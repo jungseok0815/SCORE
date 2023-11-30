@@ -1,0 +1,76 @@
+
+
+.cat{
+  margin: 0 10px;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid #1BB8F7;
+  overflow: hidden;
+  float: left;
+
+}
+
+.cat label {
+  float: left; line-height: 3.0em;
+  width: 8.0em; height: 3.0em;
+}
+
+.cat label span {
+  text-align: center;
+  padding: 3px 0;
+  display: block;
+}
+
+.cat label input {
+  position: absolute;
+  display: none;
+  color: #1BB8F7;
+}
+/* selects all of the text within the input element and changes the color of the text */
+.cat label input + span{color: #1BB8F7;}
+
+
+/* This will declare how a selected input will look giving generic properties */
+.cat input:checked + span {
+    color: #ffffff;
+    text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+}
+
+.comedy input:checked + span{background-color: #1BB8F7;}
+
+.like-position{
+  margin-top: 30%;
+  margin-bottom: 30%;
+}
+.like-position-lineTwo{
+  margin-top: 20%;
+}
+.footer{
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 5%;
+}
+.modal-header{
+  display: flex;
+}
+.modal-font{
+  font-size: 10px;
+  font-weight: 700;
+}
+#userInfo-modal-btn{
+  width: 40%;
+  height: 100%;
+  border-radius: 15px;
+}
+#userInfo-modal-btn2{
+  width: 40%;
+  height: 100%;
+  border-radius: 15px;
+}
+.userInfo-modal-title{
+  color: #1BB8F7;
+}

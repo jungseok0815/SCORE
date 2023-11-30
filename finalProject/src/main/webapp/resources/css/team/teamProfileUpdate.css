@@ -1,0 +1,110 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.outer{
+    background-color: #f3f5f7;
+    width: 100%;
+    height: 100%;
+}
+
+.team-update-main{
+    margin:  auto;
+    max-width: 80%;
+    background: white;
+    padding: 40px 10%;
+    min-height: calc(100vh - 60rem);
+}
+.team-profile-update{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.team-profile-update-img{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: yellow;
+   width: 10%;
+   padding: 10px;
+   border-radius: 80px;
+   margin-top: 3%;
+
+}
+.ab-font{
+    font-size: 10px;
+}
+.team-area {
+    margin-bottom: 5%;
+}
+.team-city{
+    margin-bottom: 5%;
+}
+.team-age{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1%;
+   
+}
+.team-age > div{
+    width: 33%;
+}
+.team-age > div>label{
+    width: 100%;
+}
+.team-age2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5%;
+   
+}
+.team-age2 > div{
+    width: 33%;
+}
+.team-age2 > div>label{
+    width: 100%;
+}
+.team-category{
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8%;
+    
+}
+.team-category > div{
+    width: 33%;
+}
+.team-category > div>label{
+    width: 100%;
+}
+.team-btn{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 5%;
+
+}
+.team-btn > button{
+    width: 48%;
+    border-radius: 40px;
+}
+.delete-btn{
+    background: red;
+    color: white;
+}
+@media screen and (min-width: 720px) {
+    .login-header{
+        margin-top: 10%;
+    }
+    .login-main{
+        margin-top: 5%;
+    }
+   
+}

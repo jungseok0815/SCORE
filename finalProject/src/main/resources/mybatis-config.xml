@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/.mybatis-3-config.dtd">
+  
+  <configuration>
+  
+  	<!-- settings : mybatis구동시 선언할 설정들을 작성하는 영역 -->
+  	<settings>
+  		<!-- 만약 null로 데이터가 전달되었다면 빈칸이 아닌 null로 인식해라(무조건대문자NULL) -->
+  		<setting name="jdbcTypeForNull" value="NULL"/>
+  	</settings>
+  	
+  	<!-- typeAlias : VO/DTO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기 위해서 별칭을 등록할 수 있는 영역-->
+  	<typeAliases>
+  		
+  	</typeAliases>
+
+  	<mappers>
+  	
+  	</mappers>
+ 
+  	
+  </configuration>

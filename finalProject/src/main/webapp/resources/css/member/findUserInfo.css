@@ -1,0 +1,28 @@
+.find-modal{
+    display: flex;
+}
+.modal-font{
+    font-size: 12px;
+    font-weight: 700;
+  }
+.input-userInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+.inupt-user-phone{
+    display: flex;
+    width: 100%;
+}
+.find-modal-btn{
+    width: 30%;
+  }
+.find-modal-footer{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 5%;
+}
+
+  

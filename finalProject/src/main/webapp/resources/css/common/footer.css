@@ -1,0 +1,136 @@
+@charset "UTF-8";
+/*FOOTER*/
+#footer {
+    background-color: black;
+}
+
+.footerWrap {
+    overflow: auto;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 50px 20px 100px 20px;
+}
+
+.footerNav {
+    color: white;
+    margin-bottom: 20px;
+    overflow: auto;
+    display: flex;
+}
+
+.footerNav ul {
+    margin-bottom: 30px;
+    width: 50%;
+    float: left;
+}
+
+.footerNav h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.footerNav ul li {
+    padding: 2px 0;
+    list-style:none;
+}
+
+.footerNav a {
+    color: white;
+    font-size: 13px;
+    color: #b5b5b5;
+    text-decoration-line: none;
+}
+
+.footerWrap .newLogo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.footerWrap .newLogo img {
+    height: 46px;
+}
+
+.footerWrap .company {
+    text-align: left;
+}
+
+.footerWrap .company p {
+    font-size: 12px;
+    color: #b5b5b5;
+    margin-bottom: 20px;
+}
+
+.footerWrap .company a {
+    color: #b5b5b5;
+}
+
+.footerWrap .company h2 {
+    margin-bottom: 10px;
+}
+
+.footerWrap .company h2 a {
+    font-size: 16px;
+    color: white;
+    font-style: italic;
+}
+
+.footerWrap .company span {
+    padding: 2px 0;
+    display: block;
+    font-size: 11px;
+    color: #b5b5b5;
+}
+
+.footerWrap .company .copyright {
+    font-size: 12px;
+}
+@media (max-width: 1024px) {
+    .footerNav .footerDul {
+        overflow: auto;
+    }
+
+    .footerNav .footerDul li {
+        width: 47%;
+        float: left;
+    }
+
+    .footerNav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .footerNav {
+        float: initial;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .footerWrap {
+        padding: 50px 30px 100px 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .footerWrap .newLogo {
+        float: left;
+        margin-bottom: inherit;
+    }
+
+    .footerWrap .footerNav {
+        width: 50%;
+    }
+
+    .footerNav ul {
+        width: 25%;
+    }
+
+    .footerWrap .company {
+        margin-left: 50px;
+        text-align: left;
+        width: 40%;
+    }
+
+    .footerWrap .company h2 a {
+        font-size: 20px;
+    }
+}

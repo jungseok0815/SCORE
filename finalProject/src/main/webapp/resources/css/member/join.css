@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.outer{
+    width: 100%;
+    height: 100%;
+}
+.join-main{
+    margin-top: 5%;
+    max-width: 1024px;
+    width: 100%;
+    min-width: max-content;
+    height: 100%;
+    margin: 0 auto;
+    padding: 24px;
+
+}
+
+.join-password-part{
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+}
+.join-font{
+    font-size: 10px;
+}
+.join-content{
+    font-size: 10px;
+    color: green;
+}
+
+.id 
+{ 
+    border-radius: 15px;
+}
+#join-btn{
+    border-radius: 15px;
+    height: 50px;
+}
+#phone-certified-btn{
+    width: 15%;
+    height: 60px;
+}
+.join-phone{ 
+    width: calc(85% - 4px);
+    margin: 5px;
+    
+}
+.join-half{
+    width: calc(50% - 3px);
+}
+.join-btn-div{
+    margin-top: 50px;
+    width: 100%;
+}
+.userid{
+    margin: 5px;
+}
+
