@@ -1,0 +1,302 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.all{
+    margin: auto;
+    background-color: #F8FAFB;
+    height: 100%;
+    min-height: calc(100vh - 50rem);
+}
+.teamMain{
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: white;
+    padding-bottom: 40px;
+}
+
+.team-left-wrap{
+    position: relative;
+}
+
+.left-header{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 0px 50px;
+}
+
+.list-link{
+    display: flex;
+    align-items: center;
+    padding: 16px 0px;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.list-img-all{
+    margin-right: 10px;
+}
+
+.list-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    vertical-align: middle;
+    object-fit: cover;
+}
+
+.TimeName{
+    font-size: 16px;
+    line-height: 160%;
+    font-weight: 500;
+}
+
+.list-member{
+    font-size: 12px;
+    line-height: 14px;
+    color: #9EAAB3;
+}
+
+.left-body{
+    padding: 0px 50px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.body-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.body-list-item{
+    width: 50%;
+    margin-bottom: 8px;
+}
+
+.body-list-item-text{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    word-break: keep-all;
+}
+
+.list-star-img{
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
+
+.content-wrap{
+    width: 100%;
+    background-color: #F8FAFB;
+    height: 100%
+}
+
+.content-body{
+    padding: 20px;
+    background-color: #fff;
+    height: 100%;
+}
+
+.content-img{
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.content-div{
+    margin: 0px 0px 40px 80px;
+    font-size: 16px;
+    line-height: 26px;
+    min-height: 120px;
+    word-break: keep-all;
+}
+
+.content-tag-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0px 20px 30px;
+}
+
+.content-tag{
+    padding: 0px 12px;
+    background-color: #F2F5F7;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 32px;
+    border-radius: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 32px;
+}
+
+.content-footer{
+    font-size: 14px;
+    line-height: 120%;
+    color: #727F88;
+    margin: 10px 20px 20px 30px;
+}
+
+.modal-content{
+    height: fit-content;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+    margin: auto;
+    border-radius: 20px;
+    transform: initial;
+    animation: none;
+    max-height: 80%;
+}
+
+.modal-header{
+    padding: 16px 20px;
+    height: 48px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+.modal-title{
+    width: 100%;
+    text-align: left;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: #282B33;
+}
+
+.btn-close{
+    position: relative;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.modal-body{
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-name{
+    padding: 0px 20px 16px 20px;
+    padding-top: 20px;
+}
+
+.join-content{
+    padding: 20px 20px 16px 20px;
+}
+
+.btn-list{
+    padding: 10px 50px;
+}
+
+.btn-wrap{
+    float: right;
+    width: 15%;
+}
+
+.btnJoin{
+    background-color: #1570FF;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    font-size: 16px;
+    text-align: center;
+    color:white;
+}
+
+
+#modal-input-name{
+    border: 1px solid #d2d1d1;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+#modal-input-content{
+    border: 1px solid #d2d1d1;
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+#modal-input-name:focus {
+    animation-name: border-focus;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes border-focus {
+    from {
+      border-radius: 0;
+    }
+    to {
+      border-radius: 15px;
+    }
+  }
+
+  #modal-input-content:focus {
+    animation-name: border-focus;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes border-focus {
+    from {
+      border-radius: 0;
+    }
+    to {
+      border-radius: 15px;
+    }
+  }
+
+  .modal-bottom{
+    position: sticky;
+    background-color: #ffffff;
+    color: #ffffff;
+  }
+
+  .modal-button-join{
+    display: flex;
+    align-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 2%;
+  }
+
+  #btnModelJoin{
+    width: fit-content;
+    background-color: #1570FF;
+    border-radius: 10px;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+  }
+
+@media screen and (min-width: 720px) {
+    .btnJoin{
+        max-width: 500px;
+    }
+} 

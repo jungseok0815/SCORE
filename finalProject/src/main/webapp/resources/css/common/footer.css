@@ -62,6 +62,7 @@
 
 .footerWrap .company a {
     color: #b5b5b5;
+    text-decoration: none;
 }
 
 .footerWrap .company h2 {
