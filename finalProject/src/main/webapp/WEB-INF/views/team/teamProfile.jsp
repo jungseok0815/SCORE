@@ -200,9 +200,7 @@
                                             </span>
                                         </div>
                                     </a>
-                                    <div>
-                                        <img src="./resources/images/dotted-barline.png" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    </div>
+                                    
                                 </div>
                             </li>
                         </ul>
