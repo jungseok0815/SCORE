@@ -1,0 +1,202 @@
+.content-wrap {
+    width: 100%;
+    background-color: #F8FAFB;
+}
+
+.content-body-double{
+    display: flex;
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-top: 30px;
+    flex-direction: column;
+}
+.content-body-left {
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    background: white;
+}
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.content-body-right{
+    background: white;
+}
+
+.profile {
+    margin-bottom: 10px;
+}
+.profile-info {
+    width: 80%;
+}
+.team-profile-name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+.team-profile-stadium a {
+    outline: none;
+    color: #1570FF;
+    text-decoration: none;
+    cursor: pointer;
+}
+.team-profile-addInfo {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #727F88;
+}
+.profile-image {
+    width: 25%;
+}
+.profile-photo {
+    width: 80px;
+    height: 80px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 40px;
+}
+.profile-btn {
+    font-size: 14px;
+    padding: 9.5px;
+    border-radius: 8px;
+    width: 100%;
+}
+.section-header{
+    margin-left: 20px;
+    padding: 16px 20px;
+    margin-bottom: 0;
+}
+.friend-nav {
+    padding: 15px 20px 0px 0px;
+    display: flex;
+}
+.friend-tab {
+    font-size: 16px;
+    display: flex;
+    color: black;
+    cursor: pointer;
+    margin-right: 20px;
+    opacity: 0.3;
+}
+.friend-tab-focused {
+    font-weight: 700;
+    opacity: 0.9;
+}
+.team-overview {
+    margin-bottom: 10px;
+}
+.section-title {
+    font-size: 18px;
+    padding-bottom: 0px;
+    font-weight: 700;
+    line-height: 24px;
+}
+/*오버뷰 보여주는 내용  */
+.team-preview-wrapper{
+    padding: 0px 20px 20px 20px;
+}
+.team-preview-list {
+    padding: 8px 0px;
+    display: flex;
+    align-items: center;
+}
+.team-preview-list-icon {
+    width: 24px;
+    height: 24px;
+}
+.team-preview-list-title{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 8px;
+}
+.team-preview-list-value{
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-overflow: ellipsis;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.team-preview-list-value-blue {
+    color: #1570FF;
+}
+.team-member {
+    background: rgb(255, 255, 255);
+}
+
+/* 멤버 정보 보여주는 부분 */
+.team-member {
+    background: rgb(255, 255, 255);
+}
+.team-member li {
+    padding: 12px 20px;
+    list-style-type: none;
+}
+.team-member-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.team-member-profile{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.team-member-profile-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.team-member-profile-info{
+    margin-left: 10px;
+}
+.team-member-profile-info-wrapper{
+    display: flex;
+}
+.team-member-profile-info-name {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
+.team-member-profile-info-label{
+    display: flex;
+    margin-left: 4px;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 500;
+    background: rgb(40, 43, 51);
+    border-radius: 4px;
+    padding: 1.5px 5px 2px;
+}
+.team-member-profile-info-address{
+    color: rgb(114, 127, 136);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+
+
+@media (min-width: 720px) {
+    .content-body-double{
+        flex-direction: row;
+    }
+    .content-body-right{
+        width: 100%;
+    }
+    .content-body-left {
+        width: 60%;
+    }
+}
