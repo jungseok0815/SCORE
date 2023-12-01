@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+* {
+    font-family: 'KBO-Dia-Gothic_bold';
+}
+
+.no1-title {
+    display: flex;
+    justify-content: center;
+}
+
+.big-title {
+    padding: 12px;
+    height: max-content;
+    min-width: 370px;
+    max-width: 1020px;
+    display: flex;
+    flex-direction: column;
+}
+
+.point-1 {
+    width: 200px;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+.point-2 {
+    width: 200px;
+    margin-left: 52px;
+    font-size: 25px;
+}
+
+.point-3 {
+    width: 150px;
+    margin-top: 30px;
+    font-size: 14px;
+    color: rgb(127, 127, 127);
+}
+
+.select1 {
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.select1 input[type=radio] {
+    display: none;
+}
+
+.select1 input[type=radio]+label {
+    display: inline-block;
+    cursor: pointer;
+    height: 46px;
+    width: 80px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    padding-bottom: 14px;
+    border-radius: 8px;
+    margin-right: 20px;
+    margin-bottom: 12px;
+    color: #333;
+    padding-top: 10px;
+    font-size: 8px;
+    background-color: rgb(242, 245, 247);
+}
+
+.select1 input[type=radio]:checked+label {
+    color: rgb(55, 131, 255);
+    border: 2px solid rgb(55, 131, 255);
+}
+
+.select2 {
+    padding: 5px 10px;
+    margin-top: 3px;
+    width: 100%;
+}
+
+.select2 input[type=radio] {
+    display: none;
+}
+
+.select2 input[type=radio]+label {
+    display: inline-block;
+    cursor: pointer;
+    height: 46px;
+    width: 80px;
+    border: 2px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    /* font-size:13px; */
+    padding: 5px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+    border-radius: 14px;
+    margin-right: 17px;
+    background-color: #fff;
+    color: #333;
+    padding-top: 10px;
+    font-size: 10px;
+}
+
+.select2 input[type=radio]:checked+label {
+    color: rgb(55, 131, 255);
+    border: 2px solid rgb(55, 131, 255);
+}
+
+.point-4 {
+    width: 150px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgb(127, 127, 127);
+}
+
+.point-5 {
+    margin-top: 28px;
+    font-size: 14px;
+    border: 1px solid black;
+    height: 100px;
+    background-color: rgba(243, 239, 239, 0.9);
+    min-width: 340px
+}
+
+.point-6 {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.point-7 {
+    margin-top: 7px;
+    font-size: 12px;
+    color: rgb(127, 127, 127);
+}
+
+.point-8 {
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.point-btn {
+    width: 340px;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: none;
+}
+.point-tt{
+    width: 96%;
+}
+
+@media screen and (min-width: 720px) {
+    .select1 input[type=radio]+label{
+        height: 50px;
+        width: 300px;
+        font-size: 18px;
+    }
+    .select2 input[type=radio]+label{
+        height: 50px;
+        width: 300px;
+        font-size: 14px;
+    }
+    .point-btn{
+        margin-left: 30%;
+        font-size: 20px;
+    }
+}
