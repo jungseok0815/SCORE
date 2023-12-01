@@ -1,0 +1,154 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.all{
+    max-width: 1024px;
+    margin: auto;
+}
+.main{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    min-height: calc(100vh - 50rem);
+}
+
+
+.top_container{
+    display: inherit;
+    background-color: white;
+    z-index: 4;
+    left: 0;
+    top: 0;
+}
+
+.top_container ul{
+    box-sizing: content-box;
+    white-space: nowrap;
+    padding: 0;
+    max-width: 1024px;
+    display: flex;
+    margin-left: 5%;
+}
+
+.top_container ul li {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 5px;
+    padding: 0px 12px;
+    line-height: 32px;
+    height: 32px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #D9E0E6;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: content-box;
+}
+
+.top_container ul li.on{
+    border: 1px solid #1570FF;
+    border-radius: 20px;
+    color: #1570FF
+}
+
+
+.team-list-item{
+    list-style: none;
+    position: relative;
+}
+
+.team-list-item:hover{
+    background-color: rgb(249, 251, 255);
+}
+
+.list-img-all{
+    margin-right: 10px;
+}
+
+.list-img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    vertical-align: middle;
+    object-fit: cover;
+}
+
+.list-link{
+    display: flex;
+    border-bottom: 1px solid #E6ECF1;
+    padding: 16px 0px;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 10px;
+}
+
+.list-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.memberListCount{
+    background-color: #F2F5F7;
+    height: 16px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #727F88;
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 4px;
+    margin-left: 5px;
+    border-radius: 4px;
+}
+
+.list-local{
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #727F88;
+    margin-bottom: 4px;
+}
+
+.list-member{
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #727F88;
+    margin-bottom: 4px;
+}
+
+.list-member-img{
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+}
+
+.TimeName{
+    font-weight: 550;
+    font-size: 17px;
+    line-height: 19px;
+}
+
+.memberPosting{
+    margin-left: 4px;
+    background-color: #E8F7FF;
+    height: 16px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #1570FF;
+    padding: 0px 4px;
+    border-radius: 4px;
+}

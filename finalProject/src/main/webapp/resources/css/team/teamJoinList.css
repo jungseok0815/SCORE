@@ -1,0 +1,151 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    min-height: calc(100vh - 50rem);
+}
+
+.topWrapper{
+    padding: 8px 0px;
+}
+
+.top_container{
+    width:100%;
+    position: relative;
+}
+
+
+.team-list-container{
+    padding: 0px 20px;
+}
+
+.team-list-item{
+    list-style: none;
+    position: relative;
+    border-bottom: 1px solid #E6ECF1;
+    margin-bottom: 15px;
+}
+
+.list-img-all{
+    margin-right: 10px;
+}
+
+.list-img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    vertical-align: middle;
+    object-fit: cover;
+}
+
+.list-link{
+    display: flex;
+    padding: 16px 0px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.list-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.memberListCount{
+    background-color: #F2F5F7;
+    height: 16px;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 14px;
+    text-align: center;
+    color: #727F88;
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 4px;
+    margin-left: 5px;
+    border-radius: 4px;
+}
+
+.list-member{
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #727F88;
+    margin-bottom: 4px;
+}
+
+.top-member-img{
+    width: 25px;
+    height: 25px;
+    margin-right: 3px;
+}
+
+.memberName{
+    font-weight: 550;
+    font-size: 15px;
+    line-height: 19px;
+}
+
+.list-member-x{
+    float: right;
+}
+
+.list-img-x{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.list-text{
+    font-size: 13px;
+}
+
+#buttonRe{
+    border-radius: 10px;
+    border: 1px solid #727F88;
+    background-color: white;
+    color: #727F88;
+    font-size: 15px;
+    cursor: pointer;
+    width: 20%;
+    margin-right: 3px;
+    word-break: break-all;
+}
+
+#buttonAc{
+    border-radius: 10px;
+    background-color: #1570FF;
+    color: white;
+    font-size: 15px;
+    border: 1px solid;
+    cursor: pointer;
+    width: 20%;
+    word-break: break-all;
+}
+
+.btnList{
+    width: 100%;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: flex;
+}
+/* 
+@media screen and (min-width: 720px) {
+    .team-list-item{
+        display:block;    
+    }
+
+}  */
