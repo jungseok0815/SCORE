@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    }
+    *{font-family: 'KBO-Dia-Gothic_bold';}
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .title{
+    background-color: rgb(243, 245, 247);
+    display: flex;
+    justify-content: center;
+    }
+    .title2{
+    border: 1px solid black;
+    background-color: white;
+    max-width: 950px;
+    width: 100%;
+    height: 1520px;
+    padding: 24px;
+    }
+    .img3{
+        width: 207px;
+        height: 185px;
+        margin-left: 43%;
+        margin-top: 60px;
+    }
+    .a-btn{
+        margin-left: 43%;
+        text-align: center;
+        width: 200px;
+    }
+    .title3{
+        margin-top: 20px;
+        font-size: 19px;
+    }
+    .title4{
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    .input-1{
+        width: calc(100% - 100px);
+        height: 60px;
+        font-size: 14px;
+        margin-top: 8px;
+        background-color: rgb(241, 241, 241);
+        border: none;
+        border-radius: 8px 0px 0px 8px;
+    }
+    .b-btn{
+        height: 60px;
+        width: 100px;
+        background-color: rgb(241, 241, 241);
+        position: absolute;
+        margin-top: 8px;
+        border: none;
+        border-radius: 0px 8px 8px 0px;
+    }
+    .select input[type=radio]{
+        display: none;
+    }
+    .select input[type=radio]+label{
+        display: inline-block;
+        cursor: pointer;
+        height: 40px;
+        width: 280px;
+        border: 1px solid #333;
+        line-height: 16px;
+        text-align: center;
+        font-weight:bold;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #333;
+        padding-top: 10px;
+        font-size: 20px;
+    }
+    .select input[type=radio]:checked+label{
+        color: rgb(55, 131, 255);
+        border: 2px solid rgb(55, 131, 255);
+    }
+    .select{
+        margin-left: 90px;
+        margin-right: 10%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cat{
+        margin: 6px 10px;
+        background-color: white;
+        border-radius: 15px;
+        border: 1px solid black;
+        overflow: hidden;
+        float: left;
+        width: 187px;
+        }
+        .cat label {
+        float: left; line-height: 3.0em;
+        width: 8.0em; height: 3.0em;
+        }
+        .cat label span {
+        text-align: center;
+        display: block;
+        width: 187px;
+        }
+        .cat label input {
+        position: absolute;
+        display: none;
+        color: #1BB8F7;
+        }
+        .cat label input + span{
+            color: black;
+        }
+        .cat input:checked + span {
+            color: #ffffff;
+            text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+        }
+        .comedy input:checked + span{
+            background-color: #1BB8F7;
+        }
+        /* .like-position{
+        margin-top: 80px;
+        } */
+        .like-position-lineTwo{
+        margin-top: 17px;
+        }
+        .like-position-lineONe{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+
+        .like-position-lineTwo{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .subm-btn-1{
+            border: 1px solid black;
+            height: 50px;
+            width: 50px;
+            margin-top: 1328px;
+            position: absolute;
+        }
+        .subm-btn{
+            width: 800px;
+            height: 50px;
+            margin-left: 6px;
+            margin-top: 1400px;
+            background-color: rgb(55, 131, 255);
+            color: white;
+            border: none;
+            position: absolute;
+        }
+    @media screen and (max-width: 720px) {
+        .title{
+            flex-direction: column;
+        }
+        .title2{
+            width: 667px;
+            padding-left: 53px;
+        }
+        .img3{
+            width: 202px;
+            margin-left: 221px;
+        }
+        .input-1{
+            width: 75%;
+        }
+        .a-btn{
+            margin-left: 34%;
+        }
+        .select input[type=radio]+label{
+            margin-left: 0px;
+            margin-right: 3%;
+            width: 222px;
+        }
+        .cat{
+            margin-right: 50px;
+            margin-top: 10px;
+            width: 128px;
+            
+        }
+        .cat label span{
+            width: 129px;
+        }
+        .subm-btn{
+            margin-top: 1280px;
+            width: 590px;
+            margin-left: 38px;
+        }
+    }
+
+
+
+ 

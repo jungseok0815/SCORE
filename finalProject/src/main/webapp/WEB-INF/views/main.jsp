@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="common/header.jsp" />
-	<jsp:include page="place/placeInsert.jsp" />
-	<jsp:include page="common/footer.jsp" />
+
+	
+	<jsp:include page="member/chargingPoint.jsp" />
+	
 </body>
 </html>
