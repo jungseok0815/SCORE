@@ -16,7 +16,7 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5b03f739e9.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./resources/css/common/header.css">
+<link rel="stylesheet" href="/final/resources/css/common/header.css">
 
 
 
@@ -26,7 +26,7 @@
         <div class="header">
             <div class="header-left">
                 <img class="hambuger-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_hamburger.svg" />
-                <a href="" class="header-name">SCORE</a>
+                <a href="${pageContext.request.contextPath}" class="header-name">SCORE</a>
             </div>
             <div class="header-right">
                 <div class="search-bar">
@@ -35,7 +35,7 @@
                 </div>
                 <div class ="search-bar-icon">
                     <a href=""><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img"></a>
-                    <a href="loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                    <a href="${pageContext.request.contextPath}/myPage.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
                 </div>
             </div>
         </div>

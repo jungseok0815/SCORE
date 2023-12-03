@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/member/myPage.css" >
+
+<link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -25,11 +26,11 @@
             </div>
             
             <div class="bot01">
-                <button class="btn-1">프로필 설정</button>
+                <button class="btn-1" onclick="location.href='${pageContext.request.contextPath}/myPageUpdate.me'">프로필 설정</button>
             </div>
                 
             <div class="bot02">
-                <button class="btn-1">나의 친구 보기</button>
+                <button class="btn-1" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">나의 친구 보기</button>
             </div>
 
             <div class="bot02">
@@ -66,6 +67,66 @@
             
         </div>
     </div>
+
+    <!-- 친구 목록 모달창-->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                친구요청 2 |
+                <button class="btn-btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">친구 보기</button>
+            </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body" style="height: 440px;">
+                <div class="list-title">친구요청 리스트</div>
+                <div class="tt22">
+                    <img class="img5" src="/img/img1.jpg">
+                    <div class="main-title">임도현</div>
+                    <div class="sub-title">서울시 강남구</div>
+                    <button class="btn-chexk" onclick="">수락</button>
+                </div>
+                <div class="tt22">
+                    <img class="img5" src="/img/img1.jpg">
+                    <div class="main-title">최행배</div>
+                    <div class="sub-title">부산시 서면</div>
+                    <button class="btn-chexk" onclick="">수락</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                친구 5 |
+                <button class="btn-btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">친구 요청 보기</button>
+            </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="height: 440px;">
+                <div class="list-title">친구 리스트</div>
+                <div class="tt22">
+                    <img class="img5" src="/img/img1.jpg">
+                    <div class="main-title">최행배</div>
+                    <div class="sub-title">부산시 서면</div>
+                    <button class="btn-chexk2" onclick="">친구삭제</button>
+                </div>
+                <div class="tt22">
+                    <img class="img5" src="/img/img1.jpg">
+                    <div class="main-title">임도현</div>
+                    <div class="sub-title">서울시 강남구</div>
+                    <button class="btn-chexk2" onclick="">친구삭제</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 	
 	<jsp:include page="../common/footer.jsp" />
 </body>

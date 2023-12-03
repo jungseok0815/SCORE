@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/place/placeDetailView.css">
+<link rel="stylesheet" href="/final/resources/css/place/placeDetailView.css">
 </head>
 <body onload="init()">
 	<jsp:include page="../common/header.jsp" />

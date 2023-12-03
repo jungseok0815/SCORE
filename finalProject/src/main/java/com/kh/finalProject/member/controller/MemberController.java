@@ -19,6 +19,24 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("/chargingPoint.me")
+	public String chargingPoint() {
+		return "member/chargingPoint";
+		
+	}
+	
+	@RequestMapping("/myPage.me")
+	public String myPage() {
+		return "member/mypage";
+		
+	}
+	
+	@RequestMapping("/myPageUpdate.me")
+	public String myPageUpdate() {
+		return "member/mypageUpdate";
+		
+	}
+	
 //	@RequestMapping("/login.me") 
 //	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {
 //		Member loginUser = memberService.loginMember(m); //아이디로만 멤버객체 가져오기
