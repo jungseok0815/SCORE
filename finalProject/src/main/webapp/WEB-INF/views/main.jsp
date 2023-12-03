@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/common/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="./resources/css/common/main.css">
 
 </head>
 <body>
@@ -430,14 +431,12 @@
             <button class="btn btn-light" onclick="location.href=''">1</button>
             <button class="btn btn-light" onclick="location.href=''">2</button>
             <button class="btn btn-light" onclick="location.href=''">3</button>
-            <button class="btn btn-light" onclick="location.href=''">4</button>
-            <button class="btn btn-light" onclick="location.href=''">5</button>
             <button class="btn btn-light" onclick="location.href=''">&gt;</button>
         </div>
 
     </div>
 
-    <!-- <script>
+    <script>
         function initCalendar() {
         const calendarContainer = document.getElementById('calendar2');
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -490,7 +489,7 @@
     }
 
     initCalendar();
-    </script> -->
+    </script>
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>

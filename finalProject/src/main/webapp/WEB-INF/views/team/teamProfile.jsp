@@ -147,7 +147,7 @@
                                         </div>
                                     </a>
                                     <div>
-                                        <img src="">
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
                                     </div>
                                 </div>
                             </li>
@@ -174,7 +174,7 @@
                                         </div>
                                     </a>
                                     <div>
-                                        <img src="">
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
                                     </div>
                                 </div>
                             </li>
@@ -200,7 +200,9 @@
                                             </span>
                                         </div>
                                     </a>
-                                    
+                                    <div>
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
+                                    </div>
                                 </div>
                             </li>
                         </ul>
