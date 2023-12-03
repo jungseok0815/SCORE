@@ -4,36 +4,35 @@
     padding: 0;
 }
 
+ul, li, ol{
+    padding: 0px;
+    margin: 0px;
+}
+
 .all{
     max-width: 1024px;
     margin: auto;
 }
+
 .main{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%;
+    margin-top: 2%;
     min-height: calc(100vh - 50rem);
 }
-
 
 .top_container{
     display: inherit;
     background-color: white;
-    z-index: 4;
-    left: 0;
-    top: 0;
 }
 
 .top_container ul{
     box-sizing: content-box;
     white-space: nowrap;
-    padding: 0;
     max-width: 1024px;
     display: flex;
-    margin-left: 5%;
+    padding: 0px;
 }
 
-.top_container ul li {
+.top_container input[type=radio]+label{
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -49,10 +48,18 @@
     box-sizing: content-box;
 }
 
-.top_container ul li.on{
-    border: 1px solid #1570FF;
-    border-radius: 20px;
-    color: #1570FF
+.top_container input[type=radio] {
+    display: none;
+}
+
+
+.top_container ul li{
+    list-style : none;
+}
+
+.top_container input[type=radio]:checked+label {
+    color: rgb(55, 131, 255);
+    border: 2px solid rgb(55, 131, 255);
 }
 
 
@@ -151,4 +158,8 @@
     color: #1570FF;
     padding: 0px 4px;
     border-radius: 4px;
+}
+
+.team-list-container > ul{
+    padding: 0px;
 }

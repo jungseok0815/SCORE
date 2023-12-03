@@ -14,20 +14,20 @@
 	            <div class="topWrapper">
 	                <div class="top_container">
 	                    <ul>
-	                        <li class="btnAll">
-	                            <span>전체</span>
+	                        <li class="btnLocal">
+	                            <input type="radio" name="local" id="all"><label for="all">전체</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <span>서울</span>
+	                            <input type="radio" name="local" id="seoul"><label for="seoul">서울</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <span>인천</span>
+	                            <input type="radio" name="local" id="incheon"><label for="incheon">인천</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <span>대구</span>
+	                            <input type="radio" name="local" id="deagu"><label for="deagu">대구</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <span>부산</span>
+	                            <input type="radio" name="local" id="busan"><label for="busan">부산</label>
 	                        </li>
 	                    </ul> 
 	                </div>

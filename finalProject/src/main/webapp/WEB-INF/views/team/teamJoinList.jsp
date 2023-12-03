@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./resources/css/team/teamJoinList.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 		<jsp:include page="../common/header.jsp" />
@@ -23,7 +24,7 @@
 	                            <li class="team-list-item">
 	                                <div>
 	                                    <a href="" class="list-link">
-	                                        <div class="list-img-all">
+	                                       <div class="list-img-all">
 	                                            <img src="./resources/img/team/teamJoinList/ffff.jpg" class="list-img"/>
 	                                        </div>
 	                                        <div class="list-content">
@@ -49,8 +50,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p id="buttonRe">거절하기</p>
-	                                            <p id="buttonAc">수락하기</p>
+	                                            <p class="buttonRe btnFloat btnLightBlue">거절하기</p>
+	                                            <p class="buttonAc">수락하기</p>
 	                                        </div>
 	                                    </a>
 	                                </div>
@@ -85,8 +86,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p id="buttonRe">거절하기</p>
-	                                            <p id="buttonAc">수락하기</p>
+	                                            <p class="buttonRe">거절하기</p>
+	                                            <p class="buttonAc">수락하기</p>
 	                                        </div>
 	                                    </a>
 	                                </div>
@@ -121,8 +122,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p id="buttonRe">거절하기</p>
-	                                            <p id="buttonAc">수락하기</p>
+	                                            <p class="buttonRe">거절하기</p>
+	                                            <p class="buttonAc">수락하기</p>
 	                                        </div>
 	                                    </a>
 	                                </div>
@@ -157,8 +158,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p id="buttonRe">거절하기</p>
-	                                            <p id="buttonAc">수락하기</p>
+	                                            <p class="buttonRe">거절하기</p>
+	                                            <p class="buttonAc">수락하기</p>
 	                                        </div>
 	                                    </a>
 	                                </div>
