@@ -1,0 +1,28 @@
+.outer {
+    margin-top: 50px;
+    min-height: calc(100vh - 70rem);
+}
+.notice-header{
+    text-align: center;
+    font-weight:bolder;
+    margin-bottom: 30px;
+}
+#accordionExample{
+    font-weight:100;
+}
+.accordion-button{
+    font-weight: 800;
+}
+#accordion-bottom{
+    margin-bottom: 50px;
+}
+
+
+@media (min-width: 720px) {
+    .outer{
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-bottom: 50px;
+        min-height: calc(100vh - 70rem);
+    }
+}

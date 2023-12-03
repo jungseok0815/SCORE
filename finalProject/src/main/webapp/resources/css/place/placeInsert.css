@@ -1,3 +1,45 @@
-.outer{
-    
+.from-input{
+    width: 500px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: solid 1px;
+    padding: 0 10px;
+}
+.field-select{
+    width: 150px;
+    height: 30px;
+    margin: 10px 10px 10px 0px;
+}
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 200px;
+    color: #999999;
+    margin-bottom: 10px;
+}
+.filebox label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+.field-insert-input input[type="time"]{
+    width: 75px;
 }

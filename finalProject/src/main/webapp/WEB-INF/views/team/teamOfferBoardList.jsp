@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="./resources/css/team/teamOfferBoardList.css">
+	<link rel="stylesheet" href="/final/resources/css/team/teamOfferBoardList.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />

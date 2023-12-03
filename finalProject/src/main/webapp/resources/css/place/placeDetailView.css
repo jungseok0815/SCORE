@@ -1,0 +1,107 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+font-family: 'KBO-Dia-Gothic_bold';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+font-weight: 300;
+font-style: normal;
+}
+*{font-family: 'KBO-Dia-Gothic_bold';}
+.outer{
+    background: #f3f5f7;
+}
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 448px;                                 
+    overflow: hidden;
+    position: relative;
+}
+.slide {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+img {
+    width: 100%;
+    height: auto;                                                        
+}
+.section {
+    border-bottom: 20px solid #F2F5F7;
+}
+.section_header{
+    padding: 20px;
+}
+.section_body{
+    padding: 0px 20px 24px 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+.section_body ul li{
+    list-style: none;
+    display: inline-flex;
+    padding: 10px 0px;
+    width: 48%;
+}
+.section_body ul li img{
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+.section_div{
+    width: 100%;
+    margin: 0px 10px;
+}
+.body_right span{
+    display: inline-flex;
+    align-items: center;
+}
+.body_right span h6 a{
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.5;
+    margin-left: 5px;
+    margin-top: 9px;
+    cursor: pointer;
+}
+.body_right h5 a{
+    margin: 10px;
+}
+.body_right img{
+    width: 24px;
+    height: 24px;
+}
+.body_right div{
+    display: inline-flex;
+}
+.body_right_count_like{
+    display: inline-flex;
+}
+.body_right_count_like img{
+    margin: 5px;
+}
+.body_right_pay{
+    display: inline-flex;
+    align-items: center;
+    margin: 3px;
+}
+
+@media screen and (min-width: 720px) {
+    .section_body{
+        display: flex;
+        flex-direction: row;
+    }
+    .section_div{
+        max-width: 500px;
+    }
+}

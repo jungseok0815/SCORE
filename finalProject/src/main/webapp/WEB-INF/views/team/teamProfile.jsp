@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./resources/css/team/teamProfile.css">
+<link rel="stylesheet" href="/final/resources/css/team/teamProfile.css">
 
 </head>
 <body>	
@@ -200,9 +200,7 @@
                                             </span>
                                         </div>
                                     </a>
-                                    <div>
-                                        <img src="./resources/images/dotted-barline.png" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    </div>
+                                    
                                 </div>
                             </li>
                         </ul>

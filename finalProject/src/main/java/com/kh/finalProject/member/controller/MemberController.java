@@ -1,15 +1,7 @@
 package com.kh.finalProject.member.controller;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.kh.finalProject.member.model.service.MemberService;
-import com.kh.finalProject.member.model.vo.Member;
 
 @Controller
 public class MemberController {
@@ -29,6 +21,24 @@ public class MemberController {
 	@RequestMapping("/joinView.me")
 	public String joinView() {
 		return "member/memberJoin";
+		
+	}
+	
+	@RequestMapping("/chargingPoint.me")
+	public String chargingPoint() {
+		return "member/chargingPoint";
+		
+	}
+	
+	@RequestMapping("/myPage.me")
+	public String myPage() {
+		return "member/mypage";
+		
+	}
+	
+	@RequestMapping("/myPageUpdate.me")
+	public String myPageUpdate() {
+		return "member/mypageUpdate";
 		
 	}
 	

@@ -12,7 +12,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
    
-    <link rel="stylesheet" href="./resources/css/team/teamOfferListDetailView.css">
+    <link rel="stylesheet" href="/final/resources/css/team/teamOfferListDetailView.css">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -68,9 +68,6 @@
 	                </div>
 	            </div>
 	
-	
-	
-	            
 	            <div class="content-wrap">
 	                <div class="content-body">
 	                    
