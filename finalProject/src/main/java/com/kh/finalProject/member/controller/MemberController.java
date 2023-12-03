@@ -18,11 +18,6 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("/joinView.me")
-	public String joinView() {
-		return "member/memberJoin";
-		
-	}
 	
 //	@RequestMapping("/login.me") 
 //	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {
