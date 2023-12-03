@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="./resources/css/common/main.css">
+    <link rel="stylesheet" href="/final/resources/css/common/main.css">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
                 <div class="nav-item"><a href="" class="">팀관리</a></div>
-                <div class="nav-item"><a href="" class="">구장등록</a></div>
+                <div class="nav-item"><a href="${pageContext.request.contextPath}/insert.pl" class="">구장등록</a></div>
             </div>
         </div>
     
@@ -26,19 +26,19 @@
         <div class='explore-container'>
             <div class="explore-wrapper">
                 <div class="explore-item">
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/noticeList.no">
                         <img src="./resources/img/main/notice.img.png" alt="">
                         <p>공지사항</p>
                     </a>
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/chargingPoint.me">
                         <img src="./resources/img/main/coin.png" alt="">
                         <p>포인트 충전</p>
                     </a>
-                    <a href="">
+                    <a href="${pageContext.request.contextPath}/offerBoardList.tm">
                         <img src="./resources/img/main/thunder.png" alt="">
                         <p>팀 구인</p>
                     </a>
-                    <a href="">
+                    <a href="" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
                         <img src="./resources/img/main/searchPeople.png" alt="">
                         <p>팀 생성</p>
                     </a>
@@ -231,7 +231,7 @@
         <div class="match-schedule-container">
             <ul>
                 <li class="match-schedule-item">
-                    <a>
+                    <a href="${pageContext.request.contextPath}/detail.pl">
                         <div class="match-time">
                             <p>18:00</p>
                         </div>
@@ -436,7 +436,143 @@
 
     </div>
 
-    <script>
+    <!-- 팀 생성 Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+      
+            <div class="modal-header">
+              <h5 class="header-h5">팀 만들기</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <div class="modal-body">
+              <form action="">
+                  <p class="body-p">팀 정보를 <br>입력해주세요</p>
+  
+                  <div class="profile-imgbox">
+                      <label for="file">
+                          <div class="btn-upload"><img src="./em_K09.png" alt=""></div>
+                      </label>
+                      <input type="file" name="file" id="file">
+                  </div>
+  
+                  <p class="madal-font">팀 이름</p>
+                  <div class="input-group mb-3 input-group-lg">
+                      <input type="text" class="form-control" placeholder="팀 이름을 작성해주세요">
+                  </div>
+                  <p class="madal-font">활동지역</p>
+                  <div class="input-group mb-3 input-group-lg home-field-search">
+                      <input type="text" class="form-control" placeholder="홈 구장 찾기">
+                  </div>
+                  <p class="userInfo-modal-font">성별</p>
+                  <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
+                      <ul style="padding: 0px;">
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="gender" id="gender-all" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="gender-all">남녀 모두</label>
+                          </li>
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="gender" id="gender-male" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="gender-male">남자</label>
+                          </li>
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="gender" id="gender-female" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="gender-female">여자</label>
+                          </li>
+                      </ul>
+                  </div>
+                  <p class="userInfo-modal-font">좋아하는 스타일</p>
+                  <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
+                      <ul style="padding: 0px;">
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="ability" id="ability-offence" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="ability-offence">공격</label>
+                          </li>
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="ability" id="ability-balance" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="ability-balance">밸런스</label>
+                          </li>
+                          <li class="">
+                              <input type="checkbox" class="btn-check" name="ability" id="ability-defence" autocomplete="off">
+                              <label class="btn btn-check-label madal-label" for="ability-defence">수비</label>
+                          </li>
+                      </ul>
+                  </div>
+                  <p class="madal-font">레벨(중복가능)</p>
+                  <div>
+                      <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
+                          <ul>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="level" id="level-all" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-all">실력무관</label>
+                              </li>
+                              <li>
+                                  <input type="checkbox" class="btn-check" name="level" id="level-1" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-1">스타터</label>
+                              </li>
+                              <li>
+                                  <input type="checkbox" class="btn-check" name="level" id="level-2" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-2">비기너</label>
+                              </li>
+                          </ul>
+                          <ul>
+                              <li>
+                                  <input type="checkbox" class="btn-check" name="level" id="level-3" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-3">아마추어</label>
+                              </li>
+                              <li>
+                                  <input type="checkbox" class="btn-check" name="level" id="level-4" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-4">세미프로</label>
+                              </li>
+                              <li>
+                                  <input type="checkbox" class="btn-check" name="level" id="level-5" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="level-5">프로</label>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <p class="madal-font">나이(중복 가능)</p>
+                  <div>
+                      <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
+                          <ul>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-10" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-10">10대</label>
+                              </li>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-20" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-20">20대</label>
+                              </li>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-30" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-30">30대</label>
+                              </li>
+                          </ul>
+                          <ul>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-40" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-40">40대</label>
+                              </li>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-50" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-50">50대</label>
+                              </li>
+                              <li class="">
+                                  <input type="checkbox" class="btn-check" name="age" id="age-60" autocomplete="off">
+                                  <label class="btn btn-check-label madal-label" for="age-60">60대 이상</label>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-next">다음</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- <script>
         function initCalendar() {
         const calendarContainer = document.getElementById('calendar2');
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -489,7 +625,7 @@
     }
 
     initCalendar();
-    </script>
+    </script> -->
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>

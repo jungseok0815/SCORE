@@ -228,3 +228,76 @@
         margin-left: 80px;
         }
     }
+
+/* 친구 관련 모달*/
+
+.tt22{
+    /* border: 1px solid black; */
+    border-bottom: 1px solid black;
+    width: 400px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 30px;
+    display: flex;
+    position:relative;
+}
+ .main-title{
+    /* border: 1px solid black; */
+    width: 110px;
+    margin-left: 10px;
+    position:absolute; 
+    margin-left: 60px;
+ }   
+ .img5{
+    width: 53px;
+    height: 49px;
+    margin-top: -5px;
+    border-radius: 37px;
+ }
+ .sub-title{
+    /* border: 1px solid black; */
+    width: 200px;
+    position:absolute; 
+    margin-left: 10px;
+    left: 50px;
+    bottom:0px;
+    margin-bottom: 5px;
+    font-size: 12px;
+ }
+ .btn-chexk{
+    margin-left: 229px;
+    border-radius: 5px;
+    width: 120px;
+    height: 39px;
+    margin-top: 5px;
+    border: none;
+    background-color: rgb(28, 135, 205);
+    color: white;
+ }
+ .btn-chexk2{
+    margin-left: 229px;
+    border-radius: 5px;
+    width: 120px;
+    height: 39px;
+    margin-top: 5px;
+    border: none;
+    color: white;
+    background-color: red;
+    }
+.btn-btn-primary{
+    border: none;
+    background-color: white;
+}
+.btn-btn-primary:active{
+    font-size: 14px;
+}
+.list-title{
+    text-align: center;
+    border-bottom: 1px solid;
+    width: 400px;
+    margin-left: 30px;
+}
+.modal-header{
+    padding-left: 151px;
+    border-bottom: none;
+}
