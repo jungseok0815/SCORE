@@ -54,8 +54,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p class="buttonRe btnFloat btnLightBlue">거절하기</p>
-	                                            <p class="buttonAc">수락하기</p>
+	                                            <p class="buttonRe btnFloat btnLightBlue"></p>
+	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
 	                                        </div>
 	                                    </a>
 	                                </div>
@@ -90,9 +90,9 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p class="buttonRe">거절하기</p>
-	                                            <p class="buttonAc">수락하기</p>
-	                                        </div>
+												<p class="buttonRe btnFloat btnLightBlue"></p>
+	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
+											</div>
 	                                    </a>
 	                                </div>
 	                            </li>
@@ -126,8 +126,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p class="buttonRe">거절하기</p>
-	                                            <p class="buttonAc">수락하기</p>
+												<p class="buttonRe btnFloat btnLightBlue"></p>
+	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
 	                                        </div>
 	                                    </a>
 	                                </div>
@@ -162,8 +162,8 @@
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p class="buttonRe">거절하기</p>
-	                                            <p class="buttonAc">수락하기</p>
+												<p class="buttonRe btnFloat btnLightBlue"></p>
+	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
 	                                        </div>
 	                                    </a>
 	                                </div>
