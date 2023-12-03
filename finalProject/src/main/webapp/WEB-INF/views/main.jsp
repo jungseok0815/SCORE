@@ -176,13 +176,13 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ☆남녀모두
+                                            <input type="checkbox">☆남녀모두
                                         </div>
                                         <div class="modal-body">
-                                            남자
+                                            <input type="checkbox"> 남자
                                         </div>
                                         <div class="modal-body">
-                                            여자
+                                            <input type="checkbox"> 여자
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

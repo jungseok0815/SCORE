@@ -11,6 +11,8 @@
 
 	<jsp:forward page="WEB-INF/views/main.jsp" />
 	<%--
+		<jsp:forward page="WEB-INF/views/main.jsp" />
+		
 		<jsp:forward page="WEB-INF/views/team/teamProfileUpdate.jsp" />
 		<jsp:forward page="WEB-INF/views/team/teamProfile.jsp" />
 		<jsp:forward page="WEB-INF/views/team/teamOfferListDetailView.jsp" />
