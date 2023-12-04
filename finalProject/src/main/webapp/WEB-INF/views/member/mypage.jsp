@@ -56,7 +56,7 @@
                 <div class="point">POINT<div class="ipbox1">10,000</div></div>
 
                 <div class="btn-3">
-                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="">풋살</button>
+                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="">축구</button>
                     <button class="btn-sm-2" style="margin-right: 50px;" onclick="">야구</button>
                     <button class="btn-sm-2" onclick="">농구</button>
                 </div>
