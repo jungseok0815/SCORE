@@ -34,6 +34,7 @@
                             </div>
                         </div>
                         <div class="profile-btn d-grid gap-2">
+
                             <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
                                 프로필 설정
                             </button>
@@ -152,7 +153,7 @@
                                         </div>
                                     </a>
                                     <div>
-                                        <img src="">
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
                                     </div>
                                 </div>
                             </li>
@@ -179,7 +180,7 @@
                                         </div>
                                     </a>
                                     <div>
-                                        <img src="">
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
                                     </div>
                                 </div>
                             </li>
@@ -205,7 +206,9 @@
                                             </span>
                                         </div>
                                     </a>
-                                    
+                                    <div>
+                                        <img class="team-member-profile-info-img" src="./resources/img/team/teamProfile/dotted-barline.png">
+                                    </div>
                                 </div>
                             </li>
                         </ul>

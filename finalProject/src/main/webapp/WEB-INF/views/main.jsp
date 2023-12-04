@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/final/resources/css/common/main.css">
 
 </head>
 <body>
@@ -175,13 +176,13 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ☆남녀모두
+                                            <input type="checkbox">☆남녀모두
                                         </div>
                                         <div class="modal-body">
-                                            남자
+                                            <input type="checkbox"> 남자
                                         </div>
                                         <div class="modal-body">
-                                            여자
+                                            <input type="checkbox"> 여자
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -430,8 +431,6 @@
             <button class="btn btn-light" onclick="location.href=''">1</button>
             <button class="btn btn-light" onclick="location.href=''">2</button>
             <button class="btn btn-light" onclick="location.href=''">3</button>
-            <button class="btn btn-light" onclick="location.href=''">4</button>
-            <button class="btn btn-light" onclick="location.href=''">5</button>
             <button class="btn btn-light" onclick="location.href=''">&gt;</button>
         </div>
 
