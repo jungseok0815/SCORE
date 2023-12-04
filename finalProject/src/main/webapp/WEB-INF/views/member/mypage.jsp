@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
+<link rel="stylesheet" href="/final/resources/css/common/main.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -34,8 +35,7 @@
             </div>
 
             <div class="bot02">
-                <button class="btn-sm-1">마이페이지</button>
-                <button class="btn-sm-1">나의 팀보기</button>
+                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
             </div>
 
             <div class="bot03">
@@ -127,6 +127,91 @@
           </div>
         </div>
       </div>
+      
+       <!-- 내팀 보기 모달-->
+    <div class="modal fade" id="viewMyTeamsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">MY TEAM</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- 아코디언 추가 (내팀, 축구, 야구, 농구) -->
+            <div class="modal-body">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          축구
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <a href="${pageContext.request.contextPath}/teamProfile.tm">
+                                <img src="./resources/images/sonny2.jpg" alt="">
+                                <p>기만FC</p>
+                            </a>
+                            <a href="">
+                                <img src="./resources/images/liverpool.png" alt="">
+                                <p>기만유나이티드</p>
+                            </a>
+                            <!-- 가입 신청 내역(고정) -->
+                            <a href="">
+                                <img src="./resources/images/makingteams.png" alt="">
+                                <p>가입 신청 내역</p>
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          야구
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <a href="">
+                              <img src="./resources/images/human_img.png" alt="">
+                              <p>LG쌍둥이둥이</p>
+                          </a>
+                          <!-- 가입 신청 내역(고정) -->
+                          <a href="">
+                            <img src="./resources/images/makingteams.png" alt="">
+                            <p>가입 신청 내역</p>
+                        </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          농구
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <a href="">
+                                <img src="./resources/images/human_img.png" alt="">
+                                <p>파주레이커스</p>
+                            </a>
+                            <!-- 가입 신청 내역(고정) -->
+                            <a href="">
+                              <img src="./resources/images/makingteams.png" alt="">
+                              <p>가입 신청 내역</p>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+      </div>
+    </div>
 	
 	<jsp:include page="../common/footer.jsp" />
 </body>
