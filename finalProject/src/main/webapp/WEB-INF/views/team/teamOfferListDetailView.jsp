@@ -92,7 +92,10 @@
 	            </div>
 	        </div>
 	    </div>
-	
+	    
+		<jsp:include page="../common/footer.jsp" />
+		
+		
 	    <!-- The Modal -->
 	    <div class="modal" id="myModal">
 	        <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -126,6 +129,6 @@
 	
 	        </div>
 	    </div> 
-	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

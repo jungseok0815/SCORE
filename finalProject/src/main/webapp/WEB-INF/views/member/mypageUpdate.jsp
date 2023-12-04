@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/final/resources/css/member/myPageUpdate.css" >
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />	
-	
-	<div class="title"> 
+   <jsp:include page="../common/header.jsp" />   
+   
+   <div class="title"> 
         <div class="title2">
 
             <img src="/img/img1.jpg" class="img3">
@@ -106,7 +106,7 @@
 
         </div>
     </div>
-	
-	<jsp:include page="../common/footer.jsp" />
+   
+   <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

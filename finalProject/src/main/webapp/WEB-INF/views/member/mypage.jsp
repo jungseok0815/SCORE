@@ -6,10 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="./resources/css/member/myPage.css" >
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
 
 </head>
