@@ -26,4 +26,9 @@ public class TeamController {
 	public String teamOfferDetailView() {
 		return "team/teamOfferListDetailView";
 	}
+	
+	@RequestMapping("insertTeamOfferBoard.tm")
+	public String teamOfferInsertForm() {
+		return "team/teamOfferInsertForm";
+	}
 }
