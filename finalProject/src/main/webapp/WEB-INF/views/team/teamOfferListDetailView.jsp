@@ -92,7 +92,10 @@
 	            </div>
 	        </div>
 	    </div>
-	
+	    
+		<jsp:include page="../common/footer.jsp" />
+		
+		
 	    <!-- The Modal -->
 	    <div class="modal" id="myModal">
 	        <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -120,12 +123,12 @@
 	            <!-- Modal bottom -->
 	            <div class="modal-bottom">
 	                <div class="modal-button-join">
-	                    <button type="button" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
+	                    <button type="submit" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
 	                </div>
 	            </div>
 	
 	        </div>
 	    </div> 
-	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>
