@@ -160,6 +160,27 @@
             border: none;
             position: absolute;
         }
+        
+        .btn-upload {
+            width: 208px;
+            height: 30px;
+            background: #fff;
+            border: 1px solid rgb(77,77,77);
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+              background: rgb(77,77,77);
+              color: #fff;
+            }
+          }
+          #file {
+            display: none;
+          }
+        
     @media screen and (max-width: 720px) {
         .title{
             flex-direction: column;
