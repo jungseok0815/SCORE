@@ -341,6 +341,9 @@ li, ul{
 	padding: 20px 15px;
     text-decoration: none;
 }
+.match-title h3{
+    text-decoration: none;
+}
 .match-schedule-item .match-time {
 	width: 15%;
 	font-weight: 700;

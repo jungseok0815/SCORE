@@ -93,17 +93,103 @@
                     <hr>
                     <h1 class="body_right_pay">12,000</h1><h6 class="body_right_pay">/2시간</h6>
                     <hr>
-                    <div>
-                        <a href="">다음 일정을 미리 예약하세요</a>
-                    </div>
-                    <div>
-                        <button class="btn btn-secondary">신청마감</button>
+                    <div class="body_right_btn_div">
+                        <div>
+                            <!-- 신청 여부에 따라 멘트 조정
+                            <a href="">다음 일정을 미리 예약하세요</a>
+                            <p>마감까지 7자리남았어요</p>-->
+                            <p>지금 신청하면<br>진행 확정이 빨라져요!</p>
+                        </div>
+                        <div>
+                            <!-- 신청 여부에 따라 버튼 조정-->
+                            <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal">신청하기</button>
+                            <!--
+                            <button class="btn btn-secondary">신청마감</button>
+                            -->
+                        </div>
                     </div>
                 </div>
 
             </div>
         </section>
     </div>
+
+    <!-- 팀 리스트 모달-->
+    <div class="modal fade" id="matchUpModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            <div class="modal-body">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button type="button" class="match-solo-btn">
+                            개인 신청
+                        </button>
+                        <button class="accordion-button match-team-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <span>팀별 신청</span>
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body choice-team-body">
+                          <button class="choice-team" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                            <img src="./토트넘_홋스퍼_FC_로고.svg.png" alt="">
+                            <label>토트넘 홋스퍼</label>
+                          </button>
+                        </div>
+                        <div class="accordion-body choice-team-body">
+                          <button class="choice-team" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                            <img src="./em_K09.png" alt="">
+                            <label>FC 정석</label>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 팀원 리스트 모달-->
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">팀원</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+              <div class="modal-body">
+                <div class="team-member">
+                  <img src="./person.png" alt="">
+                  <div>
+                    <span>김기만</span><p>경기도 구리시</p>
+                  </div>
+                  <input type="checkbox" name="" id="">
+                </div>
+                <div class="team-member">
+                  <img src="./person.png" alt="">
+                  <div>
+                    <span>김기만</span><p>경기도 구리시</p>
+                  </div>
+                  <input type="checkbox" name="" id="">
+                </div>
+                <div class="team-member">
+                  <img src="./person.png" alt="">
+                  <div>
+                    <span>김기만</span><p>경기도 구리시</p>
+                  </div>
+                  <input type="checkbox" name="" id="">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">신청</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
