@@ -1,3 +1,11 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.outer{
+    min-height: calc(100vh - 10rem);
+}
 .from-input{
     width: 500px;
     height: 40px;
