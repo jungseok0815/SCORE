@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@font-face {
+        font-family: 'KBO-Dia-Gothic_bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+        }
+        *{font-family: 'KBO-Dia-Gothic_bold';}
+
+        .error-img{
+            width: 500px;
+            height: 500px;
+        }
+        .error-up{
+            margin-top: 30px;
+        }
+        .error-btn{
+            background-color: #3540A5;
+            color: white;
+            width: 240px;
+            margin: 0 auto;
+            width: 240px;
+            height: 56px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
