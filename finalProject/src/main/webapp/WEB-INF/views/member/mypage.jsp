@@ -34,8 +34,7 @@
             </div>
 
             <div class="bot02">
-                <button class="btn-sm-1">마이페이지</button>
-                <button class="btn-sm-1">나의 팀보기</button>
+                <button class="btn-1">나의 팀보기</button>
             </div>
 
             <div class="bot03">
