@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="/final/resources/place/placeInsert.css">
+	<link rel="stylesheet" href="/final/resources/css/place/placeInsert.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -20,9 +20,10 @@
                 <tr>
                     <td>
                         <div class="filebox" align="center">
-                            <input class="upload-name" value="" placeholder="경기장 사진 첨부">
-                            <label for="file">파일찾기</label> 
-                            <input type="file" id="file">
+                            <label for="fileImgFile">
+                                <div class="btn-upload">경기장사진첨부</div>
+                            </label>
+                            <input type="file" name="file" id="fileImgFile">
                         </div>
                     </td>
                 </tr>
