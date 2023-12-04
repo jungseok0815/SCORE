@@ -469,16 +469,16 @@
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-all" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-all">남녀 모두</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-all" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-all">남녀 모두</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-male" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-male">남자</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-male" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-male">남자</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-female" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-female">여자</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-female" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-female">여자</label>
                           </li>
                       </ul>
                   </div>
@@ -486,16 +486,16 @@
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-offence" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-offence">공격</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-offence" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-offence">공격</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-balance" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-balance">밸런스</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-balance" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-balance">밸런스</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-defence" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-defence">수비</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-defence" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-defence">수비</label>
                           </li>
                       </ul>
                   </div>
@@ -504,30 +504,30 @@
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="level" id="level-all" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-all">실력무관</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-all" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-all">실력무관</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-1" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-1">스타터</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-1" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-1">스타터</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-2" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-2">비기너</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-2" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-2">비기너</label>
                               </li>
                           </ul>
                           <ul>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-3" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-3">아마추어</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-3" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-3">아마추어</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-4" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-4">세미프로</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-4" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-4">세미프로</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-5" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-5">프로</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-5" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-5">프로</label>
                               </li>
                           </ul>
                       </div>
@@ -537,30 +537,30 @@
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-10" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-10">10대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-10" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-10">10대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-20" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-20">20대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-20" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-20">20대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-30" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-30">30대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-30" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-30">30대</label>
                               </li>
                           </ul>
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-40" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-40">40대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-40" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-40">40대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-50" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-50">50대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-50" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-50">50대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-60" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-60">60대 이상</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-60" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-60">60대 이상</label>
                               </li>
                           </ul>
                       </div>

@@ -101,32 +101,32 @@
 	        <div class="modal-dialog modal-dialog-centered modal-lg">
 	            <div class="modal-content">
 	
-	            <!-- Modal Header -->
-	            <div class="modal-header">
-	                <h4 class="modal-title" >팀 가입 신청</h4>
-	                <button type="button" class="btn-close" id="btnCloseModal" data-bs-dismiss="modal"></button>
-	            </div>
-	            
-	            
-	            <!-- Modal body -->
-	            <div class="modal-body">
-	                <div class="join-name">
-	                    <label for="join-name">이름</label><br>
-	                    <input type="text" id="modal-input-name" name=""  placeholder="내용을 입력하세요."/>
-	                </div>
-	                <div class="join-content">
-	                    <label for="join-content">각오 한마디</label><br>
-	                    <input type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
-	                </div>
-	            </div>
-	
-	            <!-- Modal bottom -->
-	            <div class="modal-bottom">
-	                <div class="modal-button-join">
-	                    <button type="button" id="btnModelJoin">가입 신청</button>
-	                </div>
-	            </div>
-	
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title" >팀 가입 신청</h4>
+						<button type="button" class="btn-close" id="btnCloseModal" data-bs-dismiss="modal"></button>
+					</div>
+					
+					
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="join-name">
+							<label for="join-name">이름</label><br>
+							<input type="text" id="modal-input-name" name=""  placeholder="내용을 입력하세요."/>
+						</div>
+						<div class="join-content">
+							<label for="join-content">각오 한마디</label><br>
+							<input style="vertical-align: bottom;" type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
+						</div>
+					</div>
+		
+					<!-- Modal bottom -->
+					<div class="modal-bottom">
+						<div class="modal-button-join">
+							<button type="button" id="btnModelJoin">가입 신청</button>
+						</div>
+					</div>
+				</div>
 	        </div>
 	    </div> 
 	<jsp:include page="../common/footer.jsp" />
