@@ -104,15 +104,15 @@
             <div class="main-match-filter">
                 <div class="filter-wrapper">
                     <ul>
-                        <li class="on" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <li class="on" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <span>지역</span>
                             <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow_selected.svg" alt="">
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">지역</h1>
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">지역</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -657,7 +657,7 @@
       </div>
     </div>
 
-    <!-- <script>
+    <script>
         function initCalendar() {
         const calendarContainer = document.getElementById('calendar2');
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -710,7 +710,7 @@
     }
 
     initCalendar();
-    </script> -->
+    </script>
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>

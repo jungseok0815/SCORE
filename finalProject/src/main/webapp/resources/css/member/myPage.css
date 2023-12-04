@@ -301,3 +301,25 @@
     padding-left: 151px;
     border-bottom: none;
 }
+
+.modal-content{
+    text-align: center;
+}
+.accordion-button{
+    text-align: center;
+}
+.accordion-body a {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+}
+.accordion-body > a > img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-bottom: 16px;
+}
