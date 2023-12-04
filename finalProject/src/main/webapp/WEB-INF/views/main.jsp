@@ -657,7 +657,7 @@
       </div>
     </div>
 
-    <!-- <script>
+    <script>
         function initCalendar() {
         const calendarContainer = document.getElementById('calendar2');
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -710,7 +710,7 @@
     }
 
     initCalendar();
-    </script> -->
+    </script>
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>
