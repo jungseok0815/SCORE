@@ -10,6 +10,7 @@
 <body>
 
 	<jsp:forward page="WEB-INF/views/team/teamOfferListDetailView.jsp" />
+	<jsp:forward page="WEB-INF/views/main.jsp" />
 	
 	<!-- <jsp:forward page="WEB-INF/views/team/teamJoinList.jsp" /> -->
 	<!-- <jsp:forward page="WEB-INF/views/team/teamOfferBoardList.jsp" /> -->
