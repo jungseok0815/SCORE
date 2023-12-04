@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="/final/resources/css/common/errorPage.css" >
 </head>
 <body>
-
+	<jsp:include page="../common/header.jsp" />
+	
+	
 	 <div align="center" class="error-up">
         <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_404.png" class="error-img">
     </div>
@@ -19,5 +21,7 @@
         <button href="/views/main.jsp" class="error-btn">홈으로 가기</button>
     </div>
     
+    
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>
