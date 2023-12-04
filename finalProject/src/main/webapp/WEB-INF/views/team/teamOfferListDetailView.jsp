@@ -116,7 +116,7 @@
 						</div>
 						<div class="join-content">
 							<label for="join-content">각오 한마디</label><br>
-							<input style="vertical-align: bottom;" type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
+							<input type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
 						</div>
 					</div>
 		
