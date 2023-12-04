@@ -3,23 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insert title here</title>
-  <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
-=======
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link rel="stylesheet" href="./resources/css/member/myPage.css" >
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
-
-<link rel="stylesheet" href="/final/resources/css/common/main.css">
->>>>>>> 84c4e45b7e027ac12059fc74f15bb6a28625875b
+  <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
+  <link rel="stylesheet" href="/final/resources/css/common/main.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
