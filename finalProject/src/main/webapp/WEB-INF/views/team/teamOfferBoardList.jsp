@@ -36,7 +36,7 @@
 	                    <div class="team-list-container">
 	                        <ul>
 	                            <li class="team-list-item">
-	                                <a href="" class="list-link">
+	                                <a href="${pageContext.request.contextPath}/offerDetailView.tm" class="list-link" >
 	                                    <div class="list-img-all">
 	                                        <img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>
 	                                    </div>
@@ -53,7 +53,7 @@
 	                            </li>
 	
 	                            <li class="team-list-item">
-	                                <a href="" class="list-link">
+	                                <a href="${pageContext.request.contextPath}/offerDetailView.tm" class="list-link">
 	                                    <div class="list-img-all">
 	                                        <img src="./resources/img/team/teamOfferBoardList/re.jpg" class="list-img"/>
 	                                    </div>
@@ -70,7 +70,7 @@
 	                            </li>
 	
 	                            <li class="team-list-item">
-	                                <a href="" class="list-link">
+	                                <a href="${pageContext.request.contextPath}/offerDetailView.tm" class="list-link">
 	                                    <div class="list-img-all">
 	                                        <img src="./resources/img/team/teamOfferBoardList/menU.jpg" class="list-img"/>
 	                                    </div>
@@ -87,7 +87,7 @@
 	                            </li>
 	
 	                            <li class="team-list-item">
-	                                <a href="" class="list-link">
+	                                <a href="${pageContext.request.contextPath}/offerDetailView.tm" class="list-link">
 	                                    <div class="list-img-all">
 	                                        <img src="./resources/img/team/teamOfferBoardList/oulbe.png" class="list-img"/>
 	                                    </div>
@@ -104,7 +104,7 @@
 	                            </li>
 	
 	                            <li class="team-list-item">
-	                                <a href="" class="list-link">
+	                                <a href="${pageContext.request.contextPath}/offerDetailView.tm" class="list-link">
 	                                    <div class="list-img-all">
 	                                        <img src="./resources/img/team/teamOfferBoardList/totunum.png" class="list-img"/>
 	                                    </div>

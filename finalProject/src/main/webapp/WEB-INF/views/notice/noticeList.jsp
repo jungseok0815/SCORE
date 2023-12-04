@@ -14,6 +14,9 @@
 		<div claa="notice-wrap">
 		  <div class="notice-header">
 			  <h1>공지사항</h1>
+			  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#noticeModal">
+				공지사항등록하러가기
+			  </button>
 		  </div>
 		  <hr style="border:1px color= silver;" width="100%">
 		  <div class="accordion" id="accordionExample">
@@ -72,6 +75,38 @@
 		</div>
 	  </div>
 
+	  <!-- 공지사항 등록 모달 -->
+	  <div class="modal" id="noticeModal">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+	  
+			<!-- Modal Header -->
+			<div class="modal-header">
+			  <h4 style="margin: auto;">공지사항 등록</h4>
+			</div>
+	  
+			<!-- Modal body -->
+			<div class="modal-body">
+			  <form action="" class="notice_form">
+				  <h6>제목</h6>
+				  <div class="input-group input-group-sm mb-3">
+					  <input type="text" class="form-control" name="" placeholder="제목 입력란입니다.">
+				  </div>
+				  <h6>공지사항</h6>
+				  <div class="input-group input-group-sm mb-3">
+					  <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="공지사항 입력란입니다."></textarea>
+				  </div>
+				  <div class="bottom-btn">
+					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					  <button type="submit" class="btn btn-primary">등록하기</button>
+				  </div>
+			  </form>
+			</div>
+	  
+	  
+		  </div>
+		</div>
+	  </div>
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -34,8 +34,14 @@
                             </div>
                         </div>
                         <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/teamProfileUpdate.jsp'";>
+
+                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
                                 프로필 설정
+                            </button>
+                        </div>
+                        <div class="profile-btn d-grid gap-2">
+                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                가입신청 보기
                             </button>
                         </div>
                     </div>
@@ -101,7 +107,7 @@
                         <ul>
                             <li>
                                 <div class="team-member-item">
-                                    <a class="team-member-profile" href="">
+                                    <a class="team-member-profile" type="button" data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
                                         <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
                                         <div class="team-member-profile-info">
                                             <div class="team-member-profile-info-wrapper">
@@ -128,7 +134,7 @@
                         <ul>
                             <li>
                                 <div class="team-member-item">
-                                    <a class="team-member-profile" href="">
+                                    <a class="team-member-profile" type="button" data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
                                         <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
                                         <div class="team-member-profile-info">
                                             <div class="team-member-profile-info-wrapper">
@@ -155,7 +161,7 @@
                         <ul>
                             <li>
                                 <div class="team-member-item">
-                                    <a class="team-member-profile" href="">
+                                    <a class="team-member-profile" type="button" data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
                                         <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
                                         <div class="team-member-profile-info">
                                             <div class="team-member-profile-info-wrapper">
@@ -182,7 +188,7 @@
                         <ul>
                             <li>
                                 <div class="team-member-item">
-                                    <a class="team-member-profile" href="">
+                                    <a class="team-member-profile" type="button" data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
                                         <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
                                         <div class="team-member-profile-info">
                                             <div class="team-member-profile-info-wrapper">
@@ -208,6 +214,28 @@
                         </ul>
                     </div>
                 </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- 멤버 상태 관리 모달 -->
+    <div class="modal fade" id="teamMemberStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">임도현</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                        <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                        <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
+                        <!-- <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button> -->
+                        <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
