@@ -14,6 +14,8 @@
    
     <link rel="stylesheet" href="/final/resources/css/team/teamOfferListDetailView.css">
     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -34,17 +36,10 @@
 	                                <span class="list-member">남녀 모두 · 20~30대 · 아마추어3</span>
 	                            </div>
 	                        </a>
-	                        <div class="btn-wrap">
-	                            <!-- Button to Open the Modal -->
-	                            <button type="button" class="btnJoin" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
-	                        </div>
 	                    </div>
-	
-	
+
+
 	                    <div class="left-body">
-	                        <div class="btn-list">
-	                            <img src="./resources/img/team/teamOfferListDetailView/shm.jpg"  class="content-img"/>
-	                        </div>
 	                        <div class="body-list">
 	                            <div class="body-list-item">
 	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>남녀 모두</span>
@@ -62,16 +57,18 @@
 	                            
 	                        </div>
 	                    </div>
-	                   
+	                    <div class="btn-wrap">
+							<!-- Button to Open the Modal -->
+							<button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
+						</div>
 	                </div>
 	            </div>
 	
-	
-	
-	            
 	            <div class="content-wrap">
 	                <div class="content-body">
-	                    
+	                    <div class="btn-list">
+							<img src="./resources/img/team/teamOfferListDetailView/shm.jpg"  class="content-img"/>
+						</div>
 	                    <div class="content-div">
 	                        경기장에 나가면 쏟아부을 수 있는 것을<br>
 	                        모두 쏟으려고 해요<br>
@@ -95,40 +92,43 @@
 	            </div>
 	        </div>
 	    </div>
-	
+	    
+		<jsp:include page="../common/footer.jsp" />
+		
+		
 	    <!-- The Modal -->
 	    <div class="modal" id="myModal">
 	        <div class="modal-dialog modal-dialog-centered modal-lg">
 	            <div class="modal-content">
 	
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title" >팀 가입 신청</h4>
-						<button type="button" class="btn-close" id="btnCloseModal" data-bs-dismiss="modal"></button>
-					</div>
-					
-					
-					<!-- Modal body -->
-					<div class="modal-body">
-						<div class="join-name">
-							<label for="join-name">이름</label><br>
-							<input type="text" id="modal-input-name" name=""  placeholder="내용을 입력하세요."/>
-						</div>
-						<div class="join-content">
-							<label for="join-content">각오 한마디</label><br>
-							<input type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
-						</div>
-					</div>
-		
-					<!-- Modal bottom -->
-					<div class="modal-bottom">
-						<div class="modal-button-join">
-							<button type="button" id="btnModelJoin">가입 신청</button>
-						</div>
-					</div>
-				</div>
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <h4 class="modal-title" >팀 가입 신청</h4>
+	                <button type="button" class="btn-close" id="btnCloseModal" data-bs-dismiss="modal"></button>
+	            </div>
+	            
+	            
+	            <!-- Modal body -->
+	            <div class="modal-body">
+	                <div class="join-name">
+	                    <label for="join-name">이름</label><br>
+	                    <input type="text" id="modal-input-name" name=""  placeholder="내용을 입력하세요."/>
+	                </div>
+	                <div class="join-content">
+	                    <label for="join-content">각오 한마디</label><br>
+	                    <input type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
+	                </div>
+	            </div>
+	
+	            <!-- Modal bottom -->
+	            <div class="modal-bottom">
+	                <div class="modal-button-join">
+	                    <button type="submit" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
+	                </div>
+	            </div>
+	
 	        </div>
 	    </div> 
-	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

@@ -40,13 +40,15 @@ ul, li, ol{
 }
 
 .nav-container .nav-wrapper .nav-item a {
-    color: #727F88;
+    color: black;
     position: relative;
     padding: 0;
     display: flex;
     align-items: center;
     text-decoration: none;
 }
+
+a:link { color: black; }
 
 .nav-container .nav-wrapper .nav-item a.selected {
     font-weight: 700;
