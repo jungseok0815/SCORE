@@ -9,22 +9,23 @@
     background-color: #F8FAFB;
     height: 100%;
     min-height: calc(100vh - 50rem);
+    margin-top: 20px;
 }
 .teamMain{
     max-width: 1024px;
     margin: 0 auto;
     background-color: white;
-    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .team-left-wrap{
-    position: relative;
+    display: flex;
 }
 
 .left-header{
     display: flex;
-    align-items: center;
-    padding: 10px 20px 0px 50px;
+    padding: 0px 20px 0px 20px;
 }
 
 .list-link{
@@ -66,9 +67,8 @@
 }
 
 .left-body{
-    padding: 0px 50px;
+    padding:20px;
     background-color: #fff;
-    display: flex;
     align-items: center;
 }
 
@@ -101,6 +101,7 @@
     width: 100%;
     background-color: #F8FAFB;
     height: 100%
+    
 }
 
 .content-body{
@@ -112,11 +113,11 @@
 .content-img{
     margin-bottom: 20px;
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
+    padding: 0;
 }
 
 .content-div{
-    margin: 0px 0px 40px 80px;
     font-size: 16px;
     line-height: 26px;
     min-height: 120px;
@@ -126,7 +127,7 @@
 .content-tag-list{
     display: flex;
     flex-wrap: wrap;
-    margin: 10px 0px 20px 30px;
+    margin-top: 20px;
 }
 
 .content-tag{
@@ -145,7 +146,7 @@
     font-size: 14px;
     line-height: 120%;
     color: #727F88;
-    margin: 10px 20px 20px 30px;
+    margin: 10px 10px 20px 0px;
 }
 
 .modal-content{
@@ -202,27 +203,57 @@
     padding: 20px 20px 16px 20px;
 }
 
-.btn-list{
-    padding: 10px 50px;
-}
-
-.btn-wrap{
-    float: right;
-    width: 15%;
-}
-
 .btnJoin{
-    background-color: #1570FF;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     border: none;
     cursor: pointer;
-    width: 80%;
     font-size: 16px;
     text-align: center;
     color:white;
+    line-height: 50px;
 }
 
+.btnLightBlue {
+    background: #5DC8CD;
+}
+
+
+.btnFloat {
+    background: none;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.btnFloat:before {
+    content: '가입 신청';
+    display: block;
+    position: absolute;
+    height: 50px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    width: 230px;
+}
+
+.btnLightBlue.btnFloat:before {
+    background: #5DC8CD;
+}
+
+.btnFloat:before {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+  }
+  
+.btnFloat:hover:before {
+    
+}
+  
+.btnFloat:hover:before {
+    margin-top: -2px;
+    margin-left: 0px;
+    transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+}
 
 #modal-input-name{
     border: 1px solid #d2d1d1;
@@ -279,12 +310,12 @@
     align-content: space-around;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-bottom: 2%;
+    margin-bottom: 18%;
+    margin-right: 28%;
   }
 
-  #btnModelJoin{
+  .btnModelJoin{
     width: fit-content;
-    background-color: #1570FF;
     border-radius: 10px;
     padding: 20px;
     border: none;
@@ -293,10 +324,81 @@
     font-size: 16px;
     color: white;
     text-align: center;
+    line-height: 60px;
   }
 
+.btnLightBlue2 {
+    background: #5DC8CD;
+}
+
+
+.btnFloat2 {
+    background: none;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.btnFloat2:before {
+    content: '가입 신청하기';
+    display: block;
+    position: absolute;
+    width: 120px;
+    height: 60px;
+    border-radius: 5px;
+    transition: all 0.2s ;
+}
+
+.btnLightBlue2.btnFloat2:before {
+    background: #5DC8CD;
+}
+
+.btnFloat2:before {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+  }
+  
+.btnFloat2:hover:before {
+    
+}
+  
+.btnFloat2:hover:before {
+    margin-top: -2px;
+    margin-left: 0px;
+    transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+}
+
+
 @media screen and (min-width: 720px) {
-    .btnJoin{
-        max-width: 500px;
+    .teamMain{
+        flex-direction: row;
+    }
+
+    .team-left-wrap{
+        max-width: 320px;
+    }
+
+    .content-body{
+        margin-left: 10px;
+    }
+
+    .left-header{
+        padding: 20px;
+    }
+
+    .body-list {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+    }
+
+    .btn-wrap {
+        display: block;
+        width: 28%;
+    }
+
+    .modal-button-join{
+        margin-bottom: 9%;
+        margin-right: 0;
     }
 } 
