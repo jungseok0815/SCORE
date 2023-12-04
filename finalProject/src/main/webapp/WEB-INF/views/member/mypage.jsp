@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
 
+	<link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
+	<link rel="stylesheet" href="/final/resources/css/common/main.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />

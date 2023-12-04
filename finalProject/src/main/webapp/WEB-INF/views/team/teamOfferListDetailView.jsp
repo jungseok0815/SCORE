@@ -123,7 +123,7 @@
 	            <!-- Modal bottom -->
 	            <div class="modal-bottom">
 	                <div class="modal-button-join">
-	                    <button type="button" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
+	                    <button type="submit" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
 	                </div>
 	            </div>
 	
