@@ -163,3 +163,4 @@ ul, li, ol{
 .team-list-container > ul{
     padding: 0px;
 }
+ #pagingArea {width:fit-content; margin:auto;}

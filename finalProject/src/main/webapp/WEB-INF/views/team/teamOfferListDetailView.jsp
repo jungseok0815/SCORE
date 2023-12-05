@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +32,9 @@
 	                            </div>
 	                            <div class="list-content">
 	                                <div class="list-title">
-	                                    <span class="TimeName">토트넘Fc</span>
+	                                    <span class="TimeName">${team.teamName}</span>
 	                                </div>
-	                                <span class="list-member">남녀 모두 · 20~30대 · 아마추어3</span>
+	                                <span class="list-member">${team.offerAge}, ${team.offerLevel}, ${team.offerGender}</span>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -42,17 +43,17 @@
 	                    <div class="left-body">
 	                        <div class="body-list">
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>남녀 모두</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerGender}</span>
 	                            </div>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>실력무관</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerLevel}</span>
 	                            </div>
 	                            <br>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>20대~30대</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerAge}</span>
 	                            </div>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png" class="list-star-img"/>0원/월</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png" class="list-star-img"/>0원</span>
 	                            </div>
 	                            
 	                        </div>
@@ -63,30 +64,19 @@
 						</div>
 	                </div>
 	            </div>
-	
+	            
 	            <div class="content-wrap">
 	                <div class="content-body">
 	                    <div class="btn-list">
 							<img src="./resources/img/team/teamOfferListDetailView/shm.jpg"  class="content-img"/>
 						</div>
-	                    <div class="content-div">
-	                        경기장에 나가면 쏟아부을 수 있는 것을<br>
-	                        모두 쏟으려고 해요<br>
-	                        팀을 위해 모든 것을 쏟아내는게<br>
-	                        나의 목표입니다.<br>
-	                        <br>
-	
-	                        제 인생에서 공짜로 얻는 것은 단 하나도 없어요.<br>
-	                        드리블, 슈팅, 컨디션 유지, 부상 방지 등은<br>
-	                        전부 죽어라 노력해서 얻은 것이라고 믿어요.<br>
+	                    <div class="content-div"> 
+	                    ${team.offerContent}
 	                    </div>
-	                    <div class="content-tag-list">
-	                        <div class="content-tag">#손흥민</div>
-	                        <div class="content-tag">#실력키우기</div>
-	                    </div>
+	                    
 	                    <div class="content-footer">
-	                        조회 8888 · 신청 20
-	                        <span style="float: right;">업데이트 1달 전</span>
+	                       	조회수 ${team.offerCount}
+	                        
 	                    </div>
 	                </div>
 	            </div>
