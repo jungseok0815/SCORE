@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/place/placeDetailView.css">
+<script src="/final/resources/js/place/placeDetailView.js"></script>
 </head>
 <body onload="init()">
 	<jsp:include page="../common/header.jsp" />

@@ -8,12 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
     <link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 </head>
-<body onload="mainInit()">
+<body onload="mainInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="common/header.jsp" />
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
@@ -70,23 +71,17 @@
 
         <!-- 축구, 야구, 농구 중 어떤 경기리스트를 보여줄지 클릭하는 버튼 -->
         <div class="choice-sports">
-            <div class="baseball-btn">
-                <a href="">
-                    <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
-                    <p>Baseball</p>
-                </a>
+            <div onclick="test1(2)" class="baseball-btn">
+                <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
+                <p>Baseball</p>
             </div>
-            <div class="football-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
-                    <p>Football</p>
-                </a>
+            <div onclick="test1(1)" class="football-btn">
+                <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
+                <p>Football</p>
             </div>
-            <div class="basketball-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
-                    <p>Basketball</p>
-                </a>
+            <div onclick="test1(3)" class="basketball-btn">
+                <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
+                <p>Basketball</p>
             </div>
         </div>
 
@@ -178,14 +173,14 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabe2">성별</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox">☆남녀모두
+                                        <div class="modal-body" onclick="handleSelectPlaceGender('남여모두')">
+                                            ☆남녀모두
                                         </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox"> 남자
+                                        <div class="modal-body" onclick="handleSelectPlaceGender('남자')">
+                                            남자
                                         </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox"> 여자
+                                        <div class="modal-body" onclick="handleSelectPlaceGender('여자')">
+                                            여자
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -232,209 +227,10 @@
         
         <!-- 매치 스케쥴 -->
         <div class="match-schedule-container">
-            <ul>
-                <li class="match-schedule-item">
-                    <a href="${pageContext.request.contextPath}/detail.pl">
-                        <div class="match-time">
-                            <p>18:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>서울 역삼동 역삼파크 B구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div>
 
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>22:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>광주 전남대학교 대운동장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <div class="match-status isHurry">
-                                <p>마감임박!</p>
-                            </div>
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>13:30</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>서울 송파 올림픽공원 축구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <div class="match-status isFull">
-                                <p>마감</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>20:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>강원 강원FC 부설구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <div class="match-status isHurry">
-                                <p>마감임박!</p>
-                            </div>
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>18:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>경기 용인시 꿈나무 축구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남자-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <!-- <span>모든레벨</span> -->
-                                <!-- <span>스타터</span> -->
-                                <span>세미프로</span>
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div>
-
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
         </div>
 
         <div class="paging-area" align="center" style="margin: 50px;">
-            <button class="btn btn-light" onclick="location.href=''">&lt;</button>
-            <button class="btn btn-light" onclick="location.href=''">1</button>
-            <button class="btn btn-light" onclick="location.href=''">2</button>
-            <button class="btn btn-light" onclick="location.href=''">3</button>
-            <button class="btn btn-light" onclick="location.href=''">&gt;</button>
         </div>
 
     </div>
