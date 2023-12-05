@@ -40,37 +40,8 @@
 				</div>
 			  </div>
 			</div>
-			<div class="accordion-item">
-			  <h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				  ◇ 친구 신청 시 QR코드를 이용해보세요 ◇
-				</button>
-			  </h2>
-			  <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body">
-				  'QR 코드'로 경기장에서 만난 플래버를 친구 등록하기 쉬워졌어요. 
-					  연락처를 알고 있는 플래버라면 '링크 복사'로 내 프로필 주소를 공유해 주세요.
-					  
-					  [친구 신청 및 추가 방법]
-					  1. 마이페이지 '프로필 보기' 버튼 우측의 'QR 코드 모양 아이콘' 클릭
-					  2. 'QR 코드' 혹은 '링크 복사'를 통해 친구에게 내 프로필 주소 공유
-					  3. 친구가 내 프로필에 접속해 '친구 신청' 버튼 클릭
-					  4. '마이페이지-친구'의 '신청대기' 탭에서 수락
-				</div>
-			  </div>
-			</div>
-			<div class="accordion-item">
-			  <h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				  ◇ 임도현 집중 ◇
-				</button>
-			  </h2>
-			  <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-				<div class="accordion-body" id="accordion-bottom">
-				  림도현 집중림도현 집중림도현 집중림도현 집중림도현 집중ㅍㅍ림도현 집중림도현 집중림도현 집중림도현 집중림도현 집중림도현 집중림도현 집중
-				</div>
-			  </div>
-			</div>
+			
+			
 		  </div>
 		</div>
 	  </div>
