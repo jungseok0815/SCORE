@@ -215,7 +215,7 @@
 }
 
 .btnLightBlue {
-    background: #5DC8CD;
+    background: #0d6efd;
 }
 
 
@@ -231,7 +231,7 @@
     height: 50px;
     border-radius: 5px;
     transition: all 0.2s;
-    width: 230px;
+    width: 190px;
 }
 
 .btnLightBlue.btnFloat:before {
@@ -300,18 +300,14 @@
   }
 
   .modal-bottom{
-    position: sticky;
-    background-color: #ffffff;
-    color: #ffffff;
+    height: 100px;
   }
 
   .modal-button-join{
+    height: 100%;
     display: flex;
-    align-content: space-around;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-bottom: 18%;
-    margin-right: 28%;
+    justify-content: center;
+    align-items: center;
   }
 
   .btnModelJoin{
@@ -340,7 +336,6 @@
 .btnFloat2:before {
     content: '가입 신청하기';
     display: block;
-    position: absolute;
     width: 125px;
     height: 60px;
     border-radius: 5px;
@@ -392,13 +387,5 @@
         flex-direction: row-reverse;
     }
 
-    .btn-wrap {
-        display: block;
-        width: 28%;
-    }
 
-    .modal-button-join{
-        margin-bottom: 9%;
-        margin-right: 0;
-    }
 } 
