@@ -15,7 +15,7 @@
 		<result column="USER_BIRTH" property="age" />
 		<result column="GENDER" property="gender" />
 		<result column="USER_STATUS" property="age" />
-		<result column="USER_LEVER" property="userLever" />
+		<result column="USER_LEVEL" property="userLever" />
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
 	</resultMap>
@@ -70,7 +70,7 @@
 			STYLE,
 			SKILL,
 			USER_NO,
-			CATEGORY_NUM 
+			CATEGORY_NUM  
 			)
 		VALUES (
 			#{style},
@@ -90,8 +90,7 @@
 	
 	<select id="loginMember" resultMap="memberResult">
 		SELECT
-			USER_NO, 
-			USER_PWD
+			*
 		  FROM MEMBER
 		 WHERE USER_ID = #{userId}
 	</select>

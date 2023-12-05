@@ -22,6 +22,7 @@ public class NoticeController {
 	@RequestMapping("/noticeList.no")
 	public ModelAndView noticeList(ModelAndView mv) {
 		ArrayList<Notice> list = noticeService.selectNoticeList();
+		System.out.print(list);
 		mv.addObject("noticeList", list).setViewName("notice/noticeList");
 		return mv;
 		

@@ -15,7 +15,7 @@
 		<div class="notice-wrap">
 			<div class="notice-header">
 				<h1>공지사항</h1>
-				<c:if test="${n.userNo eq 1 }">
+				<c:if test="${loginUser.userLever eq 1 }">
 					<a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#noticeModal">
 					 공지사항등록하러가기
 					</a>
