@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/final/resources/css/common/main.css">
 
 </head>
 <body>
@@ -16,7 +17,7 @@
         <div class="nav-container">
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
-                <div class="nav-item"><a href="" class="">팀관리</a></div>
+                <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
                 <div class="nav-item"><a href="${pageContext.request.contextPath}/insert.pl" class="">구장등록</a></div>
             </div>
         </div>
@@ -103,15 +104,15 @@
             <div class="main-match-filter">
                 <div class="filter-wrapper">
                     <ul>
-                        <li class="on" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <li class="on" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <span>지역</span>
                             <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow_selected.svg" alt="">
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">지역</h1>
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">지역</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -175,13 +176,13 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ☆남녀모두
+                                            <input type="checkbox">☆남녀모두
                                         </div>
                                         <div class="modal-body">
-                                            남자
+                                            <input type="checkbox"> 남자
                                         </div>
                                         <div class="modal-body">
-                                            여자
+                                            <input type="checkbox"> 여자
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -430,8 +431,6 @@
             <button class="btn btn-light" onclick="location.href=''">1</button>
             <button class="btn btn-light" onclick="location.href=''">2</button>
             <button class="btn btn-light" onclick="location.href=''">3</button>
-            <button class="btn btn-light" onclick="location.href=''">4</button>
-            <button class="btn btn-light" onclick="location.href=''">5</button>
             <button class="btn btn-light" onclick="location.href=''">&gt;</button>
         </div>
 
@@ -470,16 +469,16 @@
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-all" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-all">남녀 모두</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-all" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-all">남녀 모두</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-male" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-male">남자</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-male" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-male">남자</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="gender" id="gender-female" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="gender-female">여자</label>
+                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-female" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="gender-female">여자</label>
                           </li>
                       </ul>
                   </div>
@@ -487,16 +486,16 @@
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-offence" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-offence">공격</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-offence" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-offence">공격</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-balance" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-balance">밸런스</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-balance" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-balance">밸런스</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-check" name="ability" id="ability-defence" autocomplete="off">
-                              <label class="btn btn-check-label madal-label" for="ability-defence">수비</label>
+                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-defence" autocomplete="off">
+                              <label class="btn btn-checkX-label madal-label" for="ability-defence">수비</label>
                           </li>
                       </ul>
                   </div>
@@ -505,30 +504,30 @@
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="level" id="level-all" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-all">실력무관</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-all" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-all">실력무관</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-1" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-1">스타터</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-1" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-1">스타터</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-2" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-2">비기너</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-2" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-2">비기너</label>
                               </li>
                           </ul>
                           <ul>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-3" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-3">아마추어</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-3" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-3">아마추어</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-4" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-4">세미프로</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-4" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-4">세미프로</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-check" name="level" id="level-5" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="level-5">프로</label>
+                                  <input type="checkbox" class="btn-checkX" name="level" id="level-5" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="level-5">프로</label>
                               </li>
                           </ul>
                       </div>
@@ -538,30 +537,30 @@
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-10" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-10">10대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-10" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-10">10대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-20" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-20">20대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-20" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-20">20대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-30" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-30">30대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-30" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-30">30대</label>
                               </li>
                           </ul>
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-40" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-40">40대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-40" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-40">40대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-50" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-50">50대</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-50" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-50">50대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-check" name="age" id="age-60" autocomplete="off">
-                                  <label class="btn btn-check-label madal-label" for="age-60">60대 이상</label>
+                                  <input type="checkbox" class="btn-checkX" name="age" id="age-60" autocomplete="off">
+                                  <label class="btn btn-checkX-label madal-label" for="age-60">60대 이상</label>
                               </li>
                           </ul>
                       </div>
@@ -572,8 +571,93 @@
           </div>
         </div>
       </div>
+      
+    <!-- 내팀 보기 모달-->
+    <div class="modal fade" id="viewMyTeamsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">MY TEAM</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- 아코디언 추가 (내팀, 축구, 야구, 농구) -->
+            <div class="modal-body">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          축구
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <a href="${pageContext.request.contextPath}/teamProfile.tm">
+                                <img src="./resources/images/sonny2.jpg" alt="">
+                                <p>기만FC</p>
+                            </a>
+                            <a href="">
+                                <img src="./resources/images/liverpool.png" alt="">
+                                <p>기만유나이티드</p>
+                            </a>
+                            <!-- 가입 신청 내역(고정) -->
+                            <a href="">
+                                <img src="./resources/images/makingteams.png" alt="">
+                                <p>가입 신청 내역</p>
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          야구
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <a href="">
+                              <img src="./resources/images/human_img.png" alt="">
+                              <p>LG쌍둥이둥이</p>
+                          </a>
+                          <!-- 가입 신청 내역(고정) -->
+                          <a href="">
+                            <img src="./resources/images/makingteams.png" alt="">
+                            <p>가입 신청 내역</p>
+                        </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          농구
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <a href="">
+                                <img src="./resources/images/human_img.png" alt="">
+                                <p>파주레이커스</p>
+                            </a>
+                            <!-- 가입 신청 내역(고정) -->
+                            <a href="">
+                              <img src="./resources/images/makingteams.png" alt="">
+                              <p>가입 신청 내역</p>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- <script>
+    <script>
         function initCalendar() {
         const calendarContainer = document.getElementById('calendar2');
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -626,7 +710,7 @@
     }
 
     initCalendar();
-    </script> -->
+    </script>
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>

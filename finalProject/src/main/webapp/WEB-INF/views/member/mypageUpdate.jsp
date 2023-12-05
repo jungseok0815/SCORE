@@ -8,13 +8,18 @@
 <link rel="stylesheet" href="/final/resources/css/member/myPageUpdate.css" >
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />	
-	
-	<div class="title"> 
+   <jsp:include page="../common/header.jsp" />   
+   
+   <div class="title"> 
         <div class="title2">
 
             <img src="/img/img1.jpg" class="img3">
-            <div class="a-btn"><a href="">이미지바꾸기</a></div>
+            <div class="a-btn">
+                <label for="file">
+                <div class="btn-upload">파일 업로드하기</div>
+                </label>
+                <input type="file" name="file" id="file">
+            </div>
             
             <div class="title3">이름</div>
             <input type="text" value="임도현" class="input-1">
@@ -106,7 +111,7 @@
 
         </div>
     </div>
-	
-	<jsp:include page="../common/footer.jsp" />
+   
+   <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

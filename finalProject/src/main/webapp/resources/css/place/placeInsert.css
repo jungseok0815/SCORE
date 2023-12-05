@@ -21,17 +21,6 @@
     color: #999999;
     margin-bottom: 10px;
 }
-.filebox label {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    vertical-align: middle;
-    background-color: #999999;
-    cursor: pointer;
-    height: 40px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
 .filebox input[type="file"] {
     position: absolute;
     width: 0;
@@ -43,3 +32,25 @@
 .field-insert-input input[type="time"]{
     width: 75px;
 }
+.btn-upload {
+    width: 150px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background: rgb(77,77,77);
+      color: #fff;
+    }
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #fileImgFile {
+    display: none;
+  }

@@ -1,9 +1,16 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .outer{
     min-height: calc(100vh - 10rem);
 }
 
-li, ul{
-    list-style-type: none;
+ul, li, ol{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
 }
 
 /* nav 글씨 */
@@ -11,6 +18,8 @@ li, ul{
     line-height: 40px;
     padding: 0px;
     background-color: white;
+    margin-top: -30px;
+    margin-bottom: -24px;
 }
 
 .nav-container .nav-wrapper {
@@ -31,13 +40,15 @@ li, ul{
 }
 
 .nav-container .nav-wrapper .nav-item a {
-    color: #727F88;
+    color: black;
     position: relative;
     padding: 0;
     display: flex;
     align-items: center;
     text-decoration: none;
 }
+
+a:link { color: black; }
 
 .nav-container .nav-wrapper .nav-item a.selected {
     font-weight: 700;
@@ -81,12 +92,14 @@ li, ul{
 /* carousel 이미지슬라이드 */
 .real-img{
     max-width: 100%;
-    max-height: 320px;
+    min-height: 130px;
     border-radius: 30px;
+    max-height: 130px;
+    object-fit: cover;
 }
 /* 축구, 농구, 야구 선택하는 버튼 */
 .choice-sports{
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -96,7 +109,7 @@ li, ul{
     justify-content: center;
     text-decoration: none;
     color: black;
-    font-size: 25px;
+    font-size: 10px;
     font-weight: 700;
 }
 .choice-sports div a p{
@@ -106,31 +119,31 @@ li, ul{
 }
 .sports-img{
     vertical-align: middle;
-    width: 28px;
-    height: 28px;
+    width: 10px;
+    height: 10px;
     margin-top: 6px;
 }
 .baseball-img{
     vertical-align: middle;
-    width: 33px;
-    height: 33px;
+    width: 13px;
+    height: 13px;
     margin-top: 6px;
 }
 .baseball-btn{
-    width: 200px;
-    height: 50px;
+    width: 120px;
+    height: 30px;
     border: 1px solid red;
     border-radius: 20px;
 }
 .football-btn{
-    width: 200px;
-    height: 50px;
+    width: 120px;
+    height: 30px;
     border: 1px solid green;
     border-radius: 20px;
 }
 .basketball-btn{
-    width: 200px;
-    height: 50px;
+    width: 120px;
+    height: 30px;
     border: 1px solid rgb(255, 115, 0);
     border-radius: 20px;
 }
@@ -138,8 +151,8 @@ li, ul{
 /* 캘린더 */
 .calender {
     height: 100%;
-    margin-top: 55px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     width: 100%;
 }
 
@@ -332,6 +345,10 @@ li, ul{
 	max-width: 1024px;
 	margin: 0 auto;
 }
+.match-schedule-container ul{
+    padding: 0px;
+    margin-bottom: 0px;
+}
 .match-schedule-item a {
 	border-bottom: 1px solid #ddd;
 	display: flex;
@@ -341,24 +358,26 @@ li, ul{
 	padding: 20px 15px;
     text-decoration: none;
 }
+.match-title h3{
+    text-decoration: none;
+}
 .match-schedule-item .match-time {
 	width: 15%;
 	font-weight: 700;
 	text-align: center;
-	font-size: 20px;
+	font-size: 10px;
 }
 .match-schedule-item .match-info {
 	width: 62%;
-    margin-right: 90px;
 	padding-right: 10px;
 }
 .match-schedule-item .match-info h3 {
-	font-size: 20px;
+	font-size: 13px;
 	font-weight: 400;
 	word-break: keep-all;
 }
 .match-option {
-	font-size: 12px;
+	font-size: 7px;
 	color: #727F88;
 	margin-top: 3px;
 	display: flex;
@@ -396,6 +415,257 @@ li, ul{
         margin-left: 15%;
         margin-right: 15%;
         min-height: calc(100vh - 10rem);
+    }
+    li, ul{
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    /* nav 글씨 */
+    .nav-container {
+        line-height: 40px;
+        padding: 0px;
+        background-color: white;
+    }
+    
+    .nav-container .nav-wrapper {
+        margin: 0 auto;
+        display: flex;
+        padding: 14px 20px;
+        justify-content: flex-start;
+    }
+    
+    .nav-container .nav-wrapper .nav-item {
+        padding-right: 16px;
+        font-size: 20px;
+        line-height: 26px;
+        margin: 0px;
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .nav-container .nav-wrapper .nav-item a {
+        color: #727F88;
+        position: relative;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+    
+    .nav-container .nav-wrapper .nav-item a.selected {
+        font-weight: 700;
+        color: #282B33;
+        border-bottom: none;
+    }
+    
+    /* EXPLORE NAV */
+    .explore-container {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+    
+    .explore-wrapper {
+        padding: 10px 15px 0px 15px;
+    }
+    
+    .explore-wrapper .explore-item {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+    
+    .explore-wrapper .explore-item a {
+        padding: 5px;
+        text-decoration: none;
+        color: black;
+    }
+    
+    .explore-wrapper .explore-item img {
+        vertical-align: middle;
+        width: 28px;
+        height: 28px;
+    }
+    
+    .explore-wrapper .explore-item p {
+        margin-top: 5px;
+        font-size: 12px;
+    }
+    
+    /* carousel 이미지슬라이드 */
+    .real-img{
+        max-width: 100%;
+        max-height: 320px;
+        border-radius: 30px;
+    }
+    /* 축구, 농구, 야구 선택하는 버튼 */
+    .choice-sports{
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .choice-sports div a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        font-weight: 700;
+    }
+    .choice-sports div a p{
+        margin-top: 7px;
+        margin-bottom: 0rem;
+        padding-left: 11px;
+    }
+    .sports-img{
+        vertical-align: middle;
+        width: 28px;
+        height: 28px;
+        margin-top: 6px;
+    }
+    .baseball-img{
+        vertical-align: middle;
+        width: 33px;
+        height: 33px;
+        margin-top: 6px;
+    }
+    .baseball-btn{
+        width: 200px;
+        height: 50px;
+        border: 1px solid red;
+        border-radius: 20px;
+    }
+    .football-btn{
+        width: 200px;
+        height: 50px;
+        border: 1px solid green;
+        border-radius: 20px;
+    }
+    .basketball-btn{
+        width: 200px;
+        height: 50px;
+        border: 1px solid rgb(255, 115, 0);
+        border-radius: 20px;
+    }
+    /* filter */
+    .main-match-filter {
+        padding: 8px 0px;
+    }
+    .filter-wrapper{
+        position: relative;
+    }
+    .filter-wrapper ul {
+        box-sizing: content-box;
+        white-space: nowrap;
+        padding: 0;
+        max-width: 1024px;
+        display: flex;
+    }
+    .filter-wrapper ul li {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-left: 5px;
+        padding: 0px 12px;
+        line-height: 32px;
+        height: 32px;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #D9E0E6;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: content-box
+    }
+    .modal-body{
+        color: black;
+    }
+
+    .filter-wrapper ul li:first-child {
+        margin-left: 20px;
+    }
+    .filter-wrapper ul li.on {
+        border: 1px solid #1570FF;
+        border-radius: 20px;
+        color: #1570FF;
+    }
+    .filter-wrapper span {
+        border: none;
+        color: #727F88
+    }
+    .filter-wrapper ul li.on span {
+        border: none;
+        color: #1570FF;
+    }
+    .filter-item-arrow {
+        width: 8.5px;
+        margin-left: 3px;
+    }
+
+    /* 매치 스케쥴 정보 */
+    .match-schedule-container {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+    .match-schedule-item a {
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 20px 15px;
+        text-decoration: none;
+    }
+    .match-schedule-item .match-time {
+        width: 15%;
+        font-weight: 700;
+        text-align: center;
+        font-size: 20px;
+    }
+    .match-schedule-item .match-info {
+        width: 62%;
+        margin-right: 90px;
+        padding-right: 10px;
+    }
+    .match-schedule-item .match-info h3 {
+        font-size: 20px;
+        font-weight: 400;
+        word-break: keep-all;
+    }
+    .match-option {
+        font-size: 12px;
+        color: #727F88;
+        margin-top: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    .match-status {
+        width: 80px;
+        height: 40px;
+        text-align: center;
+        padding: 8px 5px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .match-status.isFull {
+        color: gray;
+        background-color: #EEEEEE;
+    }
+
+    .match-status.isOpen {
+        color: white;
+        background-color: #1570FF;
+    }
+
+    .match-status.isHurry {
+        color: white;
+        background-color: #FF4D37;
     }
 }
 
@@ -455,6 +725,9 @@ input::placeholder {
     display: inline-flex;
     margin: 10px 0px;
 }
+.btn-group-top ul li input{
+    display: none;
+}
 .btn-next{
     width: 100%;
     height: 50px;
@@ -510,18 +783,18 @@ input::placeholder {
 #file {
     display: none;            
 }
-.btn-check+.btn:hover{
+.btn-checkX+.btn:hover{
     color: #1BB8F7;
     border-radius: 15px;
     border: 1px solid #1BB8F7;
 }
-.btn-check + .btn-check-label{
+.btn-checkX + .btn-checkX-label{
     color: #1BB8F7;
     background-color: white;
     border-radius: 15px;
     border: 1px solid #1BB8F7;
 }
-.btn-check:checked + .btn-check-label{
+.btn-checkX:checked + .btn-checkX-label{
     background-color: #1BB8F7;
     color: #ffffff;
     text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);

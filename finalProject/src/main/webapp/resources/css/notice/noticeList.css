@@ -16,7 +16,16 @@
 #accordion-bottom{
     margin-bottom: 50px;
 }
-
+.notice_form button{
+    width: 49.3%;
+    margin: auto;
+}
+.notice_form textarea{
+    resize: none;
+}
+.bottom-btn{
+  display: flex;
+}
 
 @media (min-width: 720px) {
     .outer{
