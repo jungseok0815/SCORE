@@ -35,7 +35,7 @@
                 </div>
                 <div class ="search-bar-icon">
                     <a href=""><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img"></a>
-                    <a href="${pageContext.request.contextPath}/myPage.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                    <a href="${pageContext.request.contextPath}/loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
                 </div>
             </div>
         </div>
