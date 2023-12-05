@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+   <resultMap type = "notice" id = "noticeResult">
+   		<result column="NOTICE_NO" property="noticeNo"/>
+   		<result column="NOTICE_TITLE" property="noticeTitle"/>
+   		<result column="NOTICE_CONTENT" property="noticeContent"/>
+   		<result column="NOTICE_DATE" property="noticeDate"/>
+   		<result column="NOTICE_COUNT" property="noticeCount"/>
+   		<result column="NOTICE_STATUS" property="noticeStatus"/>
+   		<result column="USER_NO" property="userNo"/>
+   </resultMap>
+   
+   <select id="selectNoticeList" resultMap="noticeResult">
+   		SELECT NOTICE_NO,
+   					 NOTICE_TITLE,
+   					 NOTICE_CONTENT
+   		   FROM NOTICE
+   		WHERE NOTICE_STATUS = 'Y'
+   </select>
+   
+   <insert id="insertNotice">
+   		INSERT INTO NOTICE(
+   					NOTICE_NO,
+   					NOTICE_TITLE,
+   					NOTICE_CONTENT,
+   					NOTICE_COUNT,
+   					USER_NO
+   		)
+   		VALUES (
+   					SEQ_NOTICE.NEXTVAL,
+   					#{noticeTitle},
+   					#{noticeContent},
+   					#{noticeCount},
+   					#{userNo}
+   		)
+   </insert>
+</mapper>
