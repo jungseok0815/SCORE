@@ -8,9 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
     <link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <script src="/final/resources/js/common/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 </head>
-<body>
+<body onload="mainInit()">
 	<jsp:include page="common/header.jsp" />
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
@@ -452,7 +455,7 @@
   
                   <div class="profile-imgbox">
                       <label for="file">
-                          <div class="btn-upload"><img src="./em_K09.png" alt=""></div>
+                          <div class="btn-upload"><img src="" alt=""></div>
                       </label>
                       <input type="file" name="file" id="file">
                   </div>
@@ -592,16 +595,16 @@
                       <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <a href="${pageContext.request.contextPath}/teamProfile.tm">
-                                <img src="./resources/images/sonny2.jpg" alt="">
+                                <img src="" alt="">
                                 <p>기만FC</p>
                             </a>
                             <a href="">
-                                <img src="./resources/images/liverpool.png" alt="">
+                                <img src="" alt="">
                                 <p>기만유나이티드</p>
                             </a>
                             <!-- 가입 신청 내역(고정) -->
                             <a href="">
-                                <img src="./resources/images/makingteams.png" alt="">
+                                <img src="" alt="">
                                 <p>가입 신청 내역</p>
                             </a>
                         </div>
@@ -616,12 +619,12 @@
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                           <a href="">
-                              <img src="./resources/images/human_img.png" alt="">
+                              <img src="" alt="">
                               <p>LG쌍둥이둥이</p>
                           </a>
                           <!-- 가입 신청 내역(고정) -->
                           <a href="">
-                            <img src="./resources/images/makingteams.png" alt="">
+                            <img src="" alt="">
                             <p>가입 신청 내역</p>
                         </a>
                         </div>
@@ -636,12 +639,12 @@
                       <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <a href="">
-                                <img src="./resources/images/human_img.png" alt="">
+                                <img src="" alt="">
                                 <p>파주레이커스</p>
                             </a>
                             <!-- 가입 신청 내역(고정) -->
                             <a href="">
-                              <img src="./resources/images/makingteams.png" alt="">
+                              <img src="" alt="">
                               <p>가입 신청 내역</p>
                           </a>
                         </div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="placeMapper">
+	<resultMap type="Place" id="placeResult">
+		<result column="FIELD_NO" property="fieldNo" />
+		<result column="FIELD_NAME" property="fieldName" />
+		<result column="FIELD_AREA" property="fieldArea" />
+		<result column="FILED_DATE" property="fieldDate" />
+		<result column="FILED_COUNT" property="fieldCount" />
+		<result column="PARKING" property="parking" />
+		<result column="MATCH_GENDER" property="matchGender" />
+		<result column="SHOES" property="shoes" />
+		<result column="MANAGER" property="manager" />
+		<result column="MATCH_LEVEL" property="matchLevel" />
+		<result column="MATCH_PAY" property="matchPay" />
+		<result column="CATEGOTY_NUM" property="categotyNum" />
+	</resultMap>
+	<select id="placeListCount" resultType="_int">
+ 		SELECT COUNT(*)
+ 		  FROM FIELD
+ 	</select>
+ 	<select id="selectPlaceList" resultMap="placeResult">
+ 		SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				TO_CHAR(FILED_DATE, 'YYYY-MM-DD-HH:mm') AS "FILED_DATE",
+				FILED_COUNT,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_PAY,
+				CATEGOTY_NUM
+ 		  FROM FIELD
+ 		 ORDER BY FIELD_NO DESC
+ 	</select>
+</mapper>
