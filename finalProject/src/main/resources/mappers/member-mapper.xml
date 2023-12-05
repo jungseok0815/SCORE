@@ -1,1 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+<mapper namespace="memberMapper">
+	<resultMap type="Member" id="memberResult">
+		<result column="USER_NO" property="userNo" />
+		<result column="USER_ID" property="userId" />
+		<result column="USER_PWD" property="userPwd" />
+		<result column="USER_PHONE" property="phone" />
+		<result column="USER_NAME" property="userName" />
+		<result column="USER_BIRTH" property="age" />
+		<result column="GENDER" property="gender" />
+		<result column="USER_STATUS" property="age" />
+		<result column="USER_LEVER" property="userLever" />
+		<result column="CITY" property="address" />
+		<result column="USER_POINT" property="point" />
+	</resultMap>
+	
+	<resultMap type="SportInfo" id="sportInfoResult">
+		<result column="SPORT_LEVER" property="sportLever" />
+		<result column="SPORT_SCORE" property="sportScore" />
+		<result column="SPORT_COUNT" property="sportCount" />
+		<result column="STYLE" property="style" />
+		<result column="SKILL" property="skill" />
+		<result column="USER_NO" property="userNo" />
+		<result column="CATEGOTY_NUM" property="categoryNum" />
+	</resultMap>
+
+	
+	<!-- 회원가입을 위한 쿼리문 -->
+	<insert id="joinMember">
+		INSERT INTO MEMBER(
+			USER_NO,
+			USER_ID ,
+			USER_PWD ,
+			USER_PHONE,
+			USER_NAME ,
+			USER_BIRTH,
+			GENDER,
+			CITY
+			)
+		VALUES (
+			SEQ_MEMBER.NEXTVAL,
+			#{userId},
+			#{userPwd},
+			#{phone},
+			#{userName},
+			#{age},
+			#{gender},
+			#{address}
+			)
+	</insert>
+	
+	
+	<select id="selectJoinmember" resultMap="memberResult">
+		select 
+			USER_NO,
+			USER_ID
+		FROM MEMBER
+			WHERE USER_ID = #{uesrId}
+	</select>
+	
+	
+	<insert id="insertSportInfo">
+		INSERT INTO SPORTINFO(
+			STYLE,
+			SKILL,
+			USER_NO,
+			CATEGORY_NUM 
+			)
+		VALUES (
+			#{style},
+			#{skill},
+			#{userNo},
+			#{categoryNum}
+			)
+	</insert>
+	
+	
+	<select id="checkId" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE USER_ID = #{checkId}
+	</select>
+	
+	
+	<select id="loginMember" resultMap="memberResult">
+		SELECT
+			USER_NO, 
+			USER_PWD
+		  FROM MEMBER
+		 WHERE USER_ID = #{userId}
+	</select>
+	
+</mapper>
