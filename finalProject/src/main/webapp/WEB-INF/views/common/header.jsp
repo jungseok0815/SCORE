@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="/final/resources/css/common/header.css">
 
 
-
 </head>
 <body>
     <div class="header-body">
@@ -35,7 +34,15 @@
                 </div>
                 <div class ="search-bar-icon">
                     <a href=""><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img"></a>
-                    <a href="${pageContext.request.contextPath}/myPage.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                    <c:choose>
+	            		<c:when test="${empty loginUser}">
+                    		<a href="${pageContext.request.contextPath}/loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                		</c:when>
+                	<c:otherwise>
+		                <!-- 로그인 후 -->
+			              	<a href="${pageContext.request.contextPath}/myPage.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+	                </c:otherwise>
+	            </c:choose>         
                 </div>
             </div>
         </div>
