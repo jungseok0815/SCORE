@@ -40,8 +40,8 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public ArrayList<TeamOffer> selectCity(String activityAtea) {
-		return teamDao.selectCity(sqlSession, activityAtea);
+	public ArrayList<TeamOffer> selectCity(String activityAtea, PageInfo pi) {
+		return teamDao.selectCity(sqlSession, activityAtea, pi);
 	}
 
 	@Override
@@ -49,10 +49,7 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.selectOfferListCount(sqlSession, activityAtea);
 	}
 
-//	@Override
-//	public int selectOfferListAll(String activityAtea) {
-//		return teamDao.selectOfferListAll(sqlSession, activityAtea);
-//	}
+
 
 
 

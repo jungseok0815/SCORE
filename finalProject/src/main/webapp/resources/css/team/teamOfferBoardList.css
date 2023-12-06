@@ -164,3 +164,58 @@ ul, li, ol{
     padding: 0px;
 }
  #pagingArea {width:fit-content; margin:auto;}
+ 
+ 
+ .choice-sports{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.choice-sports div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: 10px;
+    font-weight: 700;
+}
+.choice-sports div p{
+    /* margin-bottom: 0rem; */
+    padding-left: 9px;
+    margin-top: 17px;
+    font-size: 18px;
+}
+.sports-img{
+    vertical-align: middle;
+    width: 27px;
+    height: 23px;
+}
+.baseball-img{
+    vertical-align: middle;
+    width: 27px;
+    height: 23px;
+}
+.baseball-btn{
+    width: 120px;
+    height: 40px;
+    border: 1px solid red;
+    border-radius: 20px;
+}
+.football-btn{
+    width: 139px;
+    height: 40px;
+    border: 1px solid green;
+    border-radius: 20px;
+}
+.basketball-btn{
+    width: 130x;
+    height: 40px;
+    border: 1px solid rgb(255, 115, 0);
+    border-radius: 20px;
+}
+
+.choice-sports div:hover{
+    background : #1BB8F7;
+    cursor: pointer;
+}

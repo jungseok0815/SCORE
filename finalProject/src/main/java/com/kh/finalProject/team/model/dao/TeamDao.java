@@ -32,15 +32,17 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectOfferDetail", offerNo);
 	}
 	
-	public ArrayList<TeamOffer> selectCity(SqlSessionTemplate sqlSession, String activityAtea){
-		return (ArrayList)sqlSession.selectList("teamMapper.selectCity", activityAtea);
+	public ArrayList<TeamOffer> selectCity(SqlSessionTemplate sqlSession, String activityAtea, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("teamMapper.selectCity", activityAtea, rowBounds);
 	}
 	
 	public int selectOfferListCount(SqlSessionTemplate sqlSession, String activityAtea) {
 		return sqlSession.selectOne("teamMapper.selectOfferListCount", activityAtea);
 	}
 	
-//	public int selectOfferListAll(SqlSessionTemplate sqlSession, String activityAtea) {
-//		return sqlSession.selectOne("teamMapper.selectOfferListAll", activityAtea);
-//	}
+
 }

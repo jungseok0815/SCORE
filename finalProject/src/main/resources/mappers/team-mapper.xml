@@ -100,6 +100,7 @@
  		  FROM TEAM_OFFER
           JOIN TEAM USING(TEAM_NO)
           WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          ORDER BY OFFER_NO DESC
  	</select>
  	
  	<!-- 지역 offer게시글 총 갯수 -->

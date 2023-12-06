@@ -15,11 +15,15 @@
   	<typeAliases>
   		<typeAlias type="com.kh.finalProject.team.model.vo.Team" alias="team"/>
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamOffer" alias="teamOffer"/>
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.SportInfo" alias="SportInfo" />
   	</typeAliases>
 
   	<mappers>
   		<mapper resource="/mappers/team-mapper.xml" /> 
+  		<mapper resource="/mappers/member-mapper.xml" />
   	</mappers>
+
  
   	
   </configuration>

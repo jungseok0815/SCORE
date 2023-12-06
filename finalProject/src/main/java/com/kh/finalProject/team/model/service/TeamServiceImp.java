@@ -20,11 +20,10 @@ public interface TeamServiceImp {
 	TeamOffer selectOfferDetail(int offerNo);
 	
 	// 지역순 리스트 가져오기
-	ArrayList<TeamOffer> selectCity(String activityAtea);
+	ArrayList<TeamOffer> selectCity(String activityAtea, PageInfo pi);
 		
 	// 지역순 총 갯수
 	int selectOfferListCount(String activityAtea);
 	
-//	// 지역을 전체로 했을 때
-//	int selectOfferListAll(String activityAtea);
+
 }

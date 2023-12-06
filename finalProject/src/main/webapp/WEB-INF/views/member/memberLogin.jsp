@@ -20,11 +20,11 @@
         <form action="login.me" method="post">
             <div class="login-middle">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control id" id="floatingInput" placeholder="name@example.com">
+                    <input type="text" class="form-control id" id="floatingInput" name="userId" placeholder="name@example.com">
                     <label for="floatingInput">아이디 또는 이메일</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="floatingPassword" name="userPwd" placeholder="Password">
                     <label for="floatingPassword">비밀번호</label>
                 </div>
             </div>

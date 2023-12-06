@@ -16,6 +16,21 @@
 	<jsp:include page="../common/header.jsp" />
 		 <div class="main">
 	        <div class="all"> 
+	        <div class="choice-sports">
+        <div onclick="" class="baseball-btn">
+            <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
+            <p>Baseball</p>
+        </div>
+        <div onclick="" class="football-btn">
+            <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
+            <p>Football</p>
+        </div>
+        <div onclick="" class="basketball-btn">
+            <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
+            <p>Basketball</p>
+        </div>
+    </div>
+    <br>
 	            <div class="topWrapper">
 	                <div class="top_container">
 	                    <ul>
@@ -53,7 +68,7 @@
 	                                            <span class="memberPosting">${t.offerTitle}</span>
 	                                        </div>
 	                                        <span class="list-local">${t.activityAtea}</span>
-	                                        <span class="list-member">${t.offerAge}, ${t.offerLevel}, ${t.offerGender}</span>
+	                                        <span class="list-member">${t.offerAge}대, ${t.offerLevel}, ${t.offerGender}</span>
 	                                    </div>
 	                                </a>
 	                                </c:forEach>

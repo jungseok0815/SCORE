@@ -65,7 +65,7 @@ public class TeamController {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 			
 			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea);
+			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, pi);
 			
 			mv.addObject("pi", pi)
 			  .addObject("list", teamService.selectList(pi));
@@ -74,12 +74,11 @@ public class TeamController {
 			
 		} else {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
-			
 			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea);
+			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, pi);
 			
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectCity(activityAtea));
+			mv.addObject("pi", pi)						// pi 처리
+			  .addObject("list", teamService.selectCity(activityAtea, pi));
 			
 
 			return new Gson().toJson(mv);
