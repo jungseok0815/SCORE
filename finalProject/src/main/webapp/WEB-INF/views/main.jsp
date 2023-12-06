@@ -11,6 +11,13 @@
 
 </head>
 <body>
+    <c:if test="${ !empty alertMsg}">
+             <script>
+                alertify.alert('제목', '${alertMsg}');
+             </script>
+           <c:remove var="alertMsg" scope="session" />
+    </c:if>
+    
 	<jsp:include page="common/header.jsp" />
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
@@ -18,7 +25,7 @@
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
                 <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
-                <div class="nav-item"><a href="${pageContext.request.contextPath}/insert.pl" class="">구장등록</a></div>
+                <div class="nav-item"><a href="${pageContext.request.contextPath}/insertForm.pl" class="">구장등록</a></div>
             </div>
         </div>
     
@@ -66,26 +73,7 @@
         </div>
 
         <!-- 축구, 야구, 농구 중 어떤 경기리스트를 보여줄지 클릭하는 버튼 -->
-        <div class="choice-sports">
-            <div class="baseball-btn">
-                <a href="">
-                    <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
-                    <p>Baseball</p>
-                </a>
-            </div>
-            <div class="football-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
-                    <p>Football</p>
-                </a>
-            </div>
-            <div class="basketball-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
-                    <p>Basketball</p>
-                </a>
-            </div>
-        </div>
+        <jsp:include page="common/sportSelectBtn.jsp" />
 
         <!-- 캘린더 -->
         <div class="calender">

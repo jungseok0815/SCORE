@@ -13,11 +13,11 @@
   	
   	<!-- typeAlias : VO/DTO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기 위해서 별칭을 등록할 수 있는 영역-->
   	<typeAliases>
-  		
+  		<typeAlias type="com.kh.finalProject.place.model.vo.Place" alias="Place" />
   	</typeAliases>
 
   	<mappers>
-  	
+  		<mapper resource="/mappers/place-mapper.xml" />
   	</mappers>
  
   	

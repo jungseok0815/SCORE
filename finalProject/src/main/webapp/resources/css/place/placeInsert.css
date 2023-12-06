@@ -29,14 +29,17 @@
     color: #999999;
     margin-bottom: 10px;
 }
-.filebox input[type="file"] {
+#file-upload-button{
+    display: none;
+}
+/* .filebox input[type="file"] {
     position: absolute;
     width: 0;
     height: 0;
     padding: 0;
     overflow: hidden;
     border: 0;
-}
+} */
 .field-insert-input input[type="time"]{
     width: 75px;
 }
@@ -59,6 +62,6 @@
     margin-bottom: 20px;
   }
   
-  #fileImgFile {
+  /* #fileImgFile {
     display: none;
-  }
+  } */

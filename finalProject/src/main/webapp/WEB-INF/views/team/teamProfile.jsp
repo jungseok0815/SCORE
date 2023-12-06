@@ -44,7 +44,7 @@
                             </button>
                         </div>
                         <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferBoard.tm'">
+                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
                                 구인글 작성
                             </button>
                         </div>

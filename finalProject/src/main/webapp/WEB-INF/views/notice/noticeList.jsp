@@ -28,18 +28,58 @@
 			  </h2>
 			  <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
-				  먼저 플랩풋볼 서비스를 사랑해 주시는 플래버님들께 진심으로 감사의 말씀드립니다. 
+				먼저 플랩풋볼 서비스를 사랑해 주시는 플래버님들께 진심으로 감사의 말씀드립니다. 
 	
-					  플랩풋볼은 오는 11월 1일 수요일 매치부터 일부 경기 참가비를 인상하게 되었음을 안내드립니다. 
-					  
-					  그동안 코로나19 영향 및 지속적인 비용 상승에도 불구하고 인상 요인들을 내부적으로 감내하며, 6년 동안 가격 동결을 유지해왔습니다. 
-					  
-					  그러나 플래버님들께 더 좋은 서비스와 혜택을 드리기 위해서는 지속적인 투자가 필요하다고 판단했고, 오랜 고민 끝에 가격 인상을 결정했습니다. 
-					  
-					  이에 따라 11월 1일 수요일 매치부터 지역과 시간에 따라 10,000원에서 12,000원 사이의 세분화된 가격이 적용될 예정입니다. 
+				플랩풋볼은 오는 11월 1일 수요일 매치부터 일부 경기 참가비를 인상하게 되었음을 안내드립니다. 
+				
+				그동안 코로나19 영향 및 지속적인 비용 상승에도 불구하고 인상 요인들을 내부적으로 감내하며, 6년 동안 가격 동결을 유지해왔습니다. 
+				
+				그러나 플래버님들께 더 좋은 서비스와 혜택을 드리기 위해서는 지속적인 투자가 필요하다고 판단했고, 오랜 고민 끝에 가격 인상을 결정했습니다. 
+				
+				이에 따라 11월 1일 수요일 매치부터 지역과 시간에 따라 10,000원에서 12,000원 사이의 세분화된 가격이 적용될 예정입니다. 
 				</div>
 			  </div>
 			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+				  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					◇ 가격 인상 안내 ◇
+				  </button>
+				</h2>
+				<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				  <div class="accordion-body">
+				  먼저 플랩풋볼 서비스를 사랑해 주시는 플래버님들께 진심으로 감사의 말씀드립니다. 
+	  
+				  플랩풋볼은 오는 11월 1일 수요일 매치부터 일부 경기 참가비를 인상하게 되었음을 안내드립니다. 
+				  
+				  그동안 코로나19 영향 및 지속적인 비용 상승에도 불구하고 인상 요인들을 내부적으로 감내하며, 6년 동안 가격 동결을 유지해왔습니다. 
+				  
+				  그러나 플래버님들께 더 좋은 서비스와 혜택을 드리기 위해서는 지속적인 투자가 필요하다고 판단했고, 오랜 고민 끝에 가격 인상을 결정했습니다. 
+				  
+				  이에 따라 11월 1일 수요일 매치부터 지역과 시간에 따라 10,000원에서 12,000원 사이의 세분화된 가격이 적용될 예정입니다. 
+				  </div>
+				</div>
+			  </div>
+			  <div class="accordion-item">
+				<h2 class="accordion-header">
+				  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					◇ 가격 인상 안내 ◇
+				  </button>
+				</h2>
+				<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				  <div class="accordion-body">
+				  먼저 플랩풋볼 서비스를 사랑해 주시는 플래버님들께 진심으로 감사의 말씀드립니다. 
+	  
+				  플랩풋볼은 오는 11월 1일 수요일 매치부터 일부 경기 참가비를 인상하게 되었음을 안내드립니다. 
+				  
+				  그동안 코로나19 영향 및 지속적인 비용 상승에도 불구하고 인상 요인들을 내부적으로 감내하며, 6년 동안 가격 동결을 유지해왔습니다. 
+				  
+				  그러나 플래버님들께 더 좋은 서비스와 혜택을 드리기 위해서는 지속적인 투자가 필요하다고 판단했고, 오랜 고민 끝에 가격 인상을 결정했습니다. 
+				  
+				  이에 따라 11월 1일 수요일 매치부터 지역과 시간에 따라 10,000원에서 12,000원 사이의 세분화된 가격이 적용될 예정입니다. 
+				  </div>
+				</div>
+			  </div>
 			
 			
 		  </div>

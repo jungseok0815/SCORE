@@ -41,8 +41,14 @@ public class TeamController {
 		return "team/teamOfferListDetailView";
 	}
 	
-	@RequestMapping("insertTeamOfferBoard.tm")
+	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
+	@RequestMapping("insertTeamOfferForm.tm")
 	public String teamOfferInsertForm() {
-		return "team/teamOfferInsertForm";
+		return "team/teamOfferInsert";
+	}
+	
+	@RequestMapping("insertTeamOffer.tm")
+	public String teamOfferInsert() {
+		return "team/teamProfile";
 	}
 }
