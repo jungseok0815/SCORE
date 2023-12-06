@@ -1,12 +1,26 @@
 
 handleMemberJoin=()=>{
    const userInfo = document.querySelectorAll(".id");
+   console.log(userInfo[5].value)
+    const yearPart = userInfo[5].value.substring(0, 4); 
+   // 현재 날짜를 나타내는 Date 객체 생성
+   const currentDate = new Date();
+
+    // 현재 연도를 가져오기
+    const  currentYear = currentDate.getFullYear();
+    const age = (currentYear - yearPart)+1;
+
+    console.log(age)
+    // 결과 출력
+    console.log('현재 연도: ' + currentYear);
    const data = {
     userId : userInfo[0].value,
     userPwd : userInfo[1].value,
     userName : userInfo[3].value,
     gender : userInfo[4].value,
-    phone : userInfo[5].value
+    age : age,
+    address : userInfo[6].value,
+    phone : userInfo[7].value,
    };
    
    if(checkJoin() === "ok"){
@@ -229,6 +243,23 @@ checkJoin=()=>{
     return "ok"
     
 }
+
+
+myPageInit = () =>{
+    console.log("hihi")
+    const data = {
+        userNo : '${login.userNo}'
+    }
+    memberAjaxController.getUserInfo(data,drawMypage)
+} 
+
+
+drawMypage = () =>{
+    
+}
+
+
+
 
 
 

@@ -15,6 +15,7 @@
   	<typeAliases>
   		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.SportInfo" alias="SportInfo" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Friend" />
   	</typeAliases>
 
   	<mappers>

@@ -21,7 +21,7 @@
 	</resultMap>
 	
 	<resultMap type="SportInfo" id="sportInfoResult">
-		<result column="SPORT_LEVER" property="sportLever" />
+		<result column="SPORT_LEVEL" property="sportLever" />
 		<result column="SPORT_SCORE" property="sportScore" />
 		<result column="SPORT_COUNT" property="sportCount" />
 		<result column="STYLE" property="style" />
@@ -29,6 +29,16 @@
 		<result column="USER_NO" property="userNo" />
 		<result column="CATEGOTY_NUM" property="categoryNum" />
 	</resultMap>
+	
+	<resultMap type="Friend" id="friendResult">
+		<result column="FRIEND_NO" property="friendNo" />
+		<result column="FRIEND_REQ_USER" property="friendReqUser" />
+		<result column="FRIEND_RES_USER" property="friendResUser" />
+		<result column="FRIEND_STATUS" property="friendStatus" />
+	</resultMap>
+
+
+
 
 	
 	<!-- 회원가입을 위한 쿼리문 -->
@@ -91,9 +101,42 @@
 	<select id="loginMember" resultMap="memberResult">
 		SELECT
 			USER_NO, 
-			USER_PWD
+			USER_ID,
+			USER_PWD,
+			USER_PHONE,
+			USER_NAME,
+			USER_BIRTH,
+			GENDER,
+			CITY,
+			USER_POINT
 		  FROM MEMBER
-		 WHERE USER_ID = #{userId}
+		 WHERE USER_ID = #{userId} and 
+		 USER_STATUS = 'Y'
 	</select>
+	
+	<select id="getCountUserfriends" resultType="_int">
+		SELECT COUNT(*)
+		  FROM FRIEND
+		 WHERE FRIEND_REQ_USER = #{userNo}
+		 OR FRIEND_RES_USER = #{userNo} 
+		 AND FRIEND_STATUS = 'Y'
+	</select>
+
+
+	<select id="getUserSportInfo" resultMap="sportInfoResult">
+		SELECT
+			SPORT_LEVEL, 
+			SPORT_SCORE,
+			SPORT_COUNT,
+			SPORT_COUNT,
+			STYLE,
+			SKILL,
+			USER_NO,
+			CATEGORY_NUM
+		  FROM SPORTINFO
+		 WHERE USER_NO = #{userNo} AND
+		 CATEGORY_NUM = #{categoryNum}
+	</select>
+	
 	
 </mapper>

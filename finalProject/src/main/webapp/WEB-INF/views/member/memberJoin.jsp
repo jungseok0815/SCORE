@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="/final/resources/css/member/joinModal.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <script src="resources/js/member/memberJs/member.js?ver=5"></script>
-    <script src="resources/js/member/memberAjax/memberAjax.js?ver=3"></script>
+    <script src="resources/js/member/memberJs/member.js?ver=3"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
  
 </head>
 </head>
@@ -56,10 +56,38 @@
                             <p class="join-font">성별</p>
                             <select type="text" class="form-control id" value="" id="floatingInput" placeholder="name@example.com">
                                 <option value="남자">남</option>
-                                <option value="남자">여</option>
+                                <option value="여자">여</option>
                             </select>
                         </div> 
                     </div>
+
+               
+                    <div class="join-password-part">
+                        <div class="form-floating mb-3 join-half">
+                            <p class="join-font">생년월일</p>
+                            <input type="date" class="form-control id" value="" id="floatingInput" placeholder="name@example.com">
+                        </div> 
+                        <div class="form-floating mb-3 join-half">
+                            <p class="join-font">선호지역</p>
+                            <select type="text" class="form-control id" value="" id="floatingInput" placeholder="name@example.com">
+                                <option value="서울">서울</option>
+                                <option value="경기">경상</option>
+                                <option value="인천">대구</option>
+                                <option value="대전">대전</option>
+                                <option value="경기">경기</option>
+                                <option value="광주">광주</option>
+                                <option value="부산">부산</option>
+                                <option value="충청">충청</option>
+                                <option value="인천">인천</option>
+                                <option value="전라">전라</option>
+                                <option value="울산">울산</option>
+                                <option value="세종">세종</option>
+                                <option value="강원">강원</option>
+                                <option value="제주">제주</option>
+                            </select>
+                        </div> 
+                    </div>
+                    
                     <p class="join-font">휴대폰 번호</p>
                     <div class="join-password-part">
                         <div class="form-floating mb-3 join-phone">
