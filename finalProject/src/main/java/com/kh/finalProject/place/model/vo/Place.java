@@ -195,14 +195,14 @@ public class Place {
 	}
 
 
-@Override
-public String toString() {
-	return "Place [fieldNo=" + fieldNo + ", fieldName=" + fieldName + ", fieldArea=" + fieldArea + ", fieldDate="
-			+ fieldDate + ", enrollDate=" + fieldEnrollDate + ", fieldCount=" + fieldCount + ", fieldSize=" + fieldSize
-			+ ", parking=" + parking + ", matchGender=" + matchGender + ", shoes=" + shoes + ", manager=" + manager
-			+ ", matchLevel=" + matchLevel + ", matchType=" + matchType + ", startTime=" + startTime + ", endTime="
-			+ endTime + ", matchPay=" + matchPay + ", categoryNum=" + categoryNum + "]";
-}
+	@Override
+	public String toString() {
+		return "Place [fieldNo=" + fieldNo + ", fieldName=" + fieldName + ", fieldArea=" + fieldArea + ", fieldDate="
+				+ fieldDate + ", enrollDate=" + fieldEnrollDate + ", fieldCount=" + fieldCount + ", fieldSize=" + fieldSize
+				+ ", parking=" + parking + ", matchGender=" + matchGender + ", shoes=" + shoes + ", manager=" + manager
+				+ ", matchLevel=" + matchLevel + ", matchType=" + matchType + ", startTime=" + startTime + ", endTime="
+				+ endTime + ", matchPay=" + matchPay + ", categoryNum=" + categoryNum + "]";
+	}
 
 
    

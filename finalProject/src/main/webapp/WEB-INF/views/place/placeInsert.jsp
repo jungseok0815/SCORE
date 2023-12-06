@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div align="center" class="outer">
-        <form action="insert.pl" class="field-insert-input" method="post">
+        <form action="insert.pl" class="field-insert-input" method="post" enctype="multipart/form-data">
             <table align="center" class="field-table" id="formData">
                 <tr>
                     <td style="display:block">
@@ -31,7 +31,7 @@
                             <label for="fileImgFile">
                                 <div class="btn-upload">경기장사진첨부</div>
                             </label>
-                            <input type="file" name="file" id="fileImgFile">
+                            <input type="file" name="upfile" id="fileImgFile">
                         </div>
                     </td>
                 </tr>

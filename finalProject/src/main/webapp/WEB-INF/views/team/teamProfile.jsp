@@ -35,7 +35,7 @@
                         </div>
                         <div class="profile-btn d-grid gap-2">
                             <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
-                                프로필 설정
+                                팀 프로필 설정
                             </button>
                         </div>
                         <div class="profile-btn d-grid gap-2">

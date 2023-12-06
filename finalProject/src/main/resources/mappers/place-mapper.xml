@@ -18,7 +18,7 @@
   		<result column="START_TIME" property="startTime" />
   		<result column="END_TIME" property="endTime" />
   		<result column="MATCH_PAY" property="matchPay" />
-  		<result column="CATEGORY_NUM " property="categoryNum" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
   	
   	<insert id= "insertPlace">
