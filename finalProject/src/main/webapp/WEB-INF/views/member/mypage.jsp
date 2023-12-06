@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,18 +9,22 @@
 
   <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
   <link rel="stylesheet" href="/final/resources/css/common/main.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script src="resources/js/member/memberJs/member.js?ver=3"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
 </head>
-<body>
+<body onload="myPageInit()">
 	<jsp:include page="../common/header.jsp" />
 	
 	<div class="title"> 
 
         <div class="title2">
             <div style="float: left; width: 35%; padding:10px;">
-                <div style="font-size: 22px; width: 80px; height: 30px;">임도현</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">아이디</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px;">강남구 역삼동</div><br>
-                <div style="font-size: 14px; width: 80px; height: 0px;">5명의 친구</div><br><br>
+                <div style="font-size: 22px; width: 80px; height: 30px;">${loginUser.userName}</div><br>
+                <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">${loginUser.userId}</div><br>
+                <div style="font-size: 14px; width: 90px; height: 20px;">선호 지역 : ${loginUser.address}</div><br>
+                <div style="font-size: 14px; width: 80px; height: 0px;">${countfriends}명의 친구</div><br><br>
             </div>
 
             <div class="img-teul">
@@ -39,8 +44,8 @@
             </div>
 
             <div class="bot03">
-                <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">100</div></div>
-                <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">아마추어</div></div>
+                <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
+                <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">${sportInfo.sportLever}</div></div>
             </div>
         </div>
 
@@ -48,7 +53,7 @@
             <div class="start-1">
                 <div class="match">소셜 매치</div>
                 <br>
-                <div class="point">POINT<div class="ipbox1">10,000</div></div>
+                <div class="point">POINT<div class="ipbox1">${loginUser.point}</div></div>
 
                 <div class="btn-3">
                     <button class="btn-sm-2" style="margin-right: 50px;" onclick="">축구</button>
