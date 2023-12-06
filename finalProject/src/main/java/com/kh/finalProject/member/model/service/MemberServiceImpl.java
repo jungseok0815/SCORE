@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.member.model.dao.MemberDao;
+import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
 
@@ -41,5 +42,18 @@ public class MemberServiceImpl implements MemberService {
 	public int checkId(String checkId) {
 		return memberDao.checkId(sqlSession, checkId);
 	}
+
+	@Override
+	public SportInfo getUserSportInfo(SportInfo sport) {
+		return memberDao.getUserSportInfo(sqlSession, sport);
+	}
+
+	@Override
+	public int getCountUserfriends(int userNo) {
+		return memberDao.getCountUserfriends(sqlSession,userNo);
+	}
+
+
+
 	
 }
