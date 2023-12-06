@@ -15,7 +15,7 @@
 		<div class="notice-wrap">
 			<div class="notice-header">
 				<h1>공지사항</h1>
-				<c:if test="${loginUser.userLever eq 1 }">
+				<c:if test="${loginUser.userLevel eq 1}">
 					<a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#noticeModal">
 					 공지사항등록하러가기
 					</a>
@@ -23,17 +23,17 @@
 			</div>
 			<hr style="border: 1px color= silver;" width="100%">
 			<div class="accordion" id="accordionExample">
-				<c:forEach var="i" begin="0" end="${noticeList.size()-1}">
+				<c:forEach var="i" begin="0" end="${noticeList.size() > 0 ? noticeList.size()-1 : 0}">
 					<div class="accordion-item">
 						<h2 class="accordion-header">
 							<button class="accordion-button" type="button"
 								data-bs-toggle="collapse" data-bs-target="#collapseOne${i}"
 								aria-expanded="true" aria-controls="collapseOne${i}">
-								${noticeList[i].noticeTitle }</button>
+								${noticeList[i].noticeTitle}</button>
 						</h2>
 						<div id="collapseOne${i}" class="accordion-collapse collapse"
 							data-bs-parent="#accordionExample">
-							<div class="accordion-body">${noticeList[i].noticeContent }
+							<div class="accordion-body">${noticeList[i].noticeContent}
 							</div>
 						</div>
 					</div>
