@@ -1,5 +1,6 @@
 package com.kh.finalProject.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.finalProject.member.model.service.MemberService;
+import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
 
@@ -45,8 +47,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myPage.me")
-	public String myPage() {
-		return "member/mypage";
+	public ModelAndView myPage(HttpServletRequest req,ModelAndView mv) {
+		Member m = (Member)req.getSession().getAttribute("loginUser");
+		System.out.println(m.getUserNo());
+		SportInfo sport = new SportInfo();
+		sport.setCategoryNum(1);
+		sport.setUserNo(m.getUserNo());
+		SportInfo sportInfo = memberService.getUserSportInfo(sport);
+		int countfriends = memberService.getCountUserfriends(m.getUserNo());
+		System.out.println(sportInfo);
+		System.out.println(countfriends);
+		mv.addObject("sportInfo", sportInfo).addObject("countfriends",countfriends).setViewName("member/mypage");
+		return mv;
 	}
 	
 	@RequestMapping("/myPageUpdate.me")
@@ -104,5 +116,18 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+//	@ResponseBody
+//	@RequestMapping(value= "/getUserInfo.me",produces="application/json; charset=UTF-8" )
+//	public String getUserInfo(Member m) {
+//		System.out.println(m.getUserNo());
+//		SportInfo sportInfo = memberService.getUserSportInfo(m.getUserNo());
+//		SportInfo friendsInfo = memberService.getUserfriendsInfo(m.getUserNo());
+//		
+//		
+//		
+//		return result > 0 ? "failCheckId" : "passCheckId"; 
+//	}
 
 }
