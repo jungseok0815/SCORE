@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="noticeMapper">
-   <resultMap type = "notice" id = "noticeResult">
+   <resultMap type = "Notice" id = "noticeResult">
    		<result column="NOTICE_NO" property="noticeNo"/>
    		<result column="NOTICE_TITLE" property="noticeTitle"/>
    		<result column="NOTICE_CONTENT" property="noticeContent"/>

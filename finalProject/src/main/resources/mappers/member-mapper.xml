@@ -3,8 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  
-  
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResult">
 		<result column="USER_NO" property="userNo" />
@@ -100,7 +98,6 @@
 	
 	<select id="loginMember" resultMap="memberResult">
 		SELECT
-			*
 			USER_NO, 
 			USER_ID,
 			USER_PWD,
@@ -109,7 +106,8 @@
 			USER_BIRTH,
 			GENDER,
 			CITY,
-			USER_POINT
+			USER_POINT,
+			USER_LEVEL
 		  FROM MEMBER
 		 WHERE USER_ID = #{userId} and 
 		 USER_STATUS = 'Y'

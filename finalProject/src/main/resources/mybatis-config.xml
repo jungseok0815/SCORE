@@ -17,11 +17,14 @@
   		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.SportInfo" alias="SportInfo" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Friend" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Team" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="TeamMember" />
   	</typeAliases>
 
   	<mappers>
   		<mapper resource="/mappers/notice-mapper.xml" />
-  		<mapper resource="/mappers/member-mapper.xml" />	
+  		<mapper resource="/mappers/member-mapper.xml" />
+  		<mapper resource="/mappers/team-mapper.xml" />	
   	</mappers>
  
   </configuration>
