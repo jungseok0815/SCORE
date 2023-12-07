@@ -37,7 +37,7 @@
                         <img src="./resources/img/main/notice.img.png" alt="">
                         <p>공지사항</p>
                     </a>
-                    <a href="${pageContext.request.contextPath}/chargingPoint.me">
+                    <a href="${pageContext.request.contextPath}/pointView.me">
                         <img src="./resources/img/main/coin.png" alt="">
                         <p>포인트 충전</p>
                     </a>

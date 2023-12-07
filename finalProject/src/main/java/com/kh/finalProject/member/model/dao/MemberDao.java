@@ -36,4 +36,8 @@ public class MemberDao {
 	public int getCountUserfriends(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.getCountUserfriends", userNo);
 	}
+	
+	public int updateUserPoint(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateUserPoint", m);
+	}
 }

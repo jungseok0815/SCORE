@@ -137,6 +137,11 @@
 		 WHERE USER_NO = #{userNo} AND
 		 CATEGORY_NUM = #{categoryNum}
 	</select>
+	<update id="updateUserPoint">
+		UPDATE MEMBER
+				SET USER_POINT = #{point}
+			WHERE USER_ID = #{userId}
+	</update>
 	
 	
 </mapper>
