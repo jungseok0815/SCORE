@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
+import com.kh.finalProject.place.model.vo.PlaceImg;
 
 @Service
 public class PlaceServiceImpl implements PlaceService{
@@ -18,6 +19,12 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int insertPlace(Place p) {
 		return placeDao.insertPlace(sqlSession, p);
+	}
+
+	@Override
+	public int insertPlaceImg(PlaceImg pi) {
+		
+		return placeDao.insertPlaceImg(sqlSession, pi);
 	}
 	
 }

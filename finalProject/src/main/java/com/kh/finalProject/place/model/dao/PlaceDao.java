@@ -4,11 +4,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.place.model.vo.Place;
+import com.kh.finalProject.place.model.vo.PlaceImg;
 
 @Repository
 public class PlaceDao {
 	public int insertPlace(SqlSessionTemplate sqlSession, Place p) {
 	      
 		return sqlSession.insert("placeMapper.insertPlace", p);
+	}
+	
+	public int insertPlaceImg(SqlSessionTemplate sqlSession, PlaceImg pi) {
+		return sqlSession.insert("placeMapper.insertPlaceImg", pi);
 	}
 }

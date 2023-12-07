@@ -21,6 +21,15 @@
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
   	
+  	<resultMap type="PlaceImg" id="placeImgResultSet">
+  		<result column="FIELD_IMG_NO" property="fieldImgNo" />
+  		<result column="FIELD_URL" property="fieldUrl" />
+  		<result column="FIELD_ORIGIN_NAME" property="fieldOriginName" />
+  		<result column="FIELD_CHANGE_NAME" property="fieldChangeName" />
+  		<result column="DLELTE_FIELD_IMG" property="deleteFieldImg" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  	</resultMap>
+  	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
       				( 
@@ -60,5 +69,26 @@
 	            #{matchPay}, 
 	            #{categoryNum}
             	)
+   </insert>
+   
+   <insert id= "insertPlaceImg">
+   	INSERT INTO FIELD_IMG
+   						 (
+   						 FIELD_IMG_NO,
+   						 FIELD_URL,
+   						 FIELD_ORIGIN_NAME,
+   						 FIELD_CHANGE_NAME,
+   						 DLELTE_FIELD_IMG,
+   						 FIELD_NO
+   						 )
+   				VALUES
+   						(
+   						SEQ_FIELD_IMG.NEXTVAL,
+   						#{fieldUrl}, 
+			            #{fieldOriginName},
+			            #{fieldChangeName},
+			            'N', 
+			            SEQ_FIELD.CURRVAL
+   						)
    </insert>
 </mapper>
