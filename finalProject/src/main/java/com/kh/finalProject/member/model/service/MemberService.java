@@ -14,5 +14,9 @@ public interface MemberService {
 	int checkId(String checkId);
 	SportInfo getUserSportInfo(SportInfo sport);	
 	int getCountUserfriends(int userNo);
+	ArrayList<Member> getPostFriends(int userNo);
+	int addFriend(Friend f);
+	ArrayList<Friend> selectFriendList(int userNo);
+	int deleteFriend(Friend f);
 }
 
