@@ -1,13 +1,22 @@
 package com.kh.finalProject.team.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.service.TeamService;
+import com.kh.finalProject.team.model.vo.TeamOffer;
 
 @Controller
 public class TeamController {
@@ -16,13 +25,125 @@ public class TeamController {
 	private TeamService teamService;
 	
 	@RequestMapping("offerBoardList.tm")
-	public String teamOfferBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage) {
-		int teamListCount = teamService.selectListCount();
+	public ModelAndView teamOfferBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
-		PageInfo pi = Pagenation.getPageInfo(teamListCount, currentPage, 10, 5);
+		PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 		
-		return "team/teamOfferBoardList";
+		mv.addObject("pi", pi)
+		  .addObject("list", teamService.selectList(pi))
+		  .setViewName("team/teamOfferBoardList");
+		
+		return mv;
 	}
+	
+	@RequestMapping("offerDetailView.tm")
+	public String teamOfferDetailView(int tno, Model model) {
+		
+		int result = teamService.increaseCount(tno);
+		
+		if (result > 0) {
+			TeamOffer team = teamService.selectOfferDetail(tno);
+			model.addAttribute("team", team);
+			
+			return "team/teamOfferListDetailView";
+		} else {
+			model.addAttribute("errorMsg", "게시글 조회 실패");
+			return "common/errorMsg";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="offerAjax.tm", produces="application/json; charset=UTF-8")
+	public String teamOfferAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, ModelAndView mv) {
+		
+//		int offerCount = teamService.selectOfferListCount(activityAtea);
+//		PageInfo pi = Pagenation.getPageInfo(offerCount, currentPage, 10, 5);
+		
+		// 게시물 갯수와 페이징 
+//		PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
+		
+		if(activityAtea.equals("all")) {
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
+			
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, pi);
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectList(pi));
+
+			return new Gson().toJson(mv);
+			
+		} else {
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, pi);
+			
+			mv.addObject("pi", pi)						// pi 처리
+			  .addObject("list", teamService.selectCity(activityAtea, pi));
+			
+			return new Gson().toJson(mv);
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="choiceSportsAjax.tm", produces="application/json; charset=UTF-8")
+	public String teamChoiceSportsAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, int category, ModelAndView mv) {
+		
+		if(activityAtea.equals("all")) {
+			int choiceCount = teamService.selectChoiceAllCount(category);
+			System.out.println(choiceCount);
+			
+			// 게시물 갯수와 페이징 
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceAllCount(category), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectChoiceAllList(category, pi);
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectChoiceAllList(category, pi));
+			
+			return new Gson().toJson(mv);
+		
+		} else {
+			int choiceCount = teamService.selectChoiceSportsCount(category, activityAtea);
+			
+			// 게시물 갯수와 페이징 
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceSportsCount(category, activityAtea), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectChoiceList(category, activityAtea, pi);
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectChoiceList(category, activityAtea, pi));
+			
+			return new Gson().toJson(mv);
+		}
+	}
+	
+	@RequestMapping("offerDelete.tm")
+	public String teamOfferDelete(int tno, String filePath, HttpSession session, Model model) {
+		
+		int result = teamService.deleteOffer(tno);
+		
+		if (result > 0) { //삭제성공
+			
+			if(!filePath.equals("")) {
+//				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			return "team/teamOfferListDetailView";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorMsg";
+		}
+
+	}
+	
+	@RequestMapping("teamReq.tm")
+	public String teamReq(String userId, String text) {
+		System.out.println(text);
+		System.out.println(userId);
+		int teamR = teamService.teamReq(userId, text);
+		return "";
+	}
+	
 	
 	@RequestMapping("teamProfile.tm")
 	public String teamProfileView() {
@@ -36,10 +157,7 @@ public class TeamController {
 	public String teamJoinListForm() {
 		return "team/teamJoinList";
 	}
-	@RequestMapping("offerDetailView.tm")
-	public String teamOfferDetailView() {
-		return "team/teamOfferListDetailView";
-	}
+	
 	
 	
 	
