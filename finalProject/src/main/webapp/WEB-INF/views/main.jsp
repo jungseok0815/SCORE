@@ -7,10 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/final/resources/css/common/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
+    <script src="resources/js/common/commonTeam/commonTeam.js"></script>
+    <script src="resources/js/common/commonTeam/commonTeamAjax.js"></script>
+
 </head>
 <body onload="mainInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="common/header.jsp" />
@@ -283,7 +287,7 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button onclick="selectMyteam(1)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           축구
                         </button>
                       </h2>
@@ -307,7 +311,7 @@
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button onclick="selectMyteam(2)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           야구
                         </button>
                       </h2>
@@ -327,7 +331,7 @@
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button onclick="selectMyteam(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                           농구
                         </button>
                       </h2>
