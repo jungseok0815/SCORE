@@ -2,6 +2,7 @@ package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
+import com.kh.finalProject.place.model.vo.PlaceImg;
+
+
 
 @Service
 public class PlaceServiceImpl implements PlaceService{
@@ -18,6 +22,18 @@ public class PlaceServiceImpl implements PlaceService{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	
+	@Override
+	public int insertPlace(Place p) {
+		return pDao.insertPlace(sqlSession, p);
+	}
+
+	@Override
+	public int insertPlaceImg(PlaceImg pi) {
+		
+		return pDao.insertPlaceImg(sqlSession, pi);
+	}
 	
 	
 	@Override

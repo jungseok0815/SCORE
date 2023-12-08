@@ -39,6 +39,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.getCountUserfriends", userNo);
 	}
 	
+
+	public int updateUserPoint(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateUserPoint", m);
+	}
 	public ArrayList<Member> getPostFriends(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.getPostFriends", userNo);
 	}
@@ -54,5 +58,6 @@ public class MemberDao {
 	
 	public int deleteFriend(SqlSessionTemplate sqlSession, Friend f) {
 		return sqlSession.delete("memberMapper.deleteFriend",f);
+
 	}
 }

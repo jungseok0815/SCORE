@@ -1,28 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="placeMapper">
 	<resultMap type="Place" id="placeResultSet">
-        <result column="FIELD_NO" property="fieldNo" />
-        <result column="FIELD_NAME" property="fieldName" />
-        <result column="FIELD_AREA" property="fieldArea" />
-        <result column="FIELD_DATE" property="fieldDate" />
-        <result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
-        <result column="FIELD_COUNT" property="fieldCount" />
-        <result column="FIELD_SIZE" property="fieldSize" />
-        <result column="PARKING" property="parking" />
-        <result column="MATCH_GENDER" property="matchGender" />
-        <result column="SHOES" property="shoes" />
-        <result column="MANAGER" property="manager" />
-        <result column="MATCH_LEVEL" property="matchLevel" />
-        <result column="MATCH_TYPE" property="matchType" />
-        <result column="START_TIME" property="startTime" />
-        <result column="END_TIME" property="endTime" />
-        <result column="MATCH_PAY" property="matchPay" />
-        <result column="CATEGORY_NUM" property="categoryNum" />
-     </resultMap>
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="FIELD_AREA" property="fieldArea" />
+  		<result column="FIELD_DATE" property="fieldDate" />
+  		<result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
+  		<result column="FIELD_COUNT" property="fieldCount" />
+  		<result column="FIELD_SIZE" property="fieldSize" />
+  		<result column="PARKING" property="parking" />
+  		<result column="MATCH_GENDER" property="matchGender" />
+  		<result column="SHOES" property="shoes" />
+  		<result column="MANAGER" property="manager" />
+  		<result column="MATCH_LEVEL" property="matchLevel" />
+  		<result column="MATCH_TYPE" property="matchType" />
+  		<result column="START_TIME" property="startTime" />
+  		<result column="END_TIME" property="endTime" />
+  		<result column="MATCH_PAY" property="matchPay" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
+  	
+  	<resultMap type="PlaceImg" id="placeImgResultSet">
+  		<result column="FIELD_IMG_NO" property="fieldImgNo" />
+  		<result column="FIELD_URL" property="fieldUrl" />
+  		<result column="FIELD_ORIGIN_NAME" property="fieldOriginName" />
+  		<result column="FIELD_CHANGE_NAME" property="fieldChangeName" />
+  		<result column="DLELTE_FIELD_IMG" property="deleteFieldImg" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  	</resultMap>
+  	
+  	<insert id= "insertPlace">
+      INSERT INTO FIELD
+      				( 
+      				  FIELD_NO, 
+	                  FIELD_NAME, 
+	                  FIELD_AREA,
+	                  FIELD_DATE, 
+	                  FIELD_COUNT, 
+	                  FIELD_SIZE,
+	                  PARKING,
+	                  MATCH_GENDER,
+	                  SHOES,
+	                  MANAGER,
+	                  MATCH_LEVEL,
+	                  MATCH_TYPE,
+	                  START_TIME,
+	                  END_TIME,
+	                  MATCH_PAY,
+	                  CATEGORY_NUM
+	                 )
+         VALUES (
+         
+      			SEQ_FIELD.NEXTVAL, 
+	            #{fieldName}, 
+	            #{fieldArea},
+	            #{fieldDate}, 
+	            #{fieldCount}, 
+	            #{fieldSize},
+	            #{parking}, 
+	            #{matchGender}, 
+	            #{shoes}, 
+	            #{manager}, 
+	            #{matchLevel},
+	            #{matchType},
+	            #{startTime}, 
+	            #{endTime}, 
+	            #{matchPay}, 
+	            #{categoryNum}
+            	)
+   </insert>
+   
+   <insert id= "insertPlaceImg">
+   	INSERT INTO FIELD_IMG
+   						 (
+   						 FIELD_IMG_NO,
+   						 FIELD_URL,
+   						 FIELD_ORIGIN_NAME,
+   						 FIELD_CHANGE_NAME,
+   						 DLELTE_FIELD_IMG,
+   						 FIELD_NO
+   						 )
+   				VALUES
+   						(
+   						SEQ_FIELD_IMG.NEXTVAL,
+   						#{fieldUrl}, 
+			            #{fieldOriginName},
+			            #{fieldChangeName},
+			            'N', 
+			            SEQ_FIELD.CURRVAL
+   						)
+   </insert>
+
 
 	<select id="placeListCount" resultType="_int">
  		SELECT COUNT(*)
@@ -75,4 +144,5 @@
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+
 </mapper>
