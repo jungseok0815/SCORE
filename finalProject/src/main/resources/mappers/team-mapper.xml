@@ -28,6 +28,29 @@
  		<result column="TEAM_NAME" property="teamName" />
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
  	</resultMap>
+ 	
+ 	 <resultMap type = "TeamMember" id = "teamMemberResult">
+    		<result column="TMEMBER_NO" property="tmemberNo"/>
+    		<result column="ENROLL_DATE" property="enrollDate"/>
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="USER_NO" property="userNo"/>
+    		<result column="GRADE" property="grade"/>
+    </resultMap>
+    
+ 	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+	  	FROM TEAM
+ 	</select>
+
+	<select id="selectCategoryNum" resultMap="teamResult">
+		SELECT CATEGORY_NUM
+		FROM TEAM
+	</select>
+	
+	<select id="selectUserNo" resultMap="teamMemberResult">
+		SELECT USER_NO
+		FROM TEAM_MEMBER
+	</select>
 
  
  	<!-- 게시글 총 갯수 -->
