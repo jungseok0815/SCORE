@@ -171,9 +171,12 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value= "/selectMyTeam.me",produces="application/json; charset=UTF-8" )
-	public String selectMyTeam(HttpSession session) {
+	public String selectMyTeam(HttpSession session, int categoryNum) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		return new Gson().toJson(memberService.selectFriendList(m.getUserNo()));
+		System.out.println(m.getUserNo());
+		System.out.println(categoryNum);
+		//new Gson().toJson(memberService.selectMyTeam(m.getUserNo()));
+		return "ss";
 	}
 }
 
