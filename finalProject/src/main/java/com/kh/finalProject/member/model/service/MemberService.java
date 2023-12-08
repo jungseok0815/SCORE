@@ -16,5 +16,9 @@ public interface MemberService {
 	int getCountUserfriends(int userNo);
 	//포인트 충전
 	int updateUserPoint(Member m);
+	ArrayList<Member> getPostFriends(int userNo);
+	int addFriend(Friend f);
+	ArrayList<Friend> selectFriendList(int userNo);
+	int deleteFriend(Friend f);
 }
 

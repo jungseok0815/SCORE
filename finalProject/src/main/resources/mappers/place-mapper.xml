@@ -91,4 +91,53 @@
 			            SEQ_FIELD.CURRVAL
    						)
    </insert>
+
+
+	<select id="placeListCount" resultType="_int">
+ 		SELECT COUNT(*)
+ 		  FROM FIELD
+ 		  WHERE CATEGORY_NUM = #{categoryNum}
+          AND FIELD_AREA LIKE '%' || #{fieldArea} || '%'
+          AND MATCH_GENDER = #{matchGender}
+          AND MATCH_LEVEL = #{matchLevel}
+          AND FIELD_DATE = #{fieldDate}
+ 	</select>
+ 	<select id="selectPlaceList" resultMap="placeResultSet">
+ 		SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				MATCH_GENDER,
+				MATCH_LEVEL,
+				START_TIME,
+				CATEGORY_NUM
+		FROM FIELD
+		WHERE CATEGORY_NUM = #{categoryNum}
+          AND FIELD_AREA LIKE '%' || #{fieldArea} || '%'
+          AND MATCH_GENDER = #{matchGender}
+          AND MATCH_LEVEL = #{matchLevel}
+          AND FIELD_DATE = #{fieldDate}
+ 	</select>
+ 	<select id="placeDetailview" resultMap="placeResultSet">
+ 		SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				FIELD_ENROLL_DATE,
+				FIELD_COUNT,
+				FIELD_SIZE,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_TYPE,
+				START_TIME,
+				END_TIME,
+				MATCH_PAY,
+				CATEGORY_NUM
+ 		  FROM FIELD
+ 		  WHERE FIELD_NO = #{fieldNo}
+ 	</select>
+
 </mapper>

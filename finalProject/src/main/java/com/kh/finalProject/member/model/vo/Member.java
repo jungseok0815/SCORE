@@ -11,7 +11,7 @@ public class Member {
 	private String address;
 	private String status;
 	private int point;
-	private int userLever;
+	private int userLevel;
 	
 	
 	public Member() {
@@ -19,7 +19,7 @@ public class Member {
 	}
 
 	public Member(int userNo, String userId, String userPwd, String userName, String gender, String age, String phone,
-			String address, String status, int point, int userLever) {
+			String address, String status, int point, int userLevel) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -31,7 +31,7 @@ public class Member {
 		this.address = address;
 		this.status = status;
 		this.point = point;
-		this.userLever = userLever;
+		this.userLevel = userLevel;
 	}
 	
 	public int getUserNo() {
@@ -94,18 +94,18 @@ public class Member {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public int getUserLever() {
-		return userLever;
+	public int getUserLevel() {
+		return userLevel;
 	}
-	public void setUserLever(int userLever) {
-		this.userLever = userLever;
+	public void setUserLevel(int userLevel) {
+		this.userLevel = userLevel;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address + ", status="
-				+ status + ", point=" + point + ", userLever=" + userLever + "]";
+				+ status + ", point=" + point + ", userLever=" + userLevel + "]";
 	}
 	
 	

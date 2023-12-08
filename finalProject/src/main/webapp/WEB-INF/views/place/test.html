@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script></script>
+    <style>
+        *{
+            box-sizing: border-box;
+            outline: none;
+
+        }
+        .date-container{
+            width: 1000px;
+            background: red;
+        }
+        .date-ul{
+            list-style-type: none;
+        }
+        .date-ul div{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .date-ul li{
+            width: 50px;
+            margin: 13px 0px 0px 0px;
+            border: 1px solid gray;
+            border-radius: 15px;
+            text-align: center;
+            padding: 6px;
+            width: 60px;
+            height: 60px;
+        }
+        .date-ul p{
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="date-container">
+        <ul class="date-ul">
+            <div>
+                <li onclick="test()">
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+                <li>
+                    <p>18</p>
+                    <span>금</span>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <script>
+        test = () =>{
+            console.log("ssss")
+        }
+    </script>
+</body>
+</html>

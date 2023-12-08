@@ -41,19 +41,80 @@ const memberAjaxController = {
             }
         })
     },
-    getUserInfo : (data,callback) =>{
+    getPostFriend : (callback) =>{
+        console.log("hihi")
         $.ajax({
-            url: "getUserInfo.me",
+            url: "getPostFriend.me",
+            type: "post",
+            success: (result) => {
+                callback(result)
+                
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    getAddFriend : (data) =>{
+        $.ajax({
+            url: "addFriend.me",
             type: "post",
             data,
             success: (result) => {
+                result === "addFriendOk" ? selectPostFriend() : alert("에러 발생 다시 시도");
+                
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    selectFriendList : (callback) =>{
+        $.ajax({
+            url: "selectFriendList.me",
+            type: "post",
+            success: (result) => {
+                console.log(result)
                 callback(result)
             },
             error: (err) => {
                 console.log(err)
             }
         })
+    },
+    deleteFriend : (data) =>{
+        $.ajax({
+            url: "deleteFriend.me",
+            type: "post",
+            data,
+            success: (result) => {
+                console.log(result)
+                result === "deleteFriendOk" ? selectFriendList() : alert("에러 발생 다시 시도");
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    selectMyteamListAjax : (data, callback) =>{
+        $.ajax({
+            url: "selectMyTeam.me",
+            type: "post",
+            data,
+            success: (result) => {
+                console.log(result)
+                callback(result);
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+
     }
+
+
+
+
 
    
 }
