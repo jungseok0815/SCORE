@@ -11,10 +11,10 @@
   <link rel="stylesheet" href="/final/resources/css/common/main.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <script src="resources/js/member/memberJs/member.js?ver=3"></script>
+    <script src="resources/js/member/memberJs/member.js?ver=4"></script>
     <script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
 </head>
-<body onload="myPageInit()">
+<body>
 	<jsp:include page="../common/header.jsp" />
 	
 	<div class="title"> 
@@ -36,7 +36,7 @@
             </div>
                 
             <div class="bot02">
-                <button class="btn-1" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">나의 친구 보기</button>
+                <button class="btn-1" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="selectPostFriend()">나의 친구 보기</button>
             </div>
 
             <div class="bot02">
@@ -61,13 +61,13 @@
                     <button class="btn-sm-2" onclick="">농구</button>
                 </div>
 
-                <div class="btn-4">경기수 <div class="ipbox2">3</div></div>
+                <div class="btn-4">경기수 <div class="ipbox2">${sportInfo.sportCount}</div></div>
                 
-                <div class="btn-5"> 스마일 카드 <div class="ipbox2">3</div></div>
+                <div class="btn-5"> 스마일 카드 <div class="ipbox2">${sportInfo.sportSmile}</div></div>
                 
-                <div class="btn-5">옐로우 카드 <div class="ipbox2">0</div></div>
+                <div class="btn-5">옐로우 카드 <div class="ipbox2">${sportInfo.sportYellow}</div></div>
                 
-                <div class="btn-5">레드 카드 <div class="ipbox2">0</div></div>
+                <div class="btn-5">레드 카드 <div class="ipbox2">${sportInfo.sportRed}</div></div>
             </div>
             
         </div>
@@ -79,55 +79,31 @@
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
-                친구요청 2 |
-                <button class="btn-btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">친구 보기</button>
+                <span id="aaaaaa">친구요청  |</span>
+                <button class="btn-btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" onclick="selectFriendList()">친구 보기</button>
             </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()"></button>
             </div>
 
-            <div class="modal-body" style="height: 440px;">
-                <div class="list-title">친구요청 리스트</div>
-                <div class="tt22">
-                    <img class="img5" src="/img/img1.jpg">
-                    <div class="main-title">임도현</div>
-                    <div class="sub-title">서울시 강남구</div>
-                    <button class="btn-chexk" onclick="">수락</button>
-                </div>
-                <div class="tt22">
-                    <img class="img5" src="/img/img1.jpg">
-                    <div class="main-title">최행배</div>
-                    <div class="sub-title">부산시 서면</div>
-                    <button class="btn-chexk" onclick="">수락</button>
-                </div>
+            <div class="modal-body" id="postFriendList" style="height: 440px;">
+                
             </div>
           </div>
         </div>
       </div>
 
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1" >
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-                친구 5 |
+                <span id="bbbb">친구요청  |</span>
                 <button class="btn-btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">친구 요청 보기</button>
             </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 440px;">
-                <div class="list-title">친구 리스트</div>
-                <div class="tt22">
-                    <img class="img5" src="/img/img1.jpg">
-                    <div class="main-title">최행배</div>
-                    <div class="sub-title">부산시 서면</div>
-                    <button class="btn-chexk2" onclick="">친구삭제</button>
-                </div>
-                <div class="tt22">
-                    <img class="img5" src="/img/img1.jpg">
-                    <div class="main-title">임도현</div>
-                    <div class="sub-title">서울시 강남구</div>
-                    <button class="btn-chexk2" onclick="">친구삭제</button>
-                </div>
+            <div class="modal-body" id="friendList" style="height: 440px;">
+               
             </div>
           </div>
         </div>
@@ -146,7 +122,7 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button onclick="selectMyTeam(1)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           축구
                         </button>
                       </h2>
@@ -170,7 +146,7 @@
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button onclick="selectMyTeam(2)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           야구
                         </button>
                       </h2>
@@ -190,7 +166,7 @@
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button onclick="selectMyTeam(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                           농구
                         </button>
                       </h2>

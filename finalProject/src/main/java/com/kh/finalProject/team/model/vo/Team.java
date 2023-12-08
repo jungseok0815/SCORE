@@ -13,7 +13,22 @@ public class Team {
 	private String teamLevel;
 	private int categotyNum;
 	
+
+
+	
 	public Team() {}
+	
+	public Team(int teamNo, String teamName, Date createDate, String teamTitle, String activityAtea, String teamLevel,
+			int categotyNum) {
+		super();
+		this.teamNo = teamNo;
+		this.teamName = teamName;
+		this.createDate = createDate;
+		this.teamTitle = teamTitle;
+		this.activityAtea = activityAtea;
+		this.teamLevel = teamLevel;
+		this.categotyNum = categotyNum;
+	}
 
 	public int getTeamNo() {
 		return teamNo;
@@ -79,5 +94,5 @@ public class Team {
 	}
 	
 	
-	
+
 }

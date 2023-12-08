@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
  <mapper namespace="teamMapper">
-    <resultMap type = "Team" id = "teamResult">
-    		<result column="TEAM_NO" property="teamNo"/>
-    		<result column="TEAM_NAME" property="teamName"/>
-    		<result column="CREATE_DATE" property="createDate"/>
-    		<result column="TEAM_TITLE" property="teamTitle"/>
-    		<result column="ACTIVITY_ATEA" property="activityAtea"/>
-    		<result column="TEAM_LEVEL" property="teamLevel"/>
-    		<result column="CATEGORY_NUM" property="categotyNum"/>
-    </resultMap>
-    
-        <resultMap type = "TeamMember" id = "teamMemberResult">
+ 
+ 	<resultMap type="Team" id="teamResult">
+ 		<result column="TEAM_NO" property="teamNo" />
+ 		<result column="TEAM_NAME" property="teamName" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 		<result column="TEAM_TITLE" property="teamTitle" />
+ 		<result column="ACTIVITY_ATEA" property="activityAtea" />
+ 		<result column="TEAM_LEVEL" property="teamLevel" />
+ 		<result column="CATEGOTY_NUM" property="categotyNum" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="TeamOffer" id="teamOfferResult">
+ 		<result column="OFFER_NO" property="offerNo" />
+ 		<result column="OFFER_TITLE" property="offerTitle" />
+ 		<result column="OFFER_CONTENT" property="offerContent" />
+ 		<result column="OFFER_GENDER" property="offerGender" />
+ 		<result column="OFFER_LEVEL" property="offerLevel" />
+ 		<result column="OFFER_AGE" property="offerAge" />
+ 		<result column="OFFER_COUNT" property="offerCount" />
+ 		<result column="USER_NO" property="userNo" />
+ 		<result column="TEAM_NO" property="teamNo" />
+ 		<result column="TEAM_NAME" property="teamName" />
+ 		<result column="ACTIVITY_ATEA" property="activityAtea" />
+ 	</resultMap>
+ 	
+ 	 <resultMap type = "TeamMember" id = "teamMemberResult">
     		<result column="TMEMBER_NO" property="tmemberNo"/>
     		<result column="ENROLL_DATE" property="enrollDate"/>
     		<result column="TEAM_NO" property="teamNo"/>
@@ -33,5 +51,158 @@
 		SELECT USER_NO
 		FROM TEAM_MEMBER
 	</select>
-	
+
+ 
+ 	<!-- 게시글 총 갯수 -->
+ 	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+ 	</select>
+ 	
+ 	<!-- 게시글 조회 쿼리문 -->
+ 	<select id="selectList" resultMap="teamOfferResult">
+	 	SELECT *
+			FROM(
+			        SELECT ROWNUM RNUM, A.*
+			        FROM (
+			                SELECT OFFER_NO
+			                     , OFFER_TITLE
+			                     , OFFER_CONTENT
+			                     , OFFER_GENDER
+			                     , OFFER_LEVEL
+		                         , OFFER_AGE
+		                         , OFFER_COUNT
+		                         , USER_NO
+			                     , TEAM_NO
+		                         , TEAM_NAME
+		                         , ACTIVITY_ATEA
+			                FROM TEAM_OFFER 
+			                JOIN TEAM USING(TEAM_NO)
+			                ORDER BY TEAM_NO DESC
+			            ) A
+			        )
+ 	</select>
+ 	
+ 	<!-- 조회수 올리는 쿼리 -->
+	<update id="increaseCount">
+ 		UPDATE TEAM_OFFER
+ 		   SET OFFER_COUNT = OFFER_COUNT + 1
+ 		 WHERE OFFER_NO = #{offerNo}
+ 	</update>
+ 	
+ 	<!-- 게시글 상세조회 쿼리 -->
+ 	<select id="selectOfferDetail" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME
+ 		  FROM TEAM_OFFER
+ 		   JOIN TEAM USING(TEAM_NO)
+ 		 WHERE OFFER_NO = #{offerNo}
+ 	</select>
+ 	
+ 	<!-- ajax로 지역순 리스트 가져오는 쿼리 -->
+ 	<select id="selectCity" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	<!-- 지역 offer게시글 총 갯수 -->
+ 	<select id="selectOfferListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+ 	</select>
+ 	
+ 	<!-- 초이스 스포츠 총 갯수 -->
+ 	<select id="selectChoiceSportsCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+          WHERE CATEGORY_NUM = #{category}
+          AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+ 	</select>
+ 	
+ 	<!-- ajax로 지역순 초이스 스포츠 리스트 가져오는 쿼리 -->
+ 	<select id="selectChoiceList" resultMap="teamOfferResult" parameterType="map">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+           WHERE CATEGORY_NUM = #{category}
+           AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	<!-- 초이스 스포츠 ALL 총 갯수  -->
+ 	<select id="selectChoiceAllCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+          WHERE CATEGORY_NUM = #{category}
+ 	</select>
+ 
+ 	<!-- ajax로 지역순 초이스 스포츠 ALL 리스트 가져오는 쿼리 -->
+ 	<select id="selectChoiceAllList" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+           WHERE CATEGORY_NUM = #{category}
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	<!-- 게시글 삭제 -->
+ 	<update id="deleteOffer">
+ 		UPDATE TEAM_OFFER
+ 		   SET OFFER_STATUS = 'N'
+ 	 	 WHERE OFFER_NO = #{offerNo}
+ 	</update>
+ 	
+ 	<insert id="teamReq">
+ 		
+ 	</insert>
+ 	
  </mapper>

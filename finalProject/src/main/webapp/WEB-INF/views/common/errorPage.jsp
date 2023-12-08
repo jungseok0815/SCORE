@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
     </div>
 
     <div align="center">
-        <h1>존재 하지 않는 페이지입니다.</h1>
+        <h1>${errorMsg}</h1>
         <h3>침착하게 처음부터 확인 해보자</h3>
         <button href="/views/main.jsp" class="error-btn">홈으로 가기</button>
     </div>

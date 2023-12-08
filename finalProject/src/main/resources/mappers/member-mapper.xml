@@ -22,6 +22,9 @@
 		<result column="SPORT_LEVEL" property="sportLever" />
 		<result column="SPORT_SCORE" property="sportScore" />
 		<result column="SPORT_COUNT" property="sportCount" />
+		<result column="SPORT_SMILE" property="sportSmile" />
+		<result column="SPORT_YELLOW" property="sportYellow" />
+		<result column="SPORT_RED" property="sportRed" />
 		<result column="STYLE" property="style" />
 		<result column="SKILL" property="skill" />
 		<result column="USER_NO" property="userNo" />
@@ -35,7 +38,40 @@
 		<result column="FRIEND_STATUS" property="friendStatus" />
 	</resultMap>
 
-
+	<select id="getPostFriends" resultMap="memberResult">
+			SELECT 
+		 	USER_NO,
+            USER_ID,
+            USER_NAME,
+            CITY
+		 FROM MEMBER
+		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
+		 WHERE 
+		 		FRIEND_RES_USER = #{userNo}
+				 AND FRIEND_STATUS = 'N'
+	</select>
+	
+	<select id="selectFriendList" resultMap="memberResult">
+			SELECT 
+		 	USER_NO,
+            USER_ID,
+            USER_NAME,
+            CITY
+		 FROM MEMBER
+		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
+		 WHERE 
+		 		(FRIEND_RES_USER = #{friendResUser} OR
+		 		FRIEND_REQ_USER = #{friendReqUser})
+				 AND FRIEND_STATUS = 'Y'
+	</select>
+	
+	
+	<delete id ="deleteFriend">
+		DELETE FROM FRIEND 
+			WHERE FRIEND_REQ_USER = #{friendReqUser}
+				AND  FRIEND_RES_USER = #{friendResUser}
+				AND FRIEND_STATUS = 'Y'
+	</delete>
 
 
 	
@@ -116,9 +152,10 @@
 	<select id="getCountUserfriends" resultType="_int">
 		SELECT COUNT(*)
 		  FROM FRIEND
-		 WHERE FRIEND_REQ_USER = #{userNo}
-		 OR FRIEND_RES_USER = #{userNo} 
-		 AND FRIEND_STATUS = 'Y'
+		 WHERE
+		 FRIEND_STATUS = 'Y' AND 
+		 (FRIEND_REQ_USER = #{userNo}
+		 OR FRIEND_RES_USER = #{userNo})
 	</select>
 
 
@@ -127,7 +164,9 @@
 			SPORT_LEVEL, 
 			SPORT_SCORE,
 			SPORT_COUNT,
-			SPORT_COUNT,
+			SPORT_SMILE,
+			SPORT_YELLOW,
+			SPORT_RED
 			STYLE,
 			SKILL,
 			USER_NO,
@@ -136,6 +175,28 @@
 		 WHERE USER_NO = #{userNo} AND
 		 CATEGORY_NUM = #{categoryNum}
 	</select>
+	<update id="updateUserPoint">
+		UPDATE MEMBER
+				SET USER_POINT = USER_POINT + #{point} 
+			WHERE USER_ID = #{userId}
+	</update>
+	
+	
+	<update id="addFriend">
+		UPDATE 
+			FRIEND
+			SET
+			FRIEND_STATUS = 'Y'
+		WHERE FRIEND_RES_USER =#{friendResUser} AND
+				FRIEND_REQ_USER = #{friendReqUser}
+	
+	</update>
+	
+	
+
+	
+	
+
 	
 	
 </mapper>
