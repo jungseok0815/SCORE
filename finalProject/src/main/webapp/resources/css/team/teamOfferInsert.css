@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.outer{
+    min-height: calc(100vh - 10rem);
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.file-upload{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.insert-field{
+}
+
+#text-area{
+    border: 1px solid black;
+    width: 100%;
+    height: 400px;
+    resize: none;
+}

@@ -16,15 +16,25 @@
     <script src="resources/js/common/commonTeam/commonTeamAjax.js"></script>
 
 </head>
+
+
 <body onload="mainInit(`${pageContext.request.contextPath}`)">
+    
 	<jsp:include page="common/header.jsp" />
+    <c:if test="${ !empty alertMsg}">
+        <script>
+           alert('${alertMsg}');
+        </script>
+      <c:remove var="alertMsg" scope="session" />
+    </c:if>
+
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
         <div class="nav-container">
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
                 <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
-                <div class="nav-item"><a href="${pageContext.request.contextPath}/insert.pl" class="">구장등록</a></div>
+                <div class="nav-item"><a href="${pageContext.request.contextPath}/insertForm.pl" class="">구장등록</a></div>
             </div>
         </div>
     
@@ -36,7 +46,7 @@
                         <img src="./resources/img/main/notice.img.png" alt="">
                         <p>공지사항</p>
                     </a>
-                    <a href="${pageContext.request.contextPath}/chargingPoint.me">
+                    <a href="${pageContext.request.contextPath}/pointView.me">
                         <img src="./resources/img/main/coin.png" alt="">
                         <p>포인트 충전</p>
                     </a>

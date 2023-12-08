@@ -55,6 +55,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getCountUserfriends(sqlSession,userNo);
 	}
 
+
+	//유저 포인트 충전
+	@Override
+	public int updateUserPoint(Member m) {
+		return memberDao.updateUserPoint(sqlSession, m);
+	}
+
 	@Override
 	public ArrayList<Member> getPostFriends(int userNo) {
 		return memberDao.getPostFriends(sqlSession,userNo);
@@ -73,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteFriend(Friend f) {
 		return memberDao.deleteFriend(sqlSession,f);
+
 	}
 
 
