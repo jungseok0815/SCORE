@@ -34,7 +34,17 @@
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
                 <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
-                <div class="nav-item"><a href="${pageContext.request.contextPath}/insertForm.pl" class="">구장등록</a></div>
+                
+                <!-- 관리자만 볼 수 있게 -->
+                <div class="nav-item">
+                    <c:if test="${loginUser.userLevel eq 1}">
+                        <a href="${pageContext.request.contextPath}/insertForm.pl">
+                            구장등록
+                        </a>
+				    </c:if>
+                </div>
+                
+                
             </div>
         </div>
     

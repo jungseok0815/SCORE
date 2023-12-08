@@ -31,43 +31,41 @@
                             <label for="fileImgFile">
                                 <div class="btn-upload">경기장사진첨부</div>
                             </label>
-                            <input type="file" name="upfile" id="fileImgFile">
+                            <input type="file" name="upfile" id="fileImgFile" required>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" value="" class="from-input" placeholder="[매니저 이름]을 입력해주세요" name="manager">
+                        <input type="text" value="" class="from-input" placeholder="[매니저 이름]을 입력해주세요" name="manager" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" value="" class="from-input" placeholder="[경기장 이름]을 입력해주세요" name="fieldName">
+                        <input type="text" value="" class="from-input" placeholder="[경기장 이름]을 입력해주세요" name="fieldName" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" value="" class="from-input" placeholder="[경기 장소]을 입력해주세요" name="fieldArea" onclick="openAddress()">
+                        <input type="text" value="" class="from-input" placeholder="[경기 장소]을 입력해주세요" name="fieldArea" required>
                     </td>
                 </tr>
                 <tr align="center">
                     <td>
-                        <select name="matchLevel" value="" class="field-select">
-                            <option value="레벨선택">레벨선택</option>
+                        <select name="matchLevel" value="" class="field-select" required>
                             <option value="모든레벨">모든레벨</option>
-                            <option value="아마추어 이하">아마추어 이하</option>
-                            <option value="아마추어 이상">아마추어 이상</option>
-                            <option value="프로">프로</option>
+                            <option value="아마추어 이하">스타터</option>
+                            <option value="아마추어 이상">아마추어</option>
+                            <option value="세미프로">세미프로</option>
+                            <option value="세미프로">프로</option>
                         </select>
 
-                        <select name="matchType" id="match-type" value="" class="field-select">
-                            <option>매치선택</option>
+                        <select name="matchType" id="match-type" value="" class="field-select" required>
                             <option value="6vs6 3파전">6vs6 3파전</option>
                             <option value="5vs5 3파전">5vs5 3파전</option>
                         </select>
 
-                        <select name="matchGender" value="" class="field-select">
-                            <option value="">성별</option>
+                        <select name="matchGender" value="" class="field-select" required>
                             <option value="3">남녀 모두</option>
                             <option value="1">남자만</option>
                             <option value="2">여자만</option>
@@ -76,38 +74,36 @@
                 </tr>
                 <tr align="center">
                     <td>
-                        <select name="parking" class="field-select">
-                            <option value="">주차정보</option>
+                        <select name="parking" class="field-select" required>
                             <option value="3">주차장 없음</option>
                             <option value="1">무료주차</option>
                             <option value="2">유료주차</option>
                         </select>
                         
-                        <input name="fieldCount" class="field-select" type="number" placeholder="인원 수">
+                        <input name="fieldCount" class="field-select" type="number" placeholder="인원 수" required>
                         
-                        <select id="shoes" name="shoes" class="field-select">
-                            <option value="">신발정보</option>
-                            <option  value="풋살화/운동화">풋살화/운동화</option>
+                        <select id="shoes" name="shoes" class="field-select" required>
                             <option  value="상관없음">상관없음</option>
+                            <option  value="풋살화/운동화">풋살화/운동화</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="date" value="" name="fieldDate" style="margin: 5px 40px 10px 10px; width: 180px;">
-                        <input class="timepicker" type="time" value="" name="startTime" style="width: 120px;"> ~
-                        <input class="timepicker" type="time" value="" name="endTime" style="width: 120px;">
+                        <input type="date" value="" name="fieldDate" style="margin: 5px 40px 10px 10px; width: 180px;" required>
+                        <input class="timepicker" type="time" value="" name="startTime" style="width: 120px;" required> ~
+                        <input class="timepicker" type="time" value="" name="endTime" style="width: 120px;" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="" class="from-input" value="" style="width: 240px; margin-right: 15px;" placeholder=" 경기장 규모" name="fieldSize">
-                        <input type="" class="from-input" value="" style="width: 240px;" placeholder=" 가격" name="matchPay">
+                        <input type="" class="from-input" value="" style="width: 240px; margin-right: 15px;" placeholder=" 경기장 규모" name="fieldSize" required>
+                        <input type="" class="from-input" value="" style="width: 240px;" placeholder=" 가격" name="matchPay" required>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">
-                        <button type="reset" class="btn btn-secondary" style="margin-top: 10px;">뒤로가기</button>
+                        <button type="reset" class="btn btn-secondary" style="margin-top: 10px;" onclick="history.back();">뒤로가기</button>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">등록하기</button>
                     </td>
                 </tr>

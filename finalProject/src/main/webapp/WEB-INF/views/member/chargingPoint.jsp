@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/member/Point.css" >
-<script src="resources/js/member/memberJs/member.js?ver=3"></script>
-<script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
+<script src="resources/js/member/memberJs/chargingPoint.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -21,8 +20,8 @@
                 <form action="updatePoint.me" method="post" id="pointForm">
                     <div class="point-3">충전할 금액</div>
                     <div class="select1">
-                        <input type="radio" name="point" id="five" value="5000"><label for="five">5,000</label>
-                        <input type="radio" name="point" id="ten" value="10000"><label for="ten" >10,000</label>
+                        <input type="radio" name="point" id="five" value="5000" selected><label for="five">5,000</label>
+                        <input type="radio" name="point" id="ten" value="10000" checked><label for="ten">10,000</label>
                         <input type="radio" name="point" id="twenty" value="20000"><label for="twenty">20,000</label> 
                         <input type="radio" name="point" id="thirty" value="30000"><label for="thirty">30,000</label>
                         <input type="radio" name="point" id="fifty" value="50000"><label for="fifty">50,000</label>
@@ -33,7 +32,7 @@
                 <div class="point-4">결제수단 선택</div>
                 <div class="select2">
                     <input type="radio" name="money-one" id="account"><label for="account">가상계좌</label>
-                    <input type="radio" name="money-one" id="card"><label for="card">카드결제</label>
+                    <input type="radio" name="money-one" id="card" checked><label for="card">카드결제</label>
                     <input type="radio" name="money-one" id="kakao"><label for="kakao">카카오페이</label>
                 </div>
 
@@ -44,7 +43,7 @@
                     </div>
                 </div>
                 <div class="point-8">
-                    <input type="checkbox">[필수] 결제 서비스 이용 약관, 개인정보 처리 동의
+                    <input type="checkbox" checked required>[필수] 결제 서비스 이용 약관, 개인정보 처리 동의
                 </div>
 
                 <div class="point-tt">
@@ -53,9 +52,7 @@
             </div>
         </div>
     <script>
-        function charging(){
-            document.querySelector("#pointForm").submit();
-        }
+        
     </script>
 	
 	<jsp:include page="../common/footer.jsp" />

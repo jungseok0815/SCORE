@@ -36,11 +36,6 @@
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
     </resultMap>
-    
- 	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*)
-	  	FROM TEAM
- 	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
 		SELECT CATEGORY_NUM
