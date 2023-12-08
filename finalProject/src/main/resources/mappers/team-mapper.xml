@@ -36,7 +36,7 @@
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
     </resultMap>
-    
+
 
 
 	<select id="selectCategoryNum" resultMap="teamResult">

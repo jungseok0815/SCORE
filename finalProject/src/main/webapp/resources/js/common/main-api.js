@@ -1,6 +1,5 @@
 const mainApi = {
     getPageList: function(data, callback){
-        console.log(data)
         $.ajax({
             type:"get",
             url:"loadList.pl",

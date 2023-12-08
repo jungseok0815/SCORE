@@ -331,7 +331,10 @@ selectTeamList =() =>{
 
 selectMyTeam = (categoryNum) => {
     console.log(categoryNum);
-    memberAjaxController.selectMyteamListAjax(categoryNum);
+    data = {
+        categoryNum : categoryNum
+    }
+    memberAjaxController.selectMyteamListAjax(data);
 }
 
 drawMyTeamList = (teamList) =>{
