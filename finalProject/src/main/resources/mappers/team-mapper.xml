@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
  <mapper namespace="teamMapper">
- 
+    <resultMap type = "Team" id = "teamResult">
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="TEAM_NAME" property="teamName"/>
+    		<result column="CREATE_DATE" property="createDate"/>
+    		<result column="TEAM_TITLE" property="teamTitle"/>
+    		<result column="ACTIVITY_ATEA" property="activityAtea"/>
+    		<result column="TEAM_LEVEL" property="teamLevel"/>
+    		<result column="CATEGORY_NUM" property="categotyNum"/>
+    </resultMap>
+    
+        <resultMap type = "TeamMember" id = "teamMemberResult">
+    		<result column="TMEMBER_NO" property="tmemberNo"/>
+    		<result column="ENROLL_DATE" property="enrollDate"/>
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="USER_NO" property="userNo"/>
+    		<result column="GRADE" property="grade"/>
+    </resultMap>
+    
  	<select id="selectListCount" resultType="_int">
-	SELECT COUNT(*)
-	  FROM TEAM;
+		SELECT COUNT(*)
+	  	FROM TEAM
  	</select>
- 
- 
+
+	<select id="selectCategoryNum" resultMap="teamResult">
+		SELECT CATEGORY_NUM
+		FROM TEAM
+	</select>
+	
+	<select id="selectUserNo" resultMap="teamMemberResult">
+		SELECT USER_NO
+		FROM TEAM_MEMBER
+	</select>
+	
  </mapper>

@@ -450,7 +450,25 @@
             </div>
       
             <div class="modal-body">
-              <form action="">
+              <form action="insertTeam.tm" method="post">
+                <p class="userInfo-modal-font">종목 선택</p>
+                <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
+                    <ul style="padding: 0px;">
+                        <li class="">
+                            <input type="radio" class="btn-checkX" name="ability" id="ability-offence" autocomplete="off">
+                            <label class="btn btn-checkX-label madal-label" for="ability-offence">축구</label>
+                        </li>
+                        <li class="">
+                            <input type="radio" class="btn-checkX" name="ability" id="ability-balance" autocomplete="off">
+                            <label class="btn btn-checkX-label madal-label" for="ability-balance">야구</label>
+                        </li>
+                        <li class="">
+                            <input type="radio" class="btn-checkX" name="ability" id="ability-defence" autocomplete="off">
+                            <label class="btn btn-checkX-label madal-label" for="ability-defence">농구</label>
+                        </li>
+                    </ul>
+                </div>
+
                   <p class="body-p">팀 정보를 <br>입력해주세요</p>
   
                   <div class="profile-imgbox">
@@ -472,33 +490,16 @@
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-all" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="gender" id="gender-all" autocomplete="off">
                               <label class="btn btn-checkX-label madal-label" for="gender-all">남녀 모두</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-male" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="gender" id="gender-male" autocomplete="off">
                               <label class="btn btn-checkX-label madal-label" for="gender-male">남자</label>
                           </li>
                           <li class="">
-                              <input type="checkbox" class="btn-checkX" name="gender" id="gender-female" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="gender" id="gender-female" autocomplete="off">
                               <label class="btn btn-checkX-label madal-label" for="gender-female">여자</label>
-                          </li>
-                      </ul>
-                  </div>
-                  <p class="userInfo-modal-font">좋아하는 스타일</p>
-                  <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
-                      <ul style="padding: 0px;">
-                          <li class="">
-                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-offence" autocomplete="off">
-                              <label class="btn btn-checkX-label madal-label" for="ability-offence">공격</label>
-                          </li>
-                          <li class="">
-                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-balance" autocomplete="off">
-                              <label class="btn btn-checkX-label madal-label" for="ability-balance">밸런스</label>
-                          </li>
-                          <li class="">
-                              <input type="checkbox" class="btn-checkX" name="ability" id="ability-defence" autocomplete="off">
-                              <label class="btn btn-checkX-label madal-label" for="ability-defence">수비</label>
                           </li>
                       </ul>
                   </div>
@@ -597,10 +598,6 @@
                             <a href="${pageContext.request.contextPath}/teamProfile.tm">
                                 <img src="./resources/images/sonny2.jpg" alt="">
                                 <p>기만FC</p>
-                            </a>
-                            <a href="">
-                                <img src="./resources/images/liverpool.png" alt="">
-                                <p>기만유나이티드</p>
                             </a>
                             <!-- 가입 신청 내역(고정) -->
                             <a href="">
