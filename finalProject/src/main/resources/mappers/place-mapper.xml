@@ -70,4 +70,9 @@
  		  FROM FIELD
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	<select id="selectPlaceList" resultMap="placeResultSet">
+ 		SELECT FIELD_NO, COUNT(*) as "FIELD_COUNT"
+			FROM RESERVATION
+			GROUP BY FIELD_NO
+ 	</select>
 </mapper>

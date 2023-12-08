@@ -1,6 +1,7 @@
 package com.kh.finalProject.place.controller;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,8 +65,11 @@ public class PlaceCtroller {
 		pl.setFieldDate(date);
 		
 		PageInfo pi = Pagenation.getPageInfo(pService.placeListCount(pl), currentPage, 5, 5);
+		ArrayList<Place> list = pService.selectPlaceList(pi, pl);
+		ArrayList<Place> resList = pService.selectResPlaceList();
+		System.out.println(resList);
 		mv.addObject("pi",pi)
-		  .addObject("list", pService.selectPlaceList(pi, pl));
+		  .addObject("list", list);
 		return new Gson().toJson(mv);
 	}
 
