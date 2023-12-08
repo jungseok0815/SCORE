@@ -14,11 +14,13 @@ public class TeamOffer {
 	private int teamNo;
 	private String teamName;
 	private String activityAtea;
+	private String offerStatus;
 
 	public TeamOffer() {}
 
 	public TeamOffer(int offerNo, String offerTitle, String offerContent, String offerGender, String offerLevel,
-			int offerAge, int offerCount, int userNo, int teamNo, String teamName, String activityAtea) {
+			int offerAge, int offerCount, int userNo, int teamNo, String teamName, String activityAtea,
+			String offerStatus) {
 		super();
 		this.offerNo = offerNo;
 		this.offerTitle = offerTitle;
@@ -31,6 +33,7 @@ public class TeamOffer {
 		this.teamNo = teamNo;
 		this.teamName = teamName;
 		this.activityAtea = activityAtea;
+		this.offerStatus = offerStatus;
 	}
 
 	public int getOfferNo() {
@@ -121,15 +124,22 @@ public class TeamOffer {
 		this.activityAtea = activityAtea;
 	}
 
+	public String getOfferStatus() {
+		return offerStatus;
+	}
+
+	public void setOfferStatus(String offerStatus) {
+		this.offerStatus = offerStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "TeamOffer [offerNo=" + offerNo + ", offerTitle=" + offerTitle + ", offerContent=" + offerContent
 				+ ", offerGender=" + offerGender + ", offerLevel=" + offerLevel + ", offerAge=" + offerAge
 				+ ", offerCount=" + offerCount + ", userNo=" + userNo + ", teamNo=" + teamNo + ", teamName=" + teamName
-				+ ", activityAtea=" + activityAtea + "]";
+				+ ", activityAtea=" + activityAtea + ", offerStatus=" + offerStatus + "]";
 	}
 
 	
-
 	
 }

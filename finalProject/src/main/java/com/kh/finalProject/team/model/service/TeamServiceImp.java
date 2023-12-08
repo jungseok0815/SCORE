@@ -20,10 +20,10 @@ public interface TeamServiceImp {
 	TeamOffer selectOfferDetail(int offerNo);
 	
 	// 지역순 리스트 가져오기
-	ArrayList<TeamOffer> selectCity(String activityAtea, PageInfo pi);
+	ArrayList<TeamOffer> selectCity(String activityAtea, int category, PageInfo pi);
 		
 	// 지역순 총 갯수
-	int selectOfferListCount(String activityAtea);
+	int selectOfferListCount(String activityAtea, int category);
 	
 	// 초이스 스포츠 갯수
 	int selectChoiceSportsCount(int category, String activityAtea);
@@ -41,5 +41,5 @@ public interface TeamServiceImp {
 	int deleteOffer(int offerNo);
 	
 	// 팀 요청 
-	int teamReq(String userId, String text);
+	int teamReq(int userNo, String reqContent, int offerNo);
 }

@@ -27,6 +27,7 @@
  		<result column="TEAM_NO" property="teamNo" />
  		<result column="TEAM_NAME" property="teamName" />
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
+ 		<result column="OFFER_STATUS" property="offerStatus" />
  	</resultMap>
 
  
@@ -55,6 +56,7 @@
 		                         , ACTIVITY_ATEA
 			                FROM TEAM_OFFER 
 			                JOIN TEAM USING(TEAM_NO)
+			                WHERE OFFER_STATUS = 'Y'
 			                ORDER BY TEAM_NO DESC
 			            ) A
 			        )
@@ -85,7 +87,7 @@
  	</select>
  	
  	<!-- ajax로 지역순 리스트 가져오는 쿼리 -->
- 	<select id="selectCity" resultMap="teamOfferResult">
+ 	<select id="selectCity" resultMap="teamOfferResult" parameterType="map">
  		SELECT OFFER_NO,
  			   OFFER_TITLE,
  			   OFFER_CONTENT,
@@ -100,15 +102,19 @@
  		  FROM TEAM_OFFER
           JOIN TEAM USING(TEAM_NO)
           WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          AND CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
           ORDER BY OFFER_NO DESC
  	</select>
  	
  	<!-- 지역 offer게시글 총 갯수 -->
- 	<select id="selectOfferListCount" resultType="_int">
+ 	<select id="selectOfferListCount" resultType="_int" parameterType="map">
 		SELECT COUNT(*)
 		  FROM TEAM_OFFER
           JOIN TEAM USING(TEAM_NO)
           WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          AND CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
  	</select>
  	
  	<!-- 초이스 스포츠 총 갯수 -->
@@ -118,6 +124,7 @@
           JOIN TEAM USING(TEAM_NO)
           JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
           WHERE CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
           AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
  	</select>
  	
@@ -138,6 +145,7 @@
           JOIN TEAM USING(TEAM_NO)
           JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
            WHERE CATEGORY_NUM = #{category}
+           AND OFFER_STATUS = 'Y'
            AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
           ORDER BY OFFER_NO DESC
  	</select>
@@ -149,6 +157,7 @@
           JOIN TEAM USING(TEAM_NO)
           JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
           WHERE CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
  	</select>
  
  	<!-- ajax로 지역순 초이스 스포츠 ALL 리스트 가져오는 쿼리 -->
@@ -168,6 +177,7 @@
           JOIN TEAM USING(TEAM_NO)
           JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
            WHERE CATEGORY_NUM = #{category}
+           AND OFFER_STATUS = 'Y'
           ORDER BY OFFER_NO DESC
  	</select>
  	
@@ -178,8 +188,22 @@
  	 	 WHERE OFFER_NO = #{offerNo}
  	</update>
  	
- 	<insert id="teamReq">
- 		
+ 	<insert id="teamReq" parameterType="map">
+ 		INSERT INTO 
+		    TEAM_REQ(
+		             REQ_NO,
+		             REQ_STATUS,
+		             REQ_USER_NO,
+		             OFFER_NO,
+		             REQ_CONTENT
+		             )
+             VALUES (
+ 			  		   SEQ_TEAD_REQ.NEXTVAL,
+ 			  		   'N',
+ 			  		   #{userNo},
+ 			  		   #{offerNo},
+ 			  		   #{reqContent}
+                     )
  	</insert>
  	
  </mapper>

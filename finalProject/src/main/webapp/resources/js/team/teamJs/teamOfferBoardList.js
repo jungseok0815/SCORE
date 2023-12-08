@@ -1,11 +1,12 @@
 
-teamList = (cpage) =>{
+teamList = (cpage, categoryNum) =>{
     const checkedArea = document.querySelector('.btnLocal input[name="local"]:checked').value;
     console.log(checkedArea)
 
      data = {
          activityAtea: checkedArea,
          cpage: cpage,
+         category: selectedCategory,
      }
      
     teamAjaxController.teamList(data,drawTeamList)
@@ -71,6 +72,8 @@ choiceSports =(categoryNum, cpage) =>{
     const checkedArea = document.querySelector('.btnLocal input[name="local"]:checked').value;
     console.log(checkedArea)
     console.log(categoryNum)
+
+    selectedCategory = categoryNum;
 
     data = {
         activityAtea: checkedArea,

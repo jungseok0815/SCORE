@@ -34,16 +34,24 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectOfferDetail", offerNo);
 	}
 	
-	public ArrayList<TeamOffer> selectCity(SqlSessionTemplate sqlSession, String activityAtea, PageInfo pi){
+	public ArrayList<TeamOffer> selectCity(SqlSessionTemplate sqlSession, String activityAtea, int category, PageInfo pi){
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("category", category);
+		params.put("activityAtea", activityAtea);
+		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("teamMapper.selectCity", activityAtea, rowBounds);
+		return (ArrayList)sqlSession.selectList("teamMapper.selectCity", params, rowBounds);
 	}
 	
-	public int selectOfferListCount(SqlSessionTemplate sqlSession, String activityAtea) {
-		return sqlSession.selectOne("teamMapper.selectOfferListCount", activityAtea);
+	public int selectOfferListCount(SqlSessionTemplate sqlSession, String activityAtea, int category) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("category", category);
+		params.put("activityAtea", activityAtea);
+		
+		return sqlSession.selectOne("teamMapper.selectOfferListCount", params);
 	}
 	
 	public int selectChoiceSportsCount(SqlSessionTemplate sqlSession, int category, String activityAtea) {
@@ -83,9 +91,13 @@ public class TeamDao {
 		return sqlSession.update("teamMapper.deleteOffer", offerNo);
 	}
 	
-	public int teamReq(SqlSessionTemplate sqlSession, String userId, String text) {
+	public int teamReq(SqlSessionTemplate sqlSession, int userNo, String reqContent, int offerNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userNo", userNo);
+		params.put("reqContent", reqContent);
+		params.put("offerNo", offerNo);
 		
 		
-		return sqlSession.insert("teamMapper.teamReq", userId);
+		return sqlSession.insert("teamMapper.teamReq", params);
 	}
 }

@@ -40,13 +40,13 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public ArrayList<TeamOffer> selectCity(String activityAtea, PageInfo pi) {
-		return teamDao.selectCity(sqlSession, activityAtea, pi);
+	public ArrayList<TeamOffer> selectCity(String activityAtea, int category, PageInfo pi) {
+		return teamDao.selectCity(sqlSession, activityAtea, category, pi);
 	}
 
 	@Override
-	public int selectOfferListCount(String activityAtea) {
-		return teamDao.selectOfferListCount(sqlSession, activityAtea);
+	public int selectOfferListCount(String activityAtea, int category) {
+		return teamDao.selectOfferListCount(sqlSession, activityAtea, category);
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public int teamReq(String userId, String text) {
-		return teamDao.teamReq(sqlSession, userId, text);
+	public int teamReq(int userNo, String reqContent, int offerNo) {
+		return teamDao.teamReq(sqlSession, userNo, reqContent, offerNo);
 	}
 
 	
