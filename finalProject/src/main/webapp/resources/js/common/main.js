@@ -91,11 +91,21 @@ function drawPage(data){
                 const tmp = data.model.list[i];
                 let gender;
                 let category;
-                let 
-                console.log(tmp)
-                console.log(data.model.resList)
-                for(let j in data.model.resList){
-
+                let btnControll = '<div class="match-status isOpen">'+
+                                        '<p>신청가능</p>'+
+                                    '</div>';
+                for(let j of data.model.resList){
+                    if(j.fieldNo == tmp.fieldNo){
+                        if((tmp.fieldCount)-(j.fieldCount)<=5){
+                            btnControll = '<div class="match-status isHurry">'+
+                                                '<p>마감임박</p>'+
+                                            '</div>';
+                        }else if((tmp.fieldCount)-(j.fieldCount) <=0){
+                            btnControll = '<div class="match-status isFull">'+
+                                                '<p>마감</p>'+
+                                            '</div>';
+                        } 
+                    }
                 }
                 switch(tmp.matchGender){
                     case 1: 
@@ -135,18 +145,7 @@ function drawPage(data){
                                 '<span>'+category+'</span>'+
                                 '<span>'+tmp.matchLevel+'</span>'+
                             '</div>'+
-                        '</div>'+
-                        '<div class="match-schedule-status">'+
-                            '<div class="match-status isOpen">'+
-                                '<p>신청가능</p>'+
-                            '</div>'+
-                            // '<div class="match-status isHurry">'+
-                            //     '<p>마감임박</p>'+
-                            // '</div>'+
-
-                            // '<div class="match-status isFull">'+
-                            //     '<p>마감</p>'+
-                            // '</div>'+
+                        '</div>'+btnControll +
                         '</div>'+
                     '</a>'+
                 '</li>'+
