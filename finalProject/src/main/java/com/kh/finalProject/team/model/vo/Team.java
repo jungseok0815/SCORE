@@ -14,6 +14,7 @@ public class Team {
 	private int categotyNum;
 	
 
+
 	
 	public Team() {}
 	
