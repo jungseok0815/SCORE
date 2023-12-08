@@ -36,4 +36,7 @@ public class PlaceDao {
 	public Place placeDetailview(SqlSessionTemplate sqlSession, int fieldNo) {
 		return sqlSession.selectOne("placeMapper.placeDetailview", fieldNo);
 	}
+	public ArrayList<Place> selectResPlaceList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectResPlaceList");
+	}
 }

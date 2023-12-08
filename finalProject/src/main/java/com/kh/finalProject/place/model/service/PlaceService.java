@@ -16,6 +16,7 @@ public interface PlaceService {
 	int placeListCount(Place pl);
 	ArrayList<Place> selectPlaceList(PageInfo pi, Place pl);
 	Place placeDetailview(int fno);
+	ArrayList<Place> selectResPlaceList();
 	
 
 }
