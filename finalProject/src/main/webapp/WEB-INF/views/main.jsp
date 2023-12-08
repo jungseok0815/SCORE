@@ -13,7 +13,7 @@
 <body>
     <c:if test="${ !empty alertMsg}">
              <script>
-                alertify.alert('제목', '${alertMsg}');
+                alert('${alertMsg}');
              </script>
            <c:remove var="alertMsg" scope="session" />
     </c:if>

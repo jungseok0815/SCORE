@@ -18,16 +18,15 @@
                 <div class="point-1">미리 충전하고</div>
                 <div class="point-2">더욱 편리하게</div>
                 
-                <form action="updatePoint.me">
+                <form action="updatePoint.me" method="post" id="pointForm">
                     <div class="point-3">충전할 금액</div>
-                    <input type="hidden" name="userId" value="${loginUser.userId}">
                     <div class="select1">
-                        <input type="radio" name="point" id="five"><label for="five" value="5000">5,000</label>
-                        <input type="radio" name="point" id="ten"><label for="ten" value="10000">10,000</label>
-                        <input type="radio" name="point" id="twenty"><label for="twenty" value="20000">20,000</label> 
-                        <input type="radio" name="point" id="thirty"><label for="thirty" value="30000">30,000</label>
-                        <input type="radio" name="point" id="fifty"><label for="fifty" value="50000">50,000</label>
-                        <input type="radio" name="point" id="hundred"><label for="hundred" value="100000">100,000</label>
+                        <input type="radio" name="point" id="five" value="5000"><label for="five">5,000</label>
+                        <input type="radio" name="point" id="ten" value="10000"><label for="ten" >10,000</label>
+                        <input type="radio" name="point" id="twenty" value="20000"><label for="twenty">20,000</label> 
+                        <input type="radio" name="point" id="thirty" value="30000"><label for="thirty">30,000</label>
+                        <input type="radio" name="point" id="fifty" value="50000"><label for="fifty">50,000</label>
+                        <input type="radio" name="point" id="hundred" value="100000"><label for="hundred">100,000</label>
                     </div>
                 </form>
 
@@ -49,11 +48,15 @@
                 </div>
 
                 <div class="point-tt">
-                    <button class="point-btn" onclick="location.href='updatePoint.me'">충전</button>
+                    <button class="point-btn" onclick="charging()">충전</button>
                 </div>
             </div>
         </div>
-    
+    <script>
+        function charging(){
+            document.querySelector("#pointForm").submit();
+        }
+    </script>
 	
 	<jsp:include page="../common/footer.jsp" />
 </body>

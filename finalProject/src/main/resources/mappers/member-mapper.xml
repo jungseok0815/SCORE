@@ -139,7 +139,7 @@
 	</select>
 	<update id="updateUserPoint">
 		UPDATE MEMBER
-				SET USER_POINT = #{point}
+				SET USER_POINT = USER_POINT + #{point} 
 			WHERE USER_ID = #{userId}
 	</update>
 	
