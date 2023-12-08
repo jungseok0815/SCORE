@@ -91,6 +91,12 @@ function drawPage(data){
                 const tmp = data.model.list[i];
                 let gender;
                 let category;
+                let 
+                console.log(tmp)
+                console.log(data.model.resList)
+                for(let j in data.model.resList){
+
+                }
                 switch(tmp.matchGender){
                     case 1: 
                         gender = '☆남자-';
@@ -146,10 +152,9 @@ function drawPage(data){
                 '</li>'+
             '</ul>'
             }
-            // if(pi.currentPage != 1){
-            //     str2 += '<button class="btn btn-light" onclick="location.href='+
-            //     "'"+path+"?cpage="+(pi.currentPage -1) +'">&lt;</button>'
-            // }
+
+            
+
             if(pi.currentPage != 1){
                 str2 += `<button class="btn btn-light" onclick="handleClickPageNum(`+(pi.currentPage -1)+`)">&lt;</button>`
             }
