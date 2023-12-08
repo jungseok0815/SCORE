@@ -40,6 +40,19 @@ const memberAjaxController = {
                 console.log("아이디 중복체크 ajax통신 실패");
             }
         })
+    },
+    getUserInfo : (data,callback) =>{
+        $.ajax({
+            url: "getUserInfo.me",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result)
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
     }
 
    
