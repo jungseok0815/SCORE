@@ -11,6 +11,8 @@
    		<result column="USER_NO" property="userNo"/>
    </resultMap>
    
+   
+   
    <select id="selectNoticeList" resultMap="noticeResult">
    		SELECT NOTICE_NO,
    					 NOTICE_TITLE,

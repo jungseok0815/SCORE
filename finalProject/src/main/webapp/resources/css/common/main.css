@@ -103,7 +103,7 @@ a:link { color: black; }
     display: flex;
     justify-content: space-between;
 }
-.choice-sports div a{
+.choice-sports div{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +112,7 @@ a:link { color: black; }
     font-size: 10px;
     font-weight: 700;
 }
-.choice-sports div a p{
-    margin-top: 7px;
+.choice-sports div p{
     margin-bottom: 0rem;
     padding-left: 11px;
 }
@@ -121,13 +120,11 @@ a:link { color: black; }
     vertical-align: middle;
     width: 10px;
     height: 10px;
-    margin-top: 6px;
 }
 .baseball-img{
     vertical-align: middle;
     width: 13px;
     height: 13px;
-    margin-top: 6px;
 }
 .baseball-btn{
     width: 120px;
@@ -146,144 +143,6 @@ a:link { color: black; }
     height: 30px;
     border: 1px solid rgb(255, 115, 0);
     border-radius: 20px;
-}
-
-/* 캘린더 */
-.calender {
-    height: 100%;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-.event-section-calender {
-    display: flex;
-    width: 100%;
-    height: auto;
-    justify-content: center;
-}
-
-.event-section-calender-div {
-    display: flex;
-    width: 940px;
-    height: 70px;
-    justify-content: center;
-}
-.event-calenderLists {
-    display: flex;
-    width: 800px;
-    height: 70px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.calendar2 {
-    display: flex;
-    width: 100%;
-    height: 70px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.day {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 30%;
-    font-size: 17px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.day:hover {
-    background-color: #e0e0e0;
-}
-
-.current-day {
-    background-color: #87ceeb;
-}
-
-.sunday {
-    color: red;
-}
-
-.saturday {
-    color: blue;
-}
-
-.event-calender-eventlist {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 300px;
-    align-items: end;
-    margin-top: 40px;
-}
-
-.event-calender-eventlist-container {
-    height: auto;
-    width: 800px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.event-calender-list {
-    height: auto;
-    width: auto;
-    text-align: center;
-    cursor: pointer;
-}
-
-.event-calender-image {
-    display: flex;
-    width: 180px;
-    height: 187px;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.event-calender-image-thumbnail {
-    width: 170px;
-    height: 113px;
-    object-fit: cover;
-
-}
-
-.event-calender-list:hover {
-    opacity: 0.8;
-}
-
-.eventName {
-    padding-top: 20px;
-    font-size: 15px;
-}
-
-.eventDay {
-    padding-top: 20px;
-    font-size: 14px;
-    color: rgb(99, 99, 99);
-}
-
-.paging {
-    padding-top: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.paging-controller {
-    display: flex;
-    width: 250px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.form-range {
-    width: 30px;
 }
 
 /* filter */
@@ -506,7 +365,7 @@ a:link { color: black; }
         display: flex;
         justify-content: space-between;
     }
-    .choice-sports div a{
+    .choice-sports div{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -515,8 +374,7 @@ a:link { color: black; }
         font-size: 25px;
         font-weight: 700;
     }
-    .choice-sports div a p{
-        margin-top: 7px;
+    .choice-sports div p{
         margin-bottom: 0rem;
         padding-left: 11px;
     }
@@ -524,13 +382,11 @@ a:link { color: black; }
         vertical-align: middle;
         width: 28px;
         height: 28px;
-        margin-top: 6px;
     }
     .baseball-img{
         vertical-align: middle;
         width: 33px;
         height: 33px;
-        margin-top: 6px;
     }
     .baseball-btn{
         width: 200px;
@@ -803,4 +659,80 @@ input::placeholder {
     .madal-label{
         width: 130px;
     }
+}
+
+/* 내팀보기 모달 */
+.list-title{
+    text-align: center;
+    border-bottom: 1px solid;
+    width: 400px;
+    margin-left: 30px;
+}
+.modal-header{
+    padding-left: 151px;
+    border-bottom: none;
+}
+
+.modal-content{
+    text-align: center;
+}
+.accordion-button{
+    text-align: center;
+}
+.accordion-body a {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+}
+.accordion-body > a > img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-bottom: 16px;
+}
+.choice-sports div:hover{
+    background : #1BB8F7;
+    cursor: pointer;
+}
+.choice-box{
+    border-radius: 15px;
+    border: 1px solid #727F88;
+    font-size: 15px;
+    padding: 5px;
+    color: #727F88;
+    width: 82px;
+}
+.choice-box:focus{
+    outline: none;
+}
+.date-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.date-container div {
+    width: 50px;
+    margin: 13px 0px 0px 0px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    text-align: center;
+    padding: 6px;
+    width: 60px;
+    height: 60px;
+    margin: 30px 2px;
+}
+.date-container div:hover{
+    background: rgb(192, 192, 192);
+    cursor: pointer;
+}
+.date-container p{
+    margin: 0px;
+}
+.date-container p{
+    margin: 0px;
+
 }

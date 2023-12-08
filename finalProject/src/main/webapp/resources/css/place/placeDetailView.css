@@ -90,6 +90,9 @@ img {
 .body_right_count_like img{
     margin: 5px;
 }
+.body_right_count_like p{
+    margin-top: 5px;
+}
 .body_right_pay{
     display: inline-flex;
     align-items: center;

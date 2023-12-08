@@ -1,7 +1,8 @@
 package com.kh.finalProject.member.controller;
 
-import java.util.ArrayList;
 
+import java.util.Map;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,11 +43,33 @@ public class MemberController {
 		
 	}
 	
-	
-	@RequestMapping("/chargingPoint.me")
-	public String chargingPoint() {
+	@RequestMapping("/pointView.me")
+	public String pointView() {
 		return "member/chargingPoint";
 		
+	}
+	
+	@RequestMapping("/updatePoint.me")
+	public ModelAndView updateMember(HttpSession session, ModelAndView mv, @RequestParam(name = "point", defaultValue = "0") int point) {
+		Member m = (Member)session.getAttribute("loginUser");
+		m.setPoint(point);
+	    int result = memberService.updateUserPoint(m);
+	    
+	    Member loginUser = memberService.loginMember(m.getUserId());
+	    if(result > 0) {
+	        // DB로부터 수정된 회원정보를 다시 조회해서
+	        // session 영역에 loginUser라는 키값으로 덮어씌워야합니다.
+	        session.setAttribute("loginUser", loginUser);
+	        session.setAttribute("alertMsg", "충전이 완료되었습니다.");
+
+	        mv.setViewName("redirect:/");
+	        
+	    } else {
+	    	mv.addObject("errorMsg", "충전 실패");
+	    	mv.setViewName("common/errorPage");
+	    }
+
+	    return mv;
 	}
 	
 	@RequestMapping("/myPage.me")

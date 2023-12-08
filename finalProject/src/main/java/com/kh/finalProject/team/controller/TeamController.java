@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +17,8 @@ import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.service.TeamService;
+import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 @Controller
@@ -166,6 +169,38 @@ public class TeamController {
 	}
 	
 	
+	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
+	@RequestMapping("insertTeamOfferForm.tm")
+	public String teamOfferInsertForm() {
+		return "team/teamOfferInsert";
+	}
 	
+	@RequestMapping("selectMyTeam.tm")
+	public String selectMyTeam(int teamNo, int tmemberNo) {
+		//categoryNum
+		Team t = teamService.selectCategoryNum(teamNo);
+		//userNo
+		TeamMember tm = teamService.selectUserNo(tmemberNo);
+		
+		//팀 생성먼저
+				
+		return "team/teamOfferListDetailView";
+	}
 	
+	@RequestMapping("insertTeam.tm")
+	public String insertTeam(Team t, MultipartFile upfile, HttpSession session, Model model) {
+		int result = teamService.insertTeam(t);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "팀 생성 완료");
+			return "redirect:main";
+		} else {
+			model.addAttribute("errorMsg", "팀 생성 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("insertTeamOffer.tm")
+	public String teamOfferInsert() {
+		return "team/teamProfile";
+	}
 }

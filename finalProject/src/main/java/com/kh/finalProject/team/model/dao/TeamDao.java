@@ -8,11 +8,28 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+
+import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
+
 @Repository
 public class TeamDao {
+
+
+	public Team selectCategoryNum(SqlSessionTemplate sqlSession, int teamNo) {
+		return sqlSession.selectOne("teamMapper.selectCategoryNum", teamNo);
+	}
+	
+	public TeamMember selectUserNo(SqlSessionTemplate sqlSession, int tmemberNo) {
+		return sqlSession.selectOne("teamMapper.selectUserNo", tmemberNo);
+	}
+	
+	public int insertTeam(SqlSessionTemplate sqlSession, Team t) {
+		return sqlSession.insert("teamMapper.insertTeam", t);
+	}
 
 	public int selectListCount(SqlSessionTemplate sqlSession) { // 리스트 총 갯수
 		return sqlSession.selectOne("teamMapper.selectListCount");
