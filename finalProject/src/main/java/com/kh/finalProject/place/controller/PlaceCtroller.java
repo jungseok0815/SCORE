@@ -69,7 +69,8 @@ public class PlaceCtroller {
 		ArrayList<Place> resList = pService.selectResPlaceList();
 		System.out.println(resList);
 		mv.addObject("pi",pi)
-		  .addObject("list", list);
+		  .addObject("list", list)
+		  .addObject("resList", resList);
 		return new Gson().toJson(mv);
 	}
 
