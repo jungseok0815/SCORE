@@ -2,6 +2,8 @@ package com.kh.finalProject.team.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +55,6 @@ public class TeamController {
 	@ResponseBody
 	@RequestMapping(value="offerAjax.tm", produces="application/json; charset=UTF-8")
 	public String teamOfferAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, ModelAndView mv) {
-		System.out.println(activityAtea);
 		
 //		int offerCount = teamService.selectOfferListCount(activityAtea);
 //		PageInfo pi = Pagenation.getPageInfo(offerCount, currentPage, 10, 5);
@@ -80,10 +81,67 @@ public class TeamController {
 			mv.addObject("pi", pi)						// pi 처리
 			  .addObject("list", teamService.selectCity(activityAtea, pi));
 			
-
 			return new Gson().toJson(mv);
 		}
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="choiceSportsAjax.tm", produces="application/json; charset=UTF-8")
+	public String teamChoiceSportsAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, int category, ModelAndView mv) {
+		
+		if(activityAtea.equals("all")) {
+			int choiceCount = teamService.selectChoiceAllCount(category);
+			System.out.println(choiceCount);
+			
+			// 게시물 갯수와 페이징 
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceAllCount(category), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectChoiceAllList(category, pi);
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectChoiceAllList(category, pi));
+			
+			return new Gson().toJson(mv);
+		
+		} else {
+			int choiceCount = teamService.selectChoiceSportsCount(category, activityAtea);
+			
+			// 게시물 갯수와 페이징 
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceSportsCount(category, activityAtea), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectChoiceList(category, activityAtea, pi);
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectChoiceList(category, activityAtea, pi));
+			
+			return new Gson().toJson(mv);
+		}
+	}
+	
+	@RequestMapping("offerDelete.tm")
+	public String teamOfferDelete(int tno, String filePath, HttpSession session, Model model) {
+		
+		int result = teamService.deleteOffer(tno);
+		
+		if (result > 0) { //삭제성공
+			
+			if(!filePath.equals("")) {
+//				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			return "team/teamOfferListDetailView";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorMsg";
+		}
+
+	}
+	
+	@RequestMapping("teamReq.tm")
+	public String teamReq(String userId, String text) {
+		System.out.println(text);
+		System.out.println(userId);
+		int teamR = teamService.teamReq(userId, text);
+		return "";
 	}
 	
 	

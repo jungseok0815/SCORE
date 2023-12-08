@@ -17,25 +17,27 @@
 		 <div class="main">
 	        <div class="all"> 
 	        <div class="choice-sports">
-        <div onclick="" class="baseball-btn">
+        <div onclick="choiceSports(2)" class="baseball-btn">
             <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
             <p>Baseball</p>
         </div>
-        <div onclick="" class="football-btn">
+        <div onclick="choiceSports(1)" class="football-btn">
             <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
             <p>Football</p>
         </div>
-        <div onclick="" class="basketball-btn">
+        <div onclick="choiceSports(3)" class="basketball-btn">
             <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
             <p>Basketball</p>
         </div>
     </div>
     <br>
+    
+			  
 	            <div class="topWrapper">
 	                <div class="top_container">
 	                    <ul>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="all" value="all" onclick="teamList()"><label for="all">전체</label>
+	                            <input type="radio" name="local" id="all" value="all" onclick="teamList()" checked><label for="all">전체</label>
 	                        </li>
 	                        <li class="btnLocal">
 	                            <input type="radio" name="local" id="seoul"  value="서울" onclick="teamList()"><label for="seoul">서울</label>
@@ -109,6 +111,7 @@
                 
                 </ul>
             </div>
+            
 	    
 	<jsp:include page="../common/footer.jsp" />
 </body>

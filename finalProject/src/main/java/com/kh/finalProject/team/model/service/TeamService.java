@@ -49,6 +49,38 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.selectOfferListCount(sqlSession, activityAtea);
 	}
 
+	@Override
+	public int selectChoiceSportsCount(int category, String activityAtea) {
+		return teamDao.selectChoiceSportsCount(sqlSession, category, activityAtea);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectChoiceList(int category, String activityAtea, PageInfo pi) {
+		return teamDao.selectChoiceList(sqlSession, category, activityAtea, pi);
+	}
+
+	@Override
+	public int selectChoiceAllCount(int category) {
+		return teamDao.selectChoiceAllCount(sqlSession, category);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectChoiceAllList(int category, PageInfo pi) {
+		return teamDao.selectChoiceAllList(sqlSession, category, pi);
+	}
+
+	@Override
+	public int deleteOffer(int offerNo) {
+		return teamDao.deleteOffer(sqlSession, offerNo);
+	}
+
+	@Override
+	public int teamReq(String userId, String text) {
+		return teamDao.teamReq(sqlSession, userId, text);
+	}
+
+	
+
 
 
 

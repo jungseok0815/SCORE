@@ -27,6 +27,8 @@
   display: flex;
 }
 
+
+
 @media (min-width: 720px) {
     .outer{
         margin-left: 15%;

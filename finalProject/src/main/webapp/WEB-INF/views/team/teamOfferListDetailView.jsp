@@ -62,6 +62,8 @@
 							<!-- Button to Open the Modal -->
 							<button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
 						</div>
+						
+						<button onclick="location.href='offerDelete.tm?tno=${team.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
 	                </div>
 	            </div>
 	            
@@ -99,14 +101,15 @@
 	            
 	            
 	            <!-- Modal body -->
+	            <form action="teamReq.tm">
 	            <div class="modal-body">
 	                <div class="join-name">
 	                    <label for="join-name">이름</label><br>
-	                    <input type="text" id="modal-input-name" name=""  placeholder="내용을 입력하세요."/>
+	                    <input id="modal-input-name" name="userId" value="로그인 유저" disabled/>
 	                </div>
 	                <div class="join-content">
 	                    <label for="join-content">각오 한마디</label><br>
-	                    <input type="text" id="modal-input-content" name=""  placeholder="내용을 입력하세요."/>
+	                    <textarea id="modal-input-content" name="text"  placeholder="내용을 입력하세요."></textarea>
 	                </div>
 	            </div>
 	
@@ -116,7 +119,7 @@
 	                    <button type="submit" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
 	                </div>
 	            </div>
-	
+				</form>
 	        </div>
 	    </div> 
 

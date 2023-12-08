@@ -111,5 +111,75 @@
           WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
  	</select>
  	
+ 	<!-- 초이스 스포츠 총 갯수 -->
+ 	<select id="selectChoiceSportsCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+          WHERE CATEGORY_NUM = #{category}
+          AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+ 	</select>
+ 	
+ 	<!-- ajax로 지역순 초이스 스포츠 리스트 가져오는 쿼리 -->
+ 	<select id="selectChoiceList" resultMap="teamOfferResult" parameterType="map">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+           WHERE CATEGORY_NUM = #{category}
+           AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	<!-- 초이스 스포츠 ALL 총 갯수  -->
+ 	<select id="selectChoiceAllCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+          WHERE CATEGORY_NUM = #{category}
+ 	</select>
  
+ 	<!-- ajax로 지역순 초이스 스포츠 ALL 리스트 가져오는 쿼리 -->
+ 	<select id="selectChoiceAllList" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
+           WHERE CATEGORY_NUM = #{category}
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	<!-- 게시글 삭제 -->
+ 	<update id="deleteOffer">
+ 		UPDATE TEAM_OFFER
+ 		   SET OFFER_STATUS = 'N'
+ 	 	 WHERE OFFER_NO = #{offerNo}
+ 	</update>
+ 	
+ 	<insert id="teamReq">
+ 		
+ 	</insert>
+ 	
  </mapper>
