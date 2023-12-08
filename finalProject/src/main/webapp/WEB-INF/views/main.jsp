@@ -9,11 +9,14 @@
     <title>Insert title here</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/final/resources/js/common/main-api.js"></script>
+    <script src="/final/resources/js/common/main.js"></script>
     <script src="resources/js/common/commonTeam/commonTeam.js"></script>
     <script src="resources/js/common/commonTeam/commonTeamAjax.js"></script>
 
 </head>
-<body>
+<body onload="mainInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="common/header.jsp" />
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
@@ -70,35 +73,22 @@
 
         <!-- 축구, 야구, 농구 중 어떤 경기리스트를 보여줄지 클릭하는 버튼 -->
         <div class="choice-sports">
-            <div class="baseball-btn">
-                <a href="">
-                    <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
-                    <p>Baseball</p>
-                </a>
+            <div onclick="changeSport(2)" class="baseball-btn">
+                <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
+                <p>Baseball</p>
             </div>
-            <div class="football-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
-                    <p>Football</p>
-                </a>
+            <div onclick="changeSport(1)" class="football-btn">
+                <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
+                <p>Football</p>
             </div>
-            <div class="basketball-btn">
-                <a href="">
-                    <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
-                    <p>Basketball</p>
-                </a>
+            <div onclick="changeSport(3)" class="basketball-btn">
+                <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
+                <p>Basketball</p>
             </div>
         </div>
 
         <!-- 캘린더 -->
-        <div class="calender">
-            <div class="event-section-calender">
-                <div class="event-section-calender-div">
-                    <div class="event-calenderLists">
-                        <div class="calendar2" id="calendar2"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="date-container">
         </div>
 
         <!-- 지역, 성별, 레벨 필터 -->
@@ -106,335 +96,44 @@
         <div class="main-filter">
             <div class="main-match-filter">
                 <div class="filter-wrapper">
-                    <ul>
-                        <li class="on" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            <span>지역</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow_selected.svg" alt="">
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">지역</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            서울
-                                        </div>
-                                        <div class="modal-body">
-                                            경상
-                                        </div>
-                                        <div class="modal-body">
-                                            대구
-                                        </div>
-                                        <div class="modal-body">
-                                            대전
-                                        </div>
-                                        <div class="modal-body">
-                                            경기
-                                        </div>
-                                        <div class="modal-body">
-                                            광주
-                                        </div>
-                                        <div class="modal-body">
-                                            부산
-                                        </div>
-                                        <div class="modal-body">
-                                            충청
-                                        </div>
-                                        <div class="modal-body">
-                                            인천
-                                        </div>
-                                        <div class="modal-body">
-                                            전라
-                                        </div>
-                                        <div class="modal-body">
-                                            울산
-                                        </div>
-                                        <div class="modal-body">
-                                            세종
-                                        </div>
-                                        <div class="modal-body">
-                                            강원
-                                        </div>
-                                        <div class="modal-body">
-                                            제주
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li data-bs-toggle="modal" data-bs-target="#exampleModa2">
-                            <span>성별</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow.svg" alt="">
-                            <div class="modal fade" id="exampleModa2" tabindex="-1" aria-labelledby="exampleModalLabe2" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabe2">성별</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox">☆남녀모두
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox"> 남자
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="checkbox"> 여자
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li data-bs-toggle="modal" data-bs-target="#exampleModa3">
-                            <span>레벨</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow.svg" alt="">
-                            <div class="modal fade" id="exampleModa3" tabindex="-1" aria-labelledby="exampleModalLabe2" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabe3">레벨</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            스타터
-                                        </div>
-                                        <div class="modal-body">
-                                            아마추어
-                                        </div>
-                                        <div class="modal-body">
-                                            세미프로
-                                        </div>
-                                        <div class="modal-body">
-                                            프로
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <select class="choice-box" id="selectArea" onchange="changeArea()">
+                        <option>서울</option>
+                        <option>경상</option>
+                        <option>대구</option>
+                        <option>대전</option>
+                        <option>경기</option>
+                        <option>광주</option>
+                        <option>부산</option>
+                        <option>충청</option>
+                        <option>인천</option>
+                        <option>전라</option>
+                        <option>울산</option>
+                        <option>세종</option>
+                        <option>강원</option>
+                        <option>제주</option>
+                    </select>
+                    <select class="choice-box" id="selectGender" onchange="changeGender()">
+                        <option value="3">남녀모두</option>
+                        <option value="1">남자</option>
+                        <option value="2">여자</option>
+                    </select>
+                    <select class="choice-box" id="selectLevel" onchange="changeLevel()">
+                        <option>모든레벨</option>
+                        <option>스타터</option>
+                        <option>아마추어</option>
+                        <option>세미프로</option>
+                        <option>프로</option>
+                    </select>
                 </div>
             </div>
         </div>
         
         <!-- 매치 스케쥴 -->
         <div class="match-schedule-container">
-            <ul>
-                <li class="match-schedule-item">
-                    <a href="${pageContext.request.contextPath}/detail.pl">
-                        <div class="match-time">
-                            <p>18:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>서울 역삼동 역삼파크 B구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div>
-
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>22:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>광주 전남대학교 대운동장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <div class="match-status isHurry">
-                                <p>마감임박!</p>
-                            </div>
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>13:30</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>서울 송파 올림픽공원 축구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <div class="match-status isFull">
-                                <p>마감</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>20:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>강원 강원FC 부설구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남녀모두-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <span>모든레벨</span>
-                                <!-- <span>스타터</span> -->
-                                <!-- <span>세미프로</span> -->
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <!-- <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div> -->
-
-                            <!-- 마감임박! -->
-                            <div class="match-status isHurry">
-                                <p>마감임박!</p>
-                            </div>
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <li class="match-schedule-item">
-                    <a>
-                        <div class="match-time">
-                            <p>18:00</p>
-                        </div>
-                        <div class="match-info">
-                            <div class="match-title">
-                                <h3>경기 용인시 꿈나무 축구장</h3>
-                            </div>
-                            <div class="match-option">
-                                <span>☆남자-</span>
-                                <!-- <span>☆남자.</span> -->
-                                <!-- <span>☆여자.</span> -->
-                                <span>축구-</span>
-                                <!-- <span>모든레벨</span> -->
-                                <!-- <span>스타터</span> -->
-                                <span>세미프로</span>
-                            </div>
-                        </div>
-                        <div class="match-schedule-status">
-                            <!-- 신청가능 -->
-                            <div class="match-status isOpen">
-                                <p>신청가능</p>
-                            </div>
-
-                            <!-- 마감임박! -->
-                            <!-- <div class="match-status isHurry">
-                                
-                            </div> -->
-
-                            <!-- 마감 -->
-                            <!-- <div class="match-status isFull">
-                                
-                            </div> -->
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            
         </div>
 
         <div class="paging-area" align="center" style="margin: 50px;">
-            <button class="btn btn-light" onclick="location.href=''">&lt;</button>
-            <button class="btn btn-light" onclick="location.href=''">1</button>
-            <button class="btn btn-light" onclick="location.href=''">2</button>
-            <button class="btn btn-light" onclick="location.href=''">3</button>
-            <button class="btn btn-light" onclick="location.href=''">&gt;</button>
         </div>
 
     </div>
@@ -455,7 +154,7 @@
   
                   <div class="profile-imgbox">
                       <label for="file">
-                          <div class="btn-upload"><img src="./em_K09.png" alt=""></div>
+                          <div class="btn-upload"><img src="" alt=""></div>
                       </label>
                       <input type="file" name="file" id="file">
                   </div>
@@ -595,16 +294,16 @@
                       <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <a href="${pageContext.request.contextPath}/teamProfile.tm">
-                                <img src="./resources/images/sonny2.jpg" alt="">
+                                <img src="" alt="">
                                 <p>기만FC</p>
                             </a>
                             <a href="">
-                                <img src="./resources/images/liverpool.png" alt="">
+                                <img src="" alt="">
                                 <p>기만유나이티드</p>
                             </a>
                             <!-- 가입 신청 내역(고정) -->
                             <a href="">
-                                <img src="./resources/images/makingteams.png" alt="">
+                                <img src="" alt="">
                                 <p>가입 신청 내역</p>
                             </a>
                         </div>
@@ -619,12 +318,12 @@
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                           <a href="">
-                              <img src="./resources/images/human_img.png" alt="">
+                              <img src="" alt="">
                               <p>LG쌍둥이둥이</p>
                           </a>
                           <!-- 가입 신청 내역(고정) -->
                           <a href="">
-                            <img src="./resources/images/makingteams.png" alt="">
+                            <img src="" alt="">
                             <p>가입 신청 내역</p>
                         </a>
                         </div>
@@ -639,12 +338,12 @@
                       <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <a href="">
-                                <img src="./resources/images/human_img.png" alt="">
+                                <img src="" alt="">
                                 <p>파주레이커스</p>
                             </a>
                             <!-- 가입 신청 내역(고정) -->
                             <a href="">
-                              <img src="./resources/images/makingteams.png" alt="">
+                              <img src="" alt="">
                               <p>가입 신청 내역</p>
                           </a>
                         </div>
@@ -660,60 +359,7 @@
       </div>
     </div>
 
-    <script>
-        function initCalendar() {
-        const calendarContainer = document.getElementById('calendar2');
-        const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        const today = new Date();
-        let selectedDay = today;
-
-        function updateCalendar() {
-            calendarContainer.innerHTML = '';
-
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(selectedDay);
-                day.setDate(selectedDay.getDate() - selectedDay.getDay() + i);
-
-                const dayElement = document.createElement('div');
-                dayElement.classList.add('day');
-                if (i === today.getDay() && day.getDate() === today.getDate()) {
-                    dayElement.classList.add('current-day');
-                }
-
-                const dayOfWeekElement = document.createElement('div');
-                dayOfWeekElement.innerText = daysOfWeek[i];
-                // 색상 스타일 추가
-                if (i === 0) {
-                    dayOfWeekElement.classList.add('sunday');
-                    dayElement.classList.add('sunday');
-                } else if (i === 6) {
-                    dayOfWeekElement.classList.add('saturday');
-                    dayElement.classList.add('saturday');
-                }
-
-                const dateElement = document.createElement('div');
-                dateElement.innerText = day.getDate();
-
-                dayElement.appendChild(dayOfWeekElement);
-                dayElement.appendChild(dateElement);
-
-                dayElement.addEventListener('click', function () {
-                    document.querySelector('.current-day').classList.remove('current-day');
-                    dayElement.classList.add('current-day');
-                    selectedDay = day;
-                    
-                    ajaxEventCalenderImage(day.getFullYear(), day.getMonth()+1, day.getDate(), 1);
-                });
-
-                calendarContainer.appendChild(dayElement);
-            }
-        }
-
-        updateCalendar();
-    }
-
-    initCalendar();
-    </script>
+    
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>
