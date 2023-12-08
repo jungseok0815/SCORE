@@ -245,18 +245,101 @@ checkJoin=()=>{
 }
 
 
-myPageInit = () =>{
-    console.log("hihi")
-    const data = {
-        userNo : '${login.userNo}'
+selectPostFriend = () =>{
+    memberAjaxController.getPostFriend(drawSelectPostFriend);
+} 
+
+drawSelectPostFriend = (result) =>{
+    console.log(result)
+     document.querySelector("#aaaaaa").innerText = "친구요청 " + result.length+"명 |"
+     
+    const PostList  = document.querySelector("#postFriendList");
+    PostList.innerHTML = "<div class = 'list-title'>친구요청 리스트</div>"
+
+    for(let a of result){
+        const postListDiv = document.createElement("div")
+        postListDiv.className = "tt22";
+        const listbtn = document.createElement("button")
+        listbtn.innerText = '승락'
+        listbtn.className = "btn-chexk";
+        listbtn.onclick = () =>{
+            addFriend(a.userNo);
+        };
+        const str = "<img class='img5'/>"+
+                    "<div class='main-title'>"+a.userName+"</div>"+
+                    "<div class='sub-title'>"+a.address+"</div>";
+        postListDiv.innerHTML += str;
+        postListDiv.appendChild(listbtn);
+        PostList.appendChild(postListDiv);
     }
-    memberAjaxController.getUserInfo(data,drawMypage)
+}
+
+
+addFriend = (userNo) =>{
+    console.log(userNo)
+    data = {
+        friendReqUser  : userNo
+    }
+    memberAjaxController.getAddFriend(data)
+}
+
+
+selectFriendList = () =>{
+
+    memberAjaxController.selectFriendList(drawSelectfriendList)
+    
+}
+
+
+drawSelectfriendList= (friendList) =>{
+    document.querySelector("#bbbb").innerText = "친구" + friendList.length+"명 |";
+    const PostList  = document.querySelector("#friendList");
+    PostList.innerHTML = "<div class = 'list-title'>친구요청 리스트</div>"
+    for(let a of friendList){
+        const postListDiv = document.createElement("div")
+        postListDiv.className = "tt22";
+        const listbtn = document.createElement("button")
+        listbtn.innerText = '친구삭제'
+        listbtn.className = "btn-chexk2";
+        listbtn.onclick = () =>{
+            deleteFriend(a.userNo);
+        };
+        const str = "<img class='img5'/>"+
+                    "<div class='main-title'>"+a.userName+"</div>"+
+                    "<div class='sub-title'>"+a.address+"</div>";
+        postListDiv.innerHTML += str;
+        postListDiv.appendChild(listbtn);
+        PostList.appendChild(postListDiv);
+    }
+}
+
+
+deleteFriend= (userNo) =>{
+    console.log(userNo);
+    data = {
+        friendReqUser : userNo
+    }
+    memberAjaxController.deleteFriend(data)
 } 
 
 
-drawMypage = () =>{
-    
+document.querySelectorAll(".collapsed");
+selectTeamList =() =>{
+
 }
+
+
+selectMyTeam = (categoryNum) => {
+    console.log(categoryNum);
+    memberAjaxController.selectMyteamListAjax(categoryNum);
+}
+
+drawMyTeamList = (teamList) =>{
+    console.log(teamList)
+}
+
+
+
 
 
 

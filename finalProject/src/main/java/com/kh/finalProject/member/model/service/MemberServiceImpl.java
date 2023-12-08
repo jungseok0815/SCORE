@@ -1,5 +1,7 @@
 package com.kh.finalProject.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +53,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getCountUserfriends(int userNo) {
 		return memberDao.getCountUserfriends(sqlSession,userNo);
+	}
+
+	@Override
+	public ArrayList<Member> getPostFriends(int userNo) {
+		return memberDao.getPostFriends(sqlSession,userNo);
+	}
+
+	@Override
+	public int addFriend(Friend f) {
+		return memberDao.addFriend(sqlSession,f);
+	}
+
+	@Override
+	public ArrayList<Friend> selectFriendList(int userNo) {
+		return memberDao.selectFriendList(sqlSession,userNo);
+	}
+
+	@Override
+	public int deleteFriend(Friend f) {
+		return memberDao.deleteFriend(sqlSession,f);
 	}
 
 
