@@ -13,14 +13,18 @@
   	
   	<!-- typeAlias : VO/DTO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기 위해서 별칭을 등록할 수 있는 영역-->
   	<typeAliases>
+  		<typeAlias type="com.kh.finalProject.notice.model.vo.Notice" alias="Notice"/>
   		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.SportInfo" alias="SportInfo" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Friend" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Team" />
+  		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="TeamMember" />
   	</typeAliases>
 
   	<mappers>
-  		<mapper resource="/mappers/member-mapper.xml" />	
+  		<mapper resource="/mappers/notice-mapper.xml" />
+  		<mapper resource="/mappers/member-mapper.xml" />
+  		<mapper resource="/mappers/team-mapper.xml" />	
   	</mappers>
  
-  	
   </configuration>
