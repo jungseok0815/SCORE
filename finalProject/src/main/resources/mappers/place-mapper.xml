@@ -8,41 +8,66 @@
         <result column="FIELD_NO" property="fieldNo" />
         <result column="FIELD_NAME" property="fieldName" />
         <result column="FIELD_AREA" property="fieldArea" />
-        <result column="FIELD_DATE " property="fieldDate" />
-        <result column="FIELD_COUNT " property="fieldCount" />
+        <result column="FIELD_DATE" property="fieldDate" />
+        <result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
+        <result column="FIELD_COUNT" property="fieldCount" />
         <result column="FIELD_SIZE" property="fieldSize" />
         <result column="PARKING" property="parking" />
         <result column="MATCH_GENDER" property="matchGender" />
-        <result column="SHOES " property="shoes" />
-        <result column="MANAGER " property="manager" />
+        <result column="SHOES" property="shoes" />
+        <result column="MANAGER" property="manager" />
         <result column="MATCH_LEVEL" property="matchLevel" />
+        <result column="MATCH_TYPE" property="matchType" />
         <result column="START_TIME" property="startTime" />
         <result column="END_TIME" property="endTime" />
-        <result column="MATCH_PAY " property="matchPay" />
-        <result column="CATEGORY_NUM " property="categoryNum" />
+        <result column="MATCH_PAY" property="matchPay" />
+        <result column="CATEGORY_NUM" property="categoryNum" />
      </resultMap>
 
 	<select id="placeListCount" resultType="_int">
  		SELECT COUNT(*)
  		  FROM FIELD
+ 		  WHERE CATEGORY_NUM = #{categoryNum}
+          AND FIELD_AREA LIKE '%' || #{fieldArea} || '%'
+          AND MATCH_GENDER = #{matchGender}
+          AND MATCH_LEVEL = #{matchLevel}
+          AND FIELD_DATE = #{fieldDate}
  	</select>
  	<select id="selectPlaceList" resultMap="placeResultSet">
- 		SELECT FIELD_NO
-		        ,FIELD_NAME
-		        ,FIELD_AREA
-		        ,FIELD_DATE
-		        ,FIELD_COUNT
-		        ,FIELD_SIZE
-		        ,PARKING
-		        ,MATCH_GENDER
-		        ,SHOES
-		        ,MANAGER
-		        ,MATCH_LEVEL
-		        ,TO_CHAR(START_TIME, 'HH24:MI') AS "START_TIME"
-		        ,END_TIME
-		        ,MATCH_PAY
-		        ,CATEGORY_NUM
+ 		SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				MATCH_GENDER,
+				MATCH_LEVEL,
+				START_TIME,
+				CATEGORY_NUM
 		FROM FIELD
-		ORDER BY FIELD_NO DESC
+		WHERE CATEGORY_NUM = #{categoryNum}
+          AND FIELD_AREA LIKE '%' || #{fieldArea} || '%'
+          AND MATCH_GENDER = #{matchGender}
+          AND MATCH_LEVEL = #{matchLevel}
+          AND FIELD_DATE = #{fieldDate}
+ 	</select>
+ 	<select id="placeDetailview" resultMap="placeResultSet">
+ 		SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				FIELD_ENROLL_DATE,
+				FIELD_COUNT,
+				FIELD_SIZE,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_TYPE,
+				START_TIME,
+				END_TIME,
+				MATCH_PAY,
+				CATEGORY_NUM
+ 		  FROM FIELD
+ 		  WHERE FIELD_NO = #{fieldNo}
  	</select>
 </mapper>

@@ -21,14 +21,20 @@ public class PlaceServiceImpl implements PlaceService{
 	
 	
 	@Override
-	public int placeListCount() {
-		return pDao.placeListCount(sqlSession);
+	public int placeListCount(Place pl) {
+		return pDao.placeListCount(sqlSession, pl);
 	}
 	
 	
 	@Override
-	public ArrayList<Place> selectPlaceList(PageInfo pi) {
-		return pDao.selectPlaceList(sqlSession, pi);
+	public ArrayList<Place> selectPlaceList(PageInfo pi, Place pl) {
+		return pDao.selectPlaceList(sqlSession, pi, pl);
+	}
+
+
+	@Override
+	public Place placeDetailview(int fno) {
+		return pDao.placeDetailview(sqlSession, fno);
 	}
 
 

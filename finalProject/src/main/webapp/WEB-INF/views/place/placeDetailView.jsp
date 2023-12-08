@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,37 +31,57 @@
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_level.svg" class="icon">
                                 <div>
-                                    <p>모든 레벨</p>
+                                    <p>${pl.matchLevel}</p>
                                 </div>
                             </li>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_gender.svg" class="icon">
                                 <div>
-                                    <p>남녀모두</p>
+                                  <c:choose> 
+                                    <c:when test="${pl.matchGender eq 1}">
+                                      <p>남자만</p>
+                                    </c:when> 
+                                    <c:when test="${pl.matchGender eq 2}">
+                                      <p>여자만</p>
+                                    </c:when> 
+                                    <c:otherwise>
+                                      <p>남녀모두</p>
+                                    </c:otherwise> 
+                                  </c:choose> 
                                 </div>
                             </li>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_stadium.svg" class="icon">
                                 <div>
-                                    <p>6vs6 3파전</p>
+                                    <p>${pl.matchType}</p>
                                 </div>
                             </li>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_max_player_cnt.svg" class="icon">
                                 <div>
-                                    <p>10~18명</p>
+                                    <p>${pl.fieldCount}</p>
                                 </div>
                             </li>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_shoes.svg" class="icon">
                                 <div>
-                                    <p>풋살화/운동화</p>
+                                    <p>${pl.shoes}</p>
                                 </div>
                             </li>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_park.svg" alt="유료주차" class="icon">
                                 <div>
-                                    <p>무료 주차</p>
+                                  <c:choose> 
+                                    <c:when test="${pl.parking eq 1}">
+                                      <p>무료 주차</p>
+                                    </c:when> 
+                                    <c:when test="${pl.parking eq 2}">
+                                      <p>유료 주차</p>
+                                    </c:when> 
+                                    <c:otherwise>
+                                      <p>주차장 없음</p>
+                                    </c:otherwise> 
+                                  </c:choose> 
                                 </div>
                             </li>
                         </ul>
@@ -75,24 +96,18 @@
                             <br>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_manager.svg" class="icon">
-                                <p>최지원 매니저가 진행해요</p>
+                                <p>${pl.manager} 매니저가 진행해요</p>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="body_right section_div">
-                    <p>11월 21일 화요일 22:00</p>
-                    <h1>서울 영등포 SKY 풋살파크 A구장</h1>
-                    <span>서울시 영등포구 선유로 43길 19<h6><a>주소복사</a><a>지도보기</a></h6></span>
+                    <p>${pl.fieldDate} ${pl.startTime}</p>
+                    <h1>${pl.fieldName}</h1>
+                    <span>${pl.fieldArea}<h6><a>주소복사</a><a>지도보기</a></h6></span>
                     <br>
-                    <div class="body_right_count_like">
-                        <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_viewer.svg">
-                        <p>150회</p>
-                        <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_bookmark_filled.svg">
-                        <p>23개</p>
-                    </div>
                     <hr>
-                    <h1 class="body_right_pay">12,000</h1><h6 class="body_right_pay">/2시간</h6>
+                    <h1 class="body_right_pay">${matchPay}</h1><h6 class="body_right_pay">/2시간</h6>
                     <hr>
                     <div class="body_right_btn_div">
                         <div>

@@ -8,11 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
     <link rel="stylesheet" href="/final/resources/css/common/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
 </head>
 <body onload="mainInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="common/header.jsp" />
@@ -71,29 +69,22 @@
 
         <!-- 축구, 야구, 농구 중 어떤 경기리스트를 보여줄지 클릭하는 버튼 -->
         <div class="choice-sports">
-            <div onclick="test1(2)" class="baseball-btn">
+            <div onclick="changeSport(2)" class="baseball-btn">
                 <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
                 <p>Baseball</p>
             </div>
-            <div onclick="test1(1)" class="football-btn">
+            <div onclick="changeSport(1)" class="football-btn">
                 <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
                 <p>Football</p>
             </div>
-            <div onclick="test1(3)" class="basketball-btn">
+            <div onclick="changeSport(3)" class="basketball-btn">
                 <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
                 <p>Basketball</p>
             </div>
         </div>
 
         <!-- 캘린더 -->
-        <div class="calender">
-            <div class="event-section-calender">
-                <div class="event-section-calender-div">
-                    <div class="event-calenderLists">
-                        <div class="calendar2" id="calendar2"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="date-container">
         </div>
 
         <!-- 지역, 성별, 레벨 필터 -->
@@ -101,133 +92,41 @@
         <div class="main-filter">
             <div class="main-match-filter">
                 <div class="filter-wrapper">
-                    <ul>
-                        <li class="on" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            <span>지역</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow_selected.svg" alt="">
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">지역</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            서울
-                                        </div>
-                                        <div class="modal-body">
-                                            경상
-                                        </div>
-                                        <div class="modal-body">
-                                            대구
-                                        </div>
-                                        <div class="modal-body">
-                                            대전
-                                        </div>
-                                        <div class="modal-body">
-                                            경기
-                                        </div>
-                                        <div class="modal-body">
-                                            광주
-                                        </div>
-                                        <div class="modal-body">
-                                            부산
-                                        </div>
-                                        <div class="modal-body">
-                                            충청
-                                        </div>
-                                        <div class="modal-body">
-                                            인천
-                                        </div>
-                                        <div class="modal-body">
-                                            전라
-                                        </div>
-                                        <div class="modal-body">
-                                            울산
-                                        </div>
-                                        <div class="modal-body">
-                                            세종
-                                        </div>
-                                        <div class="modal-body">
-                                            강원
-                                        </div>
-                                        <div class="modal-body">
-                                            제주
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li data-bs-toggle="modal" data-bs-target="#exampleModa2">
-                            <span>성별</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow.svg" alt="">
-                            <div class="modal fade" id="exampleModa2" tabindex="-1" aria-labelledby="exampleModalLabe2" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabe2">성별</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body" onclick="handleSelectPlaceGender('남여모두')">
-                                            ☆남녀모두
-                                        </div>
-                                        <div class="modal-body" onclick="handleSelectPlaceGender('남자')">
-                                            남자
-                                        </div>
-                                        <div class="modal-body" onclick="handleSelectPlaceGender('여자')">
-                                            여자
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li data-bs-toggle="modal" data-bs-target="#exampleModa3">
-                            <span>레벨</span>
-                            <img class="filter-item-arrow" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_filter_arrow.svg" alt="">
-                            <div class="modal fade" id="exampleModa3" tabindex="-1" aria-labelledby="exampleModalLabe2" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabe3">레벨</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            스타터
-                                        </div>
-                                        <div class="modal-body">
-                                            아마추어
-                                        </div>
-                                        <div class="modal-body">
-                                            세미프로
-                                        </div>
-                                        <div class="modal-body">
-                                            프로
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">확인</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <select class="choice-box" id="selectArea" onchange="changeArea()">
+                        <option>서울</option>
+                        <option>경상</option>
+                        <option>대구</option>
+                        <option>대전</option>
+                        <option>경기</option>
+                        <option>광주</option>
+                        <option>부산</option>
+                        <option>충청</option>
+                        <option>인천</option>
+                        <option>전라</option>
+                        <option>울산</option>
+                        <option>세종</option>
+                        <option>강원</option>
+                        <option>제주</option>
+                    </select>
+                    <select class="choice-box" id="selectGender" onchange="changeGender()">
+                        <option value="3">남녀모두</option>
+                        <option value="1">남자</option>
+                        <option value="2">여자</option>
+                    </select>
+                    <select class="choice-box" id="selectLevel" onchange="changeLevel()">
+                        <option>모든레벨</option>
+                        <option>스타터</option>
+                        <option>아마추어</option>
+                        <option>세미프로</option>
+                        <option>프로</option>
+                    </select>
                 </div>
             </div>
         </div>
         
         <!-- 매치 스케쥴 -->
         <div class="match-schedule-container">
-
+            
         </div>
 
         <div class="paging-area" align="center" style="margin: 50px;">
@@ -456,60 +355,7 @@
       </div>
     </div>
 
-    <script>
-        function initCalendar() {
-        const calendarContainer = document.getElementById('calendar2');
-        const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        const today = new Date();
-        let selectedDay = today;
-
-        function updateCalendar() {
-            calendarContainer.innerHTML = '';
-
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(selectedDay);
-                day.setDate(selectedDay.getDate() - selectedDay.getDay() + i);
-
-                const dayElement = document.createElement('div');
-                dayElement.classList.add('day');
-                if (i === today.getDay() && day.getDate() === today.getDate()) {
-                    dayElement.classList.add('current-day');
-                }
-
-                const dayOfWeekElement = document.createElement('div');
-                dayOfWeekElement.innerText = daysOfWeek[i];
-                // 색상 스타일 추가
-                if (i === 0) {
-                    dayOfWeekElement.classList.add('sunday');
-                    dayElement.classList.add('sunday');
-                } else if (i === 6) {
-                    dayOfWeekElement.classList.add('saturday');
-                    dayElement.classList.add('saturday');
-                }
-
-                const dateElement = document.createElement('div');
-                dateElement.innerText = day.getDate();
-
-                dayElement.appendChild(dayOfWeekElement);
-                dayElement.appendChild(dateElement);
-
-                dayElement.addEventListener('click', function () {
-                    document.querySelector('.current-day').classList.remove('current-day');
-                    dayElement.classList.add('current-day');
-                    selectedDay = day;
-                    
-                    ajaxEventCalenderImage(day.getFullYear(), day.getMonth()+1, day.getDate(), 1);
-                });
-
-                calendarContainer.appendChild(dayElement);
-            }
-        }
-
-        updateCalendar();
-    }
-
-    initCalendar();
-    </script>
+    
 	<jsp:include page="common/footer.jsp" />
 </body>
 </html>
