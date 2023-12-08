@@ -3,8 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  
-  
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResult">
 		<result column="USER_NO" property="userNo" />
@@ -14,8 +12,8 @@
 		<result column="USER_NAME" property="userName" />
 		<result column="USER_BIRTH" property="age" />
 		<result column="GENDER" property="gender" />
-		<result column="USER_STATUS" property="status" />
-		<result column="USER_LEVER" property="userLever" />
+		<result column="USER_STATUS" property="age" />
+		<result column="USER_LEVEL" property="userLevel" />
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
 	</resultMap>
@@ -116,7 +114,7 @@
 			STYLE,
 			SKILL,
 			USER_NO,
-			CATEGORY_NUM 
+			CATEGORY_NUM  
 			)
 		VALUES (
 			#{style},
@@ -144,7 +142,8 @@
 			USER_BIRTH,
 			GENDER,
 			CITY,
-			USER_POINT
+			USER_POINT,
+			USER_LEVEL
 		  FROM MEMBER
 		 WHERE USER_ID = #{userId} and 
 		 USER_STATUS = 'Y'
