@@ -10,8 +10,6 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	
-    
         <div class="no1-title">
             <div class="big-title">
                 <div class="point-1">미리 충전하고</div>
@@ -43,7 +41,7 @@
                     </div>
                 </div>
                 <div class="point-8">
-                    <input type="checkbox" checked required>[필수] 결제 서비스 이용 약관, 개인정보 처리 동의
+                    <input id="checkbox" type="checkbox" required>[필수] 결제 서비스 이용 약관, 개인정보 처리 동의
                 </div>
 
                 <div class="point-tt">
@@ -51,10 +49,6 @@
                 </div>
             </div>
         </div>
-    <script>
-        
-    </script>
-	
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

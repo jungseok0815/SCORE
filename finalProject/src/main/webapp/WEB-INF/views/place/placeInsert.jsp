@@ -47,7 +47,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" value="" class="from-input" placeholder="[경기 장소]을 입력해주세요" name="fieldArea" required>
+                        <input type="text" value="" class="from-input" placeholder="[경기 장소]을 입력해주세요 ex)서울 송파구, 경기 양주시, 전남 함평군" name="fieldArea" required>
                     </td>
                 </tr>
                 <tr align="center">
@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <td align="center">
-                        <button type="reset" class="btn btn-secondary" style="margin-top: 10px;" onclick="history.back();">뒤로가기</button>
+                        <button type="reset" class="btn btn-secondary" style="margin-top: 10px;" onclick="location.href='../final'">뒤로가기</button>
                         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">등록하기</button>
                     </td>
                 </tr>
