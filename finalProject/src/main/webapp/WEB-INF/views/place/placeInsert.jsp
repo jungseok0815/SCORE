@@ -17,7 +17,7 @@
             <table align="center" class="field-table" id="formData">
                 <tr>
                     <td style="display:block">
-                        <h5>경기장 등록</h5>
+                        <h5 align="center">경기장 등록</h5>
                         <select name="categoryNum" id="sport" class="sport-select" value="football" onchange="changeSportSelect()">
                             <option value="1">축구</option>
                             <option value="2">야구</option>
@@ -25,13 +25,21 @@
                         </select>
                     </td>
                 </tr>
+                
                 <tr>
+                    <p>*경기장 사진을 첨부해주세요</p>
                     <td>
-                        <div class="filebox" align="center">
+                        <!-- <div class="filebox" align="center">
                             <label for="fileImgFile">
                                 <div class="btn-upload">경기장사진첨부</div>
                             </label>
                             <input type="file" name="upfile" id="fileImgFile" required>
+                        </div> -->
+                        <div class="filebox">
+                            <label for="fileImgFile">
+                                <div class="btn-upload"><img src="" alt=""></div>
+                            </label>
+                            <input type="file" name="file" id="fileImgFile">
                         </div>
                     </td>
                 </tr>
