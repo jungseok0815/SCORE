@@ -16,8 +16,8 @@
         <form action="insert.pl" class="field-insert-input" method="post" enctype="multipart/form-data">
             <table align="center" class="field-table" id="formData">
                 <tr>
-                    <td style="display:block">
-                        <h5 align="center">경기장 등록</h5>
+                    <td style="display:block; margin-bottom: 10px;">
+                        <h5 align="center">구장 등록</h5>
                         <select name="categoryNum" id="sport" class="sport-select" value="football" onchange="changeSportSelect()">
                             <option value="1">축구</option>
                             <option value="2">야구</option>
@@ -25,9 +25,12 @@
                         </select>
                     </td>
                 </tr>
-                
                 <tr>
-                    <p>*경기장 사진을 첨부해주세요</p>
+                    <td style="margin-bottom: -10px;">
+                        <p>↓아래 이미지를 클릭해 사진을 등록해주세요</p>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <!-- <div class="filebox" align="center">
                             <label for="fileImgFile">
