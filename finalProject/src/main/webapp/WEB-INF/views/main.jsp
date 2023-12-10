@@ -56,10 +56,20 @@
                         <img src="./resources/img/main/notice.img.png" alt="">
                         <p>공지사항</p>
                     </a>
-                    <a href="${pageContext.request.contextPath}/pointView.me">
-                        <img src="./resources/img/main/coin.png" alt="">
-                        <p>포인트 충전</p>
-                    </a>
+                    <c:choose>
+                        <c:when test="${ empty loginUser }">
+                            <a href="${pageContext.request.contextPath}/loginView.me">
+                                <img src="./resources/img/main/coin.png" alt="">
+                                <p>포인트 충전</p>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/pointView.me">
+                                <img src="./resources/img/main/coin.png" alt="">
+                                <p>포인트 충전</p>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                     <a href="${pageContext.request.contextPath}/offerBoardList.tm">
                         <img src="./resources/img/main/thunder.png" alt="">
                         <p>팀 구인</p>

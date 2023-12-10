@@ -1,6 +1,7 @@
 init = () => {
     
-    $('.timepicker').timepicker({
+    $(document).ready(function () {
+        $('input.timepicker').timepicker({
             timeFormat: 'HH:mm',
             interval: 30,
             startTime: '00:00',
@@ -8,7 +9,21 @@ init = () => {
             dropdown: true,
             scrollbar: true
         });
+    });
         
+}
+
+loadImg = (inputFile) => {
+
+    if(inputFile.files.length == 1){ 
+        const reader = new FileReader();
+        reader.readAsDataURL(inputFile.files[0]);
+        reader.onload = function(ev){
+            document.getElementById('file-img').src = ev.target.result;
+        }
+    } else {
+        document.getElementById('file-img').src = null;   
+    }
 }
 
 changeSportSelect = () => {
@@ -17,8 +32,9 @@ changeSportSelect = () => {
     if(select === '2'){
         const drawMatchBs = document.querySelector("#match-type");
         drawMatchBs.innerHTML = "";
-        drawMatchBs.innerHTML = "<option value='용병 매치'>용병 매치</option>"+
-                                "<option value='팀 매치'>팀 매치</option>"
+        drawMatchBs.innerHTML = "<option value='팀 매치'>팀 매치</option>"+
+                                "<option value='용병 매치'>용병 매치</option>"
+                                
 
         const drawShoesBs = document.querySelector("#shoes");
         drawShoesBs.innerHTML = "";
@@ -29,13 +45,15 @@ changeSportSelect = () => {
     }else if (select === '3') {
         const drawMatchBk = document.querySelector("#match-type");
         drawMatchBk.innerHTML = "";
-        drawMatchBk.innerHTML = "<option value='3vs3'>3vs3</option>"+
-                                "<option value='5vs5'>5vs5</option>"
+        drawMatchBk.innerHTML = "<option value='5vs5'>5vs5</option>"+
+                                "<option value='3vs3'>3vs3</option>"
+                                
 
         const drawShoesBk = document.querySelector("#shoes");
         drawShoesBk.innerHTML = "";
-        drawShoesBk.innerHTML = "<option value='농구화'>농구화</option>"+
-                                "<option value='상관없음'>상관없음</option>"
+        drawShoesBk.innerHTML = "<option value='상관없음'>상관없음</option>"+
+                                "<option value='농구화'>농구화</option>"
+                                
     }else {
         const drawMatchFt = document.querySelector("#match-type");
         drawMatchFt.innerHTML = "";

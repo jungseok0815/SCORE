@@ -7,10 +7,13 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="/final/resources/css/place/placeInsert.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script type="text/javascript" src="./resources/js/place/placeInsert.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 </head>
-<body>
+<body onload="init()">
 	<jsp:include page="../common/header.jsp" />
 	<div align="center" class="outer">
         <form action="insert.pl" class="field-insert-input" method="post" enctype="multipart/form-data">
@@ -27,22 +30,16 @@
                 </tr>
                 <tr>
                     <td style="margin-bottom: -10px;">
-                        <p>↓아래 이미지를 클릭해 사진을 등록해주세요</p>
+                        <p>↓아래 상자를 클릭해 사진을 등록해주세요</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <!-- <div class="filebox" align="center">
-                            <label for="fileImgFile">
-                                <div class="btn-upload">경기장사진첨부</div>
-                            </label>
-                            <input type="file" name="upfile" id="fileImgFile" required>
-                        </div> -->
                         <div class="filebox">
                             <label for="fileImgFile">
-                                <div class="btn-upload"><img src="" alt=""></div>
+                                <div class="btn-upload"><img src="" id="file-img"></div>
                             </label>
-                            <input type="file" name="file" id="fileImgFile">
+                            <input type="file" name="upfile" id="fileImgFile" onchange="loadImg(this)">
                         </div>
                     </td>
                 </tr>
