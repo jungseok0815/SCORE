@@ -4,7 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="teamMapper">
- 
  	<resultMap type="Team" id="teamResult">
  		<result column="TEAM_NO" property="teamNo" />
  		<result column="TEAM_NAME" property="teamName" />
@@ -12,7 +11,9 @@
  		<result column="TEAM_TITLE" property="teamTitle" />
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
  		<result column="TEAM_LEVEL" property="teamLevel" />
- 		<result column="CATEGOTY_NUM" property="categotyNum" />
+ 		<result column="CATEGORY_NUM" property="categoryNum" />
+ 		<result column="GENDER" property="gender" />
+ 		<result column="USER_BIRTH" property="userBirth" />
  	</resultMap>
  	
  	<resultMap type="TeamOffer" id="teamOfferResult">
@@ -36,23 +37,18 @@
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
     </resultMap>
-    
- 	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*)
-	  	FROM TEAM
- 	</select>
-
-	<select id="selectCategoryNum" resultMap="teamResult">
-		SELECT CATEGORY_NUM
-		FROM TEAM
-	</select>
 	
-	<select id="selectUserNo" resultMap="teamMemberResult">
-		SELECT USER_NO
-		FROM TEAM_MEMBER
-	</select>
+	<resultMap type = "TeamImg" id = "teamImgResult">
+    		<result column="TEAM_IMG_NO" property="teamImgNo"/>
+    		<result column="TEAM_IMG_URL" property="teamImgUrl"/>
+    		<result column="TEAM_ORIGIN_NAME" property="teamOriginName"/>
+    		<result column="TEAM_CHANGE_NAME" property="teamChangeName"/>
+    		<result column="DLELTE_TEAM_IMG" property="deleteTeamImg"/>
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="OFFER_NO" property="offerNo"/>
+    </resultMap>
+	
 
- 
  	<!-- 게시글 총 갯수 -->
  	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -205,4 +201,48 @@
  		
  	</insert>
  	
+ 	<!-- 팀 생성 -->
+ 	<insert id="insertTeam">
+ 		INSERT INTO TEAM
+ 					(
+ 						TEAM_NO,
+ 						TEAM_NAME, 
+ 						ACTIVITY_ATEA,
+ 						CATEGORY_NUM,
+ 						GENDER,
+ 						USER_BIRTH
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_TEAM.NEXTVAL,
+ 		  			   #{teamName},
+ 		  			   #{activityAtea},
+ 		  			   #{categoryNum},
+ 		  			   #{gender},
+ 		  			   #{userBirth}
+ 		  		    )
+ 	</insert>
+ 	
+ 	<insert id="insertTeamImg">
+ 		INSERT INTO TEAMIMG
+ 					(
+ 						TEAM_IMG_NO,
+ 						TEAM_IMG_URL, 
+ 						TEAM_ORIGIN_NAME,
+ 						TEAM_CHANGE_NAME,
+ 						DLELTE_TEAM_IMG,
+ 						TEAM_NO,
+ 						OFFER_NO
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_TEAD_IMG.NEXTVAL,
+ 		  			   #{teamImgUrl},
+ 		  			   #{teamOriginName},
+ 		  			   #{teamChangeName},
+ 		  			   'N',
+ 		  			   SEQ_TEAM.CURRVAL,
+ 		  			   SEQ_TEAD_OFFER.CURRVAL
+ 		  		    )
+ 	</insert>
  </mapper>

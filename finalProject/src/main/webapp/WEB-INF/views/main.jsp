@@ -54,7 +54,7 @@
                         <img src="./resources/img/main/thunder.png" alt="">
                         <p>팀 구인</p>
                     </a>
-                    <a href="" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
+                    <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
                         <img src="./resources/img/main/searchPeople.png" alt="">
                         <p>팀 생성</p>
                     </a>
@@ -160,6 +160,9 @@
       
             <div class="modal-body">
               <form action="insertTeam.tm" method="post">
+              
+              <p class="body-p">팀 정보를 <br>입력해주세요</p>
+              
                 <p class="userInfo-modal-font">종목 선택</p>
                 <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                     <ul style="padding: 0px;">
@@ -177,14 +180,12 @@
                         </li>
                     </ul>
                 </div>
-
-                  <p class="body-p">팀 정보를 <br>입력해주세요</p>
   
                   <div class="profile-imgbox">
                       <label for="file">
-                          <div class="btn-upload"><img src="" alt=""></div>
+                          <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
                       </label>
-                      <input type="file" name="file" id="file">
+                      <input type="file" name="file" id="file" onchange="imgChange(this)">
                   </div>
   
                   <p class="madal-font">팀 이름</p>
