@@ -37,7 +37,7 @@
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
     </resultMap>
-	
+
 	<resultMap type = "TeamImg" id = "teamImgResult">
     		<result column="TEAM_IMG_NO" property="teamImgNo"/>
     		<result column="TEAM_IMG_URL" property="teamImgUrl"/>
