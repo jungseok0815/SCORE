@@ -14,11 +14,13 @@ public class Team {
 	private int categoryNum;
 	private String teamGender;
 	private String teamUserAge;
+	private String teamOriginName;
+	private String teamChangeName;
 	
 	public Team() {}
 
 	public Team(int teamNo, String teamName, Date createDate, String teamTitle, String activityAtea, String teamLevel,
-			int categoryNum, String teamGender, String teamUserAge) {
+			int categoryNum, String teamGender, String teamUserAge, String teamOriginName, String teamChangeName) {
 		super();
 		this.teamNo = teamNo;
 		this.teamName = teamName;
@@ -29,6 +31,8 @@ public class Team {
 		this.categoryNum = categoryNum;
 		this.teamGender = teamGender;
 		this.teamUserAge = teamUserAge;
+		this.teamOriginName = teamOriginName;
+		this.teamChangeName = teamChangeName;
 	}
 
 	public int getTeamNo() {
@@ -103,14 +107,29 @@ public class Team {
 		this.teamUserAge = teamUserAge;
 	}
 
+	public String getTeamOriginName() {
+		return teamOriginName;
+	}
+
+	public void setTeamOriginName(String teamOriginName) {
+		this.teamOriginName = teamOriginName;
+	}
+
+	public String getTeamChangeName() {
+		return teamChangeName;
+	}
+
+	public void setTeamChangeName(String teamChangeName) {
+		this.teamChangeName = teamChangeName;
+	}
+
 	@Override
 	public String toString() {
 		return "Team [teamNo=" + teamNo + ", teamName=" + teamName + ", createDate=" + createDate + ", teamTitle="
 				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categoryNum="
-				+ categoryNum + ", teamGender=" + teamGender + ", teamUserAge=" + teamUserAge + "]";
+				+ categoryNum + ", teamGender=" + teamGender + ", teamUserAge=" + teamUserAge + ", teamOriginName="
+				+ teamOriginName + ", teamChangeName=" + teamChangeName + "]";
 	}
-	
-	
 
-
+	
 }

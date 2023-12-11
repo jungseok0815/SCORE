@@ -50,5 +50,14 @@ public interface TeamServiceImp {
 	
 	// 팀 요청 
 	int teamReq(String userId, String text);
+	
+	//팀 프로필 조회
+	Team teamProfile(int tno);
+	
+	//팀원 총 몇명인지 조회
+	int teamMemberCount(int tno);
+	
+	//팀원의 멤버들 평균 나이
+	int teamAvgAge(int tno);
 
 }

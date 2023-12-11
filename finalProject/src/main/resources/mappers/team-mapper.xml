@@ -14,6 +14,8 @@
  		<result column="CATEGORY_NUM" property="categoryNum" />
  		<result column="TEAM_GENDER" property="teamGender" />
  		<result column="TEAM_USER_AGE" property="teamUserAge" />
+ 		<result column="TEAM_ORIGIN_NAME" property="teamOriginName" />
+ 		<result column="TEAM_CHANGE_NAME" property="teamChangeName" />
  	</resultMap>
 
  	
@@ -245,4 +247,34 @@
  		  			   SEQ_TEAM.CURRVAL
  		  		    )
  	</insert>
+ 	
+ 	<!-- 팀원 총 몇명인지 구하는 쿼리문 -->
+ 	<select id="teamMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_MEMBER
+		  WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀원의 평균 나이를 구하는 쿼리문 -->
+ 	<select id="teamAvgAge" resultType="_int">
+		SELECT AVG(USER_BIRTH)
+			  FROM TEAM
+			  JOIN TEAM_MEMBER USING(TEAM_NO)
+			  JOIN MEMBER USING(USER_NO)
+		  WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀 프로필을 가져오는 쿼리문 -->
+ 	<select id="teamProfile" resultMap="teamResult">
+	 	SELECT TEAM_NAME,
+	       TEAM_GENDER,
+	       TEAM_USER_AGE,
+	       TEAM_LEVEL,
+	       ACTIVITY_ATEA,
+	       TEAM_ORIGIN_NAME,
+	       TEAM_CHANGE_NAME
+	    FROM TEAM
+	    JOIN TEAM_IMG USING (TEAM_NO)
+	    WHERE TEAM_NO = #{teamNo}
+ 	</select>
  </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
                         <div class="profile-container" style="display: flex; width: 100%;">
                             <div class="profile-info">
                                 <div class="team-profile-info">
-                                    <p class="team-profile-name">승2FC</p>
+                                    <p class="team-profile-name">${team.teamName}</p>
                                     <p class="team-profile-stadium">
                                         <a href="">배재고등학교축구장</a>
                                     </p>
@@ -81,11 +82,6 @@
                                         <img class="team-preview-list-icon" src="./resources/img/team/teamProfile/home.png" alt="">
                                         <span class="team-preview-list-title">홈 경기장</span>
                                         <span class="team-preview-list-value team-preview-list-value-blue">배재고등학교축구장</span>
-                                    </div>
-                                    <div class="team-preview-list">
-                                        <img class="team-preview-list-icon" src="./resources/img/team/teamProfile/timer.png" alt="">
-                                        <span class="team-preview-list-title">모임 시간</span>
-                                        <span class="team-preview-list-value">주말 낮</span>
                                     </div>
                                     <div class="team-preview-list">
                                         <img class="team-preview-list-icon" src="./resources/img/team/teamProfile/average.png" alt="">

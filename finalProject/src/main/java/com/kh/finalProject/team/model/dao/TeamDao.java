@@ -99,8 +99,18 @@ public class TeamDao {
 	}
 	
 	public int teamReq(SqlSessionTemplate sqlSession, String userId, String text) {
-		
-		
 		return sqlSession.insert("teamMapper.teamReq", userId);
+	}
+	
+	public int teamMemberCount(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamMemberCount", tno);
+	}
+	
+	public int teamAvgAge(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamAvgAge", tno);
+	}
+	
+	public Team teamProfile(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamProfile", tno);
 	}
 }
