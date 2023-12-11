@@ -179,16 +179,16 @@ public class TeamController {
 	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		int result = teamService.insertTeam(t);
 		int resultImg = 0;
-		
+	
 		if(!upfile.getOriginalFilename().equals("")) {
 			
 			 String changeName = saveFile(upfile, session);
-			   
+			 
 			 ti.setTeamImgUrl("resources/img/team/");
 			 ti.setTeamOriginName(upfile.getOriginalFilename());
 			 ti.setTeamChangeName("resources/img/team/teamInsert" + changeName);
-		   
-		     resultImg = teamService.insertTeamImg(ti);
+			 
+			 resultImg = teamService.insertTeamImg(ti);
 		}
 		
 		if(result * resultImg > 0) {

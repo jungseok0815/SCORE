@@ -12,9 +12,10 @@
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
  		<result column="TEAM_LEVEL" property="teamLevel" />
  		<result column="CATEGORY_NUM" property="categoryNum" />
- 		<result column="GENDER" property="gender" />
- 		<result column="USER_BIRTH" property="userBirth" />
+ 		<result column="TEAM_GENDER" property="teamGender" />
+ 		<result column="TEAM_USER_AGE" property="teamUserAge" />
  	</resultMap>
+
  	
  	<resultMap type="TeamOffer" id="teamOfferResult">
  		<result column="OFFER_NO" property="offerNo" />
@@ -209,8 +210,9 @@
  						TEAM_NAME, 
  						ACTIVITY_ATEA,
  						CATEGORY_NUM,
- 						GENDER,
- 						USER_BIRTH
+ 						TEAM_LEVEL,
+ 						TEAM_GENDER,
+ 						TEAM_USER_AGE
  					)
  		  VALUES
  		  		    (
@@ -218,21 +220,21 @@
  		  			   #{teamName},
  		  			   #{activityAtea},
  		  			   #{categoryNum},
- 		  			   #{gender},
- 		  			   #{userBirth}
+ 		  			   #{teamLevel},
+ 		  			   #{teamGender},
+ 		  			   #{teamUserAge}
  		  		    )
  	</insert>
  	
  	<insert id="insertTeamImg">
- 		INSERT INTO TEAMIMG
+ 		INSERT INTO TEAM_IMG
  					(
  						TEAM_IMG_NO,
  						TEAM_IMG_URL, 
  						TEAM_ORIGIN_NAME,
  						TEAM_CHANGE_NAME,
  						DLELTE_TEAM_IMG,
- 						TEAM_NO,
- 						OFFER_NO
+ 						TEAM_NO
  					)
  		  VALUES
  		  		    (
@@ -241,8 +243,7 @@
  		  			   #{teamOriginName},
  		  			   #{teamChangeName},
  		  			   'N',
- 		  			   SEQ_TEAM.CURRVAL,
- 		  			   SEQ_TEAD_OFFER.CURRVAL
+ 		  			   SEQ_TEAM.CURRVAL
  		  		    )
  	</insert>
  </mapper>

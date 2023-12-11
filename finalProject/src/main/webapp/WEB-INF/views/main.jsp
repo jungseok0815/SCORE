@@ -159,7 +159,7 @@
             </div>
       
             <div class="modal-body">
-              <form action="insertTeam.tm" method="post">
+              <form action="insertTeam.tm" method="post" enctype="multipart/form-data">
               
               <p class="body-p">팀 정보를 <br>입력해주세요</p>
               
@@ -167,15 +167,15 @@
                 <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                     <ul style="padding: 0px;">
                         <li class="">
-                            <input type="radio" class="btn-checkX" name="ability" id="ability-offence" autocomplete="off">
+                            <input type="radio" class="btn-checkX" name="categoryNum" id="ability-offence" autocomplete="off" value="1">
                             <label class="btn btn-checkX-label madal-label" for="ability-offence">축구</label>
                         </li>
                         <li class="">
-                            <input type="radio" class="btn-checkX" name="ability" id="ability-balance" autocomplete="off">
+                            <input type="radio" class="btn-checkX" name="categoryNum" id="ability-balance" autocomplete="off" value="2">
                             <label class="btn btn-checkX-label madal-label" for="ability-balance">야구</label>
                         </li>
                         <li class="">
-                            <input type="radio" class="btn-checkX" name="ability" id="ability-defence" autocomplete="off">
+                            <input type="radio" class="btn-checkX" name="categoryNum" id="ability-defence" autocomplete="off" value="3">
                             <label class="btn btn-checkX-label madal-label" for="ability-defence">농구</label>
                         </li>
                     </ul>
@@ -185,62 +185,62 @@
                       <label for="file">
                           <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
                       </label>
-                      <input type="file" name="file" id="file" onchange="imgChange(this)">
+                      <input type="file" name="upfile" id="file" onchange="imgChange(this)">
                   </div>
   
                   <p class="madal-font">팀 이름</p>
                   <div class="input-group mb-3 input-group-lg">
-                      <input type="text" class="form-control" placeholder="팀 이름을 작성해주세요">
+                      <input type="text" class="form-control" placeholder="팀 이름을 작성해주세요" name="teamName">
                   </div>
                   <p class="madal-font">활동지역</p>
                   <div class="input-group mb-3 input-group-lg home-field-search">
-                      <input type="text" class="form-control" placeholder="홈 구장 찾기">
+                      <input type="text" class="form-control" placeholder="활동지역을 입력해주세요" name="activityAtea">
                   </div>
                   <p class="userInfo-modal-font">성별</p>
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                       <ul style="padding: 0px;">
                           <li class="">
-                              <input type="radio" class="btn-checkX" name="gender" id="gender-all" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="teamGender" id="gender-all" value="남녀 모두">
                               <label class="btn btn-checkX-label madal-label" for="gender-all">남녀 모두</label>
                           </li>
                           <li class="">
-                              <input type="radio" class="btn-checkX" name="gender" id="gender-male" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="teamGender" id="gender-male" value="남자">
                               <label class="btn btn-checkX-label madal-label" for="gender-male">남자</label>
                           </li>
                           <li class="">
-                              <input type="radio" class="btn-checkX" name="gender" id="gender-female" autocomplete="off">
+                              <input type="radio" class="btn-checkX" name="teamGender" id="gender-female" value="여자">
                               <label class="btn btn-checkX-label madal-label" for="gender-female">여자</label>
                           </li>
                       </ul>
                   </div>
-                  <p class="madal-font">레벨(중복가능)</p>
+                  <p class="madal-font">레벨</p>
                   <div>
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-all" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-all" autocomplete="off" value="실력무관">
                                   <label class="btn btn-checkX-label madal-label" for="level-all">실력무관</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-1" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-1" autocomplete="off" value="스타터">
                                   <label class="btn btn-checkX-label madal-label" for="level-1">스타터</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-2" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-2" autocomplete="off" value="비기너">
                                   <label class="btn btn-checkX-label madal-label" for="level-2">비기너</label>
                               </li>
                           </ul>
                           <ul>
                               <li>
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-3" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-3" autocomplete="off" value="아마추어">
                                   <label class="btn btn-checkX-label madal-label" for="level-3">아마추어</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-4" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-4" autocomplete="off" value="세미프로">
                                   <label class="btn btn-checkX-label madal-label" for="level-4">세미프로</label>
                               </li>
                               <li>
-                                  <input type="checkbox" class="btn-checkX" name="level" id="level-5" autocomplete="off">
+                                  <input type="radio" class="btn-checkX" name="teamLevel" id="level-5" autocomplete="off" value="프로">
                                   <label class="btn btn-checkX-label madal-label" for="level-5">프로</label>
                               </li>
                           </ul>
@@ -251,40 +251,40 @@
                       <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-10" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-10" autocomplete="off" value="10대">
                                   <label class="btn btn-checkX-label madal-label" for="age-10">10대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-20" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-20" autocomplete="off" value="20대">
                                   <label class="btn btn-checkX-label madal-label" for="age-20">20대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-30" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-30" autocomplete="off" value="20대">
                                   <label class="btn btn-checkX-label madal-label" for="age-30">30대</label>
                               </li>
                           </ul>
                           <ul>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-40" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-40" autocomplete="off" value="40대">
                                   <label class="btn btn-checkX-label madal-label" for="age-40">40대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-50" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-50" autocomplete="off" value="50대">
                                   <label class="btn btn-checkX-label madal-label" for="age-50">50대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="age" id="age-60" autocomplete="off">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-60" autocomplete="off" value="60대 이상">
                                   <label class="btn btn-checkX-label madal-label" for="age-60">60대 이상</label>
                               </li>
                           </ul>
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-next">다음</button>
+                  <button type="submit" class="btn btn-primary btn-next" onclick="userAgebtn()">다음</button>
               </form>
             </div>
           </div>
         </div>
-      </div>
+    </div>
       
     <!-- 내팀 보기 모달-->
     <div class="modal fade" id="viewMyTeamsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
