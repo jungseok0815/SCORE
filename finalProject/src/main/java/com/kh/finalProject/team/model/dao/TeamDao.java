@@ -118,4 +118,8 @@ public class TeamDao {
 		return (ArrayList)sqlSession.selectList("teamMapper.searchTeam", selectValue);
 
 	}
+	
+	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
+		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
+	}
 }

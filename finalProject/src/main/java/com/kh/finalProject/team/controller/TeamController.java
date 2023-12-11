@@ -154,15 +154,20 @@ public class TeamController {
 	
 	
 	@RequestMapping("teamProfile.tm")
-	public ModelAndView teamProfile(int tno, HttpSession session, ModelAndView mv) {
+	public ModelAndView teamProfile(String teamNo, HttpSession session, ModelAndView mv) {
+		int tno = Integer.parseInt(teamNo);
 		int tmc = teamService.teamMemberCount(tno);
-		System.out.println(tno);
 		int taa = teamService.teamAvgAge(tno);
-		System.out.println(taa);
-		Team t = teamService.teamProfile(tno);
-		System.out.println(t);
 		
-		mv.addObject("teamMemberCount", tmc).addObject("teamAvgAge", taa).addObject("team", t).setViewName("team/teamProfile");
+		Team t = teamService.teamProfile(tno);
+		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
+		System.out.println(tm);
+		
+		mv.addObject("teamMemberCount", tmc)
+		.addObject("teamAvgAge", taa)
+		.addObject("team", t)
+		.addObject("teamMemberList", tm)
+		.setViewName("team/teamProfile");
 		
 		return mv;
 	}

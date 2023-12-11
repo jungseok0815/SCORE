@@ -59,6 +59,9 @@ public interface TeamServiceImp {
 	
 	//팀원의 멤버들 평균 나이
 	int teamAvgAge(int tno);
+	
+	//팀 멤버 불러오기
+	ArrayList<TeamMember> teamMemberList(int tno);
 
 	ArrayList<Team> searchTeam(String selectValue);
 

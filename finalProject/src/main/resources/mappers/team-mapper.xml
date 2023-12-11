@@ -39,6 +39,10 @@
     		<result column="TEAM_NO" property="teamNo"/>
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
+    		<result column="USER_NAME" property="userName"/>
+    		<result column="CITY" property="city"/>
+    		<result column="MEMBER_ORIGIN_NAME" property="memberOriginName"/>
+    		<result column="MEMBER_CHANGE_NAME" property="memberChangeName"/>
     </resultMap>
 
 	<resultMap type = "TeamImg" id = "teamImgResult">
@@ -310,5 +314,19 @@
 	    FROM TEAM
 	    JOIN TEAM_IMG USING (TEAM_NO)
 	    WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀 멤버리스트 불러오기 -->
+ 	<select id="teamMemberList" resultMap="teamMemberResult">
+	 	SELECT TMEMBER_NO, 
+		 	   GRADE, 
+		 	   USER_NAME, 
+		 	   CITY, 
+		 	   MEMBER_ORIGIN_NAME, 
+		 	   MEMBER_CHANGE_NAME
+		FROM TEAM_MEMBER
+		JOIN MEMBER USING (USER_NO)
+		LEFT JOIN MEMBER_IMG USING (USER_NO)
+		WHERE TEAM_NO = #{teamNo}
  	</select>
  </mapper>

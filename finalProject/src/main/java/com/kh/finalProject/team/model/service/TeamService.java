@@ -112,4 +112,9 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.searchTeam(sqlSession, selectValue);
 	}
 
+	@Override
+	public ArrayList<TeamMember> teamMemberList(int tno) {
+		return teamDao.teamMemberList(sqlSession, tno);
+	}
+
 }
