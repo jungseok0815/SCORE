@@ -17,6 +17,7 @@ public interface PlaceService {
 	ArrayList<Place> selectPlaceList(PageInfo pi, Place pl);
 	Place placeDetailview(int fno);
 	ArrayList<Place> selectResPlaceList();
+	ArrayList<Place> searchPlace(String selectValue);
 	
 
 }

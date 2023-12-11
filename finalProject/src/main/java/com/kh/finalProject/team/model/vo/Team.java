@@ -11,7 +11,7 @@ public class Team {
 	private String teamTitle;
 	private String activityAtea;
 	private String teamLevel;
-	private int categotyNum;
+	private int categoryNum;
 	
 
 
@@ -27,7 +27,7 @@ public class Team {
 		this.teamTitle = teamTitle;
 		this.activityAtea = activityAtea;
 		this.teamLevel = teamLevel;
-		this.categotyNum = categotyNum;
+		this.categoryNum = categotyNum;
 	}
 
 	public int getTeamNo() {
@@ -79,18 +79,18 @@ public class Team {
 	}
 
 	public int getCategotyNum() {
-		return categotyNum;
+		return categoryNum;
 	}
 
 	public void setCategotyNum(int categotyNum) {
-		this.categotyNum = categotyNum;
+		this.categoryNum = categotyNum;
 	}
 
 	@Override
 	public String toString() {
 		return "Team [teamNo=" + teamNo + ", teamName=" + teamName + ", createDate=" + createDate + ", teamTitle="
 				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categotyNum="
-				+ categotyNum + "]";
+				+ categoryNum + "]";
 	}
 	
 	

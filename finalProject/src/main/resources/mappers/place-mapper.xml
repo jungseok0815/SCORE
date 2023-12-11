@@ -145,5 +145,14 @@
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+ 	
+ 	<select id="searchPlace" resultMap="placeResultSet">
+			SELECT 
+			FIELD_NO,
+			FIELD_NAME,
+			CATEGORY_NUM
+		FROM FIELD
+		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
+	</select>
 
 </mapper>

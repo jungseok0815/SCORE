@@ -12,9 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
-    <script src="resources/js/common/commonTeam/commonTeam.js"></script>
-    <script src="resources/js/common/commonTeam/commonTeamAjax.js"></script>
-
+    <script src="resources/js/member/memberJs/member.js?ver=5"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
 </head>
 
 
@@ -298,61 +297,37 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button onclick="selectMyteam(1)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button onclick="selectMyTeam(1)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           축구
                         </button>
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <a href="${pageContext.request.contextPath}/teamProfile.tm">
-                                <img src="" alt="">
-                                <p>기만FC</p>
-                            </a>
-                            <!-- 가입 신청 내역(고정) -->
-                            <a href="">
-                                <img src="" alt="">
-                                <p>가입 신청 내역</p>
-                            </a>
+                        <div class="accordion-body football-part">
+                          
                         </div>
                       </div>
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button onclick="selectMyteam(2)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button onclick="selectMyTeam(2)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           야구
                         </button>
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                          <a href="">
-                              <img src="" alt="">
-                              <p>LG쌍둥이둥이</p>
-                          </a>
-                          <!-- 가입 신청 내역(고정) -->
-                          <a href="">
-                            <img src="" alt="">
-                            <p>가입 신청 내역</p>
-                        </a>
+                        <div class="accordion-body baseball-part">
+                     
                         </div>
                       </div>
                     </div>
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button onclick="selectMyteam(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button onclick="selectMyTeam(3)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                           농구
                         </button>
                       </h2>
                       <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <a href="">
-                                <img src="" alt="">
-                                <p>파주레이커스</p>
-                            </a>
-                            <!-- 가입 신청 내역(고정) -->
-                            <a href="">
-                              <img src="" alt="">
-                              <p>가입 신청 내역</p>
-                          </a>
+                        <div class="accordion-body basketball-part">
+                           
                         </div>
                       </div>
                     </div>

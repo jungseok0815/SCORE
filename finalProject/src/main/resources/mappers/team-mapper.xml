@@ -12,7 +12,7 @@
  		<result column="TEAM_TITLE" property="teamTitle" />
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
  		<result column="TEAM_LEVEL" property="teamLevel" />
- 		<result column="CATEGOTY_NUM" property="categotyNum" />
+ 		<result column="CATEGORY_NUM" property="categoryNum" />
  	</resultMap>
  	
  	<resultMap type="TeamOffer" id="teamOfferResult">
@@ -38,6 +38,15 @@
     </resultMap>
 
 
+	<select id="selectMyTeam" resultMap="teamResult">
+			SELECT TEAM_NO
+					,TEAM_NAME
+					,CATEGORY_NUM
+				FROM TEAM_MEMBER
+				JOIN TEAM USING(TEAM_NO)
+				WHERE USER_NO = #{userNo}
+				AND CATEGORY_NUM = #{categoryNum}
+	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
 		SELECT CATEGORY_NUM
@@ -201,5 +210,14 @@
  	<insert id="teamReq">
  		
  	</insert>
+ 	
+ 	
+ 	<select id="searchTeam" resultMap="teamResult">
+			SELECT TEAM_NO,
+			TEAM_NAME,
+			CATEGORY_NUM
+		FROM TEAM
+		WHERE TEAM_NAME  like '%'||#{searchMain}||'%'
+	</select>
  	
  </mapper>
