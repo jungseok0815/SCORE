@@ -74,7 +74,6 @@ const memberAjaxController = {
             url: "selectFriendList.me",
             type: "post",
             success: (result) => {
-                console.log(result)
                 callback(result)
             },
             error: (err) => {
@@ -88,7 +87,6 @@ const memberAjaxController = {
             type: "post",
             data,
             success: (result) => {
-                console.log(result)
                 result === "deleteFriendOk" ? selectFriendList() : alert("에러 발생 다시 시도");
             },
             error: (err) => {
@@ -102,7 +100,21 @@ const memberAjaxController = {
             type: "post",
             data,
             success: (result) => {
-                console.log(result)
+                callback(result);
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+
+    },
+
+    selectUserSportInfoAjax : (data, callback) =>{
+        $.ajax({
+            url: "selectUserSportInfo.me",
+            type: "post",
+            data,
+            success: (result) => {
                 callback(result);
             },
             error: (err) => {
@@ -111,6 +123,7 @@ const memberAjaxController = {
         })
 
     }
+
 
 
 

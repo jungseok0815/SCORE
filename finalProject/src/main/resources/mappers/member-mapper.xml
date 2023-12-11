@@ -60,8 +60,7 @@
 		 FROM MEMBER
 		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
 		 WHERE 
-		 		(FRIEND_RES_USER = #{friendResUser} OR
-		 		FRIEND_REQ_USER = #{friendReqUser})
+		 		FRIEND_RES_USER = #{friendResUser}
 				 AND FRIEND_STATUS = 'Y'
 	</select>
 	
@@ -72,6 +71,14 @@
 				AND  FRIEND_RES_USER = #{friendResUser}
 				AND FRIEND_STATUS = 'Y'
 	</delete>
+	
+	<delete id ="deleteFriend2">
+		DELETE FROM FRIEND 
+			WHERE FRIEND_REQ_USER = #{friendResUser}
+				AND  FRIEND_RES_USER = #{friendReqUser}
+				AND FRIEND_STATUS = 'Y'
+	</delete>
+	
 
 
 	
@@ -154,8 +161,7 @@
 		  FROM FRIEND
 		 WHERE
 		 FRIEND_STATUS = 'Y' AND 
-		 (FRIEND_REQ_USER = #{userNo}
-		 OR FRIEND_RES_USER = #{userNo})
+		 FRIEND_RES_USER = #{userNo}
 	</select>
 
 
@@ -183,20 +189,62 @@
 	
 	
 	<update id="addFriend">
-		UPDATE 
-			FRIEND
-			SET
-			FRIEND_STATUS = 'Y'
-		WHERE FRIEND_RES_USER =#{friendResUser} AND
-				FRIEND_REQ_USER = #{friendReqUser}
+		UPDATE FRIEND
+		   SET FRIEND_STATUS = 'Y'
+		 where FRIEND_RES_USER = #{friendResUser} 
+		   AND FRIEND_REQ_USER = #{friendReqUser}
 	
 	</update>
 	
+	<insert id="addFriend2">
+		INSERT INTO FRIEND(
+				FRIEND_NO,
+				FRIEND_RES_USER,
+				FRIEND_REQ_USER,
+				FRIEND_STATUS  
+				)
+			VALUES (
+				SEQ_FIREDN.NEXTVAL,
+				#{friendReqUser},
+				#{friendResUser},
+				'Y'
+				)
+	</insert>
 	
-
+	<select id="searchMember" resultMap="memberResult">
+			SELECT USER_NO,
+			USER_ID,
+			USER_NAME
+		FROM MEMBER
+		WHERE USER_ID  like '%'||#{searchMain}||'%'
+		AND USER_STATUS = 'Y'
+	</select>
 	
+	<insert id="sendPostFriend">
+		INSERT INTO FRIEND(
+				FRIEND_NO,
+				FRIEND_RES_USER,
+				FRIEND_REQ_USER,
+				FRIEND_STATUS  
+				)
+			VALUES (
+				SEQ_FIREDN.NEXTVAL,
+				#{friendResUser},
+				#{friendReqUser},
+				'N'
+				)
+	</insert>
 	
-
-	
+	<select id="selectReqResFriendList" resultMap="friendResult">
+		SELECT FRIEND_REQ_USER,
+			FRIEND_RES_USER,
+			FRIEND_STATUS
+		FROM FRIEND
+		WHERE 
+		FRIEND_REQ_USER = #{userNo}
+		OR
+		FRIEND_RES_USER = #{userNo}
+	</select>
+		
 	
 </mapper>

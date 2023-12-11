@@ -59,5 +59,11 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.selectResPlaceList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Place> searchPlace(String selectValue) {
+		return pDao.searchPlace(sqlSession,selectValue);
+	}
+	
+
 
 }
