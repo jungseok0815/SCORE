@@ -105,7 +105,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="" class="from-input" value="" style="width: 240px; margin-right: 15px;" placeholder=" 경기장 규모" name="fieldSize" required>
+                        <input type="" class="from-input" value="" style="width: 240px; margin-right: 15px;" placeholder=" 경기장 규모(소, 중, 대)" name="fieldSize" required>
                         <input type="" class="from-input" value="" style="width: 240px;" placeholder=" 가격" name="matchPay" required>
                     </td>
                 </tr>
