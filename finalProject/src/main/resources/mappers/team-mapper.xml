@@ -48,7 +48,6 @@
     		<result column="TEAM_NO" property="teamNo"/>
     		<result column="OFFER_NO" property="offerNo"/>
     </resultMap>
-	
 
  	<!-- 게시글 총 갯수 -->
  	<select id="selectListCount" resultType="_int">
