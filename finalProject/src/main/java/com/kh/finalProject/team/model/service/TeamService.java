@@ -103,10 +103,13 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
+
 	public Team teamProfile(int tno) {
 		return teamDao.teamProfile(sqlSession, tno);
 	}
 
-	
+	public ArrayList<Team> searchTeam(String selectValue) {
+		return teamDao.searchTeam(sqlSession, selectValue);
+	}
 
 }

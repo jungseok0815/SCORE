@@ -102,6 +102,7 @@ public class TeamDao {
 		return sqlSession.insert("teamMapper.teamReq", userId);
 	}
 	
+
 	public int teamMemberCount(SqlSessionTemplate sqlSession, int tno) {
 		return sqlSession.selectOne("teamMapper.teamMemberCount", tno);
 	}
@@ -112,5 +113,9 @@ public class TeamDao {
 	
 	public Team teamProfile(SqlSessionTemplate sqlSession, int tno) {
 		return sqlSession.selectOne("teamMapper.teamProfile", tno);
+	}
+	public ArrayList<Team> searchTeam(SqlSessionTemplate sqlSession, String selectValue) {
+		return (ArrayList)sqlSession.selectList("teamMapper.searchTeam", selectValue);
+
 	}
 }

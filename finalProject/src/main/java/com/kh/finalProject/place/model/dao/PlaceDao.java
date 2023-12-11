@@ -39,4 +39,8 @@ public class PlaceDao {
 	public ArrayList<Place> selectResPlaceList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectResPlaceList");
 	}
+	
+	public ArrayList<Place> searchPlace(SqlSessionTemplate sqlSession, String selectValue) {
+		return (ArrayList)sqlSession.selectList("placeMapper.searchPlace",selectValue);
+	}
 }

@@ -83,7 +83,8 @@ public class Team {
 		this.teamLevel = teamLevel;
 	}
 
-	public int getCategoryNum() {
+
+	public int getCategotyNum() {
 		return categoryNum;
 	}
 
@@ -129,6 +130,7 @@ public class Team {
 				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categoryNum="
 				+ categoryNum + ", teamGender=" + teamGender + ", teamUserAge=" + teamUserAge + ", teamOriginName="
 				+ teamOriginName + ", teamChangeName=" + teamChangeName + "]";
+
 	}
 
 	

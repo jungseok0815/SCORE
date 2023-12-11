@@ -45,6 +45,9 @@
 .header-right{
     display: flex;
 }
+.search-bar{
+    position: relative;
+}
 .search-bar input{
     width: 300px;
     height: 37px;
@@ -67,9 +70,44 @@
     height: 24px;
     margin: 0px 5px;
 }
+.search-data{
+    position: absolute;
+    opacity: 0.8;
+    z-index: 1;
+    background: white;
+    width: 88%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.member-search{
+    max-height: 200px;
+    overflow: scroll;
+}
+.place-search{
+    max-height: 200px;
+    overflow: scroll;
+}
+.team-search{
+    max-height: 200px;
+    overflow: scroll;
+}
+.member-list{
+  border-bottom: 1px solid black;
+}
+.team-list{
+    border-bottom: 1px solid black;
+}
+.place-list{
+    border-bottom: 1px solid black;
+}
+
+
 @media screen and (max-width: 720px) {
     .search-bar input{
         width: 100%;
         max-width: 100px;
+    }
+    .search-data{
+        width: 72%;
     }
 }
