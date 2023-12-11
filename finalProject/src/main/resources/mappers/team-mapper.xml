@@ -37,8 +37,18 @@
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
     </resultMap>
-
-
+    
+    <resultMap type = "TeamImg" id = "teamImgResult">
+    		<result column="TEAM_IMG_NO" property="teamImgNo"/>
+    		<result column="TEAM_IMG_URL" property="teamImgUrl"/>
+    		<result column="TEAM_ORIGIN_NAME" property="teamOriginName"/>
+    		<result column="TEAM_CHANGE_NAME" property="teamChangeName"/>
+    		<result column="DLELTE_TEAM_IMG" property="deleteTeamImg"/>
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="OFFER_NO" property="offerNo"/>
+    </resultMap>
+    
+    
 	<select id="selectCategoryNum" resultMap="teamResult">
 		SELECT CATEGORY_NUM
 		FROM TEAM
@@ -58,6 +68,7 @@
  	
  	<!-- 게시글 조회 쿼리문 -->
  	<select id="selectList" resultMap="teamOfferResult">
+ 	<!-- 
 	 	SELECT *
 			FROM(
 			        SELECT ROWNUM RNUM, A.*
@@ -78,7 +89,28 @@
 			                WHERE OFFER_STATUS = 'Y'
 			                ORDER BY TEAM_NO DESC
 			            ) A
-			        )
+			        ) 
+	-->
+		SELECT OFFER_NO 
+		     , OFFER_TITLE
+		     , OFFER_CONTENT
+		     , OFFER_GENDER
+		     , OFFER_LEVEL
+		     , OFFER_AGE
+		     , OFFER_COUNT
+		     , USER_NO
+		     , TEAM_NAME
+		     , ACTIVITY_ATEA
+		     , TEAM_IMG_NO
+		     , TEAM_IMG_URL
+		     , TEAM_ORIGIN_NAME
+		     , TEAM_CHANGE_NAME
+		FROM TEAM_OFFER 
+		JOIN TEAM USING(TEAM_NO)
+		LEFT JOIN TEAM_IMG USING(OFFER_NO)
+		WHERE OFFER_STATUS = 'Y'
+		ORDER BY OFFER_NO DESC   
+			        
  	</select>
  	
  	<!-- 조회수 올리는 쿼리 -->
@@ -89,20 +121,12 @@
  	</update>
  	
  	<!-- 게시글 상세조회 쿼리 -->
- 	<select id="selectOfferDetail" resultMap="teamOfferResult">
- 		SELECT OFFER_NO,
- 			   OFFER_TITLE,
- 			   OFFER_CONTENT,
- 			   OFFER_GENDER,
- 			   OFFER_LEVEL,
- 			   OFFER_AGE,
- 			   OFFER_COUNT,
-               USER_NO,
-               TEAM_NO,
-               TEAM_NAME
- 		  FROM TEAM_OFFER
- 		   JOIN TEAM USING(TEAM_NO)
- 		 WHERE OFFER_NO = #{offerNo}
+ 	<select id="selectOfferDetail" resultMap="teamOfferResult">	 
+ 		 SELECT *
+			FROM TEAM_OFFER "OFFER"
+			JOIN TEAM "T" ON(OFFER.TEAM_NO = T.TEAM_NO)
+			LEFT JOIN TEAM_IMG "IMG" ON(OFFER.OFFER_NO = IMG.OFFER_NO)
+			WHERE OFFER.OFFER_NO = #{offerNo}
  	</select>
  	
  	<!-- ajax로 지역순 리스트 가져오는 쿼리 -->
@@ -207,6 +231,7 @@
  	 	 WHERE OFFER_NO = #{offerNo}
  	</update>
  	
+ 	<!-- 팀 신청 -->
  	<insert id="teamReq" parameterType="map">
  		INSERT INTO 
 		    TEAM_REQ(
@@ -225,4 +250,140 @@
                      )
  	</insert>
  	
+ 	<!-- 작성할때 작성자 정보  -->
+ 	<select id="selectInformation" resultMap="teamMemberResult"> 
+ 		SELECT TMEMBER_NO,
+		        TEAM_NO,
+		        USER_NO,
+		        TEAM_NAME,
+		        ACTIVITY_ATEA,
+		        CATEGORY_NUM
+		    FROM TEAM_MEMBER 
+		    JOIN TEAM USING(TEAM_NO)
+		   WHERE USER_NO = #{userNo} 
+ 	</select>
+ 	
+ 	<!-- 게시글 작성  -->
+ 	<insert id="insertOfferList" parameterType="map">
+   		INSERT INTO 
+	        TEAM_OFFER(
+	                OFFER_NO,
+	                OFFER_TITLE,
+	                OFFER_CONTENT,
+	                OFFER_GENDER,
+	                OFFER_LEVEL,
+	                OFFER_AGE,
+	                OFFER_COUNT,
+	                USER_NO,
+	                TEAM_NO,
+	                OFFER_STATUS
+	                )
+			VALUES(
+			        SEQ_TEAD_OFFER.NEXTVAL, 
+			        #{t.offerTitle}, 
+			        #{t.offerContent}, 
+			        #{t.offerGender}, 
+			        #{t.offerLevel}, 
+			        #{t.offerAge}, 
+			        0, 
+			        #{t.userNo}, 
+			        #{tno}, 
+			        'Y')
+   </insert>
+   
+   <!-- 게시글 이미지 올리기  -->
+   <insert id="insertOfferImg" parameterType="map">
+   		INSERT INTO 
+	        TEAM_IMG(
+	        		 TEAM_IMG_NO,
+                    TEAM_IMG_URL,
+                    TEAM_ORIGIN_NAME,
+                    TEAM_CHANGE_NAME,
+                    DLELTE_TEAM_IMG,
+                    TEAM_NO,
+                    OFFER_NO
+	           		 )	
+            VALUES
+                    (
+                    SEQ_TEAD_IMG.NEXTVAL,
+                    #{ti.teamImgUrl}, 
+                    #{ti.teamOriginName},
+                    #{ti.teamChangeName},
+                    'N', 
+                    #{tno},
+                    SEQ_TEAD_OFFER.CURRVAL 
+                    )	
+   </insert>
+   
+   <select id="selectOfferImg" resultMap="teamImgResult">
+   	SELECT TEAM_IMG_NO
+	        ,TEAM_IMG_URL
+	        ,TEAM_ORIGIN_NAME
+	        ,TEAM_CHANGE_NAME
+	        ,DLELTE_TEAM_IMG
+	        ,TEAM_NO
+	        ,OFFER_NO
+		FROM TEAM_IMG
+		WHERE OFFER_NO = #{tno}
+   </select>
+   
+   <!-- 가테고리별 전체 지역까지 가져오기  -->
+   <select id="selectListCountCate" resultType="_int">
+         SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
+ 	</select>
+ 	
+ 	
+ 	<!-- 카테고리별 전체 지역 리스트 가져오기 -->
+ 	<select id="selectCityAll" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE CATEGORY_NUM = #{category}
+          AND OFFER_STATUS = 'Y'
+          ORDER BY OFFER_NO DESC
+ 	</select>
+ 	
+ 	
+ 	<!-- 카테고리 없을때 지역만  -->
+   <select id="selectNotCategory" resultType="_int">
+         SELECT COUNT(*)
+		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          AND OFFER_STATUS = 'Y'
+ 	</select>
+ 	
+ 	<!-- 카테고리별 전체 지역 리스트 가져오기 -->
+ 	<select id="selectOnlyCity" resultMap="teamOfferResult">
+ 		SELECT OFFER_NO,
+ 			   OFFER_TITLE,
+ 			   OFFER_CONTENT,
+ 			   OFFER_GENDER,
+ 			   OFFER_LEVEL,
+ 			   OFFER_AGE,
+ 			   OFFER_COUNT,
+               USER_NO,
+               TEAM_NO,
+               TEAM_NAME,
+               ACTIVITY_ATEA
+ 		  FROM TEAM_OFFER
+          JOIN TEAM USING(TEAM_NO)
+          WHERE ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
+          AND OFFER_STATUS = 'Y'
+          ORDER BY OFFER_NO DESC
+ 	</select>
  </mapper>

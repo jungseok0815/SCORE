@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.dao.TeamDao;
 import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
@@ -92,6 +94,46 @@ public class TeamService implements TeamServiceImp{
 	@Override
 	public int teamReq(int userNo, String reqContent, int offerNo) {
 		return teamDao.teamReq(sqlSession, userNo, reqContent, offerNo);
+	}
+
+	@Override
+	public TeamMember selectInformation(int userNo) {
+		return teamDao.selectInformation(sqlSession, userNo);
+	}
+
+	@Override
+	public int insertOfferList(TeamOffer t, int tno) {
+		return teamDao.insertOfferList(sqlSession, t, tno);
+	}
+
+	@Override
+	public int insertOfferImg(TeamImg ti, int tno) {
+		return teamDao.insertOfferImg(sqlSession, ti, tno);
+	}
+
+	@Override
+	public TeamImg selectOfferImg(int tno) {
+		return teamDao.selectOfferImg(sqlSession, tno);
+	}
+
+	@Override
+	public int selectListCountCate(int category) {
+		return teamDao.selectListCountCate(sqlSession, category);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectCityAll(int category, PageInfo pi) {
+		return teamDao.selectCityAll(sqlSession, category, pi);
+	}
+
+	@Override
+	public int selectNotCategory(String activityAtea) {
+		return teamDao.selectNotCategory(sqlSession, activityAtea);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi) {
+		return teamDao.selectOnlyCity(sqlSession, activityAtea, pi);
 	}
 
 	

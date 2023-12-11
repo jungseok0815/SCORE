@@ -1,8 +1,6 @@
 package com.kh.finalProject.member.controller;
 
 
-import java.util.Map;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +17,7 @@ import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
+import com.kh.finalProject.team.model.vo.TeamMember;
 
 @Controller
 public class MemberController {

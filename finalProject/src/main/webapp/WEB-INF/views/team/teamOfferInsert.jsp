@@ -10,28 +10,125 @@
 <body>
     <jsp:include page="../common/header.jsp" />
 
-    <div class="outer">
-        <h3 align="center" style="color: dodgerblue; margin-bottom: 20px;">팀 구인 글 등록</h3>
-
-        <form action="insertTeamOffer.tm">
-            <div class="file-upload">
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">사진을 등록해보아요</label>
-                    <input class="form-control" type="file" id="formFile">
+	<br>
+    <div class="freeBoard-area" align="center">
+        <form action="insert.tm" method="POST" enctype="multipart/form-data">
+        
+        	<input type="hidden" name="userNo" value="${loginUser.userNo}">
+        	
+            <table>
+                <h1 align="center" style="font-size: 30px; color: dodgerblue;">팀 구인글 작성</h1>
+                
+                <!-- 성별 체크-->
+                <div class="top_container">
+                   	 성별
+                    <ul>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerGender" id="men" value="남자" checked><label for="men">남자</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerGender" id="woman"  value="여자"><label for="woman">여자</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerGender" id="sexual" value="무관"><label for="sexual">무관</label>
+                        </li>
+                    </ul> 
                 </div>
-                <div class="insert-field">
-                    <h6>팀 홍보를 해보아요</h6>
-                    <textarea name="" id="text-area" cols="30" rows="10" placeholder="여기에 입력하세요"></textarea>
+                
+                <!-- 나이대 체크-->
+                <div class="top_container">
+                                                나이
+                    <ul>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerAge" id="ten" value="10" checked><label for="ten">10대</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerAge" id="twenty"  value="20"><label for="twenty">20대</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerAge" id="thirty" value="30"><label for="thirty">30대</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerAge" id="forty" value="40"><label for="forty">40대</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerAge" id="problem" value="40"><label for="problem">무관</label>
+                        </li>
+                    </ul> 
+                </div>
+
+                <!-- 레벨 체크-->
+                <div class="top_container">
+                   	 레벨
+                    <ul>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="starter" value="스타터" checked><label for="starter">스타터</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="beginner"  value="비기너"><label for="beginner">비기너</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="amateur" value="아마추어"><label for="amateur">아마추어</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="semi" value="세미프로"><label for="semi">세미프로</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="pro" value="프로"><label for="pro">프로</label>
+                        </li>
+                        <li class="btnLocal">
+                            <input type="radio" name="offerLevel" id="noproblem" value="무관"><label for="noproblem">무관</label>
+                        </li>
+                    </ul> 
+                </div>
+                
+                <tr align="left">
+                    <th>
+                        	제목 
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="offerTitle" class="text-area" placeholder="제목을 입력하세요">
+                    </td>
+                </tr>
+                <tr align="left">
+                    <th>
+                        	작성자
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="" class="text-area" value ="${loginUser.userName}" disabled >
+                    </td>
+                </tr>
+
+                <div class="a-btn">
+	                <label for="file">
+	                    <div class="btn-upload">파일 업로드하기</div>
+	                </label>
+                    <input type="file" name="upfile" id="file">
+                </div>
+
+                <tr align="left">
+                    <th>팀 홍보를 해보아요</th>
+                </tr>
+                <tr>
+                    <td><textarea name="offerContent" id="" placeholder="내용을 입력하세요"></textarea></td>
+                </tr>
+               
+                <tr>
+                    <td align="center">
+                        <input class="offer-btn1" type="button" value="돌아가기" onclick="location.href=''">
+                        <input class="offer-btn" type="submit" value="저장"></input>
+                    </td>
                     
-                </div>
-            </div>
+                </tr>
+            </table>
 
-            <div align="center">
-                <button type="reset" class="btn btn-secondary" style="margin-top: 10px;">뒤로가기</button>
-                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">등록하기</button>
-            </div>
         </form>
     </div>
+    <br>
 
     <jsp:include page="../common/footer.jsp" />
 </body>

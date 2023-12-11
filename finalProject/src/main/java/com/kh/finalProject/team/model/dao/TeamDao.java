@@ -8,10 +8,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-
-import com.kh.finalProject.team.model.vo.Team;
-import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 
@@ -116,5 +117,58 @@ public class TeamDao {
 		
 		
 		return sqlSession.insert("teamMapper.teamReq", params);
+	}
+	
+	public TeamMember selectInformation(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("teamMapper.selectInformation", userNo);
+	}
+	// 게시판 등록
+	public int insertOfferList(SqlSessionTemplate sqlSession, TeamOffer t, int tno) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("t", t);
+		params.put("tno", tno);
+		
+		return sqlSession.insert("teamMapper.insertOfferList", params);
+	}
+	// 사진 삽입
+	public int insertOfferImg(SqlSessionTemplate sqlSession, TeamImg ti, int tno) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("ti", ti);
+		params.put("tno", tno);
+		
+		return sqlSession.insert("teamMapper.insertOfferImg", params);
+	}
+	
+	// 디테일 사진 가져오기 
+	public TeamImg selectOfferImg(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.selectOfferImg", tno);
+	}
+	
+	// 가테고리별 전체 지역 까지 가져오기 
+	public int selectListCountCate(SqlSessionTemplate sqlSession, int category) { 
+		return sqlSession.selectOne("teamMapper.selectListCountCate", category);
+	}
+	
+	// 카테고리별 전체 지역 리스트 
+	public ArrayList<TeamOffer> selectCityAll(SqlSessionTemplate sqlSession, int category, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("teamMapper.selectCityAll", category, rowBounds);
+	}
+	
+	// 카테고리 없을때 지역만 
+	public int selectNotCategory(SqlSessionTemplate sqlSession, String activityAtea) { 
+		return sqlSession.selectOne("teamMapper.selectNotCategory", activityAtea);
+	}
+	
+	// 카테고리 없을때 지역 리스트 
+	public ArrayList<TeamOffer> selectOnlyCity(SqlSessionTemplate sqlSession, String activityAtea, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("teamMapper.selectOnlyCity", activityAtea, rowBounds);
 	}
 }

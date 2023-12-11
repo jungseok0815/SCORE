@@ -219,3 +219,16 @@ ul, li, ol{
     background : #1BB8F7;
     cursor: pointer;
 }
+
+.choice-sports div.clicked {
+    /* 선택된 경우의 스타일을 지정 */
+    border: 2px solid red;
+    background-color: rgb(55, 131, 255);
+}
+
+.choice-sports div:active,
+.choice-sports div:focus {
+    /* 여기에 원하는 스타일을 추가하세요 */
+    border: 2px solid red; /* 예시: 클릭 시 테두리를 빨간색으로 변경 */
+    background-color: rgb(55, 131, 255); /* 예시: 클릭 시 배경색을 회색으로 변경 */
+}

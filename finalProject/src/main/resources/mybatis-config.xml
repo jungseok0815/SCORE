@@ -22,6 +22,7 @@
   		<typeAlias type="com.kh.finalProject.member.model.vo.Friend" alias="Friend" />
   		<typeAlias type="com.kh.finalProject.team.model.vo.Team" alias="Team" />
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamMember" alias="TeamMember" />
+  		<typeAlias type="com.kh.finalProject.team.model.vo.TeamImg" alias="TeamImg"/>
   	</typeAliases>
 
 

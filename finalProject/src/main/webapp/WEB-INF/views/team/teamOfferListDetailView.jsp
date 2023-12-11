@@ -78,7 +78,8 @@
 	            <div class="content-wrap">
 	                <div class="content-body">
 	                    <div class="btn-list">
-							<img src="./resources/img/team/teamOfferListDetailView/shm.jpg"  class="content-img"/>
+							<!-- <img src="./resources/img/team/teamOfferListDetailView/shm.jpg"  class="content-img"/> -->
+							<img src="${teamImg.teamChangeName}"  class="content-img"/>
 						</div>
 	                    <div class="content-div"> 
 	                    ${team.offerContent}

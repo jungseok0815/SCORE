@@ -1,6 +1,10 @@
 package com.kh.finalProject.team.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -18,6 +22,7 @@ import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.service.TeamService;
 import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
@@ -41,12 +46,14 @@ public class TeamController {
 	
 	@RequestMapping("offerDetailView.tm")
 	public String teamOfferDetailView(int tno, Model model) {
-		
 		int result = teamService.increaseCount(tno);
 		
 		if (result > 0) {
 			TeamOffer team = teamService.selectOfferDetail(tno);
+			TeamImg teamImg = teamService.selectOfferImg(tno);
+			
 			model.addAttribute("team", team);
+			model.addAttribute("teamImg", teamImg);
 			
 			return "team/teamOfferListDetailView";
 		} else {
@@ -66,27 +73,35 @@ public class TeamController {
 //		PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
 		
 		if(activityAtea.equals("all")) {
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
-			
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCountCate(category), currentPage, 10, 5);
+																// 카테고리 조건으로 
 			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, category, pi);
+			ArrayList<TeamOffer> list = teamService.selectCityAll(category, pi);
 			
 			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectList(pi));
+			  .addObject("list", teamService.selectCityAll(category, pi));
 
 			return new Gson().toJson(mv);
 			
+		} else if(!activityAtea.equals("all") && category == 0){
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectNotCategory(activityAtea), currentPage, 10, 5);
+			// 게시물 리스트 
+			ArrayList<TeamOffer> list = teamService.selectOnlyCity(activityAtea, pi);
+				
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectOnlyCity(activityAtea, pi));
+			
+			return new Gson().toJson(mv);
 		} else {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea, category), currentPage, 10, 5);
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, category, pi);
 			
-			mv.addObject("pi", pi)						// pi 처리
+			mv.addObject("pi", pi)						
 			  .addObject("list", teamService.selectCity(activityAtea, category, pi));
 			
 			return new Gson().toJson(mv);
 		}
-		
 	}
 	
 	@ResponseBody
@@ -127,16 +142,12 @@ public class TeamController {
 		
 		if (result > 0) { //삭제성공
 			
-//			if(!filePath.equals("")) {
-//				new File(session.getServletContext().getRealPath(filePath)).delete();
-//			}
 			session.setAttribute("alertMsg", "게시글 삭제 성공");
-			return "team/teamOfferBoardList";
+			return "redirect:/";
 		} else {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
 			return "common/errorMsg";
 		}
-
 	}
 	
 	@RequestMapping("teamReq.tm")
@@ -168,13 +179,6 @@ public class TeamController {
 		return "team/teamJoinList";
 	}
 	
-	
-	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
-	@RequestMapping("insertTeamOfferForm.tm")
-	public String teamOfferInsertForm() {
-		return "team/teamOfferInsert";
-	}
-	
 	@RequestMapping("selectMyTeam.tm")
 	public String selectMyTeam(int teamNo, int tmemberNo) {
 		//categoryNum
@@ -185,6 +189,12 @@ public class TeamController {
 		//팀 생성먼저
 				
 		return "team/teamOfferListDetailView";
+	}
+	
+	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
+	@RequestMapping("insertTeamOfferForm.tm")
+	public String teamOfferInsertForm() {
+		return "team/teamOfferInsert";
 	}
 	
 	@RequestMapping("insertTeam.tm")
@@ -198,6 +208,74 @@ public class TeamController {
 			return "common/errorPage";
 		}
 	}
+	
+	@RequestMapping("insert.tm")
+	public String InsertOffer(TeamOffer t, int userNo, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
+		
+		// userPo이 안에 팀 번호 있음
+		TeamMember userPo = teamService.selectInformation(userNo);
+		
+		// tno에 팀 번호 담음 
+		int tno = userPo.getTeamNo();
+		int resultImg = 0;
+		
+		int result = teamService.insertOfferList(t, tno);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(upfile, session, "resources/img/team/teamOfferListDetailView/");
+			
+			ti.setTeamImgUrl("resources/img/team/teamOfferListDetailView/");
+			ti.setTeamOriginName(upfile.getOriginalFilename());
+			ti.setTeamChangeName("resources/img/team/teamOfferListDetailView/" + changeName);
+			
+			resultImg = teamService.insertOfferImg(ti, tno);
+		}
+		
+		if(result * resultImg > 0) {
+			session.setAttribute("alertMsg", "구인글 작성 완료");
+			return "redirect:/";
+		} else {
+			model.addAttribute("errorMsg", "구인글 작성 실패");
+			return "common/errorPage";
+		}
+	}
+	
+
+	public String saveFile(MultipartFile upfile, HttpSession session, String path) {
+		//파일명 수정 후 서버 업로드 시키기("이미지저장용 (2).jpg" => 20231109102712345.jpg)
+		//년월일시분초 + 랜덤숫자 5개 + 확장자
+		
+		//원래 파일명
+		String originName = upfile.getOriginalFilename();
+		
+		//시간정보 (년월일시분초)
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		
+		//랜덤숫자 5자리
+		int ranNum = (int)(Math.random() * 90000) + 10000;
+		
+		//확장자
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		//변경된이름
+		String changeName = currentTime + ranNum + ext;
+		
+		//첨부파일 저장할 폴더의 물리적인 경우
+		String savePath = session.getServletContext().getRealPath(path);
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;
+	}
+	
+	
+	
+	
 	
 	@RequestMapping("insertTeamOffer.tm")
 	public String teamOfferInsert() {

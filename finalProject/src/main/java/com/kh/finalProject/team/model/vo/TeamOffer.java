@@ -35,6 +35,8 @@ public class TeamOffer {
 		this.activityAtea = activityAtea;
 		this.offerStatus = offerStatus;
 	}
+	
+
 
 	public int getOfferNo() {
 		return offerNo;

@@ -1,15 +1,23 @@
 
-teamList = (cpage, categoryNum) =>{
-    const checkedArea = document.querySelector('.btnLocal input[name="local"]:checked').value;
-    console.log(checkedArea)
+const teamFilterValue = {
+    cpage : 1,
+    activityAtea: "all",
+    category: 0
+}
 
-     data = {
-         activityAtea: checkedArea,
-         cpage: cpage,
-         category: selectedCategory,
-     }
-     
-    teamAjaxController.teamList(data,drawTeamList)
+choicePage = (page) =>{
+    teamFilterValue.cpage = page;
+    teamAjaxController.teamList(teamFilterValue,drawTeamList)
+}
+
+choiceSports =(categoryNum) =>{
+    teamFilterValue.category = categoryNum;
+    teamAjaxController.teamList(teamFilterValue,drawTeamList)
+}
+
+choiceCity = () => {
+    teamFilterValue.activityAtea = document.querySelector('.btnLocal input[name="local"]:checked').value;
+    teamAjaxController.teamList(teamFilterValue,drawTeamList)
 }
 
 drawTeamList = (result) =>{
@@ -51,37 +59,20 @@ drawTeamList = (result) =>{
         if(pi.currentPage == 1){
             str2 += '<li class="page-item disabled"><a class="page-link">Previous</a></li>'
         } else {
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
         }
 
         for (let i = pi.startPage; i <= pi.endPage; i++) {
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList('+ i +')">' + i + '</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ i +')">' + i + '</button></li>'
         }
 
         if(pi.currentPage != pi.maxPage){
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList('+ (pi.currentPage + 1) +')">Next</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ (pi.currentPage + 1) +')">Next</button></li>'
         } else {
             str2 += '<li class="page-item disabled"><a class="page-link">Next</a></li>'
         } 
 
     document.querySelector("#pagingArea ul").innerHTML = str2;
-}
-
-
-choiceSports =(categoryNum, cpage) =>{
-    const checkedArea = document.querySelector('.btnLocal input[name="local"]:checked').value;
-    console.log(checkedArea)
-    console.log(categoryNum)
-
-    selectedCategory = categoryNum;
-
-    data = {
-        activityAtea: checkedArea,
-        category: categoryNum,
-        cpage: cpage,
-    }
-
-    teamAjaxController.choiceSports(data,drawChoiceSports)
 }
 
 drawChoiceSports = (result) =>{
@@ -120,15 +111,15 @@ drawChoiceSports = (result) =>{
         if(pi.currentPage == 1){
             str2 += '<li class="page-item disabled"><a class="page-link">Previous</a></li>'
         } else {
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
         }
 
         for (let i = pi.startPage; i <= pi.endPage; i++) {
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList('+ i +')">' + i + '</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ i +')">' + i + '</button></li>'
         }
 
         if(pi.currentPage != pi.maxPage){
-            str2 += '<li class="page-item"><button class="page-link" onclick="teamList('+ (pi.currentPage + 1) +')">Next</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ (pi.currentPage + 1) +')">Next</button></li>'
         } else {
             str2 += '<li class="page-item disabled"><a class="page-link">Next</a></li>'
         } 
@@ -138,3 +129,16 @@ drawChoiceSports = (result) =>{
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const choiceSportsDivs = document.querySelectorAll('.choice-sports div');
+
+    choiceSportsDivs.forEach(function(div) {
+        div.addEventListener('click', function() {
+            choiceSportsDivs.forEach(function(otherDiv) {
+                otherDiv.classList.remove('clicked');
+            });
+
+            div.classList.toggle('clicked');
+        });
+    });
+});

@@ -1,9 +1,12 @@
 package com.kh.finalProject.team.model.service;
 
-import com.kh.finalProject.team.model.vo.Team;
-import com.kh.finalProject.team.model.vo.TeamMember;
 import java.util.ArrayList;
+
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 public interface TeamServiceImp {
@@ -50,4 +53,27 @@ public interface TeamServiceImp {
 	// 팀 요청 
 	int teamReq(int userNo, String reqContent, int offerNo);
 
+	// offerList 작성할때 작성자 정보 
+	TeamMember selectInformation(int userNo);
+	
+	// 구인글 등록 
+	int insertOfferList(TeamOffer t, int tno);
+	
+	// 구인글 사진 등록 
+	int insertOfferImg(TeamImg ti, int tno);
+	
+	// 디테일뷰 이미지 가져오기 
+	TeamImg selectOfferImg(int tno);
+	
+	// 가테고리별 전체 지역까지 가져오기
+	int selectListCountCate(int category);
+	
+	// 카테고리별 전체 지역 가져오기 
+	ArrayList<TeamOffer> selectCityAll(int category, PageInfo pi);
+	
+	// 카테고리 없을때 지역만 
+	int selectNotCategory(String activityAtea);
+	
+	// 카테고리 없을때 지역만 가져오는 리스트 
+	ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi);
 }
