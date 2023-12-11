@@ -74,11 +74,20 @@
                         <img src="./resources/img/main/thunder.png" alt="">
                         <p>팀 구인</p>
                     </a>
-
-                        <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
-                            <img src="./resources/img/main/searchPeople.png" alt="">
-                            <p>팀 생성</p>
-                        </a>
+                    <c:choose>
+                        <c:when test="${ empty loginUser }">
+                            <a href="${pageContext.request.contextPath}/loginView.me">
+                                <img src="./resources/img/main/searchPeople.png" alt="">
+                                <p>팀 생성</p>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
+                                <img src="./resources/img/main/searchPeople.png" alt="">
+                                <p>팀 생성</p>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -204,7 +213,7 @@
   
                   <div class="profile-imgbox">
                       <label for="file">
-                          <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
+                          <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img" required></div>
                       </label>
                       <input type="file" name="upfile" id="file" onchange="imgChange(this)">
                   </div>
@@ -280,7 +289,7 @@
                                   <label class="btn btn-checkX-label madal-label" for="age-20">20대</label>
                               </li>
                               <li class="">
-                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-30" autocomplete="off" value="20대">
+                                  <input type="checkbox" class="btn-checkX" name="teamUserAge" id="age-30" autocomplete="off" value="30대">
                                   <label class="btn btn-checkX-label madal-label" for="age-30">30대</label>
                               </li>
                           </ul>
@@ -300,7 +309,7 @@
                           </ul>
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-next" onclick="userAgebtn()">다음</button>
+                  <button type="submit" class="btn btn-primary btn-next">다음</button>
               </form>
             </div>
           </div>

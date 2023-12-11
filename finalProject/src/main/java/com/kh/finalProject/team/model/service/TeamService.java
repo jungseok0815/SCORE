@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.dao.TeamDao;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
-import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 @Service
@@ -37,6 +37,11 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.insertTeamImg(sqlSession, ti);
 	}
 	
+	@Override
+	public int insertTeamMember(Member m) {
+		return teamDao.insertTeamMember(sqlSession, m);
+	}
+
 	@Override
 	public ArrayList<TeamOffer> selectList(PageInfo pi) {
 		return teamDao.selectList(sqlSession, pi);
@@ -91,8 +96,5 @@ public class TeamService implements TeamServiceImp{
 	public int teamReq(String userId, String text) {
 		return teamDao.teamReq(sqlSession, userId, text);
 	}
-
-
 	
-
 }

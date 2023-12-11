@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.service.TeamService;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
@@ -177,7 +178,10 @@ public class TeamController {
 	//팀 생성
 	@RequestMapping("insertTeam.tm")
 	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		
 		int result = teamService.insertTeam(t);
+		int result2 = teamService.insertTeamMember(m);
 		int resultImg = 0;
 	
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -189,6 +193,7 @@ public class TeamController {
 			 ti.setTeamChangeName("resources/img/team/teamInsert" + changeName);
 			 
 			 resultImg = teamService.insertTeamImg(ti);
+			 
 		}
 		
 		if(result * resultImg > 0) {
