@@ -1,6 +1,10 @@
 package com.kh.finalProject.team.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +22,7 @@ import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.service.TeamService;
 import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
@@ -168,30 +173,58 @@ public class TeamController {
 		return "team/teamOfferInsert";
 	}
 	
-	@RequestMapping("selectMyTeam.tm")
-	public String selectMyTeam(int teamNo, int tmemberNo) {
-		//categoryNum
-		Team t = teamService.selectCategoryNum(teamNo);
-		//userNo
-		TeamMember tm = teamService.selectUserNo(tmemberNo);
-		
-		//팀 생성먼저
-				
-		return "team/teamOfferListDetailView";
-	}
 	
+	//팀 생성
 	@RequestMapping("insertTeam.tm")
-	public String insertTeam(Team t, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		int result = teamService.insertTeam(t);
-		if(result > 0) {
-			session.setAttribute("alertMsg", "팀 생성 완료");
-			return "redirect:main";
+		int resultImg = 0;
+	
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			 String changeName = saveFile(upfile, session);
+			 
+			 ti.setTeamImgUrl("resources/img/team/");
+			 ti.setTeamOriginName(upfile.getOriginalFilename());
+			 ti.setTeamChangeName("resources/img/team/teamInsert" + changeName);
+			 
+			 resultImg = teamService.insertTeamImg(ti);
+		}
+		
+		if(result * resultImg > 0) {
+			session.setAttribute("alertMsg", "팀 생성 완료되었습니다.");
+			return "redirect:/";
 		} else {
-			model.addAttribute("errorMsg", "팀 생성 실패");
-			return "common/errorPage";
+			session.setAttribute("alertMsg", "사진을 첨부해주세요");
+			return "redirect:/";
 		}
 	}
 	
+	public String saveFile(MultipartFile upfile, HttpSession session) {
+		  
+	      String originName = upfile.getOriginalFilename();
+	      
+	      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	      
+	      int ranNum = (int)(Math.random() * 90000) + 10000;
+	      
+	      String ext = originName.substring(originName.lastIndexOf("."));
+	      
+	      String changeName = currentTime + ranNum + ext;
+	      
+	      String savePath = session.getServletContext().getRealPath("/resources/img/place/placeInsert/");
+	      
+	      try {
+	         upfile.transferTo(new File(savePath + changeName));
+	      } catch (IllegalStateException | IOException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      
+	      return changeName;
+	   }
+	
+
 	@RequestMapping("insertTeamOffer.tm")
 	public String teamOfferInsert() {
 		return "team/teamProfile";

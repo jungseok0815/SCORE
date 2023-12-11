@@ -12,10 +12,6 @@
     font-style: normal;
 }
 
-* {
-    font-family: 'KBO-Dia-Gothic_bold';
-}
-
 .no1-title {
     display: flex;
     justify-content: center;
