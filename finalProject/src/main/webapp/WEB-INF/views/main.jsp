@@ -54,10 +54,11 @@
                         <img src="./resources/img/main/thunder.png" alt="">
                         <p>팀 구인</p>
                     </a>
-                    <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
-                        <img src="./resources/img/main/searchPeople.png" alt="">
-                        <p>팀 생성</p>
-                    </a>
+
+                        <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
+                            <img src="./resources/img/main/searchPeople.png" alt="">
+                            <p>팀 생성</p>
+                        </a>
                 </div>
             </div>
         </div>
@@ -194,7 +195,7 @@
                   </div>
                   <p class="madal-font">활동지역</p>
                   <div class="input-group mb-3 input-group-lg home-field-search">
-                      <input type="text" class="form-control" placeholder="활동지역을 입력해주세요" name="activityAtea">
+                      <input type="text" class="form-control" placeholder="홈 구장 찾기" name="activityAtea">
                   </div>
                   <p class="userInfo-modal-font">성별</p>
                   <div class="btn-group-top" role="group" aria-label="Basic radio toggle button group">
