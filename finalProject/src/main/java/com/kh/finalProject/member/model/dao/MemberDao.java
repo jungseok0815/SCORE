@@ -79,4 +79,12 @@ public class MemberDao {
 	public ArrayList<Friend> selectReqResFriendList(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectReqResFriendList", userNo);
 	}
+	public int checkFriendStatus(SqlSessionTemplate sqlSession, Friend f) {
+		return sqlSession.selectOne("memberMapper.checkFriendStatus",f);
+	}
+	public Member userInfo(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("memberMapper.userInfo",userNo);
+	}
+	
+	
 }

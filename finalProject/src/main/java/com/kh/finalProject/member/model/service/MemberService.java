@@ -11,6 +11,7 @@ import com.kh.finalProject.team.model.vo.Team;
 public interface MemberService {
 	int joinMember(Member m);
 	Member loginMember(String userId);
+	Member userInfo(int userNo);
 	Member selectJoinmember(String userId);
 	int insertSportInfo(SportInfo info);
 	int checkId(String checkId);
@@ -28,6 +29,6 @@ public interface MemberService {
 	ArrayList<Member> searchMember(String searchMain);
 	int sendPostFriend(Friend f);
 	ArrayList<Friend> selectReqResFriendList(int userNo);
-	
+	int checkFriendStatus(Friend f);
 }
 

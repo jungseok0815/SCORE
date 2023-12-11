@@ -115,6 +115,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectReqResFriendList(sqlSession,userNo);
 	}
 
+	@Override
+	public int checkFriendStatus(Friend f) {
+		return memberDao.checkFriendStatus(sqlSession,f);
+	}
+
+	@Override
+	public Member userInfo(int userNo) {
+		return memberDao.userInfo(sqlSession,userNo);
+	}
+
 
 
 	

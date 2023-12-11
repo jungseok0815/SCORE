@@ -236,15 +236,39 @@
 	</insert>
 	
 	<select id="selectReqResFriendList" resultMap="friendResult">
-		SELECT FRIEND_REQ_USER,
-			FRIEND_RES_USER,
-			FRIEND_STATUS
-		FROM FRIEND
-		WHERE 
-		FRIEND_REQ_USER = #{userNo}
-		OR
-		FRIEND_RES_USER = #{userNo}
+			select friend_req_user
+			from friend
+			where friend_res_user = #{userNo}
+			and friend_status = 'Y'
+	</select>
+	
+	<select id="checkFriendStatus" resultType="_int">
+			SELECT COUNT(*)
+			  FROM FRIEND
+			 WHERE
+			 FRIEND_STATUS = 'N' AND 
+			 FRIEND_RES_USER = #{friendResUser}
+			 AND
+			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
 		
+			
+	<select id="userInfo" resultMap="memberResult">
+			SELECT 
+				USER_NO, 
+				USER_ID,
+				USER_PHONE,
+				USER_NAME,
+				USER_BIRTH,
+				GENDER,
+				CITY,
+				USER_POINT,
+				USER_LEVEL
+			  FROM MEMBER
+			 WHERE
+				USER_NO = #{userNo}
+				AND
+				USER_STATUS = 'Y'
+	</select>
 	
 </mapper>
