@@ -92,6 +92,11 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.teamReq(sqlSession, userId, text);
 	}
 
+	@Override
+	public ArrayList<Team> searchTeam(String selectValue) {
+		return teamDao.searchTeam(sqlSession, selectValue);
+	}
+
 
 	
 

@@ -49,6 +49,28 @@
     		<result column="OFFER_NO" property="offerNo"/>
     </resultMap>
 
+
+	<select id="selectMyTeam" resultMap="teamResult">
+			SELECT TEAM_NO
+					,TEAM_NAME
+					,CATEGORY_NUM
+				FROM TEAM_MEMBER
+				JOIN TEAM USING(TEAM_NO)
+				WHERE USER_NO = #{userNo}
+				AND CATEGORY_NUM = #{categoryNum}
+	</select>
+
+	<select id="selectCategoryNum" resultMap="teamResult">
+		SELECT CATEGORY_NUM
+		FROM TEAM
+	</select>
+	
+	<select id="selectUserNo" resultMap="teamMemberResult">
+		SELECT USER_NO
+		FROM TEAM_MEMBER
+	</select>
+
+ 
  	<!-- 게시글 총 갯수 -->
  	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -201,6 +223,18 @@
  		
  	</insert>
  	
+
+ 	
+ 	<select id="searchTeam" resultMap="teamResult">
+			SELECT TEAM_NO,
+			TEAM_NAME,
+			CATEGORY_NUM
+		FROM TEAM
+		WHERE TEAM_NAME  like '%'||#{searchMain}||'%'
+	</select>
+ 	
+
+
  	<!-- 팀 생성 -->
  	<insert id="insertTeam">
  		INSERT INTO TEAM
@@ -245,4 +279,5 @@
  		  			   SEQ_TEAM.CURRVAL
  		  		    )
  	</insert>
+
  </mapper>

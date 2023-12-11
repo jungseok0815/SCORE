@@ -1,6 +1,7 @@
 package com.kh.finalProject.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.kh.finalProject.member.model.dao.MemberDao;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
+import com.kh.finalProject.team.model.vo.Team;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -81,6 +83,36 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteFriend(Friend f) {
 		return memberDao.deleteFriend(sqlSession,f);
 
+	}
+
+	@Override
+	public ArrayList<Team> selectMyTeam(HashMap teamMap) {
+		return memberDao.selectMyTeam(sqlSession,teamMap);
+	}
+
+	@Override
+	public int addFriend2(Friend f) {
+		return memberDao.addFriend2(sqlSession,f);
+	}
+
+	@Override
+	public int deleteFriend2(Friend f) {
+		return memberDao.deleteFriend2(sqlSession,f);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(String searchMain) {
+		return memberDao.searchMember(sqlSession,searchMain);
+	}
+
+	@Override
+	public int sendPostFriend(Friend f) {
+		return memberDao.sendPostFriend(sqlSession,f);
+	}
+
+	@Override
+	public ArrayList<Friend> selectReqResFriendList(int userNo) {
+		return memberDao.selectReqResFriendList(sqlSession,userNo);
 	}
 
 

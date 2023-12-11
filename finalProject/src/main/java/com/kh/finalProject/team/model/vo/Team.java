@@ -14,6 +14,7 @@ public class Team {
 	private int categoryNum;
 	private String teamGender;
 	private String teamUserAge;
+
 	
 	public Team() {}
 
@@ -79,7 +80,8 @@ public class Team {
 		this.teamLevel = teamLevel;
 	}
 
-	public int getCategoryNum() {
+
+	public int getCategotyNum() {
 		return categoryNum;
 	}
 
@@ -106,8 +108,9 @@ public class Team {
 	@Override
 	public String toString() {
 		return "Team [teamNo=" + teamNo + ", teamName=" + teamName + ", createDate=" + createDate + ", teamTitle="
-				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categoryNum="
-				+ categoryNum + ", teamGender=" + teamGender + ", teamUserAge=" + teamUserAge + "]";
+				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categotyNum="
+				+ categoryNum +   teamGender + ", teamUserAge=" + teamUserAge + "]";
+
 	}
 	
 	

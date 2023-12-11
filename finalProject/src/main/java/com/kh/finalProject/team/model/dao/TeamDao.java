@@ -99,8 +99,10 @@ public class TeamDao {
 	}
 	
 	public int teamReq(SqlSessionTemplate sqlSession, String userId, String text) {
-		
-		
 		return sqlSession.insert("teamMapper.teamReq", userId);
+	}
+	
+	public ArrayList<Team> searchTeam(SqlSessionTemplate sqlSession, String selectValue) {
+		return (ArrayList)sqlSession.selectList("teamMapper.searchTeam", selectValue);
 	}
 }

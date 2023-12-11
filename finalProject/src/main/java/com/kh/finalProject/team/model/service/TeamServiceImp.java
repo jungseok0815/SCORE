@@ -50,5 +50,8 @@ public interface TeamServiceImp {
 	
 	// 팀 요청 
 	int teamReq(String userId, String text);
+	
+	ArrayList<Team> searchTeam(String selectValue);
+	
 
 }
