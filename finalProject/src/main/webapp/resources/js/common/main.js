@@ -198,3 +198,18 @@ function changeLevel(){
     mainValue.loadFilterInfo.level = levelValue
     handleClickPage();
 }
+
+function imgChange(file){
+
+    if(file.files.length == 1){
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file.files[0]);
+        
+        reader.onload = function(ev){
+            document.getElementById('profile-img').src = ev.target.result;
+        }
+    } else {
+        document.getElementById('profile-img').src = null;
+    }
+}
