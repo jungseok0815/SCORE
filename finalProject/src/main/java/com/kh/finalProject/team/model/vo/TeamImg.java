@@ -1,7 +1,6 @@
 package com.kh.finalProject.team.model.vo;
 
 public class TeamImg {
-
 	private int teamImgNo;
 	private String teamImgUrl;
 	private String teamOriginName;
@@ -11,6 +10,7 @@ public class TeamImg {
 	private int offerNo;
 	
 	public TeamImg() {}
+
 
 	public TeamImg(int teamImgNo, String teamImgUrl, String teamOriginName, String teamChangeName, String deleteTeamImg,
 			int teamNo, int offerNo) {
@@ -86,7 +86,6 @@ public class TeamImg {
 				+ ", teamChangeName=" + teamChangeName + ", deleteTeamImg=" + deleteTeamImg + ", teamNo=" + teamNo
 				+ ", offerNo=" + offerNo + "]";
 	}
-	
 	
 	
 }

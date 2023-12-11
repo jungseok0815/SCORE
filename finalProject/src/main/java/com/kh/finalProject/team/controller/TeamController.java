@@ -179,17 +179,7 @@ public class TeamController {
 		return "team/teamJoinList";
 	}
 	
-	@RequestMapping("selectMyTeam.tm")
-	public String selectMyTeam(int teamNo, int tmemberNo) {
-		//categoryNum
-		Team t = teamService.selectCategoryNum(teamNo);
-		//userNo
-		TeamMember tm = teamService.selectUserNo(tmemberNo);
-		
-		//팀 생성먼저
-				
-		return "team/teamOfferListDetailView";
-	}
+
 	
 	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
 	@RequestMapping("insertTeamOfferForm.tm")
@@ -197,18 +187,36 @@ public class TeamController {
 		return "team/teamOfferInsert";
 	}
 	
+
+	
+	
+	//팀 생성
 	@RequestMapping("insertTeam.tm")
-	public String insertTeam(Team t, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		int result = teamService.insertTeam(t);
-		if(result > 0) {
-			session.setAttribute("alertMsg", "팀 생성 완료");
-			return "redirect:main";
+		int resultImg = 0;
+	
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			 String changeName = saveFile(upfile, session, "resources/img/team/teamInsert");
+			 
+			 ti.setTeamImgUrl("resources/img/team/");
+			 ti.setTeamOriginName(upfile.getOriginalFilename());
+			 ti.setTeamChangeName("resources/img/team/teamInsert" + changeName);
+			 
+			 resultImg = teamService.insertTeamImg(ti);
+		}
+		
+		if(result * resultImg > 0) {
+			session.setAttribute("alertMsg", "팀 생성 완료되었습니다.");
+			return "redirect:/";
 		} else {
-			model.addAttribute("errorMsg", "팀 생성 실패");
-			return "common/errorPage";
+			session.setAttribute("alertMsg", "사진을 첨부해주세요");
+			return "redirect:/";
 		}
 	}
 	
+	// 구인글 작성 
 	@RequestMapping("insert.tm")
 	public String InsertOffer(TeamOffer t, int userNo, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		
@@ -272,7 +280,6 @@ public class TeamController {
 		
 		return changeName;
 	}
-	
 	
 	
 	

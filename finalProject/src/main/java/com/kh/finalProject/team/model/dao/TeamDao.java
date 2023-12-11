@@ -8,28 +8,25 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.finalProject.common.vo.PageInfo;
-import com.kh.finalProject.member.model.vo.Member;
+
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
+import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 
 @Repository
 public class TeamDao {
-
-
-	public Team selectCategoryNum(SqlSessionTemplate sqlSession, int teamNo) {
-		return sqlSession.selectOne("teamMapper.selectCategoryNum", teamNo);
-	}
 	
-	public TeamMember selectUserNo(SqlSessionTemplate sqlSession, int tmemberNo) {
-		return sqlSession.selectOne("teamMapper.selectUserNo", tmemberNo);
-	}
-	
+	//팀 생성
 	public int insertTeam(SqlSessionTemplate sqlSession, Team t) {
 		return sqlSession.insert("teamMapper.insertTeam", t);
+	}
+	
+	//팀 생성 이미지 등록
+	public int insertTeamImg(SqlSessionTemplate sqlSession, TeamImg ti) {
+		return sqlSession.insert("teamMapper.insertTeamImg", ti);
 	}
 
 	public int selectListCount(SqlSessionTemplate sqlSession) { // 리스트 총 갯수
@@ -170,5 +167,13 @@ public class TeamDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("teamMapper.selectOnlyCity", activityAtea, rowBounds);
+	}
+	
+	public int teamReq(SqlSessionTemplate sqlSession, String userId, String text) {
+		return sqlSession.insert("teamMapper.teamReq", userId);
+	}
+	
+	public ArrayList<Team> searchTeam(SqlSessionTemplate sqlSession, String selectValue) {
+		return (ArrayList)sqlSession.selectList("teamMapper.searchTeam", selectValue);
 	}
 }

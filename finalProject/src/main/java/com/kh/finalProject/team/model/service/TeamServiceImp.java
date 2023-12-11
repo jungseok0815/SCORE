@@ -1,12 +1,12 @@
 package com.kh.finalProject.team.model.service;
 
-import java.util.ArrayList;
-
-import com.kh.finalProject.common.vo.PageInfo;
-import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
+
+import java.util.ArrayList;
+
+import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 public interface TeamServiceImp {
@@ -14,11 +14,11 @@ public interface TeamServiceImp {
 	//게시글 총 갯수 가져오기
 	int selectListCount();
 	
-	Team selectCategoryNum(int teamNo);
-	
-	TeamMember selectUserNo(int tmemberNo);
-	
+	//팀 생성
 	int insertTeam(Team t);
+	
+	//팀 생성 사진 등록
+	int insertTeamImg(TeamImg ti);
 
 	//게시글 리스트 조회
 	ArrayList<TeamOffer> selectList(PageInfo pi);
@@ -52,6 +52,10 @@ public interface TeamServiceImp {
 	
 	// 팀 요청 
 	int teamReq(int userNo, String reqContent, int offerNo);
+
+
+	ArrayList<Team> searchTeam(String selectValue);
+	
 
 	// offerList 작성할때 작성자 정보 
 	TeamMember selectInformation(int userNo);

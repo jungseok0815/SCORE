@@ -29,19 +29,16 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public Team selectCategoryNum(int teamNo) {
-		return teamDao.selectCategoryNum(sqlSession, teamNo);
-	}
-
-	@Override
-	public TeamMember selectUserNo(int tmemberNo) {
-		return teamDao.selectUserNo(sqlSession, tmemberNo);
-	}
-	
-	@Override
 	public int insertTeam(Team t) {
 		return teamDao.insertTeam(sqlSession, t);
 	}
+	
+	@Override
+	public int insertTeamImg(TeamImg ti) {
+		return teamDao.insertTeamImg(sqlSession, ti);
+	}
+	
+	@Override
 	public ArrayList<TeamOffer> selectList(PageInfo pi) {
 		return teamDao.selectList(sqlSession, pi);
 	}
@@ -135,6 +132,13 @@ public class TeamService implements TeamServiceImp{
 	public ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi) {
 		return teamDao.selectOnlyCity(sqlSession, activityAtea, pi);
 	}
+
+	@Override
+	public ArrayList<Team> searchTeam(String selectValue) {
+		return teamDao.searchTeam(sqlSession, selectValue);
+	}
+
+
 
 	
 

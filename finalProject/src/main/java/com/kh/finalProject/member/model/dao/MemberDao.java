@@ -1,6 +1,7 @@
 package com.kh.finalProject.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
+import com.kh.finalProject.team.model.vo.Team;
 
 @Repository
 public class MemberDao {
@@ -31,15 +33,12 @@ public class MemberDao {
 	}
 	
 	public SportInfo getUserSportInfo(SqlSessionTemplate sqlSession, SportInfo sport) {
-		System.out.println(sport.getUserNo() + "" + sport.getCategoryNum());
 		return sqlSession.selectOne("memberMapper.getUserSportInfo", sport);
 	}
 	
 	public int getCountUserfriends(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.getCountUserfriends", userNo);
 	}
-	
-
 	public int updateUserPoint(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateUserPoint", m);
 	}
@@ -50,8 +49,10 @@ public class MemberDao {
 	public int addFriend(SqlSessionTemplate sqlSession, Friend f) {
 		return sqlSession.update("memberMapper.addFriend", f);
 	}
+	public int addFriend2(SqlSessionTemplate sqlSession, Friend f) {
+		return sqlSession.insert("memberMapper.addFriend2", f);
+	}
 	
-
 	public ArrayList<Friend> selectFriendList(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectFriendList", userNo);
 	}
@@ -59,5 +60,23 @@ public class MemberDao {
 	public int deleteFriend(SqlSessionTemplate sqlSession, Friend f) {
 		return sqlSession.delete("memberMapper.deleteFriend",f);
 
+	}
+	public int deleteFriend2(SqlSessionTemplate sqlSession, Friend f) {
+		return sqlSession.delete("memberMapper.deleteFriend2",f);
+
+	}
+	public ArrayList<Team> selectMyTeam(SqlSessionTemplate sqlSession, HashMap teamMap) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeam", teamMap);
+	}
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, String searchMain) {
+		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", searchMain);
+	}
+	
+	public int sendPostFriend(SqlSessionTemplate sqlSession, Friend f) {
+		return sqlSession.insert("memberMapper.sendPostFriend",f);
+	}
+	
+	public ArrayList<Friend> selectReqResFriendList(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectReqResFriendList", userNo);
 	}
 }

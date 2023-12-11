@@ -1,5 +1,9 @@
 package com.kh.finalProject.member.controller;
 
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -57,7 +61,7 @@ public class MemberController {
 	    Member loginUser = memberService.loginMember(m.getUserId());
 	    if(result > 0) {
 	        // DB로부터 수정된 회원정보를 다시 조회해서
-	        // session 영역에 loginUser라는 키값으로 덮어씌워야합니다.
+	        // session 영역에 loginUser라는 키값으로 덮어씌워야 함
 	        session.setAttribute("loginUser", loginUser);
 	        session.setAttribute("alertMsg", "충전이 완료되었습니다.");
 
@@ -79,15 +83,19 @@ public class MemberController {
 		sport.setUserNo(m.getUserNo());
 		SportInfo sportInfo = memberService.getUserSportInfo(sport);
 		int countfriends = memberService.getCountUserfriends(m.getUserNo());
-		System.out.println(countfriends);
-		System.out.println(sportInfo);
 		mv.addObject("sportInfo", sportInfo).addObject("countfriends",countfriends).setViewName("member/mypage");
 		return mv;
 	}
 	
 	@RequestMapping("/myPageUpdate.me")
-	public String myPageUpdate() {
-		return "member/mypageUpdate";
+	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		SportInfo sport = new SportInfo();
+		sport.setCategoryNum(1);
+		sport.setUserNo(m.getUserNo());
+		SportInfo sportInfo = memberService.getUserSportInfo(sport);
+		mv.addObject("sportInfo", sportInfo).setViewName("member/mypageUpdate");
+		return mv;
 		
 	}
 	
@@ -144,8 +152,12 @@ public class MemberController {
 	@RequestMapping("/addFriend.me")
 	public String addFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		f.setFriendResUser(m.getUserNo());	
-		return memberService.addFriend(f) > 0 ? "addFriendOk" : "addFriendFail" ;
+		f.setFriendResUser(m.getUserNo());
+		int result = memberService.addFriend(f);  
+		if(result > 0) {
+			return memberService.addFriend2(f) > 0 ? "addFriendOk" : "addFriendFail" ; 
+		}
+		return "addFriendFail";
 	}
 	
 	
@@ -163,16 +175,50 @@ public class MemberController {
 	public String deleteFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
 		f.setFriendResUser(m.getUserNo());	
-		return memberService.deleteFriend(f) > 0 ? "deleteFriendOk" : "deleteFriendFail" ;
+		int result = memberService.deleteFriend(f);
+		if(result > 0) {
+			return memberService.deleteFriend2(f) > 0 ? "deleteFriendOk" : "deleteFriendFail" ; 
+		}
+		
+		return  "deleteFriendFail";
 	}
 	
 	
 	
 	@ResponseBody
 	@RequestMapping(value= "/selectMyTeam.me",produces="application/json; charset=UTF-8" )
-	public String selectMyTeam(HttpSession session) {
+	public String selectMyTeam(HttpSession session, int categoryNum) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		return new Gson().toJson(memberService.selectFriendList(m.getUserNo()));
+		HashMap teamMap = new HashMap();
+		teamMap.put("userNo", m.getUserNo());
+		teamMap.put("categoryNum",categoryNum);	
+		return new Gson().toJson(memberService.selectMyTeam(teamMap));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/selectUserSportInfo.me",produces="application/json; charset=UTF-8" )
+	public String selectUserSportInfo(HttpSession session, SportInfo info) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		info.setUserNo(m.getUserNo());
+		return new Gson().toJson(memberService.getUserSportInfo(info));
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/sendPostFriend.me")
+	public String sendPostFriend(Friend f,HttpSession session) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		f.setFriendReqUser(m.getUserNo());
+		System.out.println("asdasdasd"+f.getFriendResUser()+"eeeee");
+		return memberService.sendPostFriend(f) > 0 ? "PostFriendOk" : "PostFriendFail" ;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/selectReqResList.me",produces="application/json; charset=UTF-8" )
+	public String selectReqResList(HttpSession session) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		
+		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
 	}
 }
 
