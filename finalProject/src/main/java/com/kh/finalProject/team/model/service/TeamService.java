@@ -132,14 +132,33 @@ public class TeamService implements TeamServiceImp{
 	public ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi) {
 		return teamDao.selectOnlyCity(sqlSession, activityAtea, pi);
 	}
+	
+	@Override
+	public int teamMemberCount(int tno) {
+		return teamDao.teamMemberCount(sqlSession, tno);
+	}
+	
+	@Override
+	public int teamAvgAge(int tno) {
+		return teamDao.teamAvgAge(sqlSession, tno);
+	}
 
 	@Override
+
+	public Team teamProfile(int tno) {
+		return teamDao.teamProfile(sqlSession, tno);
+	}
+
 	public ArrayList<Team> searchTeam(String selectValue) {
 		return teamDao.searchTeam(sqlSession, selectValue);
 	}
 
 
+	@Override
+	public ArrayList<TeamMember> teamMemberList(int tno) {
+		return teamDao.teamMemberList(sqlSession, tno);
+	}
 
-	
+
 
 }

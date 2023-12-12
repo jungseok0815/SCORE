@@ -53,9 +53,21 @@ public interface TeamServiceImp {
 	// 팀 요청 
 	int teamReq(int userNo, String reqContent, int offerNo);
 
+	
+	//팀 프로필 조회
+	Team teamProfile(int tno);
+
+	
+	//팀원 총 몇명인지 조회
+	int teamMemberCount(int tno);
+	
+	//팀원의 멤버들 평균 나이
+	int teamAvgAge(int tno);
+	
+	//팀 멤버 불러오기
+	ArrayList<TeamMember> teamMemberList(int tno);
 
 	ArrayList<Team> searchTeam(String selectValue);
-	
 
 	// offerList 작성할때 작성자 정보 
 	TeamMember selectInformation(int userNo);
