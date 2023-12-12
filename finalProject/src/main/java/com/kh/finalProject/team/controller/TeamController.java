@@ -155,9 +155,25 @@ public class TeamController {
 	
 	
 	@RequestMapping("teamProfile.tm")
-	public String teamProfileView() {
-		return "team/teamProfile";
+	public ModelAndView teamProfile(String teamNo, HttpSession session, ModelAndView mv) {
+		int tno = Integer.parseInt(teamNo);
+		int tmc = teamService.teamMemberCount(tno);
+		int taa = teamService.teamAvgAge(tno);
+		
+		Team t = teamService.teamProfile(tno);
+		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
+		System.out.println(tm);
+		
+		mv.addObject("teamMemberCount", tmc)
+		.addObject("teamAvgAge", taa)
+		.addObject("team", t)
+		.addObject("teamMemberList", tm)
+		.setViewName("team/teamProfile");
+		
+		return mv;
 	}
+	
+	
 	@RequestMapping("updateForm.tm")
 	public String teamProfileUpdateForm() {
 		return "team/teamProfileUpdate";

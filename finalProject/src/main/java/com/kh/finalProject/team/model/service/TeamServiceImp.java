@@ -6,6 +6,7 @@ import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 public interface TeamServiceImp {
@@ -55,7 +56,18 @@ public interface TeamServiceImp {
 	// 팀 요청 
 	int teamReq(String userId, String text);
 	
-	ArrayList<Team> searchTeam(String selectValue);
+	//팀 프로필 조회
+	Team teamProfile(int tno);
 	
+	//팀원 총 몇명인지 조회
+	int teamMemberCount(int tno);
+	
+	//팀원의 멤버들 평균 나이
+	int teamAvgAge(int tno);
+	
+	//팀 멤버 불러오기
+	ArrayList<TeamMember> teamMemberList(int tno);
+
+	ArrayList<Team> searchTeam(String selectValue);
 
 }

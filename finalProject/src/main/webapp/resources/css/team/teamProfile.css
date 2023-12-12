@@ -74,7 +74,7 @@ section {
     padding: 15px 20px 0px 0px;
     display: flex;
 }
-.friend-tab {
+.overview-tab {
     font-size: 16px;
     display: flex;
     color: black;
@@ -82,7 +82,19 @@ section {
     margin-right: 20px;
     opacity: 0.3;
 }
-.friend-tab-focused {
+.overview-tab-focused {
+    font-weight: 700;
+    opacity: 0.9;
+}
+.member-tab {
+    font-size: 16px;
+    display: flex;
+    color: black;
+    cursor: pointer;
+    margin-right: 20px;
+    opacity: 0.3;
+}
+.member-tab-focused {
     font-weight: 700;
     opacity: 0.9;
 }

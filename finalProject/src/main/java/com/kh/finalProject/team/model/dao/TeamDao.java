@@ -12,6 +12,7 @@ import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
+import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 
@@ -106,7 +107,24 @@ public class TeamDao {
 		return sqlSession.insert("teamMapper.teamReq", userId);
 	}
 	
+
+	public int teamMemberCount(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamMemberCount", tno);
+	}
+	
+	public int teamAvgAge(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamAvgAge", tno);
+	}
+	
+	public Team teamProfile(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.teamProfile", tno);
+	}
 	public ArrayList<Team> searchTeam(SqlSessionTemplate sqlSession, String selectValue) {
 		return (ArrayList)sqlSession.selectList("teamMapper.searchTeam", selectValue);
+
+	}
+	
+	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
+		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
 	}
 }

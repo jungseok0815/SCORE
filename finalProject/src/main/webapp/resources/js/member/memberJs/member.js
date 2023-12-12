@@ -342,7 +342,7 @@ drawMyTeamList = (teamListA) =>{
     document.querySelector(".baseball-part").innerHTML = ""
     document.querySelector(".basketball-part").innerHTML = ""
     for(let teamLIst of teamListA){
-        const str = "<a href = /teamProfile.tm?teamNo="
+        const str = "<a href = /final/teamProfile.tm?teamNo="
                     +teamLIst.teamNo+">"
                     +"<img src=''>"
                     +"<p>"+teamLIst.teamName+"</p>"
