@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/place/placeDetailView.css">
-<script src="/final/resources/js/place/placeDetailView.js"></script>
-<script src="/final/resources/js/place/placeAjax/placeAjax.js"></script>
+<script src="resources/js/place/placeDetailView.js"></script>
+<script src="resources/js/place/placeAjax/placeAjax.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body onload="init()">
@@ -115,7 +115,10 @@
                       <c:choose> 
                         <c:when test="${pl.fieldCount-resCount le 5}">
                           <p>마감까지 ${pl.fieldCount-resCount}자리남았어요.</p>
-                          <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" onclick="loadTeam('${loginUser.userNo}')">신청하기</button>
+                          <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" 
+                          onclick="loadTeam('${loginUser.userNo}', '${pl.categoryNum}',function(res){
+                            drawMyTeam(res);
+                            })">신청하기</button>
                         </c:when> 
                         <c:when test="${pl.fieldCount-resCount le 0}">
                           <p>현재 이 경기는 마감되었습니다.</p>
@@ -123,7 +126,10 @@
                         </c:when> 
                         <c:otherwise>
                           <p>지금 신청하면<br>진행 확정이 빨라져요!</p>
-                          <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" onclick="loadTeam('${loginUser.userNo}','${pl.categoryNum}')">신청하기</button>
+                          <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" 
+                          onclick="loadTeam('${loginUser.userNo}','${pl.categoryNum}',function(res){
+                            drawMyTeam(res);
+                            })">신청하기</button>
                           </c:otherwise> 
                       </c:choose>
                     </div>
@@ -142,26 +148,19 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button type="button" class="match-solo-btn">
-                            개인 신청
-                        </button>
+                        <form action="insertSoloResMatch.pl">
+                          <input type="hidden" name="matchPay" value="${pl.matchPay}">
+                          <input type="hidden" name="fieldNo" value="${pl.fieldNo}">
+                          <button type="submit" class="match-solo-btn">
+                              개인 신청
+                          </button>
+                        </form>
                         <button class="accordion-button match-team-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <span>팀별 신청</span>
                         </button>
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body choice-team-body">
-                          <button class="choice-team" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
-                            <img src="./토트넘_홋스퍼_FC_로고.svg.png" alt="">
-                            <label>토트넘 홋스퍼</label>
-                          </button>
-                        </div>
-                        <div class="accordion-body choice-team-body">
-                          <button class="choice-team" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
-                            <img src="./em_K09.png" alt="">
-                            <label>FC 정석</label>
-                          </button>
-                        </div>
+                        <!--불러온 myTeamList 그려주기-->
                       </div>
                     </div>
                     
@@ -178,29 +177,11 @@
               <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">팀원</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="">
-              <div class="modal-body">
-                <div class="team-member">
-                  <img src="./person.png" alt="">
-                  <div>
-                    <span>김기만</span><p>경기도 구리시</p>
-                  </div>
-                  <input type="checkbox" name="" id="">
-                </div>
-                <div class="team-member">
-                  <img src="./person.png" alt="">
-                  <div>
-                    <span>김기만</span><p>경기도 구리시</p>
-                  </div>
-                  <input type="checkbox" name="" id="">
-                </div>
-                <div class="team-member">
-                  <img src="./person.png" alt="">
-                  <div>
-                    <span>김기만</span><p>경기도 구리시</p>
-                  </div>
-                  <input type="checkbox" name="" id="">
-                </div>
+            <form action="insertResMatch.pl">
+              <input type="hidden" name="matchPay" value="${pl.matchPay}">
+              <input type="hidden" name="fieldNo" value="${pl.fieldNo}">
+              <div class="modal-body" id="myteam-member-list">
+                <!--불러온 teamMemberList-->
               </div>
               <div class="modal-footer">
                 <button class="btn btn-primary" type="submit">신청</button>

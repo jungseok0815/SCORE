@@ -1,16 +1,16 @@
 package com.kh.finalProject.place.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
-import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.place.model.vo.Reservation;
 
 @Repository
 public class PlaceDao {
@@ -47,5 +47,12 @@ public class PlaceDao {
 	
 	public ArrayList<Place> searchPlace(SqlSessionTemplate sqlSession, String selectValue) {
 		return (ArrayList)sqlSession.selectList("placeMapper.searchPlace",selectValue);
+	}
+	
+	public int insertResMatch(SqlSessionTemplate sqlSession, Reservation res) {
+		return sqlSession.insert("placeMapper.insertResMatch", res);
+	}
+	public int payPoint(SqlSessionTemplate sqlSession, Member loginUser) {
+		return sqlSession.update("memberMapper.payPoint", loginUser);
 	}
 }

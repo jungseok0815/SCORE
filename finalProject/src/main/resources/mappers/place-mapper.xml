@@ -160,5 +160,21 @@
 		FROM FIELD
 		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
 	</select>
+	<insert id= "insertResMatch">
+   	INSERT INTO RESERVATION
+				 (
+				 RES_NO,
+				 RES_DATE,
+				 RES_USER_NO,
+				 FIELD_NO
+				 )
+		 VALUES
+				 (
+				 SEQ_RESERVATION.NEXTVAL,
+				 SYSDATE, 
+		         #{resUserNo},
+		         #{fieldNo}
+				 )
+   </insert>
 
 </mapper>

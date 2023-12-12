@@ -23,6 +23,12 @@
 
 </head>
 <body>
+    <c:if test="${ !empty alertMsg}">
+        <script>
+           alert('${alertMsg}');
+        </script>
+        <c:remove var="alertMsg" scope="session" />
+    </c:if>
     <div class="header-body">
         <div class="header">
             <div class="header-left">

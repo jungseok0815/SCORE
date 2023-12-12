@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,10 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
-import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.place.model.vo.Reservation;
 
 @Controller
 public class PlaceController {
@@ -135,18 +135,61 @@ public class PlaceController {
 		  .addObject("resList", resList);
 		return new Gson().toJson(mv);
 	}
-	
-	@RequestMapping("/resMatch.pl")
-	public Model reservationMatch(int userNo, int categoryNum, Model m){
-		System.out.println(userNo);
-		System.out.println(categoryNum);
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("userNo", userNo);
-		map.put("categoryNum", categoryNum);
-		ArrayList<Team> myTeamList = pService.selectMyTeamList(map);
-		
-		return m;
+	@RequestMapping(value="insertSoloResMatch.pl")
+	public String insertSoloResMatch(@RequestParam("fieldNo") int fieldNo, 
+									 @RequestParam("matchPay") int matchPay, 
+									 HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(loginUser.getPoint()-matchPay<0) {
+			session.setAttribute("alertMsg", "포인트가 부족하여  충전페이지로 이동합니다.");
+			return "member/chargingPoint";
+		}
+		Reservation res = new Reservation();
+		res.setFieldNo(fieldNo);
+		res.setResUserNo(loginUser.getUserNo());
+		int result = pService.insertResMatch(res);
+		if(result>0) {
+			loginUser.setPoint(loginUser.getPoint()-matchPay);
+			int resultPay = pService.payPoint(loginUser);
+			if(resultPay>0) {
+				session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
+			}else {
+				session.setAttribute("errorMsg", "예약 실패!");
+			}
+		}else {
+			session.setAttribute("errorMsg", "예약 실패!");
+		}
+		return "main";
 	}
 	
+	@RequestMapping(value="insertResMatch.pl")
+	public String insertResMatch(@RequestParam("teamMember") ArrayList<Integer> teamMember,
+								 @RequestParam("matchPay") int matchPay,
+								 @RequestParam("fieldNo") int fieldNo,
+									HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(loginUser.getPoint()-(teamMember.size()*matchPay)<0) {
+			session.setAttribute("alertMsg", "포인트가 부족하여  충전페이지로 이동합니다.");
+			return "member/chargingPoint";
+		}
+		int[] resultList = new int[teamMember.size()];
+		int payCount = 0;
+		for(int i = 0; i < teamMember.size(); i++) {
+			Reservation res = new Reservation();
+			res.setFieldNo(fieldNo);
+			res.setResUserNo(teamMember.get(i));
+			int result = pService.insertResMatch(res);
+			if(result > 0) {
+				payCount++;
+			}
+			resultList[i] = result;
+		}
+		loginUser.setPoint(loginUser.getPoint()-(matchPay*payCount));
+		int resultPay = pService.payPoint(loginUser);
+		if(resultPay>0) {
+			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
+		}
+		return "main";
+	}
 	
 }

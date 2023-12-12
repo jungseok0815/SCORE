@@ -1,14 +1,28 @@
-function loadTeam(userNo,categoryNum){
+function loadTeam(userNo,categoryNum,callback){
     $.ajax({
         type:"get",
-        url:"resMatch.pl",
+        url:"resMatch.tm",
         data:{userNo:userNo,
             categoryNum:categoryNum},  
         success: function(res){
-            console.log("ajax성공");
+            callback(res);
         },
         error:function(){
             console.log("ajax에러");
         }
     })
+}
+function test2(teamNo,callback){
+    $.ajax({
+        type:"get",
+        url:"selectTeamMember.tm",
+        data:{teamNo:teamNo},  
+        success: function(res){
+            callback(res)
+        },
+        error:function(){
+            console.log("ajax에러");
+        }
+    })
+    
 }

@@ -319,7 +319,8 @@
  	<!-- 팀 멤버리스트 불러오기 -->
  	<select id="teamMemberList" resultMap="teamMemberResult">
 	 	SELECT TMEMBER_NO, 
-		 	   GRADE, 
+		 	   GRADE,
+               USER_NO, 
 		 	   USER_NAME, 
 		 	   CITY, 
 		 	   MEMBER_ORIGIN_NAME, 
@@ -329,4 +330,14 @@
 		LEFT JOIN MEMBER_IMG USING (USER_NO)
 		WHERE TEAM_NO = #{teamNo}
  	</select>
+ 	<select id="selectMyTeamList" resultMap="teamResult">
+	 	SELECT TEAM_NO,
+			   TEAM_NAME,
+			   CATEGORY_NUM
+		  FROM TEAM_MEMBER
+		  JOIN TEAM USING (TEAM_NO)
+		 WHERE USER_NO = #{userNo}
+		   AND CATEGORY_NUM = #{categoryNum}
+ 	</select>
+ 	
  </mapper>

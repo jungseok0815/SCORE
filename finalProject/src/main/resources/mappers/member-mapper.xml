@@ -245,6 +245,11 @@
 		OR
 		FRIEND_RES_USER = #{userNo}
 	</select>
+ 	<update id="payPoint">
+ 		UPDATE MEMBER
+		   SET USER_POINT = #{point}
+		 WHERE USER_NO = #{userNo}
+ 	</update>
 		
 	
 </mapper>
