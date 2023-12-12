@@ -152,7 +152,7 @@ public class TeamController {
 		return "";
 	}
 	
-	
+	//팀 프로필 뷰 셀렉트
 	@RequestMapping("teamProfile.tm")
 	public ModelAndView teamProfile(String teamNo, HttpSession session, ModelAndView mv) {
 		int tno = Integer.parseInt(teamNo);
@@ -160,6 +160,7 @@ public class TeamController {
 		int taa = teamService.teamAvgAge(tno);
 		
 		Team t = teamService.teamProfile(tno);
+		System.out.println(t);
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
 		System.out.println(tm);
 		
