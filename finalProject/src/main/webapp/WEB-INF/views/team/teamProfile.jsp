@@ -25,7 +25,7 @@
                                 <div class="team-profile-info">
                                     <p class="team-profile-name">${team.teamName}</p>
                                     <p class="team-profile-stadium">
-                                        <a href="">없음</a>
+                                        <a href="">홈 경기장이 없습니다</a>
                                     </p>
                                     <p class="team-profile-addInfo">${team.activityAtea}</p>
                                     <p class="team-profile-addInfo"> ${team.teamGender}・${team.teamUserAge}・${team.teamLevel}</p>
