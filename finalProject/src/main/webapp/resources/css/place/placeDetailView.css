@@ -194,3 +194,7 @@ img {
         max-width: 500px;
     }
 }
+#soldoutBtn:hover{
+    background-color: #6c757d;
+    cursor: auto;
+}

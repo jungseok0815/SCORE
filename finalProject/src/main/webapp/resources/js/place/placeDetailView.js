@@ -2,7 +2,6 @@ function init(){
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const slideCount = slides.length;
-
     showSlide(currentSlide);
     setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드   
 }

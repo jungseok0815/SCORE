@@ -1,6 +1,7 @@
 package com.kh.finalProject.place.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.team.model.vo.Team;
 
 @Repository
 public class PlaceDao {
@@ -36,7 +38,13 @@ public class PlaceDao {
 	public Place placeDetailview(SqlSessionTemplate sqlSession, int fieldNo) {
 		return sqlSession.selectOne("placeMapper.placeDetailview", fieldNo);
 	}
+	public int placeResCount(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.selectOne("placeMapper.placeResCount", fieldNo);
+	}
 	public ArrayList<Place> selectResPlaceList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectResPlaceList");
+	}
+	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectMyTeamList", map);
 	}
 }

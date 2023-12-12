@@ -1,7 +1,7 @@
 package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.team.model.vo.Team;
 
 
 
@@ -57,6 +58,16 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public ArrayList<Place> selectResPlaceList() {
 		return pDao.selectResPlaceList(sqlSession);
+	}
+
+	@Override
+	public int placeResCount(int fno) {
+		return pDao.placeResCount(sqlSession, fno);
+	}
+
+	@Override
+	public ArrayList<Team> selectMyTeamList(HashMap<String,Integer> map) {
+		return pDao.selectMyTeamList(sqlSession, map);
 	}
 
 

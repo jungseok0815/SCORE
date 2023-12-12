@@ -130,7 +130,7 @@
 				PARKING,
 				MATCH_GENDER,
 				SHOES,
-				MANAGER,
+				USER_NAME as MANAGER,
 				MATCH_LEVEL,
 				MATCH_TYPE,
 				START_TIME,
@@ -138,6 +138,7 @@
 				MATCH_PAY,
 				CATEGORY_NUM
  		  FROM FIELD
+          JOIN MEMBER ON (MANAGER = USER_NO)
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
  	<select id="selectResPlaceList" resultMap="placeResultSet">
@@ -145,5 +146,9 @@
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
-
+	<select id="placeResCount" resultType="_int">
+ 		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE FIELD_NO =  #{fieldNo}
+ 	</select>
 </mapper>

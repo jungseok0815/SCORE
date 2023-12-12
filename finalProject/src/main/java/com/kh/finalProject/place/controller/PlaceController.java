@@ -3,9 +3,11 @@ package com.kh.finalProject.place.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
-import com.kh.finalProject.place.model.service.PlaceService;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.team.model.vo.Team;
 
 @Controller
 public class PlaceController {
@@ -103,6 +105,7 @@ public class PlaceController {
 		
 		m.addAttribute("pl", pl);
 		m.addAttribute("matchPay", formatter.format(pl.getMatchPay()));
+		m.addAttribute("resCount", pService.placeResCount(fno));
 		return "place/placeDetailView";
 	}
 	
@@ -127,10 +130,23 @@ public class PlaceController {
 		PageInfo pi = Pagenation.getPageInfo(pService.placeListCount(pl), currentPage, 5, 5);
 		ArrayList<Place> list = pService.selectPlaceList(pi, pl);
 		ArrayList<Place> resList = pService.selectResPlaceList();
-		System.out.println(resList);
 		mv.addObject("pi",pi)
 		  .addObject("list", list)
 		  .addObject("resList", resList);
 		return new Gson().toJson(mv);
 	}
+	
+	@RequestMapping("/resMatch.pl")
+	public Model reservationMatch(int userNo, int categoryNum, Model m){
+		System.out.println(userNo);
+		System.out.println(categoryNum);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("userNo", userNo);
+		map.put("categoryNum", categoryNum);
+		ArrayList<Team> myTeamList = pService.selectMyTeamList(map);
+		
+		return m;
+	}
+	
+	
 }
