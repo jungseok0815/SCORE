@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="/final/resources/css/member/myPageUpdate.css" >
-    <script src="/resources/js/member/mypageJs/mypage.js"></script>
+    <script type="text/javascript" src="./resources/js/member/mypageJs/mypage.js"></script>
 </head>
 <body>
    <jsp:include page="../common/header.jsp" />   
@@ -14,30 +14,31 @@
    <div class="title"> 
         <div class="title2">
             <div class="imgUpload">
-                <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3"/>
+                <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
             </div>
+            
             <div class="a-btn">
                 <label for="file">
                     <div class="btn-upload">파일 업로드하기</div>
                 </label>
-                <input type="file" name="upfile" id="file"  onchange="imgChangeUpdate(this)">
+                <input type="file" name="upfile" id="file"  onchange="imgChangeUpdate(this)" />
             </div>
             
             <div class="title3">이름</div>
             <input type="text" value="${loginUser.userName}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">연락처</div>
             <input type="text" value="${loginUser.phone}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">나이</div>
             <input type="text" value="${loginUser.age}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">선호 지역</div>
             <input type="text" value="${loginUser.address}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
 
             <div class="title4">성별</div>
