@@ -72,8 +72,21 @@ public class TeamController {
 		// 게시물 갯수와 페이징 
 //		PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
 		
+		if(activityAtea.equals("all") && category == 0) {
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
+			
+			ArrayList<TeamOffer> list = teamService.selectList(pi);
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", teamService.selectList(pi));
+			
+			return new Gson().toJson(mv);
+		}
+		
+		
 		if(activityAtea.equals("all")) {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCountCate(category), currentPage, 10, 5);
+			
 																// 카테고리 조건으로 
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectCityAll(category, pi);

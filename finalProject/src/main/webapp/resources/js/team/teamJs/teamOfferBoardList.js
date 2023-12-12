@@ -11,11 +11,13 @@ choicePage = (page) =>{
 }
 
 choiceSports =(categoryNum) =>{
+    teamFilterValue.cpage = 1;
     teamFilterValue.category = categoryNum;
     teamAjaxController.teamList(teamFilterValue,drawTeamList)
 }
 
 choiceCity = () => {
+    teamFilterValue.cpage = 1;
     teamFilterValue.activityAtea = document.querySelector('.btnLocal input[name="local"]:checked').value;
     teamAjaxController.teamList(teamFilterValue,drawTeamList)
 }

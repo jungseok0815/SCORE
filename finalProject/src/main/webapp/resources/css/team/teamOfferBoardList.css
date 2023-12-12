@@ -67,6 +67,9 @@ ul, li, ol{
     list-style: none;
     position: relative;
 }
+.team-list{
+	border-bottom: none;
+}
 
 .team-list-item:hover{
     background-color: rgb(249, 251, 255);
