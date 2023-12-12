@@ -16,7 +16,9 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5b03f739e9.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/final/resources/css/common/header.css">
+    <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=4"></script>
+    <script src="resources/js/common/commonTeam/commonTeam.js?ver=3"></script>
+    <link rel="stylesheet" href="/final/resources/css/common/header.css?ver=1">
 
 
 </head>
@@ -28,12 +30,38 @@
                 <a href="${pageContext.request.contextPath}" class="header-name">SCORE</a>
             </div>
             <div class="header-right">
-                <div class="search-bar">
-                    <input type="text" placeholder="검색어 입력">
+                <div  class="search-bar">
+                    <input id="search" type="text" onfocus="selectReqResList()" onkeyup="searchMain()" placeholder="검색어 입력">
                     <button><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+                    <div style="display: none;" class="search-data">
+                        <div class="member-list">
+                            <div align="center" >
+                                친구 목록
+                            </div>
+                            <div class="member-search">
+                                
+                            </div>
+                        </div>
+                        <div class="team-list">
+                            <div align="center" >
+                                팀 목록
+                            </div>
+                            <div class="team-search">
+                            
+                            </div>
+                        </div>
+                        <div class="place-list">
+                            <div align="center" >
+                                경기장 목록
+                            </div>
+                            <div class="place-search">
+                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class ="search-bar-icon">
-                    <a href=""><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img"></a>
+                    <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img">
                     <c:choose>
 	            		<c:when test="${empty loginUser}">
                     		<a href="${pageContext.request.contextPath}/loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
@@ -47,5 +75,11 @@
             </div>
         </div>
     </div>
+   
+
+
+
+
+
 </body>
 </html>

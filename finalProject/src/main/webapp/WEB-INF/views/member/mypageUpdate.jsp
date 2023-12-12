@@ -22,24 +22,21 @@
             </div>
             
             <div class="title3">이름</div>
-            <input type="text" value="임도현" class="input-1">
+            <input type="text" value="${loginUser.userName}" class="input-1">
             <button class="b-btn" onclick="">수정</button>
 
             <div class="title4">연락처</div>
-            <input type="text" value="010-1234-5678" class="input-1">
+            <input type="text" value="${loginUser.phone}" class="input-1">
             <button class="b-btn" onclick="">수정</button>
 
-            <div class="title4">생년월일</div>
-            <input type="text" value="020714" class="input-1">
+            <div class="title4">나이</div>
+            <input type="text" value="${loginUser.age}" class="input-1">
             <button class="b-btn" onclick="">수정</button>
 
             <div class="title4">선호 지역</div>
-            <input type="text" value="서울 강남구" class="input-1">
+            <input type="text" value="${loginUser.address}" class="input-1">
             <button class="b-btn" onclick="">수정</button>
 
-            <div class="title4">이메일</div>
-            <input type="text" value="kh@naver.com" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
 
             <div class="title4">성별</div>
             <div class="select">

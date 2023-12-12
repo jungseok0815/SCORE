@@ -20,7 +20,7 @@ public interface PlaceService {
 	Place placeDetailview(int fno);
 	ArrayList<Place> selectResPlaceList();
 	int placeResCount(int fno);
-	ArrayList<Team> selectMyTeamList(HashMap<String,Integer> map);
+	ArrayList<Place> searchPlace(String selectValue);
 	
 
 }

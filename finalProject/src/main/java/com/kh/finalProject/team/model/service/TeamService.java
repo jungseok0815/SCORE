@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.dao.TeamDao;
 import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
@@ -27,19 +28,16 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public Team selectCategoryNum(int teamNo) {
-		return teamDao.selectCategoryNum(sqlSession, teamNo);
-	}
-
-	@Override
-	public TeamMember selectUserNo(int tmemberNo) {
-		return teamDao.selectUserNo(sqlSession, tmemberNo);
-	}
-	
-	@Override
 	public int insertTeam(Team t) {
 		return teamDao.insertTeam(sqlSession, t);
 	}
+	
+	@Override
+	public int insertTeamImg(TeamImg ti) {
+		return teamDao.insertTeamImg(sqlSession, ti);
+	}
+	
+	@Override
 	public ArrayList<TeamOffer> selectList(PageInfo pi) {
 		return teamDao.selectList(sqlSession, pi);
 	}
@@ -93,7 +91,30 @@ public class TeamService implements TeamServiceImp{
 	public int teamReq(String userId, String text) {
 		return teamDao.teamReq(sqlSession, userId, text);
 	}
-
 	
+	@Override
+	public int teamMemberCount(int tno) {
+		return teamDao.teamMemberCount(sqlSession, tno);
+	}
+	
+	@Override
+	public int teamAvgAge(int tno) {
+		return teamDao.teamAvgAge(sqlSession, tno);
+	}
+
+	@Override
+
+	public Team teamProfile(int tno) {
+		return teamDao.teamProfile(sqlSession, tno);
+	}
+
+	public ArrayList<Team> searchTeam(String selectValue) {
+		return teamDao.searchTeam(sqlSession, selectValue);
+	}
+
+	@Override
+	public ArrayList<TeamMember> teamMemberList(int tno) {
+		return teamDao.teamMemberList(sqlSession, tno);
+	}
 
 }

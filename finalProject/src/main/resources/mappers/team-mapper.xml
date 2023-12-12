@@ -4,7 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="teamMapper">
- 
  	<resultMap type="Team" id="teamResult">
  		<result column="TEAM_NO" property="teamNo" />
  		<result column="TEAM_NAME" property="teamName" />
@@ -12,8 +11,13 @@
  		<result column="TEAM_TITLE" property="teamTitle" />
  		<result column="ACTIVITY_ATEA" property="activityAtea" />
  		<result column="TEAM_LEVEL" property="teamLevel" />
- 		<result column="CATEGOTY_NUM" property="categotyNum" />
+ 		<result column="CATEGORY_NUM" property="categoryNum" />
+ 		<result column="TEAM_GENDER" property="teamGender" />
+ 		<result column="TEAM_USER_AGE" property="teamUserAge" />
+ 		<result column="TEAM_ORIGIN_NAME" property="teamOriginName" />
+ 		<result column="TEAM_CHANGE_NAME" property="teamChangeName" />
  	</resultMap>
+
  	
  	<resultMap type="TeamOffer" id="teamOfferResult">
  		<result column="OFFER_NO" property="offerNo" />
@@ -35,8 +39,32 @@
     		<result column="TEAM_NO" property="teamNo"/>
     		<result column="USER_NO" property="userNo"/>
     		<result column="GRADE" property="grade"/>
+    		<result column="USER_NAME" property="userName"/>
+    		<result column="CITY" property="city"/>
+    		<result column="MEMBER_ORIGIN_NAME" property="memberOriginName"/>
+    		<result column="MEMBER_CHANGE_NAME" property="memberChangeName"/>
     </resultMap>
 
+	<resultMap type = "TeamImg" id = "teamImgResult">
+    		<result column="TEAM_IMG_NO" property="teamImgNo"/>
+    		<result column="TEAM_IMG_URL" property="teamImgUrl"/>
+    		<result column="TEAM_ORIGIN_NAME" property="teamOriginName"/>
+    		<result column="TEAM_CHANGE_NAME" property="teamChangeName"/>
+    		<result column="DLELTE_TEAM_IMG" property="deleteTeamImg"/>
+    		<result column="TEAM_NO" property="teamNo"/>
+    		<result column="OFFER_NO" property="offerNo"/>
+    </resultMap>
+
+
+	<select id="selectMyTeam" resultMap="teamResult">
+			SELECT TEAM_NO
+					,TEAM_NAME
+					,CATEGORY_NUM
+				FROM TEAM_MEMBER
+				JOIN TEAM USING(TEAM_NO)
+				WHERE USER_NO = #{userNo}
+				AND CATEGORY_NUM = #{categoryNum}
+	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
 		SELECT CATEGORY_NUM
@@ -201,4 +229,104 @@
  		
  	</insert>
  	
+
+ 	
+ 	<select id="searchTeam" resultMap="teamResult">
+			SELECT TEAM_NO,
+			TEAM_NAME,
+			CATEGORY_NUM
+		FROM TEAM
+		WHERE TEAM_NAME  like '%'||#{searchMain}||'%'
+	</select>
+ 	
+
+
+ 	<!-- 팀 생성 -->
+ 	<insert id="insertTeam">
+ 		INSERT INTO TEAM
+ 					(
+ 						TEAM_NO,
+ 						TEAM_NAME, 
+ 						ACTIVITY_ATEA,
+ 						CATEGORY_NUM,
+ 						TEAM_LEVEL,
+ 						TEAM_GENDER,
+ 						TEAM_USER_AGE
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_TEAM.NEXTVAL,
+ 		  			   #{teamName},
+ 		  			   #{activityAtea},
+ 		  			   #{categoryNum},
+ 		  			   #{teamLevel},
+ 		  			   #{teamGender},
+ 		  			   #{teamUserAge}
+ 		  		    )
+ 	</insert>
+ 	
+ 	<insert id="insertTeamImg">
+ 		INSERT INTO TEAM_IMG
+ 					(
+ 						TEAM_IMG_NO,
+ 						TEAM_IMG_URL, 
+ 						TEAM_ORIGIN_NAME,
+ 						TEAM_CHANGE_NAME,
+ 						DLELTE_TEAM_IMG,
+ 						TEAM_NO
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_TEAD_IMG.NEXTVAL,
+ 		  			   #{teamImgUrl},
+ 		  			   #{teamOriginName},
+ 		  			   #{teamChangeName},
+ 		  			   'N',
+ 		  			   SEQ_TEAM.CURRVAL
+ 		  		    )
+ 	</insert>
+ 	 	
+ 	<!-- 팀원 총 몇명인지 구하는 쿼리문 -->
+ 	<select id="teamMemberCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM TEAM_MEMBER
+		  WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀원의 평균 나이를 구하는 쿼리문 -->
+ 	<select id="teamAvgAge" resultType="_int">
+		SELECT AVG(USER_BIRTH)
+			  FROM TEAM
+			  JOIN TEAM_MEMBER USING(TEAM_NO)
+			  JOIN MEMBER USING(USER_NO)
+		  WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀 프로필을 가져오는 쿼리문 -->
+ 	<select id="teamProfile" resultMap="teamResult">
+	 	SELECT TEAM_NAME,
+	       TEAM_GENDER,
+	       TEAM_USER_AGE,
+	       TEAM_LEVEL,
+	       ACTIVITY_ATEA,
+	       TEAM_ORIGIN_NAME,
+	       TEAM_CHANGE_NAME
+	    FROM TEAM
+	    JOIN TEAM_IMG USING (TEAM_NO)
+	    WHERE TEAM_NO = #{teamNo}
+ 	</select>
+ 	
+ 	<!-- 팀 멤버리스트 불러오기 -->
+ 	<select id="teamMemberList" resultMap="teamMemberResult">
+	 	SELECT TMEMBER_NO, 
+		 	   GRADE, 
+		 	   USER_NAME, 
+		 	   CITY, 
+		 	   MEMBER_ORIGIN_NAME, 
+		 	   MEMBER_CHANGE_NAME
+		FROM TEAM_MEMBER
+		JOIN MEMBER USING (USER_NO)
+		LEFT JOIN MEMBER_IMG USING (USER_NO)
+		WHERE TEAM_NO = #{teamNo}
+ 	</select>
  </mapper>

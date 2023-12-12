@@ -66,9 +66,10 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public ArrayList<Team> selectMyTeamList(HashMap<String,Integer> map) {
-		return pDao.selectMyTeamList(sqlSession, map);
+	public ArrayList<Place> searchPlace(String selectValue) {
+		return pDao.searchPlace(sqlSession,selectValue);
 	}
+	
 
 
 }

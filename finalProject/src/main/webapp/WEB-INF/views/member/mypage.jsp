@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="/final/resources/css/common/main.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <script src="resources/js/member/memberJs/member.js?ver=4"></script>
-    <script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
+    <script src="resources/js/member/memberJs/member.js?ver=5"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -56,18 +56,18 @@
                 <div class="point">POINT<div class="ipbox1">${loginUser.point}</div></div>
 
                 <div class="btn-3">
-                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="">축구</button>
-                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="">야구</button>
-                    <button class="btn-sm-2" onclick="">농구</button>
+                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="selectUserSportInfo(1)">축구</button>
+                    <button class="btn-sm-2" style="margin-right: 50px;" onclick="selectUserSportInfo(2)">야구</button>
+                    <button class="btn-sm-2" onclick="selectUserSportInfo(3)">농구</button>
                 </div>
 
                 <div class="btn-4">경기수 <div class="ipbox2">${sportInfo.sportCount}</div></div>
                 
-                <div class="btn-5"> 스마일 카드 <div class="ipbox2">${sportInfo.sportSmile}</div></div>
+                <div class="btn-5 smile-card"> 스마일 카드 <div class="ipbox2">${sportInfo.sportSmile}</div></div>
                 
-                <div class="btn-5">옐로우 카드 <div class="ipbox2">${sportInfo.sportYellow}</div></div>
+                <div class="btn-5 yellow-card">옐로우 카드 <div class="ipbox2">${sportInfo.sportYellow}</div></div>
                 
-                <div class="btn-5">레드 카드 <div class="ipbox2">${sportInfo.sportRed}</div></div>
+                <div class="btn-5 red-card">레드 카드 <div class="ipbox2">${sportInfo.sportRed}</div></div>
             </div>
             
         </div>
@@ -127,20 +127,8 @@
                         </button>
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <a href="${pageContext.request.contextPath}/teamProfile.tm">
-                                <img src="./resources/images/sonny2.jpg" alt="">
-                                <p>기만FC</p>
-                            </a>
-                            <a href="">
-                                <img src="./resources/images/liverpool.png" alt="">
-                                <p>기만유나이티드</p>
-                            </a>
-                            <!-- 가입 신청 내역(고정) -->
-                            <a href="">
-                                <img src="./resources/images/makingteams.png" alt="">
-                                <p>가입 신청 내역</p>
-                            </a>
+                        <div class="accordion-body football-part" >
+                            
                         </div>
                       </div>
                     </div>
@@ -151,16 +139,8 @@
                         </button>
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                          <a href="">
-                              <img src="./resources/images/human_img.png" alt="">
-                              <p>LG쌍둥이둥이</p>
-                          </a>
-                          <!-- 가입 신청 내역(고정) -->
-                          <a href="">
-                            <img src="./resources/images/makingteams.png" alt="">
-                            <p>가입 신청 내역</p>
-                        </a>
+                        <div class="accordion-body baseball-part">
+                         
                         </div>
                       </div>
                     </div>
@@ -171,16 +151,8 @@
                         </button>
                       </h2>
                       <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <a href="">
-                                <img src="./resources/images/human_img.png" alt="">
-                                <p>파주레이커스</p>
-                            </a>
-                            <!-- 가입 신청 내역(고정) -->
-                            <a href="">
-                              <img src="./resources/images/makingteams.png" alt="">
-                              <p>가입 신청 내역</p>
-                          </a>
+                        <div class="accordion-body basketball-part">
+                         
                         </div>
                       </div>
                     </div>

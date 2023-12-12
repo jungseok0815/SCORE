@@ -11,15 +11,16 @@ public class Team {
 	private String teamTitle;
 	private String activityAtea;
 	private String teamLevel;
-	private int categotyNum;
-	
-
-
+	private int categoryNum;
+	private String teamGender;
+	private String teamUserAge;
+	private String teamOriginName;
+	private String teamChangeName;
 	
 	public Team() {}
-	
+
 	public Team(int teamNo, String teamName, Date createDate, String teamTitle, String activityAtea, String teamLevel,
-			int categotyNum) {
+			int categoryNum, String teamGender, String teamUserAge, String teamOriginName, String teamChangeName) {
 		super();
 		this.teamNo = teamNo;
 		this.teamName = teamName;
@@ -27,7 +28,11 @@ public class Team {
 		this.teamTitle = teamTitle;
 		this.activityAtea = activityAtea;
 		this.teamLevel = teamLevel;
-		this.categotyNum = categotyNum;
+		this.categoryNum = categoryNum;
+		this.teamGender = teamGender;
+		this.teamUserAge = teamUserAge;
+		this.teamOriginName = teamOriginName;
+		this.teamChangeName = teamChangeName;
 	}
 
 	public int getTeamNo() {
@@ -78,21 +83,55 @@ public class Team {
 		this.teamLevel = teamLevel;
 	}
 
+
 	public int getCategotyNum() {
-		return categotyNum;
+		return categoryNum;
 	}
 
-	public void setCategotyNum(int categotyNum) {
-		this.categotyNum = categotyNum;
+	public void setCategoryNum(int categoryNum) {
+		this.categoryNum = categoryNum;
+	}
+
+	public String getTeamGender() {
+		return teamGender;
+	}
+
+	public void setTeamGender(String teamGender) {
+		this.teamGender = teamGender;
+	}
+
+	public String getTeamUserAge() {
+		return teamUserAge;
+	}
+
+	public void setTeamUserAge(String teamUserAge) {
+		this.teamUserAge = teamUserAge;
+	}
+
+	public String getTeamOriginName() {
+		return teamOriginName;
+	}
+
+	public void setTeamOriginName(String teamOriginName) {
+		this.teamOriginName = teamOriginName;
+	}
+
+	public String getTeamChangeName() {
+		return teamChangeName;
+	}
+
+	public void setTeamChangeName(String teamChangeName) {
+		this.teamChangeName = teamChangeName;
 	}
 
 	@Override
 	public String toString() {
 		return "Team [teamNo=" + teamNo + ", teamName=" + teamName + ", createDate=" + createDate + ", teamTitle="
-				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categotyNum="
-				+ categotyNum + "]";
-	}
-	
-	
+				+ teamTitle + ", activityAtea=" + activityAtea + ", teamLevel=" + teamLevel + ", categoryNum="
+				+ categoryNum + ", teamGender=" + teamGender + ", teamUserAge=" + teamUserAge + ", teamOriginName="
+				+ teamOriginName + ", teamChangeName=" + teamChangeName + "]";
 
+	}
+
+	
 }

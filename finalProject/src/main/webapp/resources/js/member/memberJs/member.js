@@ -331,12 +331,52 @@ selectTeamList =() =>{
 
 selectMyTeam = (categoryNum) => {
     console.log(categoryNum);
-    memberAjaxController.selectMyteamListAjax(categoryNum);
+    data = {
+        categoryNum : categoryNum
+    }
+    memberAjaxController.selectMyteamListAjax(data,drawMyTeamList);
 }
 
-drawMyTeamList = (teamList) =>{
-    console.log(teamList)
+drawMyTeamList = (teamListA) =>{
+    document.querySelector(".football-part").innerHTML = ""
+    document.querySelector(".baseball-part").innerHTML = ""
+    document.querySelector(".basketball-part").innerHTML = ""
+    for(let teamLIst of teamListA){
+        const str = "<a href = /final/teamProfile.tm?teamNo="
+                    +teamLIst.teamNo+">"
+                    +"<img src=''>"
+                    +"<p>"+teamLIst.teamName+"</p>"
+        if(teamLIst.categoryNum===1){
+            
+            document.querySelector(".football-part").innerHTML += str;
+        }else if(teamLIst.categoryNum===2){
+            
+            document.querySelector(".baseball-part").innerHTML += str;
+        }else{
+            
+            document.querySelector(".basketball-part").innerHTML += str;
+        }
+       
+    }
 }
+
+selectUserSportInfo =(categoryNum)=>{
+    data = {
+        categoryNum : categoryNum
+    }
+    memberAjaxController.selectUserSportInfoAjax(data,drawUserSportInfo)
+}
+
+drawUserSportInfo = (userSportInfo) =>{
+    document.querySelector(".box2 > div").innerText = userSportInfo.sportScore;
+    document.querySelector(".box22 > div").innerText = userSportInfo.sportLever;
+    document.querySelector(".btn-4 > div").innerText = userSportInfo.sportCount;
+    document.querySelector(".smile-card > div").innerText = userSportInfo.sportSmile;
+    document.querySelector(".yellow-card > div").innerText = userSportInfo.sportYellow;
+    document.querySelector(".red-card > div").innerText = userSportInfo.sportRed;
+}
+
+
 
 
 

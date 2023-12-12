@@ -44,7 +44,8 @@ public class PlaceDao {
 	public ArrayList<Place> selectResPlaceList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectResPlaceList");
 	}
-	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
-		return (ArrayList)sqlSession.selectList("placeMapper.selectMyTeamList", map);
+	
+	public ArrayList<Place> searchPlace(SqlSessionTemplate sqlSession, String selectValue) {
+		return (ArrayList)sqlSession.selectList("placeMapper.searchPlace",selectValue);
 	}
 }
