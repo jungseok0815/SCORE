@@ -285,6 +285,25 @@
  		  			   SEQ_TEAM.CURRVAL
  		  		    )
  	</insert>
+
+ 	<insert id="insertTeamMember">
+ 			INSERT INTO TEAM_MEMBER
+ 					(
+						TMEMBER_NO,
+						ENROLL_DATE,
+						TEAM_NO,
+						USER_NO,
+ 						GRADE
+ 					)
+ 			VALUES
+ 					(
+ 						SEQ_TEAM_MEMBER.NEXTVAL,
+ 						SYSDATE,
+ 						SEQ_TEAM.CURRVAL,
+ 						#{userNo},
+ 						2
+ 					)
+ 	</insert>
  	 	
  	<!-- 팀원 총 몇명인지 구하는 쿼리문 -->
  	<select id="teamMemberCount" resultType="_int">
@@ -304,7 +323,9 @@
  	
  	<!-- 팀 프로필을 가져오는 쿼리문 -->
  	<select id="teamProfile" resultMap="teamResult">
-	 	SELECT TEAM_NAME,
+	 	SELECT 
+	 	   TEAM_NO,
+	 	   TEAM_NAME,
 	       TEAM_GENDER,
 	       TEAM_USER_AGE,
 	       TEAM_LEVEL,
@@ -312,15 +333,15 @@
 	       TEAM_ORIGIN_NAME,
 	       TEAM_CHANGE_NAME
 	    FROM TEAM
-	    JOIN TEAM_IMG USING (TEAM_NO)
+	    LEFT JOIN TEAM_IMG USING (TEAM_NO)
 	    WHERE TEAM_NO = #{teamNo}
  	</select>
  	
  	<!-- 팀 멤버리스트 불러오기 -->
  	<select id="teamMemberList" resultMap="teamMemberResult">
-	 	SELECT TMEMBER_NO, 
+	 	SELECT TMEMBER_NO,
+	 		   USER_NO,
 		 	   GRADE,
-               USER_NO, 
 		 	   USER_NAME, 
 		 	   CITY, 
 		 	   MEMBER_ORIGIN_NAME, 
@@ -329,6 +350,7 @@
 		JOIN MEMBER USING (USER_NO)
 		LEFT JOIN MEMBER_IMG USING (USER_NO)
 		WHERE TEAM_NO = #{teamNo}
+		ORDER BY GRADE DESC 
  	</select>
  	<select id="selectMyTeamList" resultMap="teamResult">
 	 	SELECT TEAM_NO,
@@ -339,5 +361,4 @@
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
  	</select>
- 	
  </mapper>

@@ -8,11 +8,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-
+import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
-import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 
@@ -27,6 +27,11 @@ public class TeamDao {
 	//팀 생성 이미지 등록
 	public int insertTeamImg(SqlSessionTemplate sqlSession, TeamImg ti) {
 		return sqlSession.insert("teamMapper.insertTeamImg", ti);
+	}
+	
+	//팀 멤버 생성
+	public int insertTeamMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("teamMapper.insertTeamMember", m);
 	}
 
 	public int selectListCount(SqlSessionTemplate sqlSession) { // 리스트 총 갯수

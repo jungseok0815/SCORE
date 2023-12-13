@@ -37,6 +37,11 @@
 		<result column="FRIEND_RES_USER" property="friendResUser" />
 		<result column="FRIEND_STATUS" property="friendStatus" />
 	</resultMap>
+	<resultMap type="MessageAuth" id="messageAuthResult">
+		<result column="AUTH_NUM" property="authNum" />
+		<result column="PHONE" property="phone" />
+		<result column="SEND_DATE" property="sendDate" />
+	</resultMap>
 
 	<select id="getPostFriends" resultMap="memberResult">
 			SELECT 
@@ -236,14 +241,20 @@
 	</insert>
 	
 	<select id="selectReqResFriendList" resultMap="friendResult">
-		SELECT FRIEND_REQ_USER,
-			FRIEND_RES_USER,
-			FRIEND_STATUS
-		FROM FRIEND
-		WHERE 
-		FRIEND_REQ_USER = #{userNo}
-		OR
-		FRIEND_RES_USER = #{userNo}
+			select friend_req_user
+			from friend
+			where friend_res_user = #{userNo}
+			and friend_status = 'Y'
+	</select>
+	
+	<select id="checkFriendStatus" resultType="_int">
+			SELECT COUNT(*)
+			  FROM FRIEND
+			 WHERE
+			 FRIEND_STATUS = 'N' AND 
+			 FRIEND_RES_USER = #{friendResUser}
+			 AND
+			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
  	<update id="payPoint">
  		UPDATE MEMBER
@@ -251,5 +262,45 @@
 		 WHERE USER_NO = #{userNo}
  	</update>
 		
+			
+	<select id="userInfo" resultMap="memberResult">
+			SELECT 
+				USER_NO, 
+				USER_ID,
+				USER_PHONE,
+				USER_NAME,
+				USER_BIRTH,
+				GENDER,
+				CITY,
+				USER_POINT,
+				USER_LEVEL
+			  FROM MEMBER
+			 WHERE
+				USER_NO = #{userNo}
+				AND
+				USER_STATUS = 'Y'
+	</select>
+	
+	<insert id="insertAuth">
+		INSERT INTO MESSAGE_AUTH(
+				AUTH_NUM,
+				PHONE
+				
+				)
+			VALUES (
+				#{authNum},
+				#{phone}
+				)
+	</insert>
+	
+	<select id="checkPhoneAuth" resultType="_int">
+		SELECT COUNT(*)
+		FROM MESSAGE_AUTH
+		WHERE PHONE = #{phone}
+        AND AUTH_NUM = #{authNum}
+        AND SEND_DATE BETWEEN (SYSDATE - 3/24/60)	AND SYSDATE
+   <!--      SYSDATE BEWEEN SEND_DATE AND (SEND_DATE + 3/24/60)  -->
+	</select>
+	
 	
 </mapper>
