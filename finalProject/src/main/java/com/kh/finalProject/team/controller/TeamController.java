@@ -205,8 +205,11 @@ public class TeamController {
 	//팀 생성
 	@RequestMapping("insertTeam.tm")
 	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
-		
+
+		Member m = (Member)session.getAttribute("loginUser");
+
 		int result = teamService.insertTeam(t);
+		int result2 = teamService.insertTeamMember(m);
 		int resultImg = 0;
 	
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -218,6 +221,7 @@ public class TeamController {
 			 ti.setTeamChangeName("resources/img/team/teamInsert" + changeName);
 			 
 			 resultImg = teamService.insertTeamImg(ti);
+			 
 		}
 		
 		if(result * resultImg > 0) {

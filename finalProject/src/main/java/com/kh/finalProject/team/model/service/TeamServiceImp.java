@@ -1,10 +1,12 @@
 package com.kh.finalProject.team.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
-import java.util.ArrayList;
-import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 public interface TeamServiceImp {
@@ -17,6 +19,9 @@ public interface TeamServiceImp {
 	
 	//팀 생성 사진 등록
 	int insertTeamImg(TeamImg ti);
+	
+	//팀 멤버 생성
+	int insertTeamMember(Member m);
 
 	//게시글 리스트 조회
 	ArrayList<TeamOffer> selectList(PageInfo pi);

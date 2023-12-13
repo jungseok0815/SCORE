@@ -92,12 +92,9 @@ public class MemberController {
 	
 	@RequestMapping("/myPageUpdate.me")
 	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv) {
-		Member m =  (Member) session.getAttribute("loginUser");
-		SportInfo sport = new SportInfo();
-		sport.setCategoryNum(1);
-		sport.setUserNo(m.getUserNo());
-		SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		mv.addObject("sportInfo", sportInfo).setViewName("member/mypageUpdate");
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		
 		return mv;
 		
 	}

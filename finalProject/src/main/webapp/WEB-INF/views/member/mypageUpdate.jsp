@@ -5,37 +5,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/final/resources/css/member/myPageUpdate.css" >
+    <link rel="stylesheet" href="/final/resources/css/member/myPageUpdate.css" >
+    <script type="text/javascript" src="./resources/js/member/mypageJs/mypage.js"></script>
 </head>
 <body>
    <jsp:include page="../common/header.jsp" />   
    
    <div class="title"> 
         <div class="title2">
-
-            <img src="/img/img1.jpg" class="img3">
+            <div class="imgUpload">
+                <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
+            </div>
+            
             <div class="a-btn">
                 <label for="file">
-                <div class="btn-upload">파일 업로드하기</div>
+                    <div class="btn-upload">파일 업로드하기</div>
                 </label>
-                <input type="file" name="file" id="file">
+                <input type="file" name="upfile" id="file"  onchange="imgChangeUpdate(this)" />
             </div>
             
             <div class="title3">이름</div>
             <input type="text" value="${loginUser.userName}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">연락처</div>
             <input type="text" value="${loginUser.phone}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">나이</div>
             <input type="text" value="${loginUser.age}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
             <div class="title4">선호 지역</div>
             <input type="text" value="${loginUser.address}" class="input-1">
-            <button class="b-btn" onclick="">수정</button>
+            <button class="b-btn" onclick="UpdateChangeMypage()">수정</button>
 
 
             <div class="title4">성별</div>
@@ -65,47 +68,46 @@
                 </div>
             </div>
         
-               <div class="like-position">
-                    <p class="title4">자신있는 능력</p>
-                    <div class="like-position-lineONe">
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>슛</span>
-                            </label>
-                        </div>
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>패스</span>
-                            </label>
-                        </div>
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>드리블</span>
-                            </label>
-                        </div>
+            <div class="like-position">
+                <p class="title4">자신있는 능력</p>
+                <div class="like-position-lineONe">
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>슛</span>
+                        </label>
                     </div>
-                    <div class="like-position-lineTwo">   
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>스피드</span>
-                            </label>
-                        </div>
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>피지컬</span>
-                            </label>
-                        </div>
-                        <div class="cat comedy">
-                            <label>
-                            <input type="checkbox" value="1"><span>티키타카</span>
-                            </label>
-                        </div>   
-                    </div>      
-               </div>
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>패스</span>
+                        </label>
+                    </div>
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>드리블</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="like-position-lineTwo">   
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>스피드</span>
+                        </label>
+                    </div>
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>피지컬</span>
+                        </label>
+                    </div>
+                    <div class="cat comedy">
+                        <label>
+                        <input type="checkbox" value="1"><span>티키타카</span>
+                        </label>
+                    </div>   
+                </div>
+                <div class="btn-save">
+                    <button class="subm-btn" onclick="">저장하기</button>
+                </div>
             </div>
-
-            <button class="subm-btn" onclick="">저장하기</button>
-
         </div>
     </div>
    

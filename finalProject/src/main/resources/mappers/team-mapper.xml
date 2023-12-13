@@ -285,6 +285,25 @@
  		  			   SEQ_TEAM.CURRVAL
  		  		    )
  	</insert>
+
+ 	<insert id="insertTeamMember">
+ 			INSERT INTO TEAM_MEMBER
+ 					(
+						TMEMBER_NO,
+						ENROLL_DATE,
+						TEAM_NO,
+						USER_NO,
+ 						GRADE
+ 					)
+ 			VALUES
+ 					(
+ 						SEQ_TEAM_MEMBER.NEXTVAL,
+ 						SYSDATE,
+ 						SEQ_TEAM.CURRVAL,
+ 						#{userNo},
+ 						2
+ 					)
+ 	</insert>
  	 	
  	<!-- 팀원 총 몇명인지 구하는 쿼리문 -->
  	<select id="teamMemberCount" resultType="_int">
@@ -333,4 +352,5 @@
 		WHERE TEAM_NO = #{teamNo}
 		ORDER BY GRADE DESC 
  	</select>
+
  </mapper>
