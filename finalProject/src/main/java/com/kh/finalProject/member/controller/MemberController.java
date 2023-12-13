@@ -2,6 +2,8 @@ package com.kh.finalProject.member.controller;
 
 
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,6 +22,7 @@ import com.google.gson.Gson;
 import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 
 @Controller
@@ -75,14 +78,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myPage.me")
-	public ModelAndView myPage(HttpServletRequest req,ModelAndView mv) {
-		Member m = (Member)req.getSession().getAttribute("loginUser");
+	public ModelAndView myPage(HttpSession session,ModelAndView mv,String userNo) {
+		int userNum = Integer.parseInt(userNo);
 		SportInfo sport = new SportInfo();
 		sport.setCategoryNum(1);
-		sport.setUserNo(m.getUserNo());
+		sport.setUserNo(userNum);
+		Member m = memberService.userInfo(userNum);
 		SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		int countfriends = memberService.getCountUserfriends(m.getUserNo());
-		mv.addObject("sportInfo", sportInfo).addObject("countfriends",countfriends).setViewName("member/mypage");
+		int countfriends = memberService.getCountUserfriends(userNum);
+		mv.addObject("sportInfo", sportInfo).addObject("countfriends",countfriends).addObject("userInfo",m).setViewName("member/mypage");
 		return mv;
 	}
 	
@@ -204,9 +208,19 @@ public class MemberController {
 	@RequestMapping("/sendPostFriend.me")
 	public String sendPostFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
+
+		f.setFriendResUser(m.getUserNo());
+		int result = memberService.checkFriendStatus(f);
+		if(result > 0) {
+			return "PostFriendFail";
+		}
+		f.setFriendResUser(f.getFriendReqUser());
 		f.setFriendReqUser(m.getUserNo());
-		System.out.println("asdasdasd"+f.getFriendResUser()+"eeeee");
-		return memberService.sendPostFriend(f) > 0 ? "PostFriendOk" : "PostFriendFail" ;
+		int result2 = memberService.checkFriendStatus(f);
+		if(result2> 0) {
+			return "PostFriendFail";
+		 }
+		return   memberService.sendPostFriend(f) > 0 ? "PostFriendOk" : "PostFriendFail";
 	}
 	
 	@ResponseBody
@@ -215,6 +229,22 @@ public class MemberController {
 		Member m =  (Member) session.getAttribute("loginUser");
 		
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value= "/checkPhoneAuth.me")
+	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
+		System.out.println();
+	
+		int reusult = memberService.checkPhoneAuth(auth);
+		System.out.println();
+		System.out.println(reusult);
+		if(reusult > 0) {
+			return "authOk";
+		}
+	
+		return "authFail";
 	}
 }
 

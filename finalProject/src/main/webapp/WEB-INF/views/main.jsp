@@ -32,8 +32,16 @@
         <div class="nav-container">
             <div class="nav-wrapper">
                 <div class="nav-item"><a href="" class="selected">소셜매치</a></div>
-                <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
-                
+
+                <c:choose>
+                    <c:when test="${ empty loginUser }">
+                        <div class="nav-item"><a href="${pageContext.request.contextPath}/loginView.me" type="button" >팀관리</a></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="nav-item"><a href="" type="button" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">팀관리</a></div>
+                    </c:otherwise>
+                </c:choose>
+
                 <!-- 관리자만 볼 수 있게 -->
                 <div class="nav-item">
                     <c:if test="${loginUser.userLevel eq 1}">
@@ -41,9 +49,7 @@
                             구장등록
                         </a>
 				    </c:if>
-                </div>
-                
-                
+                </div> 
             </div>
         </div>
     
@@ -76,12 +82,14 @@
                     <c:choose>
                         <c:when test="${ empty loginUser }">
                             <a href="${pageContext.request.contextPath}/loginView.me">
+
                                 <img src="./resources/img/main/searchPeople.png" alt="">
                                 <p>팀 생성</p>
                             </a>
                         </c:when>
-                        <c:otherwise>
+
                             <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
+
                                 <img src="./resources/img/main/searchPeople.png" alt="">
                                 <p>팀 생성</p>
                             </a>
@@ -209,12 +217,14 @@
                         </li>
                     </ul>
                 </div>
+
   
                   <div class="profile-imgbox">
                       <label for="file">
                           <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
                       </label>
                       <input type="file" name="upfile" id="file" onchange="imgChange(this)" required>
+
                   </div>
   
                   <p class="madal-font">팀 이름</p>

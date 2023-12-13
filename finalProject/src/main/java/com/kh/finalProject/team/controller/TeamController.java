@@ -153,21 +153,32 @@ public class TeamController {
 		return "";
 	}
 	
-	
+	//팀 프로필 뷰 셀렉트
 	@RequestMapping("teamProfile.tm")
 	public ModelAndView teamProfile(String teamNo, HttpSession session, ModelAndView mv) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		int tno = Integer.parseInt(teamNo);
 		int tmc = teamService.teamMemberCount(tno);
 		int taa = teamService.teamAvgAge(tno);
 		
 		Team t = teamService.teamProfile(tno);
+		System.out.println(t);
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
 		System.out.println(tm);
+		
+		int myGrade = 1;
+		for (TeamMember m : tm) {
+			if(m.getUserNo() == loginUser.getUserNo())
+				myGrade = m.getGrade();
+			
+		}
 		
 		mv.addObject("teamMemberCount", tmc)
 		.addObject("teamAvgAge", taa)
 		.addObject("team", t)
 		.addObject("teamMemberList", tm)
+		.addObject("myGrade", myGrade)
 		.setViewName("team/teamProfile");
 		
 		return mv;
@@ -194,8 +205,9 @@ public class TeamController {
 	//팀 생성
 	@RequestMapping("insertTeam.tm")
 	public String insertTeam(Team t, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
+
 		Member m = (Member)session.getAttribute("loginUser");
-		
+
 		int result = teamService.insertTeam(t);
 		int result2 = teamService.insertTeamMember(m);
 		int resultImg = 0;

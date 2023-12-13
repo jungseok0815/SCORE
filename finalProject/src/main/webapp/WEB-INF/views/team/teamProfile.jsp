@@ -25,7 +25,7 @@
                                 <div class="team-profile-info">
                                     <p class="team-profile-name">${team.teamName}</p>
                                     <p class="team-profile-stadium">
-                                        <a href="">없음</a>
+                                        <a href="">홈 경기장이 없습니다</a>
                                     </p>
                                     <p class="team-profile-addInfo">${team.activityAtea}</p>
                                     <p class="team-profile-addInfo"> ${team.teamGender}・${team.teamUserAge}・${team.teamLevel}</p>
@@ -37,21 +37,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
-                                팀 프로필 설정
-                            </button>
-                        </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
-                                가입신청 보기
-                            </button>
-                        </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                구인글 작성
-                            </button>
-                        </div>
+                        <c:choose>
+                            <!-- 로그인한 유저가 주장일 때 보여주는 버튼(팀 생성자) -->
+                            <c:when test="${myGrade eq 3}">
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
+                                        팀 프로필 설정
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                        가입신청 보기
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
+                                        구인글 작성
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-danger" onclick="">
+                                        팀 해체
+                                    </button>
+                                </div>
+                            </c:when>
+                            <!-- 로그인한 유저가 일반 멤버일 때 보여주는 버튼(운영진, 멤버) -->
+                            <c:otherwise>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-danger" onclick="">
+                                        팀 탈퇴
+                                    </button>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </section>
             </div>
@@ -81,6 +99,7 @@
                                         <span class="team-preview-list-title">지역</span>
                                         <span class="team-preview-list-value team-preview-list-value-blue">${team.activityAtea}</span>
                                     </div>
+                                    <!-- 지도로 설정할 지 api로 할지 아직 모름 -->
                                     <div class="team-preview-list">
                                         <img class="team-preview-list-icon" src="./resources/img/team/teamProfile/home.png" alt="">
                                         <span class="team-preview-list-title">홈 경기장</span>
@@ -105,7 +124,7 @@
                             </div>
                         </section>
                     </div>
-
+                    <!-- 팀 멤버를 보여주는 곳(오른쪽) -->
                     <div class="team-member" style="display: none">
                         <c:forEach var="list" items="${teamMemberList}">
                             <ul>
@@ -119,7 +138,14 @@
                                                         ${list.userName}
                                                     </p>
                                                     <c:choose>
-                                                        <c:when test = "${list.grade != 1}">
+                                                        <c:when test = "${list.grade eq 3}">
+                                                            <div class="team-member-profile-info-label">
+                                                                <span>
+                                                                    주장
+                                                                </span>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test = "${list.grade eq 2}">
                                                             <div class="team-member-profile-info-label">
                                                                 <span>
                                                                     운영진
@@ -138,13 +164,64 @@
                                             </div>
                                         </a>
                                         <div>
-                                            <img class="team-member-profile-info-img" 
-                                            src="./resources/img/team/teamProfile/dotted-barline.png"
-                                            data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
+                                            <c:if test="${loginUser.userNo != list.userNo}">
+                                                <img class="team-member-profile-info-img" 
+                                                src="./resources/img/team/teamProfile/dotted-barline.png"
+                                                data-bs-toggle="modal" data-bs-target="#manage-status${list.userNo}">
+                                            </c:if>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
+                            <!-- 멤버 상태 관리 모달 -->
+                            <div class="modal fade" id="manage-status${list.userNo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">${list.userName}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- 로그인한 유저가 주장일 때(팀생성한 사람) -->
+                                            <c:if test="${myGrade eq 3}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                        <c:choose>
+                                                            <c:when test="${list.grade ne 1}">
+                                                                <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button>
+                                                            </c:when>
+                                                            <c:when test="${list.grade ne 2}">
+                                                                <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                </div>
+                                            </c:if>
+                                            <!-- 로그인한 유저가 운영진일 때 -->
+                                            <c:if test="${myGrade eq 2}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <c:if test="${ list.grade eq 1 }">
+                                                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                    </c:if>
+                                                </div>
+                                            </c:if>
+                                            <!-- 로그인한 유저가 일반 멤버일 때 -->
+                                            <c:if test="${myGrade eq 1}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </section>
@@ -152,31 +229,7 @@
         </div>
     </div>
 
-    <!-- 멤버 상태 관리 모달 -->
-    <div class="modal fade" id="teamMemberStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">임도현</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary" type="button">친구신청</button>
-                        <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
-                        <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
-                        <!-- <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button> -->
-                        <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
-                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        
-    </script>
+    
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

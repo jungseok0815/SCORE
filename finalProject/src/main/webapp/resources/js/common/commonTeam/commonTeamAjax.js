@@ -18,7 +18,7 @@ const commonAjaxController ={
             type: "post",
             data,
             success: (result) => {
-              console.log(result)    
+              result === "PostFriendOk" ? alert("친구요청 성공") : alert("이미 친구요청을한 친구입니다.")
             },
             error: (err) => {
                 console.log(err)
@@ -30,6 +30,7 @@ const commonAjaxController ={
             url: "selectReqResList.me",
             type: "post",
             success: (result) => {
+                console.log(result)
                 callback(result)
             },
             error: (err) => {
