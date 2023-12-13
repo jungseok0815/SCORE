@@ -24,7 +24,12 @@ handleMemberJoin=()=>{
    };
    
    if(checkJoin() === "ok"){
-        memberAjaxController.getJoinMemeber(data,memberJoin)
+        if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
+            memberAjaxController.getJoinMemeber(data,memberJoin)
+        }else{
+            alert("휴대폰 인증을 진행해주세요")
+        }
+     
    }else if(checkJoin() ==="fail1"){
         alert("비밀번호 형식에 맞추어 작성해주세요")
         return;
@@ -342,7 +347,7 @@ drawMyTeamList = (teamListA) =>{
     document.querySelector(".baseball-part").innerHTML = ""
     document.querySelector(".basketball-part").innerHTML = ""
     for(let teamLIst of teamListA){
-        const str = "<a href = /teamProfile.tm?teamNo="
+        const str = "<a href = /final/teamProfile.tm?teamNo="
                     +teamLIst.teamNo+">"
                     +"<img src=''>"
                     +"<p>"+teamLIst.teamName+"</p>"
@@ -375,6 +380,70 @@ drawUserSportInfo = (userSportInfo) =>{
     document.querySelector(".yellow-card > div").innerText = userSportInfo.sportYellow;
     document.querySelector(".red-card > div").innerText = userSportInfo.sportRed;
 }
+
+
+sendPhoneAuth = () =>{
+    const regex = /^\d{11}$/;
+    const phoneNum =  document.querySelector(".join-phone > input").value
+   
+    if(regex.test(phoneNum)){
+        data = {
+            phone : phoneNum
+        }
+        memberAjaxController.sendPhoneAuthAjax(data,drawAuthInput)
+    }else{
+        alert("올바르게 전화번로를 입력해주세요")
+    }
+    console.log("hihi")
+}
+
+drawAuthInput = () =>{
+    document.querySelector("#authBtn").click()
+    checkAuthTime()
+}
+
+checkAuthTime = () =>{
+    let time = 30;
+    let min = ""
+    let sec = "";
+   
+    const x = setInterval(()=>{
+        min = parseInt(time/60);
+        sec = time%60;
+        document.querySelector("#checkTime").style.color="black"
+        document.querySelector("#checkTime").innerHTML = "유효시간 : "+ min+"분" + sec +"초";
+        time --;
+
+        if(time < 0){
+            clearInterval(x)
+            document.querySelector("#checkTime").style.color="red"
+            document.querySelector("#checkTime").innerHTML = "시간초과"
+        }
+
+    },1000)
+}
+
+checkPhoneAuth =()=>{
+    const authNum = document.querySelector("#floatingInput2").value
+    const phoneNum =  document.querySelector(".join-phone > input").value
+    data = {
+        authNum : authNum,
+        phone : phoneNum
+    }
+    memberAjaxController.checkPhoneAuthAjax(data,drawCheckPhoneAuth)
+}
+
+drawCheckPhoneAuth = (result) =>{
+    if(result === "authOk"){
+        alert("인증성공")
+        document.querySelector("#auth-modal-close").click()
+        document.querySelector("#phone-certified-btn").innerText = "인증완료"
+        document.querySelector("#phone-certified-btn").disabled = true
+    }else{
+        alert("인증번호가 다릅니다.")
+    }
+}
+
 
 
 

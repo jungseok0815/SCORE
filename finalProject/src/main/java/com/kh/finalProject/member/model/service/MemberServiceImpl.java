@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.finalProject.member.model.dao.MemberDao;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
 
@@ -123,6 +124,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member userInfo(int userNo) {
 		return memberDao.userInfo(sqlSession,userNo);
+	}
+
+	@Override
+	public int insertAuth(MessageAuth auth) {
+		return memberDao.insertAuth(sqlSession,auth);
+	}
+
+	@Override
+	public int checkPhoneAuth(MessageAuth auth) {
+		return memberDao.checkPhoneAuth(sqlSession,auth);
 	}
 
 

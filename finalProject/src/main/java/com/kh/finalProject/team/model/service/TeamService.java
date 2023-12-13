@@ -91,13 +91,30 @@ public class TeamService implements TeamServiceImp{
 	public int teamReq(String userId, String text) {
 		return teamDao.teamReq(sqlSession, userId, text);
 	}
+	
+	@Override
+	public int teamMemberCount(int tno) {
+		return teamDao.teamMemberCount(sqlSession, tno);
+	}
+	
+	@Override
+	public int teamAvgAge(int tno) {
+		return teamDao.teamAvgAge(sqlSession, tno);
+	}
 
 	@Override
+
+	public Team teamProfile(int tno) {
+		return teamDao.teamProfile(sqlSession, tno);
+	}
+
 	public ArrayList<Team> searchTeam(String selectValue) {
 		return teamDao.searchTeam(sqlSession, selectValue);
 	}
 
-
-	
+	@Override
+	public ArrayList<TeamMember> teamMemberList(int tno) {
+		return teamDao.teamMemberList(sqlSession, tno);
+	}
 
 }

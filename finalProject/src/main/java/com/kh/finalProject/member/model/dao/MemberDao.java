@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
 
@@ -84,6 +85,12 @@ public class MemberDao {
 	}
 	public Member userInfo(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.userInfo",userNo);
+	}
+	public int insertAuth(SqlSessionTemplate sqlSession, MessageAuth auth) {
+		return sqlSession.insert("memberMapper.insertAuth",auth);
+	}
+	public int checkPhoneAuth(SqlSessionTemplate sqlSession, MessageAuth auth) {
+		return sqlSession.selectOne("memberMapper.checkPhoneAuth",auth);
 	}
 	
 	

@@ -2,6 +2,8 @@ package com.kh.finalProject.member.controller;
 
 
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,6 +22,7 @@ import com.google.gson.Gson;
 import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 
 @Controller
@@ -229,6 +232,22 @@ public class MemberController {
 		Member m =  (Member) session.getAttribute("loginUser");
 		
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value= "/checkPhoneAuth.me")
+	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
+		System.out.println();
+	
+		int reusult = memberService.checkPhoneAuth(auth);
+		System.out.println();
+		System.out.println(reusult);
+		if(reusult > 0) {
+			return "authOk";
+		}
+	
+		return "authFail";
 	}
 }
 
