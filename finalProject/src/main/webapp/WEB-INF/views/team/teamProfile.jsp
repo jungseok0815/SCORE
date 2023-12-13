@@ -37,21 +37,37 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
-                                팀 프로필 설정
-                            </button>
-                        </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
-                                가입신청 보기
-                            </button>
-                        </div>
-                        <div class="profile-btn d-grid gap-2">
-                            <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                구인글 작성
-                            </button>
-                        </div>
+                        <c:choose>
+                            <c:when test="${myGrade eq 3}">
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
+                                        팀 프로필 설정
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                        가입신청 보기
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
+                                        구인글 작성
+                                    </button>
+                                </div>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-danger" onclick="">
+                                        팀 해체
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-danger" onclick="">
+                                        팀 해체
+                                    </button>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </section>
             </div>
@@ -105,7 +121,7 @@
                             </div>
                         </section>
                     </div>
-
+                    <!-- 팀 멤버를 보여주는 곳(오른쪽) -->
                     <div class="team-member" style="display: none">
                         <c:forEach var="list" items="${teamMemberList}">
                             <ul>
@@ -157,25 +173,45 @@
                             <!-- 멤버 상태 관리 모달 -->
                             <div class="modal fade" id="manage-status${list.userNo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">${list.userName}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <c:choose>
-                                                <c:when test="${}">
-                                                    <div class="d-grid gap-2">
-                                                        <button class="btn btn-outline-secondary" type="button">친구신청</button>
-                                                        <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
-                                                        <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
-                                                        <!-- <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button> -->
-                                                        <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
-                                                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>   
-                                                    </div>
-                                                </c:when>
-                                            </c:choose>
+                                            <c:if test="${myGrade eq 3}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                        <c:choose>
+                                                            <c:when test="${list.grade ne 1}">
+                                                                <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button>
+                                                            </c:when>
+                                                            <c:when test="${list.grade ne 2}">
+                                                                <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${myGrade eq 2}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <c:if test="${ list.grade eq 1 }">
+                                                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                    </c:if>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${myGrade eq 1}">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </div>

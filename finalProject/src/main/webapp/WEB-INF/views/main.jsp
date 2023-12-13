@@ -216,12 +216,14 @@
                         </li>
                     </ul>
                 </div>
-  
-                  <div class="profile-imgbox">
-                      <label for="file">
-                          <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
-                      </label>
-                      <input type="file" name="upfile" id="file" onchange="imgChange(this)">
+                   <div class="team-profile-insert">
+                    <div class="profile-imgbox">
+                        <label for="file">
+                            <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
+                        </label>
+                        <input type="file" name="upfile" id="file" onchange="imgChange(this)">
+                        <p style="font-size: 10px;">↑클릭하여 엠블럼 등록</p>
+                    </div>
                   </div>
   
                   <p class="madal-font">팀 이름</p>
