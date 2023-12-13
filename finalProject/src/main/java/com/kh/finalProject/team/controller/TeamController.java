@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.service.TeamService;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
@@ -45,14 +46,15 @@ public class TeamController {
 	}
 	
 	@RequestMapping("offerDetailView.tm")
-	public String teamOfferDetailView(int tno, Model model) {
+	public String teamOfferDetailView(int tno, Model model, HttpSession session) {
 		int result = teamService.increaseCount(tno);
-		
+
 		if (result > 0) {
-			TeamOffer team = teamService.selectOfferDetail(tno);
+			TeamOffer teamOffer = teamService.selectOfferDetail(tno);
 			TeamImg teamImg = teamService.selectOfferImg(tno);
 			
-			model.addAttribute("team", team);
+			model.addAttribute("teamOffer", teamOffer);
+			// 어쏘를 데이터베이스로부터 조회해서 넘겨주자
 			model.addAttribute("teamImg", teamImg);
 			
 			return "team/teamOfferListDetailView";
@@ -187,7 +189,6 @@ public class TeamController {
 		
 		Team t = teamService.teamProfile(tno);
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
-		System.out.println(tm);
 		
 		mv.addObject("teamMemberCount", tmc)
 		.addObject("teamAvgAge", taa)

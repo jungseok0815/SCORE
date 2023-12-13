@@ -32,9 +32,9 @@
 	                            </div>
 	                            <div class="list-content">
 	                                <div class="list-title">
-	                                    <span class="TimeName">${team.teamName}</span>
+	                                    <span class="TimeName">${teamOffer.teamName}</span>
 	                                </div>
-	                                <span class="list-member">${team.offerAge}, ${team.offerLevel}, ${team.offerGender}</span>
+	                                <span class="list-member">${teamOffer.offerAge}, ${teamOffer.offerLevel}, ${teamOffer.offerGender}</span>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -43,14 +43,14 @@
 	                    <div class="left-body">
 	                        <div class="body-list">
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerGender}</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerGender}</span>
 	                            </div>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerLevel}</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerLevel}</span>
 	                            </div>
 	                            <br>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${team.offerAge}</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerAge}대</span>
 	                            </div>
 	                            <div class="body-list-item">
 	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png" class="list-star-img"/>0원</span>
@@ -60,17 +60,17 @@
 	                    </div>
 	                    <div class="btn-wrap">
 							<!-- Button to Open the Modal -->
-							<c:if test="${empty loginUser}">
-							    <!-- 로그인이 안 되어 있을 때 버튼을 보이지 않게 함 -->
+							<c:if test="${empty loginUser and teamOffer.teamNo eq loginUser.teamNo}">
+							    <!-- 로그인이 안 되어 있을 때 버튼을 보이지 않게 함 그리고 이미 팀원인 사람은 안보이게 -->
 							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal" style="display: none;">가입 신청</button>
 							</c:if>
-							<c:if test="${not empty loginUser}">
+							<c:if test="${not empty loginUser and teamOffer.teamNo ne loginUser.teamNo}"> 
 							    <!-- 로그인이 되어 있을 때 버튼을 보이게 함 -->
 							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
 							</c:if>
 						</div>
-						<c:if test="${team.userNo eq loginUser.userNo}">
-							<button onclick="location.href='offerDelete.tm?tno=${team.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
+						<c:if test="${teamOffer.userNo eq loginUser.userNo}">
+							<button onclick="location.href='offerDelete.tm?tno=${teamOffer.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
 	                	</c:if>
 	                </div>
 	            </div>
@@ -82,11 +82,11 @@
 							<img src="${teamImg.teamChangeName}"  class="content-img"/>
 						</div>
 	                    <div class="content-div"> 
-	                    ${team.offerContent}
+	                    ${teamOffer.offerContent}
 	                    </div>
 	                    
 	                    <div class="content-footer">
-	                       	조회수 ${team.offerCount}
+	                       	조회수 ${teamOffer.offerCount}
 	                        
 	                    </div>
 	                </div>
@@ -111,7 +111,7 @@
 	            
 	            <!-- Modal body -->
 	            <form action="teamReq.tm" method="POST">
-	            <input type="hidden" name="offerNo" value="${team.offerNo}">
+	            <input type="hidden" name="offerNo" value="${teamOffer.offerNo}">
 	            <input type="hidden" name="userNo" value="${loginUser.userNo}">
 	            
 	            <div class="modal-body">

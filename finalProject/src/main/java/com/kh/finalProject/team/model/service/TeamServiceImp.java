@@ -92,4 +92,7 @@ public interface TeamServiceImp {
 	
 	// 카테고리 없을때 지역만 가져오는 리스트 
 	ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi);
+	
+	// 팀 번호 조회 
+	int getTeamNumber(int userNo);
 }

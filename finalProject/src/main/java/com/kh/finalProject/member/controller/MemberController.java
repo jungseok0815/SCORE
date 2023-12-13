@@ -220,5 +220,18 @@ public class MemberController {
 		
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
 	}
+	
+	
+	@RequestMapping(value="/logout.me")
+	public ModelAndView logoutMember(ModelAndView mv, HttpSession session) {
+		
+		session.removeAttribute("loginUser"); 
+		mv.setViewName("redirect:/");
+		
+		return mv;
+	}
+	
+	
 }
+
 

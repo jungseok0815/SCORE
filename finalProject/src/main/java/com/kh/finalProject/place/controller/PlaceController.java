@@ -127,7 +127,6 @@ public class PlaceController {
 		PageInfo pi = Pagenation.getPageInfo(pService.placeListCount(pl), currentPage, 5, 5);
 		ArrayList<Place> list = pService.selectPlaceList(pi, pl);
 		ArrayList<Place> resList = pService.selectResPlaceList();
-		System.out.println(resList);
 		mv.addObject("pi",pi)
 		  .addObject("list", list)
 		  .addObject("resList", resList);

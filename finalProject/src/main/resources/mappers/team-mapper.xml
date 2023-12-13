@@ -508,4 +508,15 @@
 		LEFT JOIN MEMBER_IMG USING (USER_NO)
 		WHERE TEAM_NO = #{teamNo}
  	</select>
+ 	
+ 	<!-- 팀 번호 불러오기 -->
+ 	<select id="getTeamNumber" resultType="_int">
+	 	SELECT TEAM_NO,
+	       TEAM_NAME
+	    FROM TEAM_MEMBER
+	    JOIN TEAM USING(TEAM_NO)
+	    WHERE USER_NO = #{userNo}
+ 	</select>
+ 	
+ 	
  </mapper>
