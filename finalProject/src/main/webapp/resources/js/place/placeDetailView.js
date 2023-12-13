@@ -3,22 +3,22 @@ function init(){
     const slides = document.querySelectorAll('.slide');
     const slideCount = slides.length;
     showSlide(currentSlide);
-    setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드   
-}
-
-function showSlide(n) {
-    slides.forEach(slide => slide.style.display = 'none');
-    slides[n].style.display = 'block';
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slideCount;
-    showSlide(currentSlide);
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slideCount) % slideCount;
-    showSlide(currentSlide);
+    setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드 
+    
+    function showSlide(n) {
+        slides.forEach(slide => slide.style.display = 'none');
+        slides[n].style.display = 'block';
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+        showSlide(currentSlide);
+    }
 }
 function drawMyTeam(res){
     let myTeamListStr = "";
@@ -49,4 +49,14 @@ function drawTeamMemberList(res){
                                 `</div>`
     }
     document.querySelector('#myteam-member-list').innerHTML = myTeamMemberListStr;
+}
+
+function copyText(){
+    const text = document.getElementById('copy_text').textContent;
+    const textarea = document.createElement('textarea');
+    textarea.textContent = text;
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
 }

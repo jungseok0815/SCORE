@@ -23,6 +23,7 @@ public interface PlaceService {
 	ArrayList<Place> searchPlace(String selectValue);
 	int insertResMatch(Reservation res);
 	int payPoint(Member loginUser);
+	int checkResMatch(Reservation res);
 	
 
 }

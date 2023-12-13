@@ -106,7 +106,7 @@
                 <div class="body_right section_div">
                     <p>${pl.fieldDate} ${pl.startTime}</p>
                     <h1>${pl.fieldName}</h1>
-                    <span>${pl.fieldArea}<h6><a>주소복사</a><a>지도보기</a></h6></span>
+                    <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a>지도보기</a></h6></span>
                     <br>
                     <hr>
                     <h1 class="body_right_pay">${matchPay}</h1><h6 class="body_right_pay">/2시간</h6>

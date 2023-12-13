@@ -55,4 +55,9 @@ public class PlaceDao {
 	public int payPoint(SqlSessionTemplate sqlSession, Member loginUser) {
 		return sqlSession.update("memberMapper.payPoint", loginUser);
 	}
+	public int checkResMatch(SqlSessionTemplate sqlSession, Reservation res) {
+		System.out.println(res);
+		int result = sqlSession.selectOne("placeMapper.checkResMatch", res);
+		return result;
+	}
 }

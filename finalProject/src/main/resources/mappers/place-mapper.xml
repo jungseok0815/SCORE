@@ -176,5 +176,12 @@
 		         #{fieldNo}
 				 )
    </insert>
+   
+ 	<select id="checkResMatch" resultType="_int">
+ 		SELECT COUNT(*)
+		  FROM RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+		   AND RES_USER_NO = #{resUserNo}
+ 	</select>
 
 </mapper>

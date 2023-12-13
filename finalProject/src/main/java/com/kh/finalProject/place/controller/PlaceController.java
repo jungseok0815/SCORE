@@ -172,19 +172,24 @@ public class PlaceController {
 			session.setAttribute("alertMsg", "포인트가 부족하여  충전페이지로 이동합니다.");
 			return "member/chargingPoint";
 		}
-		int[] resultList = new int[teamMember.size()];
-		int payCount = 0;
+		
+		for(int i = 0; i < teamMember.size(); i++) {
+			Reservation res = new Reservation();
+			res.setFieldNo(fieldNo);
+			res.setResUserNo(teamMember.get(i));
+			
+			if(pService.checkResMatch(res) > 0) {
+				session.setAttribute("alertMsg", "이미 예약한 인원이 존재합니다.");
+				return "main";
+			}
+		}
 		for(int i = 0; i < teamMember.size(); i++) {
 			Reservation res = new Reservation();
 			res.setFieldNo(fieldNo);
 			res.setResUserNo(teamMember.get(i));
 			int result = pService.insertResMatch(res);
-			if(result > 0) {
-				payCount++;
-			}
-			resultList[i] = result;
 		}
-		loginUser.setPoint(loginUser.getPoint()-(matchPay*payCount));
+		loginUser.setPoint(loginUser.getPoint()-(teamMember.size()*matchPay));
 		int resultPay = pService.payPoint(loginUser);
 		if(resultPay>0) {
 			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");

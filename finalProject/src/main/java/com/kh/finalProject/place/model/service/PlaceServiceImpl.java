@@ -80,5 +80,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.payPoint(sqlSession, loginUser);
 	}
 
+	@Override
+	public int checkResMatch(Reservation res) {
+		return pDao.checkResMatch(sqlSession, res);
+	}
+
 
 }
