@@ -15,7 +15,7 @@
     <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/header.jsp"/>
 	
 	<div class="title"> 
 
@@ -68,7 +68,7 @@
             <div class="start-1">
                 <div class="match">소셜 매치</div>
                 <br>
-                <div class="point">POINT<div class="ipbox1">${userInfo.point}</div></div>
+                <div class="point">POINT<div class="ipbox1">${loginUser.point}원</div></div>
 
                 <div class="btn-3">
                     <button class="btn-sm-2" style="margin-right: 50px;" onclick="selectUserSportInfo(1)">축구</button>
