@@ -15,12 +15,11 @@
 	<jsp:include page="../common/header.jsp" />
 	<div class="outer">
         <div class="slider">
-            <div class="slide">
-                <img src="https://d31wz4d3hgve8q.cloudfront.net/media/stadium_01_gasan.jpg" alt="플랩 스타디움 가산 마리오 단일 구장">
-            </div>
-            <div class="slide">
-                <img src="https://d31wz4d3hgve8q.cloudfront.net/media/stadium_02_gasan.jpg" alt="">
-            </div>
+            <c:forEach var="item" items="${plImgList}">
+              <div class="slide">
+                <img src="${item.fieldChangeName}">
+              </div>
+            </c:forEach>
         </div>
         <section>
             <div class="section_body">

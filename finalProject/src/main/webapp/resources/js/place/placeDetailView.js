@@ -27,7 +27,7 @@ function drawMyTeam(res){
         myTeamListStr += `<div class="accordion-body choice-team-body">`+
                             `<button class="choice-team"`+
                             `data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"`+
-                            `onclick="test2(`+tmp.teamNo+`,`+function(res){
+                            `onclick="selectTeamMember(`+tmp.teamNo+`,`+function(res){
                                 drawTeamMemberList(res);
                                 }+`)">`+
                             `<img src="./em_K09.png" alt="">`+

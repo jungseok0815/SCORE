@@ -85,5 +85,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.checkResMatch(sqlSession, res);
 	}
 
+	@Override
+	public ArrayList<PlaceImg> placeImgList(int fno) {
+		return pDao.placeImgList(sqlSession, fno);
+	}
+
 
 }

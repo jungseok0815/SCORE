@@ -130,7 +130,7 @@
 				PARKING,
 				MATCH_GENDER,
 				SHOES,
-				USER_NAME as MANAGER,
+				MANAGER,
 				MATCH_LEVEL,
 				MATCH_TYPE,
 				START_TIME,
@@ -138,7 +138,6 @@
 				MATCH_PAY,
 				CATEGORY_NUM
  		  FROM FIELD
-          JOIN MEMBER ON (MANAGER = USER_NO)
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
  	<select id="selectResPlaceList" resultMap="placeResultSet">
@@ -182,6 +181,14 @@
 		  FROM RESERVATION
 		 WHERE FIELD_NO = #{fieldNo}
 		   AND RES_USER_NO = #{resUserNo}
+ 	</select>
+ 	<select id="placeImgList" resultMap="placeImgResultSet">
+ 		SELECT FIELD_IMG_NO,
+		       FIELD_URL,
+		       FIELD_ORIGIN_NAME,
+		       FIELD_CHANGE_NAME
+		  FROM FIELD_IMG
+		 WHERE FIELD_NO = #{fieldNo}
  	</select>
 
 </mapper>

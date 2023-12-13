@@ -12,7 +12,7 @@ function loadTeam(userNo,categoryNum,callback){
         }
     })
 }
-function test2(teamNo,callback){
+function selectTeamMember(teamNo,callback){
     $.ajax({
         type:"get",
         url:"selectTeamMember.tm",

@@ -56,8 +56,10 @@ public class PlaceDao {
 		return sqlSession.update("memberMapper.payPoint", loginUser);
 	}
 	public int checkResMatch(SqlSessionTemplate sqlSession, Reservation res) {
-		System.out.println(res);
-		int result = sqlSession.selectOne("placeMapper.checkResMatch", res);
-		return result;
+		return sqlSession.selectOne("placeMapper.checkResMatch", res);
 	}
+	public ArrayList<PlaceImg> placeImgList(SqlSessionTemplate sqlSession, int fieldNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.placeImgList", fieldNo);
+	}
+	
 }

@@ -40,32 +40,31 @@ public class PlaceController {
 	}
 
 	@RequestMapping("/insert.pl")
-	public String insertPlace(Place p, PlaceImg pi, MultipartFile upfile, HttpSession session, Model m) {
+	public String insertPlace(Place p, ArrayList<MultipartFile> upfile, HttpSession session, Model m) {
 		
 		int resultPlace = pService.insertPlace(p);
-		int resultImg = 0;
+		int resultImg = 1;
 		
-		
-		//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
-		if(!upfile.getOriginalFilename().equals("")) {
-			
-		   String changeName = saveFile(upfile, session);
-		   
-		   pi.setFieldUrl("resources/img/place/");
-		   pi.setFieldOriginName(upfile.getOriginalFilename());
-		   pi.setFieldChangeName("resources/img/place/placeInsert" + changeName);
-		   
-		   resultImg = pService.insertPlaceImg(pi);
+		for(MultipartFile mf : upfile) {
+			//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
+			if(!mf.getOriginalFilename().equals("")) {
+				PlaceImg pi = new PlaceImg();
+				String changeName = saveFile(mf, session);
+				
+				pi.setFieldUrl("resources/img/place/");
+				pi.setFieldOriginName(mf.getOriginalFilename());
+				pi.setFieldChangeName("resources/img/place/placeInsert/" + changeName);
+				
+				resultImg = resultImg * pService.insertPlaceImg(pi);
+			}
 		}
 		
 		if(resultPlace * resultImg > 0) {
 			session.setAttribute("alertMsg", "경기장 등록이 완료되었습니다.");
-	        return "redirect:/";
 		} else {
-			session.setAttribute("alertMsg", "사진을 꼭 첨부해주세요.");
-	        return "redirect:/";
+			session.setAttribute("alertMsg", "경기장 등록에 실패하였습니다.");
 		}
-		
+		return "redirect:/";
 	}
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {
@@ -106,6 +105,7 @@ public class PlaceController {
 		m.addAttribute("pl", pl);
 		m.addAttribute("matchPay", formatter.format(pl.getMatchPay()));
 		m.addAttribute("resCount", pService.placeResCount(fno));
+		m.addAttribute("plImgList", pService.placeImgList(fno));
 		return "place/placeDetailView";
 	}
 	
