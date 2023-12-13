@@ -15,7 +15,7 @@
     <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/header.jsp"/>
 	
 	<div class="title"> 
 

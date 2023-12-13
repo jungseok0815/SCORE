@@ -38,6 +38,7 @@
                             </div>
                         </div>
                         <c:choose>
+                            <!-- 로그인한 유저가 주장일 때 보여주는 버튼(팀 생성자) -->
                             <c:when test="${myGrade eq 3}">
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
@@ -60,10 +61,11 @@
                                     </button>
                                 </div>
                             </c:when>
+                            <!-- 로그인한 유저가 일반 멤버일 때 보여주는 버튼(운영진, 멤버) -->
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-danger" onclick="">
-                                        팀 해체
+                                        팀 탈퇴
                                     </button>
                                 </div>
                             </c:otherwise>
@@ -97,6 +99,7 @@
                                         <span class="team-preview-list-title">지역</span>
                                         <span class="team-preview-list-value team-preview-list-value-blue">${team.activityAtea}</span>
                                     </div>
+                                    <!-- 지도로 설정할 지 api로 할지 아직 모름 -->
                                     <div class="team-preview-list">
                                         <img class="team-preview-list-icon" src="./resources/img/team/teamProfile/home.png" alt="">
                                         <span class="team-preview-list-title">홈 경기장</span>
@@ -179,6 +182,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <!-- 로그인한 유저가 주장일 때(팀생성한 사람) -->
                                             <c:if test="${myGrade eq 3}">
                                                 <div class="d-grid gap-2">
                                                     <button class="btn btn-outline-secondary" type="button">친구신청</button>
@@ -195,6 +199,7 @@
                                                     <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
                                                 </div>
                                             </c:if>
+                                            <!-- 로그인한 유저가 운영진일 때 -->
                                             <c:if test="${myGrade eq 2}">
                                                 <div class="d-grid gap-2">
                                                     <button class="btn btn-outline-secondary" type="button">친구신청</button>
@@ -205,6 +210,7 @@
                                                     </c:if>
                                                 </div>
                                             </c:if>
+                                            <!-- 로그인한 유저가 일반 멤버일 때 -->
                                             <c:if test="${myGrade eq 1}">
                                                 <div class="d-grid gap-2">
                                                     <button class="btn btn-outline-secondary" type="button">친구신청</button>
