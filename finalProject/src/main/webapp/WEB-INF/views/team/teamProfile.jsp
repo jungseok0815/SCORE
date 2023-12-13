@@ -119,7 +119,14 @@
                                                         ${list.userName}
                                                     </p>
                                                     <c:choose>
-                                                        <c:when test = "${list.grade != 1}">
+                                                        <c:when test = "${list.grade eq 3}">
+                                                            <div class="team-member-profile-info-label">
+                                                                <span>
+                                                                    주장
+                                                                </span>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test = "${list.grade eq 2}">
                                                             <div class="team-member-profile-info-label">
                                                                 <span>
                                                                     운영진
@@ -138,13 +145,41 @@
                                             </div>
                                         </a>
                                         <div>
-                                            <img class="team-member-profile-info-img" 
-                                            src="./resources/img/team/teamProfile/dotted-barline.png"
-                                            data-bs-toggle="modal" data-bs-target="#teamMemberStatus">
+                                            <c:if test="${loginUser.userNo != list.userNo}">
+                                                <img class="team-member-profile-info-img" 
+                                                src="./resources/img/team/teamProfile/dotted-barline.png"
+                                                data-bs-toggle="modal" data-bs-target="#manage-status${list.userNo}">
+                                            </c:if>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
+                            <!-- 멤버 상태 관리 모달 -->
+                            <div class="modal fade" id="manage-status${list.userNo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">${list.userName}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <c:choose>
+                                                <c:when test="${}">
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                        <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
+                                                        <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
+                                                        <!-- <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button> -->
+                                                        <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>   
+                                                    </div>
+                                                </c:when>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </section>
@@ -152,31 +187,7 @@
         </div>
     </div>
 
-    <!-- 멤버 상태 관리 모달 -->
-    <div class="modal fade" id="teamMemberStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">임도현</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary" type="button">친구신청</button>
-                        <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
-                        <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
-                        <!-- <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button> -->
-                        <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
-                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        
-    </script>
+    
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
