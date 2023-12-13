@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <script src="resources/js/member/memberJs/member.js?ver=3"></script>
-    <script src="resources/js/member/memberAjax/memberAjax.js?ver=2"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=5"></script>
  
 </head>
 </head>
@@ -89,12 +89,12 @@
                     </div>
                     
                     <p class="join-font">휴대폰 번호</p>
-                    <div class="join-password-part">
-                        <div class="form-floating mb-3 join-phone">
-                            <input type="text" value="" class="form-control id" id="floatingInput" placeholder="name@example.com">
-                        </div> 
-                        <button type="button"  class="btn btn-primary" id="phone-certified-btn">인증요청</button>
-                    </div>
+                        <div class="join-password-part">
+                            <div class="form-floating mb-3 join-phone">
+                                <input type="text" value="" class="form-control id" id="floatingInput" placeholder="name@example.com">
+                            </div> 
+                            <button type="button"  class="btn btn-primary" onclick="sendPhoneAuth()" id="phone-certified-btn">인증요청</button>
+                        </div>
                     <div class="d-grid gap-2 join-btn-div" >
                         <button class="btn btn-primary" id="join-btn" onclick="handleMemberJoin()">회원가입</button>
                     </div>
@@ -184,6 +184,30 @@
       </div>
       
 
+
+      <button type="button" style="display: none;" class="btn btn-primary" id="authBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Launch demo modal
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header" align="center">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">인증번호</h1>
+              <button type="button" class="btn-close" id="auth-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="join-password-part">
+                    <div class="form-floating mb-3 join-phone">
+                        <input type="number"class="form-control id" id="floatingInput2" placeholder="name@example.com">
+                    </div> 
+                    <button type="button" onclick="checkPhoneAuth()" class="btn btn-primary" >확인</button>
+                </div>
+                <div id="checkTime"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 

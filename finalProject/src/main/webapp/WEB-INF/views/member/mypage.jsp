@@ -21,28 +21,43 @@
 
         <div class="title2">
             <div style="float: left; width: 35%; padding:10px;">
-                <div style="font-size: 22px; width: 80px; height: 30px;">${loginUser.userName}</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">${loginUser.userId}</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px;">선호 지역 : ${loginUser.address}</div><br>
+                <div style="font-size: 22px; width: 80px; height: 30px;">${userInfo.userName}</div><br>
+                <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">${userInfo.userId}</div><br>
+                <div style="font-size: 14px; width: 90px; height: 20px;">선호 지역 : ${userInfo.address}</div><br>
                 <div style="font-size: 14px; width: 80px; height: 0px;">${countfriends}명의 친구</div><br><br>
             </div>
 
             <div class="img-teul">
                 <img src="/img/img1.jpg" alt="" class="img1">
             </div>
-            
-            <div class="bot01">
-                <button class="btn-1" onclick="location.href='${pageContext.request.contextPath}/myPageUpdate.me'">프로필 설정</button>
-            </div>
-                
-            <div class="bot02">
-                <button class="btn-1" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="selectPostFriend()">나의 친구 보기</button>
-            </div>
-
-            <div class="bot02">
-                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
-            </div>
-
+            <c:choose>
+            <c:when test="${loginUser.userNo eq userInfo.userNo}">
+	            <div class="bot01">
+	                <button class="btn-1" onclick="location.href='${pageContext.request.contextPath}/myPageUpdate.me'">프로필 설정</button>
+	            </div>
+	                
+	            <div class="bot02">
+	                <button class="btn-1" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="selectPostFriend()">나의 친구 보기</button>
+	            </div>
+	
+	            <div class="bot02">
+	                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
+	            </div>
+	        </c:when>
+	        <c:otherwise>
+	        	 <div class="bot01">
+	                <button class="btn-1" disabled onclick="location.href='${pageContext.request.contextPath}/myPageUpdate.me'">프로필 설정</button>
+	            </div>
+	                
+	            <div class="bot02">
+	                <button class="btn-1" disabled data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="selectPostFriend()">나의 친구 보기</button>
+	            </div>
+	
+	            <div class="bot02">
+	                <button class="btn-1" disabled data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
+	            </div>
+	        </c:otherwise>
+			</c:choose>
             <div class="bot03">
                 <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
                 <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">${sportInfo.sportLever}</div></div>
@@ -53,7 +68,7 @@
             <div class="start-1">
                 <div class="match">소셜 매치</div>
                 <br>
-                <div class="point">POINT<div class="ipbox1">${loginUser.point}</div></div>
+                <div class="point">POINT<div class="ipbox1">${userInfo.point}</div></div>
 
                 <div class="btn-3">
                     <button class="btn-sm-2" style="margin-right: 50px;" onclick="selectUserSportInfo(1)">축구</button>

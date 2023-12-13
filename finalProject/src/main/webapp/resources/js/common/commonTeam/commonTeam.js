@@ -1,8 +1,6 @@
 const haderValue = {
     eventFlag: null,
-    tmp: {
-
-    }
+    tmp: {}
 }
 
 selectReqResList = () =>{
@@ -60,13 +58,26 @@ drawSearchResult = (selectResult) =>{
             memberArea.appendChild(memberList);
             
         }else{
+            console.log(mList)
+            memberArea.innerHTML = ""
             for(let a of mList){
-                memberArea.innerHTML = ""
+                let status = false;
                 for(let b of  haderValue.tmp){
-                    if((a.userNo===b.friendResUser || a.userNo===b.friendReqUser) && b.friendStatus ==="Y"){
+                    if(a.userNo===b.friendReqUser){
+                        status= true;
+                        break
+                    }
+                    else{ 
+                        status= false;
+                    }
+                }     
+                if(status===true){
                         const postFriendBTn = document.createElement("button");
                         postFriendBTn.className="btn btn-outline-primary";
-                        postFriendBTn.innerText = "이미 친구"
+                        postFriendBTn.innerText = "친구 프로필!"
+                        postFriendBTn.onclick =() =>{
+                            location.href = "/final/myPage.me?userNo="+a.userNo
+                        }
                         const divtag2 =  document.createElement("div")
                         const spanTag =  document.createElement("span");
                         const spanTag2 =  document.createElement("span");
@@ -76,21 +87,7 @@ drawSearchResult = (selectResult) =>{
                         divtag2.appendChild(spanTag2)
                         memberList.appendChild(divtag2);
                         memberList.appendChild(postFriendBTn);
-                    }else if((a.userNo===b.friendResUser || a.userNo===b.friendReqUser) && b.friendStatus ==="N"){
-                        const postFriendBTn = document.createElement("button");
-                        postFriendBTn.className="btn btn-outline-primary";
-                        postFriendBTn.innerText = "친구 요청중"
-
-                        const divtag2 =  document.createElement("div")
-                        const spanTag =  document.createElement("span");
-                        const spanTag2 =  document.createElement("span");
-                        spanTag.innerHTML = "아이디: " + a.userId;
-                        spanTag2.innerHTML = "이름 : " + a.userName;
-                        divtag2.appendChild(spanTag)
-                        divtag2.appendChild(spanTag2)
-                        memberList.appendChild(divtag2);
-                        memberList.appendChild(postFriendBTn);
-                    }else{ 
+                }else{
                         const postFriendBTn = document.createElement("button");
                         postFriendBTn.className="btn btn-outline-primary";
                         postFriendBTn.innerText = "친구요청"
@@ -104,11 +101,11 @@ drawSearchResult = (selectResult) =>{
                         divtag2.appendChild(spanTag2)
                         memberList.appendChild(divtag2);
                         memberList.appendChild(postFriendBTn);
-
-                    }
-                }  
+                    
+                }
             }
-                memberArea.appendChild(memberList);
+         
+            memberArea.appendChild(memberList);
         }
 
         if(pList.length === 0){
@@ -181,10 +178,10 @@ checkCategory = (categoryNum) =>{
 }
 
 
-sendPostFriend = (resUser) =>{
+sendPostFriend = (reqUser) =>{
     if(window.confirm("친구 신청을 하겠습니까?")){
         data = {
-            friendResUser  :resUser
+            friendReqUser  :reqUser
         }
         commonAjaxController.sendFostFreind(data)
     }else{
@@ -193,13 +190,13 @@ sendPostFriend = (resUser) =>{
 
 }
 
-selectPlace=()=>{
-    console.log("나는 농구가 하고싶다.");
-}
+// selectPlace=()=>{
+//     console.log("나는 농구가 하고싶다.");
+// }
 
-selectTeam=()=>{
-    console.log("차정석 팀")
-}
+// selectTeam=()=>{
+//     console.log("차정석 팀")
+// }
 
 
 
