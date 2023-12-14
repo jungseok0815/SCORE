@@ -16,6 +16,7 @@
 		<result column="USER_LEVEL" property="userLevel" />
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
+		<result column="TEAM_NO" property="teamNo" />
 	</resultMap>
 	
 	<resultMap type="SportInfo" id="sportInfoResult">
@@ -155,10 +156,12 @@
 			GENDER,
 			CITY,
 			USER_POINT,
-			USER_LEVEL
+			USER_LEVEL,
+            TEAM_NO
 		  FROM MEMBER
-		 WHERE USER_ID = #{userId} and 
-		 USER_STATUS = 'Y'
+          JOIN TEAM_MEMBER USING(USER_NO)
+		 WHERE USER_ID = #{userId}
+         AND USER_STATUS = 'Y'
 	</select>
 	
 	<select id="getCountUserfriends" resultType="_int">
@@ -256,6 +259,11 @@
 			 AND
 			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
+ 	<update id="payPoint">
+ 		UPDATE MEMBER
+		   SET USER_POINT = #{point}
+		 WHERE USER_NO = #{userNo}
+ 	</update>
 		
 			
 	<select id="userInfo" resultMap="memberResult">

@@ -20,13 +20,6 @@
 <body onload="mainInit(`${pageContext.request.contextPath}`)">
     
 	<jsp:include page="common/header.jsp" />
-    <c:if test="${ !empty alertMsg}">
-        <script>
-           alert('${alertMsg}');
-        </script>
-        <c:remove var="alertMsg" scope="session" />
-    </c:if>
-
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
         <div class="nav-container">
