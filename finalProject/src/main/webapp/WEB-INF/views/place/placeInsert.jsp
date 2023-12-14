@@ -69,7 +69,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="text" class="address-input" id="sample6_address" name="fieldArea" placeholder="주소">
+                        <input type="text" style="padding: 10px;" class="address-input" id="sample6_address" name="fieldArea" placeholder="주소">
                         <input type="button" style="width: 65px; height: 35px;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
                     </td>
                 </tr>
