@@ -156,10 +156,8 @@
 			GENDER,
 			CITY,
 			USER_POINT,
-			USER_LEVEL,
-            TEAM_NO
+			USER_LEVEL
 		  FROM MEMBER
-          JOIN TEAM_MEMBER USING(USER_NO)
 		 WHERE USER_ID = #{userId}
          AND USER_STATUS = 'Y'
 	</select>

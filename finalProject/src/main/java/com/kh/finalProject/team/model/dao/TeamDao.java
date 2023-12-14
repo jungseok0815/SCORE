@@ -225,4 +225,5 @@ public class TeamDao {
 	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
 		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeamList", map);
 
+	}
 }
