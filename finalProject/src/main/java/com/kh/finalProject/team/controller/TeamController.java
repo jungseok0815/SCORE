@@ -148,6 +148,23 @@ public class TeamController {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 			
 			ArrayList<TeamOffer> list = teamService.selectList(pi);
+			System.out.println("기본" + list);
+
+			for(int i= 0; i < list.size(); i++) {
+				System.out.println("팀 번호" + list.get(i).getTeamNo());
+				
+				String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+				System.out.println("이미지 이름" + img);
+				
+				list.get(i).setTeamChangeName(img);
+				System.out.println("체인지 들어감" + list);
+				
+				mv.addObject("pi", pi)
+				  .addObject("list", list)
+				  .setViewName("team/teamOfferBoardList");
+				
+				return new Gson().toJson(mv);
+			}
 			
 			mv.addObject("pi", pi)
 			  .addObject("list", teamService.selectList(pi));
@@ -162,6 +179,23 @@ public class TeamController {
 																// 카테고리 조건으로 
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectCityAll(category, pi);
+			System.out.println("없어도 될듯" + list);
+			
+			for(int i= 0; i < list.size(); i++) {
+				System.out.println("팀 번호" + list.get(i).getTeamNo());
+				
+				String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+				System.out.println("이미지 이름" + img);
+				
+				list.get(i).setTeamChangeName(img);
+				System.out.println("체인지 들어감" + list);
+				
+				mv.addObject("pi", pi)
+				  .addObject("list", list)
+				  .setViewName("team/teamOfferBoardList");
+				
+				return new Gson().toJson(mv);
+			}
 			
 			mv.addObject("pi", pi)
 			  .addObject("list", teamService.selectCityAll(category, pi));
@@ -172,6 +206,23 @@ public class TeamController {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectNotCategory(activityAtea), currentPage, 10, 5);
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectOnlyCity(activityAtea, pi);
+			System.out.println("전체만 눌렀을때" + list);
+			
+			for(int i= 0; i < list.size(); i++) {
+				System.out.println("팀 번호" + list.get(i).getTeamNo());
+				
+				String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+				System.out.println("이미지 이름" + img);
+				
+				list.get(i).setTeamChangeName(img);
+				System.out.println("체인지 들어감" + list);
+				
+				mv.addObject("pi", pi)
+				  .addObject("list", list)
+				  .setViewName("team/teamOfferBoardList");
+				
+				return new Gson().toJson(mv);
+			}
 				
 			mv.addObject("pi", pi)
 			  .addObject("list", teamService.selectOnlyCity(activityAtea, pi));
@@ -181,6 +232,23 @@ public class TeamController {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea, category), currentPage, 10, 5);
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, category, pi);
+			System.out.println("지역 카테고리" + list);
+			
+			for(int i= 0; i < list.size(); i++) {
+				System.out.println("팀 번호" + list.get(i).getTeamNo());
+				
+				String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+				System.out.println("이미지 이름" + img);
+				
+				list.get(i).setTeamChangeName(img);
+				System.out.println("체인지 들어감" + list);
+				
+				mv.addObject("pi", pi)
+				  .addObject("list", list)
+				  .setViewName("team/teamOfferBoardList");
+				
+				return new Gson().toJson(mv);
+			}
 			
 			mv.addObject("pi", pi)						
 			  .addObject("list", teamService.selectCity(activityAtea, category, pi));
@@ -189,36 +257,7 @@ public class TeamController {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="choiceSportsAjax.tm", produces="application/json; charset=UTF-8")
-	public String teamChoiceSportsAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, int category, ModelAndView mv) {
-		
-		if(activityAtea.equals("all")) {
-			int choiceCount = teamService.selectChoiceAllCount(category);
 
-			
-			// 게시물 갯수와 페이징 
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceAllCount(category), currentPage, 10, 5);
-			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectChoiceAllList(category, pi);
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectChoiceAllList(category, pi));
-			
-			return new Gson().toJson(mv);
-		
-		} else {
-			int choiceCount = teamService.selectChoiceSportsCount(category, activityAtea);
-			
-			// 게시물 갯수와 페이징 
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceSportsCount(category, activityAtea), currentPage, 10, 5);
-			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectChoiceList(category, activityAtea, pi);
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectChoiceList(category, activityAtea, pi));
-			
-			return new Gson().toJson(mv);
-		}
-	}
 	
 	@RequestMapping("offerDelete.tm")
 	public String teamOfferDelete(int tno, String filePath, HttpSession session, Model model) {

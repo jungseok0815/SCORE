@@ -36,7 +36,7 @@ drawTeamList = (result) =>{
                         + '<li class="team-list-item">'
                             + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + `'" class="list-link">`
                                 + '<div class="list-img-all">'
-                                    + '<img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>'
+                                    + '<img src="' + te.teamChangeName + '"  class="list-img"/>'
                                 + '</div>'
                                 + '<div class="list-content">'
                                     + '<div class="list-title">'
@@ -89,7 +89,7 @@ drawChoiceSports = (result) =>{
                         + '<li class="team-list-item">'
                             + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + `'" class="list-link">`
                                 + '<div class="list-img-all">'
-                                    + '<img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>'
+                                    + '<img src="' + te.teamChangeName + '"  class="list-img"/>'
                                 + '</div>'
                                 + '<div class="list-content">'
                                     + '<div class="list-title">'

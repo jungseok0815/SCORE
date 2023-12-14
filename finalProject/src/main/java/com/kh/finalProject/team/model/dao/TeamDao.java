@@ -74,39 +74,6 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectOfferListCount", params);
 	}
 	
-	public int selectChoiceSportsCount(SqlSessionTemplate sqlSession, int category, String activityAtea) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("category", category);
-		params.put("activityAtea", activityAtea);
-		    
-		return sqlSession.selectOne("teamMapper.selectChoiceSportsCount", params);
-	}
-	
-	public ArrayList<TeamOffer> selectChoiceList(SqlSessionTemplate sqlSession, int category, String activityAtea, PageInfo pi){
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("category", category);
-		params.put("activityAtea", activityAtea);
-		
-		return (ArrayList)sqlSession.selectList("teamMapper.selectChoiceList", params, rowBounds);
-	}
-	
-	public int selectChoiceAllCount(SqlSessionTemplate sqlSession, int category) {
-		return sqlSession.selectOne("teamMapper.selectChoiceAllCount", category);
-	}
-	
-	public ArrayList<TeamOffer> selectChoiceAllList(SqlSessionTemplate sqlSession, int category, PageInfo pi){
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("teamMapper.selectChoiceAllList", category, rowBounds);
-	}
-	
 	public int deleteOffer(SqlSessionTemplate sqlSession, int offerNo) {
 		return sqlSession.update("teamMapper.deleteOffer", offerNo);
 	}

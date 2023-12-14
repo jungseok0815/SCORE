@@ -65,7 +65,7 @@ public class MemberController {
 	    if(result > 0) {
 	        // DB로부터 수정된 회원정보를 다시 조회해서
 	        // session 영역에 loginUser라는 키값으로 덮어씌워야 함
-	        session.setAttribute("loginUser", loginUser);
+	    	session.setAttribute("loginUser", loginUser);
 	        session.setAttribute("alertMsg", "충전이 완료되었습니다.");
 
 	        mv.setViewName("redirect:/");
