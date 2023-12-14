@@ -4,7 +4,7 @@ function init(){
     const slideCount = slides.length;
     showSlide(currentSlide);
     setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드 
-    
+
     function showSlide(n) {
         slides.forEach(slide => slide.style.display = 'none');
         slides[n].style.display = 'block';
@@ -18,7 +18,7 @@ function init(){
     function prevSlide() {
         currentSlide = (currentSlide - 1 + slideCount) % slideCount;
         showSlide(currentSlide);
-    }
+    }    
 }
 function drawMyTeam(res){
     let myTeamListStr = "";
@@ -51,6 +51,46 @@ function drawTeamMemberList(res){
     document.querySelector('#myteam-member-list').innerHTML = myTeamMemberListStr;
 }
 
+function drawMap(fieldArea){
+     // !! 지도 그리는 부분 !!
+     let mapContainer = document.getElementById('fieldMap'), // 지도를 표시할 div 
+     mapOption = {
+         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+         level: 3 // 지도의 확대 레벨
+     };  
+ 
+     // 지도를 생성합니다    
+     let map = new kakao.maps.Map(mapContainer, mapOption); 
+ 
+     // 주소-좌표 변환 객체를 생성합니다
+     let geocoder = new kakao.maps.services.Geocoder();
+ 
+     // 주소로 좌표를 검색합니다
+     geocoder.addressSearch(fieldArea, function(result, status) {
+ 
+         // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+ 
+             let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+ 
+             // 결과값으로 받은 위치를 마커로 표시합니다
+             let marker = new kakao.maps.Marker({
+                 map: map,
+                 position: coords
+             });
+ 
+             // 인포윈도우로 장소에 대한 설명을 표시합니다
+             let infowindow = new kakao.maps.InfoWindow({
+                 content: '<div style="width:150px;text-align:center;">경기장 위치</div>'
+             });
+             infowindow.open(map, marker);
+ 
+             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+             map.setCenter(coords);
+         } 
+     });
+}
+
 function copyText(){
     const text = document.getElementById('copy_text').textContent;
     const textarea = document.createElement('textarea');
@@ -59,4 +99,14 @@ function copyText(){
     textarea.select();
     document.execCommand('copy');
     textarea.remove();
+}
+function test3(fieldArea){
+	    if($("#fieldMap").css("display") == "none"){
+            $('#fieldMap').show();
+            $('.slider').hide();
+            drawMap(fieldArea);
+    	}else{
+            $('#fieldMap').hide();
+            $('.slider').show();
+        }
 }
