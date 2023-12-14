@@ -12,10 +12,11 @@
 		<result column="USER_NAME" property="userName" />
 		<result column="USER_BIRTH" property="age" />
 		<result column="GENDER" property="gender" />
-		<result column="USER_STATUS" property="age" />
+		<result column="USER_STATUS" property="status" />
 		<result column="USER_LEVEL" property="userLevel" />
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
+		<result column="TEAM_NO" property="teamNo" />
 	</resultMap>
 	
 	<resultMap type="SportInfo" id="sportInfoResult">
@@ -28,7 +29,7 @@
 		<result column="STYLE" property="style" />
 		<result column="SKILL" property="skill" />
 		<result column="USER_NO" property="userNo" />
-		<result column="CATEGOTY_NUM" property="categoryNum" />
+		<result column="CATEGORY_NUM" property="categoryNum" />
 	</resultMap>
 	
 	<resultMap type="Friend" id="friendResult">
@@ -155,10 +156,12 @@
 			GENDER,
 			CITY,
 			USER_POINT,
-			USER_LEVEL
+			USER_LEVEL,
+            TEAM_NO
 		  FROM MEMBER
-		 WHERE USER_ID = #{userId} and 
-		 USER_STATUS = 'Y'
+          JOIN TEAM_MEMBER USING(USER_NO)
+		 WHERE USER_ID = #{userId}
+         AND USER_STATUS = 'Y'
 	</select>
 	
 	<select id="getCountUserfriends" resultType="_int">
@@ -177,7 +180,7 @@
 			SPORT_COUNT,
 			SPORT_SMILE,
 			SPORT_YELLOW,
-			SPORT_RED
+			SPORT_RED,
 			STYLE,
 			SKILL,
 			USER_NO,
@@ -186,12 +189,12 @@
 		 WHERE USER_NO = #{userNo} AND
 		 CATEGORY_NUM = #{categoryNum}
 	</select>
+	
 	<update id="updateUserPoint">
 		UPDATE MEMBER
 				SET USER_POINT = USER_POINT + #{point} 
 			WHERE USER_ID = #{userId}
 	</update>
-	
 	
 	<update id="addFriend">
 		UPDATE FRIEND
@@ -246,6 +249,25 @@
 			where friend_res_user = #{userNo}
 			and friend_status = 'Y'
 	</select>
+	
+	<update id="updateMyPageMember">
+		UPDATE MEMBER
+		SET USER_NAME = #{userName},
+				USER_PHONE = #{phone},
+				USER_BIRTH = #{age},
+				CITY = #{address},
+				GENDER = #{gender}
+		WHERE USER_NO = #{userNo}
+	</update>
+	
+
+	<update id="updateMyPageSport">
+		UPDATE SPORTINFO
+		SET  CATEGORY_NUM = #{categoryNum},
+				STYLE = #{style},
+				SKILL = #{skill}
+		WHERE CATEGORY_NUM = #{categoryNum}
+	</update>
 	
 	<select id="checkFriendStatus" resultType="_int">
 			SELECT COUNT(*)

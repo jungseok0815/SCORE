@@ -60,13 +60,13 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public ArrayList<TeamOffer> selectCity(String activityAtea, PageInfo pi) {
-		return teamDao.selectCity(sqlSession, activityAtea, pi);
+	public ArrayList<TeamOffer> selectCity(String activityAtea, int category, PageInfo pi) {
+		return teamDao.selectCity(sqlSession, activityAtea, category, pi);
 	}
 
 	@Override
-	public int selectOfferListCount(String activityAtea) {
-		return teamDao.selectOfferListCount(sqlSession, activityAtea);
+	public int selectOfferListCount(String activityAtea, int category) {
+		return teamDao.selectOfferListCount(sqlSession, activityAtea, category);
 	}
 
 	@Override
@@ -95,8 +95,48 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public int teamReq(String userId, String text) {
-		return teamDao.teamReq(sqlSession, userId, text);
+	public int teamReq(int userNo, String reqContent, int offerNo) {
+		return teamDao.teamReq(sqlSession, userNo, reqContent, offerNo);
+	}
+
+	@Override
+	public TeamMember selectInformation(int userNo) {
+		return teamDao.selectInformation(sqlSession, userNo);
+	}
+
+	@Override
+	public int insertOfferList(TeamOffer t, int tno) {
+		return teamDao.insertOfferList(sqlSession, t, tno);
+	}
+
+	@Override
+	public int insertOfferImg(TeamImg ti, int tno) {
+		return teamDao.insertOfferImg(sqlSession, ti, tno);
+	}
+
+	@Override
+	public TeamImg selectOfferImg(int tno) {
+		return teamDao.selectOfferImg(sqlSession, tno);
+	}
+
+	@Override
+	public int selectListCountCate(int category) {
+		return teamDao.selectListCountCate(sqlSession, category);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectCityAll(int category, PageInfo pi) {
+		return teamDao.selectCityAll(sqlSession, category, pi);
+	}
+
+	@Override
+	public int selectNotCategory(String activityAtea) {
+		return teamDao.selectNotCategory(sqlSession, activityAtea);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> selectOnlyCity(String activityAtea, PageInfo pi) {
+		return teamDao.selectOnlyCity(sqlSession, activityAtea, pi);
 	}
 	
 	@Override
@@ -119,11 +159,28 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.searchTeam(sqlSession, selectValue);
 	}
 
+
 	@Override
 	public ArrayList<TeamMember> teamMemberList(int tno) {
 		return teamDao.teamMemberList(sqlSession, tno);
 	}
 
+
+	// 팀 번호 조회
+	@Override
+	public int getTeamNumber(int userNo) {
+		return teamDao.getTeamNumber(sqlSession, userNo);
+	}
+
+	@Override
+	public String selectTeamImg(int teamNo) {
+		return teamDao.selectTeamImg(sqlSession, teamNo);
+	}
+//	@Override
+//	public ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi) {
+//		return teamDao.selectTeamImg(sqlSession, teamNo, pi);
+//	}
+	
 	@Override
 	public ArrayList<Team> selectMyTeamList(HashMap<String, Integer> map) {
 		return teamDao.selectMyTeamList(sqlSession, map);

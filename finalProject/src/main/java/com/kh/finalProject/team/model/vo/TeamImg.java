@@ -11,6 +11,19 @@ public class TeamImg {
 	
 	public TeamImg() {}
 
+
+	public TeamImg(int teamImgNo, String teamImgUrl, String teamOriginName, String teamChangeName, String deleteTeamImg,
+			int teamNo, int offerNo) {
+		super();
+		this.teamImgNo = teamImgNo;
+		this.teamImgUrl = teamImgUrl;
+		this.teamOriginName = teamOriginName;
+		this.teamChangeName = teamChangeName;
+		this.deleteTeamImg = deleteTeamImg;
+		this.teamNo = teamNo;
+		this.offerNo = offerNo;
+	}
+
 	public int getTeamImgNo() {
 		return teamImgNo;
 	}
@@ -73,8 +86,6 @@ public class TeamImg {
 				+ ", teamChangeName=" + teamChangeName + ", deleteTeamImg=" + deleteTeamImg + ", teamNo=" + teamNo
 				+ ", offerNo=" + offerNo + "]";
 	}
-
-
 	
 	
 }

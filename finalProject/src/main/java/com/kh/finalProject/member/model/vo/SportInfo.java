@@ -14,16 +14,9 @@ public class SportInfo {
 	private int sportRed;
 	
 	
-	
-	
-	
 	public SportInfo() {
 		super();
 	}
-
-
-
-
 
 	public SportInfo(String sportLever, int sportScore, int sportCount, String style, String skill, int userNo,
 			int categoryNum, int sportSmile, int sportYellow, int sportRed) {
