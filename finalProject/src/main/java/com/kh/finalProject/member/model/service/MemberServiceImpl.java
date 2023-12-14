@@ -117,6 +117,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int updateMyPageMember(Member m) {
+		return memberDao.updateMyPageMember(sqlSession, m);
+	}
+	
+	@Override
 	public int checkFriendStatus(Friend f) {
 		return memberDao.checkFriendStatus(sqlSession,f);
 	}
@@ -136,7 +141,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.checkPhoneAuth(sqlSession,auth);
 	}
 
-
-
+	@Override
+	public int updateMyPageSport(SportInfo sport) {
+		return memberDao.updateMyPageSport(sqlSession, sport);
+	}
 	
 }

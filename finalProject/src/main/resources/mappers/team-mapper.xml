@@ -485,7 +485,7 @@
  						SYSDATE,
  						SEQ_TEAM.CURRVAL,
  						#{userNo},
- 						2
+ 						3
  					)
  	</insert>
  	 	
