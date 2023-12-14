@@ -2,15 +2,16 @@ package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
 
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reservation;
 
 
 
@@ -60,10 +61,34 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
+	public int placeResCount(int fno) {
+		return pDao.placeResCount(sqlSession, fno);
+	}
+
+	@Override
 	public ArrayList<Place> searchPlace(String selectValue) {
 		return pDao.searchPlace(sqlSession,selectValue);
 	}
-	
+
+	@Override
+	public int insertResMatch(Reservation res) {
+		return pDao.insertResMatch(sqlSession, res);
+	}
+
+	@Override
+	public int payPoint(Member loginUser) {
+		return pDao.payPoint(sqlSession, loginUser);
+	}
+
+	@Override
+	public int checkResMatch(Reservation res) {
+		return pDao.checkResMatch(sqlSession, res);
+	}
+
+	@Override
+	public ArrayList<PlaceImg> placeImgList(int fno) {
+		return pDao.placeImgList(sqlSession, fno);
+	}
 
 
 }

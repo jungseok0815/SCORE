@@ -127,4 +127,7 @@ public class TeamDao {
 	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
 		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
 	}
+	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeamList", map);
+	}
 }

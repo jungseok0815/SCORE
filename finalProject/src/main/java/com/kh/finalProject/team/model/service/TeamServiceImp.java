@@ -7,6 +7,10 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.team.model.vo.TeamOffer;
 
 public interface TeamServiceImp {
@@ -69,5 +73,7 @@ public interface TeamServiceImp {
 	ArrayList<TeamMember> teamMemberList(int tno);
 
 	ArrayList<Team> searchTeam(String selectValue);
+	//나의 팀 리스트 불러오기
+	ArrayList<Team> selectMyTeamList(HashMap<String, Integer> map);
 
 }
