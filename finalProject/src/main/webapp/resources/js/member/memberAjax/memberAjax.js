@@ -122,6 +122,35 @@ const memberAjaxController = {
             }
         })
 
+    },
+    sendPhoneAuthAjax: (data,callback) =>{
+        $.ajax({
+            url: "send-one",
+            type: "post",
+            data,
+            success: (result) => {
+                result === "sendOAuthOk" ?  callback(result) : alert("전화번호를 확인해주시요")
+               
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    checkPhoneAuthAjax: (data,callback) =>{
+        $.ajax({
+            url: "checkPhoneAuth.me",
+            type: "post",
+            data,
+            success: (result) => {
+                console.log(result)
+                callback(result)
+               
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
     }
 
 

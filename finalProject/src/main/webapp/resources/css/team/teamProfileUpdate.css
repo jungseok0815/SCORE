@@ -17,6 +17,29 @@
     padding: 40px 10%;
     min-height: calc(100vh - 60rem);
 }
+.profile-imgbox{
+    display: flex;
+    justify-content: center;
+}
+.btn-upload {
+    width: 96px;
+    height: 96px;
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: none;
+}
+.btn-upload img{
+    width: 96px;
+    height: 96px;
+    border-radius: 50px;
+}
 .team-profile-update{
     
     display: flex;
@@ -24,7 +47,10 @@
     align-items: center;
     justify-content: center;
 }
-.team-profile-update-img{
+#file {
+    display: none;            
+}
+/* .team-profile-update-img{
    display: flex;
    align-items: center;
    justify-content: center;
@@ -34,7 +60,7 @@
    border-radius: 80px;
    margin-top: 3%;
 
-}
+} */
 .ab-font{
     font-size: 10px;
 }

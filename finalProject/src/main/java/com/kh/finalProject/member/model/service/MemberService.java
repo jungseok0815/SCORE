@@ -5,12 +5,14 @@ import java.util.HashMap;
 
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
 
 public interface MemberService {
 	int joinMember(Member m);
 	Member loginMember(String userId);
+	Member userInfo(int userNo);
 	Member selectJoinmember(String userId);
 	int insertSportInfo(SportInfo info);
 	int checkId(String checkId);
@@ -30,5 +32,8 @@ public interface MemberService {
 	ArrayList<Friend> selectReqResFriendList(int userNo);
 	int updateMyPageMember(Member m);
 	int updateMyPageSport(SportInfo sport);
+	int checkFriendStatus(Friend f);
+	int insertAuth(MessageAuth auth);
+	int checkPhoneAuth(MessageAuth auth);
 }
 
