@@ -165,6 +165,16 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.getTeamNumber(sqlSession, userNo);
 	}
 
+	@Override
+	public String selectTeamImg(int teamNo) {
+		return teamDao.selectTeamImg(sqlSession, teamNo);
+	}
+//	@Override
+//	public ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi) {
+//		return teamDao.selectTeamImg(sqlSession, teamNo, pi);
+//	}
+	
+
 
 
 }

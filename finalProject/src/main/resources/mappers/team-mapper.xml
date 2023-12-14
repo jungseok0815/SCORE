@@ -113,27 +113,32 @@
 			            ) A
 			        ) 
 	-->
-		SELECT OFFER_NO 
-		     , OFFER_TITLE
-		     , OFFER_CONTENT
-		     , OFFER_GENDER
-		     , OFFER_LEVEL
-		     , OFFER_AGE
-		     , OFFER_COUNT
-		     , USER_NO
-		     , TEAM_NAME
-		     , ACTIVITY_ATEA
-		     , TEAM_IMG_NO
-		     , TEAM_IMG_URL
-		     , TEAM_ORIGIN_NAME
-		     , TEAM_CHANGE_NAME
-		FROM TEAM_OFFER 
-		JOIN TEAM USING(TEAM_NO)
-		LEFT JOIN TEAM_IMG USING(OFFER_NO)
-		WHERE OFFER_STATUS = 'Y'
-		ORDER BY OFFER_NO DESC   
+		SELECT
+		    OFFER.OFFER_NO,
+		    OFFER.OFFER_TITLE,
+		    OFFER.OFFER_CONTENT,
+		    OFFER.OFFER_GENDER,
+		    OFFER.OFFER_LEVEL,
+		    OFFER.OFFER_AGE,
+		    OFFER.OFFER_COUNT,
+		    OFFER.USER_NO,
+		    OFFER.TEAM_NO,
+		    TM.TEAM_NAME,
+		    TM.ACTIVITY_ATEA,
+		    TI.TEAM_IMG_NO,
+		    TI.TEAM_IMG_URL,
+		    TI.TEAM_ORIGIN_NAME,
+		    TI.TEAM_CHANGE_NAME
+		FROM TEAM_OFFER OFFER
+		JOIN TEAM TM ON(OFFER.TEAM_NO = TM.TEAM_NO)
+		LEFT JOIN TEAM_IMG TI ON(TI.OFFER_NO = OFFER.OFFER_NO)
+		WHERE OFFER.OFFER_STATUS = 'Y'
+		ORDER BY OFFER.OFFER_NO DESC   
 			        
  	</select>
+ 	
+ 	
+ 	
  	
  	<!-- 조회수 올리는 쿼리 -->
 	<update id="increaseCount">
@@ -518,5 +523,12 @@
 	    WHERE USER_NO = #{userNo}
  	</select>
  	
+ 	<!-- 이미지 가져오기 resultType="string"  -->
+   <select id="selectTeamImg" resultMap="teamImgResult">
+         SELECT TEAM_CHANGE_NAME
+			FROM TEAM_IMG
+			WHERE TEAM_NO = #{teamNo}
+			 AND OFFER_NO IS NULL
+ 	</select>
  	
  </mapper>

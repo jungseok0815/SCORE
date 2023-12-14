@@ -38,8 +38,78 @@ public class TeamController {
 		
 		PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 		
+		ArrayList<TeamOffer> list = teamService.selectList(pi);
+		
+//		for (TeamOffer t : list) {
+//		    int teamNo = t.getTeamNo();
+//		    System.out.println("팀 번호" + teamNo);
+//		
+//		    String img = teamService.selectTeamImg(teamNo);
+////		    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo, pi);
+//		    System.out.println("팀 이미지" + img);
+//		    
+//		    mv.addObject("pi", pi)
+//			  .addObject("list", list)
+//			  .addObject("img", img)
+//			  .setViewName("team/teamOfferBoardList");
+//			
+//			return mv;
+//		}
+		
+//		for (TeamOffer t : list) {
+//		    int teamNo = t.getTeamNo();
+//		    System.out.println("팀 번호" + teamNo);
+//		    
+//		    String img = teamService.selectTeamImg(teamNo);
+//		    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo);
+//		}
+		
+//		mv.addObject("pi", pi)
+//		  .addObject("list", list)
+//		  .setViewName("team/teamOfferBoardList");
+		
+		
+//		for(int i= 0; i < list.size(); i++) {
+//			System.out.println(list.size());
+//			
+//			for (TeamOffer t : list) {
+//				System.out.println(t);
+//			    int teamNo = t.getTeamNo();
+//			    System.out.println("팀 번호" + teamNo);
+//			    
+//			    String img = teamService.selectTeamImg(teamNo);  // 팀번호가 일치하는 이미지 가져 오기 
+////			    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo);
+//			    
+//			    list.get(i).setTeamChangeName(img);
+//				System.out.println(list + "sssss");
+//				
+//				mv.addObject("pi", pi)
+//				  .addObject("list", list)
+//				  .setViewName("team/teamOfferBoardList");
+//				
+//				return mv;
+//			}
+//		}
+		
+		for(int i= 0; i < list.size(); i++) {
+			System.out.println("팀 번호" + list.get(i).getTeamNo());
+			
+			String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+//			String img = teamService.selectTeamImg(teamNo);
+			System.out.println("이미지 이름" + img);
+			
+			list.get(i).setTeamChangeName(img);
+			System.out.println("체인지 들어감" + list);
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("team/teamOfferBoardList");
+			
+			return mv;
+		}
+		
 		mv.addObject("pi", pi)
-		  .addObject("list", teamService.selectList(pi))
+		  .addObject("list", list)
 		  .setViewName("team/teamOfferBoardList");
 		
 		return mv;
@@ -47,7 +117,7 @@ public class TeamController {
 	
 	@RequestMapping("offerDetailView.tm")
 	public String teamOfferDetailView(int tno, Model model, HttpSession session) {
-		int result = teamService.increaseCount(tno);
+		int result = teamService.increaseCount(tno);  // tno는 게시물 번호 
 
 		if (result > 0) {
 			TeamOffer teamOffer = teamService.selectOfferDetail(tno);
@@ -247,7 +317,7 @@ public class TeamController {
 	}
 	
 	// 구인글 작성 
-	@RequestMapping("insert.tm")
+	@RequestMapping("insertOffer.tm")
 	public String InsertOffer(TeamOffer t, int userNo, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		
 		// userPo이 안에 팀 번호 있음
@@ -257,6 +327,7 @@ public class TeamController {
 		int tno = userPo.getTeamNo();
 		int resultImg = 0;
 		
+		// 게시글 등록 
 		int result = teamService.insertOfferList(t, tno);
 		
 		if(!upfile.getOriginalFilename().equals("")) {

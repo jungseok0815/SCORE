@@ -95,4 +95,8 @@ public interface TeamServiceImp {
 	
 	// 팀 번호 조회 
 	int getTeamNumber(int userNo);
+	
+	// ㅇㅇㅇㅇ
+	String selectTeamImg(int teamNo);
+//	ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi);
 }

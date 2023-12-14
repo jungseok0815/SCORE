@@ -15,12 +15,15 @@ public class TeamOffer {
 	private String teamName;
 	private String activityAtea;
 	private String offerStatus;
+	private String teamChangeName;
 
+	
 	public TeamOffer() {}
-
+	
+	// 이미지 
 	public TeamOffer(int offerNo, String offerTitle, String offerContent, String offerGender, String offerLevel,
 			int offerAge, int offerCount, int userNo, int teamNo, String teamName, String activityAtea,
-			String offerStatus) {
+			String offerStatus, String teamChangeName) {
 		super();
 		this.offerNo = offerNo;
 		this.offerTitle = offerTitle;
@@ -34,9 +37,42 @@ public class TeamOffer {
 		this.teamName = teamName;
 		this.activityAtea = activityAtea;
 		this.offerStatus = offerStatus;
+		this.teamChangeName = teamChangeName;
+	}
+
+
+	public String getTeamChangeName() {
+		return teamChangeName;
+	}
+
+	public void setTeamChangeName(String teamChangeName) {
+		this.teamChangeName = teamChangeName;
 	}
 	
 
+	
+
+//	public TeamOffer(int offerNo, String offerTitle, String offerContent, String offerGender, String offerLevel,
+//			int offerAge, int offerCount, int userNo, int teamNo, String teamName, String activityAtea,
+//			String offerStatus) {
+//		super();
+//		this.offerNo = offerNo;
+//		this.offerTitle = offerTitle;
+//		this.offerContent = offerContent;
+//		this.offerGender = offerGender;
+//		this.offerLevel = offerLevel;
+//		this.offerAge = offerAge;
+//		this.offerCount = offerCount;
+//		this.userNo = userNo;
+//		this.teamNo = teamNo;
+//		this.teamName = teamName;
+//		this.activityAtea = activityAtea;
+//		this.offerStatus = offerStatus;
+//	}
+	
+
+
+	
 
 	public int getOfferNo() {
 		return offerNo;
@@ -139,8 +175,11 @@ public class TeamOffer {
 		return "TeamOffer [offerNo=" + offerNo + ", offerTitle=" + offerTitle + ", offerContent=" + offerContent
 				+ ", offerGender=" + offerGender + ", offerLevel=" + offerLevel + ", offerAge=" + offerAge
 				+ ", offerCount=" + offerCount + ", userNo=" + userNo + ", teamNo=" + teamNo + ", teamName=" + teamName
-				+ ", activityAtea=" + activityAtea + ", offerStatus=" + offerStatus + "]";
+				+ ", activityAtea=" + activityAtea + ", offerStatus=" + offerStatus + ", teamChangeName="
+				+ teamChangeName + "]";
 	}
+
+	
 
 	
 	

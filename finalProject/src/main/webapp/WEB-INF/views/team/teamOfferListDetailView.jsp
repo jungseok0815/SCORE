@@ -43,17 +43,17 @@
 	                    <div class="left-body">
 	                        <div class="body-list">
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerGender}</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/gender.png"  class="list-star-img"/>${teamOffer.offerGender}</span>
 	                            </div>
 	                            <div class="body-list-item">
 	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerLevel}</span>
 	                            </div>
 	                            <br>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png"  class="list-star-img"/>${teamOffer.offerAge}대</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/age.png"  class="list-star-img"/>${teamOffer.offerAge}대</span>
 	                            </div>
 	                            <div class="body-list-item">
-	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/star.png" class="list-star-img"/>0원</span>
+	                                <span class="body-list-item-text"><img src="./resources/img/team/teamOfferListDetailView/money.png" class="list-star-img"/>0원</span>
 	                            </div>
 	                            
 	                        </div>

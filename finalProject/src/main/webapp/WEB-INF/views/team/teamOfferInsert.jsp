@@ -6,13 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/team/teamOfferInsert.css">
+<script src="resources/js/team/teamJs/teamInsert.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />
 
 	<br>
     <div class="freeBoard-area" align="center">
-        <form action="insert.tm" method="POST" enctype="multipart/form-data">
+        <form action="insertOffer.tm" method="POST" enctype="multipart/form-data">
         
         	<input type="hidden" name="userNo" value="${loginUser.userNo}">
         	
@@ -89,7 +91,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" name="offerTitle" class="text-area" placeholder="제목을 입력하세요">
+                        <input type="text" name="offerTitle" class="text-area" placeholder="제목을 입력하세요" required>
                     </td>
                 </tr>
                 <tr align="left">
@@ -102,19 +104,22 @@
                         <input type="text" name="" class="text-area" value ="${loginUser.userName}" disabled >
                     </td>
                 </tr>
-
-                <div class="a-btn">
-	                <label for="file">
-	                    <div class="btn-upload">파일 업로드하기</div>
-	                </label>
-                    <input type="file" name="upfile" id="file">
+			
+				<!-- 사진 넣는 곳  -->
+			    <div class="a-btn">
+			        <img id="title-img" style="border: 1px solid;" width="270" height="180" onclick="chooseFile();" src="./resources/img/team/teamOfferListDetailView/real.png">
+			        <h4>★사진 등록 필수★</h4>
+			    </div>
+			    <div style="display: none;">
+                	<input type="file" name="upfile" id="file" required onchange="loadImg(this)">
                 </div>
-
+                
+				
                 <tr align="left">
                     <th>팀 홍보를 해보아요</th>
                 </tr>
                 <tr>
-                    <td><textarea name="offerContent" id="" placeholder="내용을 입력하세요"></textarea></td>
+                    <td><textarea name="offerContent" id="" placeholder="내용을 입력하세요" required></textarea></td>
                 </tr>
                
                 <tr>

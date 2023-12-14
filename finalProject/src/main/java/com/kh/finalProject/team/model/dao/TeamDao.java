@@ -199,4 +199,20 @@ public class TeamDao {
 	public int getTeamNumber(SqlSessionTemplate sqlSession, int userNo) { 
 		return sqlSession.selectOne("teamMapper.getTeamNumber", userNo);
 	}
+	
+	 //이미지 다오 
+	public String selectTeamImg(SqlSessionTemplate sqlSession, int teamNo) { 
+		return sqlSession.selectOne("teamMapper.selectTeamImg", teamNo);
+	}
+	
+//	public ArrayList<TeamOffer> selectTeamImg(SqlSessionTemplate sqlSession, int teamNo, PageInfo pi) { 
+//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+//		int limit = pi.getBoardLimit();
+//		
+//		RowBounds rowBounds = new RowBounds(offset, limit);
+//		
+//		return (ArrayList)sqlSession.selectList("teamMapper.selectTeamImg", teamNo, rowBounds);
+//	}
+	
+	
 }
