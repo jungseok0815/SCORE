@@ -96,6 +96,35 @@
 .team-age2 > div>label{
     width: 100%;
 }
+
+
+
+.team-level{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1%;
+   
+}
+.team-level > div{
+    width: 33%;
+}
+.team-level > div>label{
+    width: 100%;
+}
+.team-level2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5%;
+   
+}
+.team-level2 > div{
+    width: 33%;
+}
+.team-level2 > div>label{
+    width: 100%;
+}
 .team-category{
    
     display: flex;
@@ -108,6 +137,21 @@
     width: 33%;
 }
 .team-category > div>label{
+    width: 100%;
+}
+
+.team-gender{
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8%;
+    
+}
+.team-gender > div{
+    width: 33%;
+}
+.team-gender > div>label{
     width: 100%;
 }
 .team-btn{

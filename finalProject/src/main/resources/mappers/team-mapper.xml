@@ -310,6 +310,7 @@
 	       TEAM_GENDER,
 	       TEAM_USER_AGE,
 	       TEAM_LEVEL,
+	       CATEGORY_NUM,
 	       ACTIVITY_ATEA,
 	       TEAM_ORIGIN_NAME,
 	       TEAM_CHANGE_NAME
@@ -333,4 +334,24 @@
 		WHERE TEAM_NO = #{teamNo}
 		ORDER BY GRADE DESC 
  	</select>
+ 	
+ 	<!-- 팀 프로필 업데이트 쿼리문 -->
+ 	<update id="updateTeam">
+	 	UPDATE TEAM
+	 		SET TEAM_NAME = #{teamName}, 
+				ACTIVITY_ATEA = #{activityAtea},
+				CATEGORY_NUM = #{categoryNum},
+				TEAM_LEVEL = #{teamLevel},
+				TEAM_GENDER = #{teamGender},
+				TEAM_USER_AGE = #{teamUserAge}
+	 	   	WHERE TEAM_NO = #{tno}
+ 	</update>
+ 	
+ 	<!-- 팀 프로필 사진 업데이트 쿼리문 -->
+ 	<update id="updateTeamImg">
+	 	UPDATE TEAM_IMG
+	 		SET TEAM_ORIGIN_NAME = #{teamOriginName},
+				TEAM_CHANGE_NAME = #{teamChangeName}
+	 	   	WHERE TEAM_IMG_NO = #{teamImgNo}
+ 	</update>
  </mapper>

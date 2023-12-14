@@ -55,7 +55,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updatePoint.me")
-	public ModelAndView updateMember(HttpSession session, ModelAndView mv, @RequestParam(name = "point", defaultValue = "0") int point) {
+	public ModelAndView updatePoint(HttpSession session, ModelAndView mv, @RequestParam(name = "point", defaultValue = "0") int point) {
 		Member m = (Member)session.getAttribute("loginUser");
 		m.setPoint(point);
 	    int result = memberService.updateUserPoint(m);

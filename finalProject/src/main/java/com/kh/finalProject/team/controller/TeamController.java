@@ -147,8 +147,7 @@ public class TeamController {
 	
 	@RequestMapping("teamReq.tm")
 	public String teamReq(String userId, String text) {
-		System.out.println(text);
-		System.out.println(userId);
+		
 		int teamR = teamService.teamReq(userId, text);
 		return "";
 	}
@@ -163,9 +162,9 @@ public class TeamController {
 		int taa = teamService.teamAvgAge(tno);
 		
 		Team t = teamService.teamProfile(tno);
-		System.out.println(t);
+		
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
-		System.out.println(tm);
+		
 		
 		int myGrade = 1;
 		for (TeamMember m : tm) {
@@ -186,9 +185,48 @@ public class TeamController {
 	
 	
 	@RequestMapping("updateForm.tm")
-	public String teamProfileUpdateForm() {
-		return "team/teamProfileUpdate";
+	public ModelAndView teamUpdateForm(int tno, ModelAndView mv) {
+		System.out.println(tno);
+		Team t = teamService.teamProfile(tno);
+		System.out.println(t);
+		mv.addObject("team", t).setViewName("team/teamProfileUpdate");
+		return mv;
 	}
+	
+	@RequestMapping("update.tm")
+	public ModelAndView teamProfileUpdate(Team t, TeamImg ti, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
+		System.out.println(t);
+		int resultContent = teamService.updateTeam(t);
+		int resultImg = 0;
+		
+	
+		System.out.println(t);
+	    System.out.println(reupfile);
+	    //새로운 첨부파일 존재유무 확인
+	    if(!reupfile.getOriginalFilename().equals("")) {
+	       String changeName = saveFile(reupfile, session);
+	       if(ti.getTeamOriginName() != null) {
+	          new File(session.getServletContext().getRealPath(ti.getTeamChangeName())).delete();
+	       }      
+	       
+	       ti.setTeamOriginName(reupfile.getOriginalFilename());
+	       ti.setTeamChangeName("resources/img/team/teamProfile/" + changeName); 
+	      
+	    }
+	    
+	    resultImg = teamService.updateTeamImg(ti);
+	    
+	    if(resultContent * resultImg > 0) {//성공 => 게시글 리스트 페이지 redirect: "list.bo"
+	        session.setAttribute("alertMsg", "팀 수정 완료");
+	        mv.setViewName("rediect:/teamProfile.tm");
+	    }else {
+	        mv.setViewName("rediect:/");
+	    }
+	      
+	      return mv;
+	}
+	
+	
 	@RequestMapping("joinList.tm")
 	public String teamJoinListForm() {
 		return "team/teamJoinList";

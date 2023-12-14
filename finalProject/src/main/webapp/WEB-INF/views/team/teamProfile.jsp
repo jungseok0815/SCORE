@@ -38,10 +38,9 @@
                             </div>
                         </div>
                         <c:choose>
-                            <!-- 로그인한 유저가 주장일 때 보여주는 버튼(팀 생성자) -->
                             <c:when test="${myGrade eq 3}">
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm?tno=${team.teamNo}'">
                                         팀 프로필 설정
                                     </button>
                                 </div>
@@ -61,7 +60,6 @@
                                     </button>
                                 </div>
                             </c:when>
-                            <!-- 로그인한 유저가 일반 멤버일 때 보여주는 버튼(운영진, 멤버) -->
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-danger" onclick="">

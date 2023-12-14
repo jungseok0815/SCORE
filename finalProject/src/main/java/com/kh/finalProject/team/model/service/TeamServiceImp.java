@@ -64,5 +64,10 @@ public interface TeamServiceImp {
 	ArrayList<TeamMember> teamMemberList(int tno);
 
 	ArrayList<Team> searchTeam(String selectValue);
-
+	
+	//팀 프로필 업데이트
+	int updateTeam(Team t);
+	
+	//팀 프로필 이미지 엄데이트
+	int updateTeamImg(TeamImg ti);
 }
