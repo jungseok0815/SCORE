@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -443,5 +444,22 @@ public class TeamController {
 	@RequestMapping("insertTeamOffer.tm")
 	public String teamOfferInsert() {
 		return "team/teamProfile";
+	}
+	@ResponseBody
+	@RequestMapping(value="resMatch.tm", produces="application/json; charset=UTF-8")
+	public String reservationMatch(int userNo, int categoryNum, Model m){
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("userNo", userNo);
+		map.put("categoryNum", categoryNum);
+		ArrayList<Team> myTeamList = teamService.selectMyTeamList(map);
+		m.addAttribute("myTeamList", myTeamList);
+		return new Gson().toJson(m);
+	}
+
+	@ResponseBody
+	@RequestMapping(value="selectTeamMember.tm", produces="application/json; charset=UTF-8")
+	public ArrayList<TeamMember> selectTeamMemberList(@RequestParam("teamNo") int teamNo){
+		ArrayList<TeamMember> tm = teamService.teamMemberList(teamNo);
+		return tm;
 	}
 }

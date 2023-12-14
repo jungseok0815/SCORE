@@ -421,7 +421,7 @@
  						SYSDATE,
  						SEQ_TEAM.CURRVAL,
  						#{userNo},
- 						2
+ 						3
  					)
  	</insert>
  	 	
@@ -459,9 +459,9 @@
  	
  	<!-- 팀 멤버리스트 불러오기 -->
  	<select id="teamMemberList" resultMap="teamMemberResult">
-	 	SELECT TMEMBER_NO, 
+	 	SELECT TMEMBER_NO,
 	 		   USER_NO,
-		 	   GRADE, 
+		 	   GRADE,
 		 	   USER_NAME, 
 		 	   CITY, 
 		 	   MEMBER_ORIGIN_NAME, 
@@ -472,7 +472,7 @@
 		WHERE TEAM_NO = #{teamNo}
 		ORDER BY GRADE DESC 
  	</select>
- 	
+
  	<!-- 팀 번호 불러오기 -->
  	<select id="getTeamNumber" resultType="_int">
 	 	SELECT TEAM_NO,
@@ -490,4 +490,14 @@
 			 AND OFFER_NO IS NULL
  	</select>
 
+
+ 	<select id="selectMyTeamList" resultMap="teamResult">
+	 	SELECT TEAM_NO,
+			   TEAM_NAME,
+			   CATEGORY_NUM
+		  FROM TEAM_MEMBER
+		  JOIN TEAM USING (TEAM_NO)
+		 WHERE USER_NO = #{userNo}
+		   AND CATEGORY_NUM = #{categoryNum}
+ 	</select>
  </mapper>

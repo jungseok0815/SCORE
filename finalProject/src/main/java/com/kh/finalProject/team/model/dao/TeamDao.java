@@ -166,6 +166,7 @@ public class TeamDao {
 	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
 		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
 	}
+
 	
 	// 팀 번호 조회 
 	public int getTeamNumber(SqlSessionTemplate sqlSession, int userNo) { 
@@ -187,4 +188,9 @@ public class TeamDao {
 //	}
 	
 	
+
+	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeamList", map);
+	}
+
 }
