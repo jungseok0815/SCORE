@@ -39,6 +39,11 @@ public class TeamService implements TeamServiceImp{
 	}
 	
 	@Override
+	public int insertTeamMember(Member m) {
+		return teamDao.insertTeamMember(sqlSession, m);
+	}
+
+	@Override
 	public ArrayList<TeamOffer> selectList(PageInfo pi) {
 		return teamDao.selectList(sqlSession, pi);
 	}
@@ -144,11 +149,11 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-
 	public Team teamProfile(int tno) {
 		return teamDao.teamProfile(sqlSession, tno);
 	}
 
+	@Override
 	public ArrayList<Team> searchTeam(String selectValue) {
 		return teamDao.searchTeam(sqlSession, selectValue);
 	}

@@ -70,7 +70,8 @@
                 		</c:when>
                 	<c:otherwise>
 		                <!-- 로그인 후 -->
-			              	<a href="${pageContext.request.contextPath}/myPage.me" onclick='toggleHeader()' id='header2'><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+			              	<a href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+
 	                </c:otherwise>
 	            </c:choose>         
                 </div>
