@@ -18,7 +18,6 @@
     <script src="https://kit.fontawesome.com/5b03f739e9.js" crossorigin="anonymous"></script>
     <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=4"></script>
     <script src="resources/js/common/commonTeam/commonTeam.js?ver=3"></script>
-    <script src="resources/js/common/headerLogout/logout.js"></script>
     <link rel="stylesheet" href="/final/resources/css/common/header.css?ver=1">
     
 
