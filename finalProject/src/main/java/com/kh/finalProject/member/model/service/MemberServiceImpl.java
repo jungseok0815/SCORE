@@ -115,7 +115,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectReqResFriendList(sqlSession,userNo);
 	}
 
+	@Override
+	public int updateMyPageMember(Member m) {
+		return memberDao.updateMyPageMember(sqlSession, m);
+	}
 
-
+	@Override
+	public int updateMyPageSport(SportInfo sport) {
+		return memberDao.updateMyPageSport(sqlSession, sport);
+	}
 	
 }

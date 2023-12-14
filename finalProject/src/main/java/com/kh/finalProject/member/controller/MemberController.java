@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -86,13 +87,57 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@RequestMapping("/myPageUpdate.me")
 	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv) {
-		Member m = (Member)session.getAttribute("loginUser");
-		
+		Member m = (Member) session.getAttribute("loginUser");
+		SportInfo sport = new SportInfo();
+		sport.setCategoryNum(1);
+		sport.setUserNo(m.getUserNo());
+		SportInfo sportInfo = memberService.getUserSportInfo(sport);
+		System.out.println(sportInfo);
+		mv.addObject("sportInfo", sportInfo).setViewName("member/mypageUpdate");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/myPageCheckCategory.me",produces="application/json; charset=UTF-8")
+	public String myPageCheckCategory(HttpSession session,SportInfo sport) {
+		System.out.println("hihihi");
+		Member m = (Member) session.getAttribute("loginUser");
+		sport.setUserNo(m.getUserNo());
+		SportInfo info = memberService.getUserSportInfo(sport);
+		if(info.getSkill() == null) {
+			info.setSkill("null");
+		}
+		if(info.getStyle() == null) {
+			info.setStyle("null");
+		}
+		return new Gson().toJson(info);
+	
+	}
+	
+	
+	//마이페이지 수정
+	@ResponseBody
+	@RequestMapping(value= "/reMyPageUpdate.me",produces="application/json; charset=UTF-8")
+	public ModelAndView updateMyPageMember(HttpSession session,ModelAndView mv, MultipartFile reupfile,  SportInfo sport) {
+		Member m = (Member) session.getAttribute("loginUser");
+		sport.setUserNo(m.getUserNo());
+		System.out.println(sport);
+
+		int result = memberService.updateMyPageMember(m);
+		int result2 = memberService.updateMyPageSport(sport);
+	    
+	    if(result * result2 > 0) {
+		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
+		    mv.addObject("sportInfo", sportInfo).addObject("skills",sportInfo.getSkill()).addObject("styles",sportInfo.getStyle()).setViewName("member/mypageUpdate");
+	    } else {
+	    	mv.addObject("errorMsg", "수정  실패");
+	    	mv.setViewName("common/errorPage");
+	    }
 		
 		return mv;
-		
 	}
 	
 	@ResponseBody

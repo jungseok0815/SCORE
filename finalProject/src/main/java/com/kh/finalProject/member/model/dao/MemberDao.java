@@ -79,4 +79,15 @@ public class MemberDao {
 	public ArrayList<Friend> selectReqResFriendList(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectReqResFriendList", userNo);
 	}
+	
+	public int updateMyPageSport(SqlSessionTemplate sqlSession, SportInfo sport) {
+		return sqlSession.update("memberMapper.updateMyPageSport", sport);
+	}
+	
+	public int updateMyPageMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMyPageMember", m);
+	}
+	
+	
+	
 }

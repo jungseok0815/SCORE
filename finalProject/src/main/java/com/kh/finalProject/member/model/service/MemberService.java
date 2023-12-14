@@ -28,6 +28,7 @@ public interface MemberService {
 	ArrayList<Member> searchMember(String searchMain);
 	int sendPostFriend(Friend f);
 	ArrayList<Friend> selectReqResFriendList(int userNo);
-	
+	int updateMyPageMember(Member m);
+	int updateMyPageSport(SportInfo sport);
 }
 
