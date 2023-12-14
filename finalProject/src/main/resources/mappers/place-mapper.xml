@@ -145,6 +145,11 @@
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+	<select id="placeResCount" resultType="_int">
+ 		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE FIELD_NO =  #{fieldNo}
+ 	</select>
  	
  	<select id="searchPlace" resultMap="placeResultSet">
 			SELECT 
@@ -154,5 +159,36 @@
 		FROM FIELD
 		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
 	</select>
+	<insert id= "insertResMatch">
+   	INSERT INTO RESERVATION
+				 (
+				 RES_NO,
+				 RES_DATE,
+				 RES_USER_NO,
+				 FIELD_NO
+				 )
+		 VALUES
+				 (
+				 SEQ_RESERVATION.NEXTVAL,
+				 SYSDATE, 
+		         #{resUserNo},
+		         #{fieldNo}
+				 )
+   </insert>
+   
+ 	<select id="checkResMatch" resultType="_int">
+ 		SELECT COUNT(*)
+		  FROM RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+		   AND RES_USER_NO = #{resUserNo}
+ 	</select>
+ 	<select id="placeImgList" resultMap="placeImgResultSet">
+ 		SELECT FIELD_IMG_NO,
+		       FIELD_URL,
+		       FIELD_ORIGIN_NAME,
+		       FIELD_CHANGE_NAME
+		  FROM FIELD_IMG
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</select>
 
 </mapper>

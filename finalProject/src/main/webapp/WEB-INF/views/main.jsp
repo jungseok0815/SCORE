@@ -20,13 +20,6 @@
 <body onload="mainInit(`${pageContext.request.contextPath}`)">
     
 	<jsp:include page="common/header.jsp" />
-    <c:if test="${ !empty alertMsg}">
-        <script>
-           alert('${alertMsg}');
-        </script>
-        <c:remove var="alertMsg" scope="session" />
-    </c:if>
-
 	<div class="outer">
         <!-- 네비게이터 (소셜매치 팀관리 구장등록) -->
         <div class="nav-container">
@@ -87,7 +80,9 @@
                                 <p>팀 생성</p>
                             </a>
                         </c:when>
- 						<c:otherwise>
+
+                        <c:otherwise>
+n
                             <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
 
                                 <img src="./resources/img/main/searchPeople.png" alt="">

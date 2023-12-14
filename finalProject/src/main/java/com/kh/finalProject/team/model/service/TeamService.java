@@ -1,6 +1,7 @@
 package com.kh.finalProject.team.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +165,7 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.teamMemberList(sqlSession, tno);
 	}
 
+
 	// 팀 번호 조회
 	@Override
 	public int getTeamNumber(int userNo) {
@@ -179,7 +181,9 @@ public class TeamService implements TeamServiceImp{
 //		return teamDao.selectTeamImg(sqlSession, teamNo, pi);
 //	}
 	
-
-
+	@Override
+	public ArrayList<Team> selectMyTeamList(HashMap<String, Integer> map) {
+		return teamDao.selectMyTeamList(sqlSession, map);
+	}
 
 }

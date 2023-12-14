@@ -3,9 +3,10 @@ package com.kh.finalProject.place.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
-import com.kh.finalProject.place.model.service.PlaceService;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reservation;
 
 @Controller
 public class PlaceController {
@@ -38,32 +40,31 @@ public class PlaceController {
 	}
 
 	@RequestMapping("/insert.pl")
-	public String insertPlace(Place p, PlaceImg pi, MultipartFile upfile, HttpSession session, Model m) {
+	public String insertPlace(Place p, ArrayList<MultipartFile> upfile, HttpSession session, Model m) {
 		
 		int resultPlace = pService.insertPlace(p);
-		int resultImg = 0;
+		int resultImg = 1;
 		
-		
-		//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
-		if(!upfile.getOriginalFilename().equals("")) {
-			
-		   String changeName = saveFile(upfile, session);
-		   
-		   pi.setFieldUrl("resources/img/place/");
-		   pi.setFieldOriginName(upfile.getOriginalFilename());
-		   pi.setFieldChangeName("resources/img/place/placeInsert" + changeName);
-		   
-		   resultImg = pService.insertPlaceImg(pi);
+		for(MultipartFile mf : upfile) {
+			//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
+			if(!mf.getOriginalFilename().equals("")) {
+				PlaceImg pi = new PlaceImg();
+				String changeName = saveFile(mf, session);
+				
+				pi.setFieldUrl("resources/img/place/");
+				pi.setFieldOriginName(mf.getOriginalFilename());
+				pi.setFieldChangeName("resources/img/place/placeInsert/" + changeName);
+				
+				resultImg = resultImg * pService.insertPlaceImg(pi);
+			}
 		}
 		
 		if(resultPlace * resultImg > 0) {
 			session.setAttribute("alertMsg", "경기장 등록이 완료되었습니다.");
-	        return "redirect:/";
 		} else {
-			session.setAttribute("alertMsg", "사진을 꼭 첨부해주세요.");
-	        return "redirect:/";
+			session.setAttribute("alertMsg", "경기장 등록에 실패하였습니다.");
 		}
-		
+		return "redirect:/";
 	}
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {
@@ -103,6 +104,8 @@ public class PlaceController {
 		
 		m.addAttribute("pl", pl);
 		m.addAttribute("matchPay", formatter.format(pl.getMatchPay()));
+		m.addAttribute("resCount", pService.placeResCount(fno));
+		m.addAttribute("plImgList", pService.placeImgList(fno));
 		return "place/placeDetailView";
 	}
 	
@@ -132,4 +135,66 @@ public class PlaceController {
 		  .addObject("resList", resList);
 		return new Gson().toJson(mv);
 	}
+	@RequestMapping(value="insertSoloResMatch.pl")
+	public String insertSoloResMatch(@RequestParam("fieldNo") int fieldNo, 
+									 @RequestParam("matchPay") int matchPay, 
+									 HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(loginUser.getPoint()-matchPay<0) {
+			session.setAttribute("alertMsg", "포인트가 부족하여  충전페이지로 이동합니다.");
+			return "member/chargingPoint";
+		}
+		Reservation res = new Reservation();
+		res.setFieldNo(fieldNo);
+		res.setResUserNo(loginUser.getUserNo());
+		int result = pService.insertResMatch(res);
+		if(result>0) {
+			loginUser.setPoint(loginUser.getPoint()-matchPay);
+			int resultPay = pService.payPoint(loginUser);
+			if(resultPay>0) {
+				session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
+			}else {
+				session.setAttribute("errorMsg", "예약 실패!");
+			}
+		}else {
+			session.setAttribute("errorMsg", "예약 실패!");
+		}
+		return "main";
+	}
+	
+	@RequestMapping(value="insertResMatch.pl")
+	public String insertResMatch(@RequestParam("teamMember") ArrayList<Integer> teamMember,
+								 @RequestParam("matchPay") int matchPay,
+								 @RequestParam("fieldNo") int fieldNo,
+									HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		if(loginUser.getPoint()-(teamMember.size()*matchPay)<0) {
+			session.setAttribute("alertMsg", "포인트가 부족하여  충전페이지로 이동합니다.");
+			return "member/chargingPoint";
+		}
+		
+		for(int i = 0; i < teamMember.size(); i++) {
+			Reservation res = new Reservation();
+			res.setFieldNo(fieldNo);
+			res.setResUserNo(teamMember.get(i));
+			
+			if(pService.checkResMatch(res) > 0) {
+				session.setAttribute("alertMsg", "이미 예약한 인원이 존재합니다.");
+				return "main";
+			}
+		}
+		for(int i = 0; i < teamMember.size(); i++) {
+			Reservation res = new Reservation();
+			res.setFieldNo(fieldNo);
+			res.setResUserNo(teamMember.get(i));
+			int result = pService.insertResMatch(res);
+		}
+		loginUser.setPoint(loginUser.getPoint()-(teamMember.size()*matchPay));
+		int resultPay = pService.payPoint(loginUser);
+		if(resultPay>0) {
+			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
+		}
+		return "main";
+	}
+	
 }

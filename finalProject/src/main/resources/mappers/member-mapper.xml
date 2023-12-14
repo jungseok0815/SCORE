@@ -259,6 +259,11 @@
 			 AND
 			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
+ 	<update id="payPoint">
+ 		UPDATE MEMBER
+		   SET USER_POINT = #{point}
+		 WHERE USER_NO = #{userNo}
+ 	</update>
 		
 			
 	<select id="userInfo" resultMap="memberResult">
