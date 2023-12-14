@@ -12,6 +12,7 @@ public class Member {
 	private String status;
 	private int point;
 	private int userLevel;
+	private int teamNo;
 	
 	
 	public Member() {
@@ -33,6 +34,34 @@ public class Member {
 		this.point = point;
 		this.userLevel = userLevel;
 	}
+	
+	
+	// 지워 버려 
+	public Member(int userNo, String userId, String userPwd, String userName, String gender, String age, String phone,
+			String address, String status, int point, int userLevel, int teamNo) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.gender = gender;
+		this.age = age;
+		this.phone = phone;
+		this.address = address;
+		this.status = status;
+		this.point = point;
+		this.userLevel = userLevel;
+		this.teamNo = teamNo;
+	}
+	// 지워 버려 
+	public int getTeamNo() {
+		return teamNo;
+	}
+
+	public void setTeamNo(int teamNo) {
+		this.teamNo = teamNo;
+	}
+
 	
 	public int getUserNo() {
 		return userNo;

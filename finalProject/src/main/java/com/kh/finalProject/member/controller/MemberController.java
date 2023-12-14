@@ -1,11 +1,11 @@
 package com.kh.finalProject.member.controller;
 
-
 import java.util.Map;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,6 +24,7 @@ import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
+import com.kh.finalProject.team.model.vo.TeamMember;
 
 @Controller
 public class MemberController {
@@ -231,7 +232,7 @@ public class MemberController {
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
 	}
 	
-	
+
 	@ResponseBody
 	@RequestMapping(value= "/checkPhoneAuth.me")
 	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
@@ -246,5 +247,7 @@ public class MemberController {
 	
 		return "authFail";
 	}
+
 }
+
 

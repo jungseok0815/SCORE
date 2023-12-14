@@ -80,7 +80,9 @@
                                 <p>팀 생성</p>
                             </a>
                         </c:when>
+
                         <c:otherwise>
+n
                             <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
 
                                 <img src="./resources/img/main/searchPeople.png" alt="">
