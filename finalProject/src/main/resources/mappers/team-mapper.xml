@@ -344,7 +344,7 @@
 				TEAM_LEVEL = #{teamLevel},
 				TEAM_GENDER = #{teamGender},
 				TEAM_USER_AGE = #{teamUserAge}
-	 	   	WHERE TEAM_NO = #{tno}
+	 	   	WHERE TEAM_NO = #{teamNo}
  	</update>
  	
  	<!-- 팀 프로필 사진 업데이트 쿼리문 -->
@@ -352,6 +352,6 @@
 	 	UPDATE TEAM_IMG
 	 		SET TEAM_ORIGIN_NAME = #{teamOriginName},
 				TEAM_CHANGE_NAME = #{teamChangeName}
-	 	   	WHERE TEAM_IMG_NO = #{teamImgNo}
+	 	   	WHERE TEAM_No = #{teamNo}
  	</update>
  </mapper>

@@ -218,9 +218,9 @@ public class TeamController {
 	    
 	    if(resultContent * resultImg > 0) {//성공 => 게시글 리스트 페이지 redirect: "list.bo"
 	        session.setAttribute("alertMsg", "팀 수정 완료");
-	        mv.setViewName("rediect:/teamProfile.tm");
+	        mv.setViewName("redirect:teamProfile.tm");
 	    }else {
-	        mv.setViewName("rediect:/");
+	    	session.setAttribute("alertMsg", "사진을 첨부해주세요");
 	    }
 	      
 	      return mv;
