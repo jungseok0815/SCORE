@@ -107,7 +107,7 @@
                 <div class="body_right section_div">
                     <p>${pl.fieldDate} ${pl.startTime}</p>
                     <h1>${pl.fieldName}</h1>
-                    <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="test3(`${pl.fieldArea}`)">지도보기</a></h6></span>
+                    <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a></h6></span>
                     <br>
                     <hr>
                     <h1 class="body_right_pay">${matchPay}</h1><h6 class="body_right_pay">/2시간</h6>
@@ -117,9 +117,7 @@
                         <c:when test="${pl.fieldCount-resCount le 5}">
                           <p>마감까지 ${pl.fieldCount-resCount}자리남았어요.</p>
                           <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" 
-                          onclick="loadTeam('${loginUser.userNo}', '${pl.categoryNum}',function(res){
-                            drawMyTeam(res);
-                            })">신청하기</button>
+                          onclick="resMatchBtn('${loginUser.userNo}','${pl.categoryNum}','${pageContext.request.contextPath}')">신청하기</button>
                         </c:when> 
                         <c:when test="${pl.fieldCount-resCount le 0}">
                           <p>현재 이 경기는 마감되었습니다.</p>
@@ -128,9 +126,7 @@
                         <c:otherwise>
                           <p>지금 신청하면<br>진행 확정이 빨라져요!</p>
                           <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" 
-                          onclick="loadTeam('${loginUser.userNo}','${pl.categoryNum}',function(res){
-                            drawMyTeam(res);
-                            })">신청하기</button>
+                          onclick="resMatchBtn('${loginUser.userNo}','${pl.categoryNum}','${pageContext.request.contextPath}')">신청하기</button>
                           </c:otherwise> 
                       </c:choose>
                     </div>

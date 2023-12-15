@@ -100,7 +100,7 @@ function copyText(){
     document.execCommand('copy');
     textarea.remove();
 }
-function test3(fieldArea){
+function drawMapBtn(fieldArea){
 	    if($("#fieldMap").css("display") == "none"){
             $('#fieldMap').show();
             $('.slider').hide();
@@ -109,4 +109,21 @@ function test3(fieldArea){
             $('#fieldMap').hide();
             $('.slider').show();
         }
+}
+
+resMatchBtn = (userNo, categoryNum, path) =>{
+    if(userNo == ""){
+        gotoHome(path)
+    }else{
+        data = {
+            userNo :userNo,
+            categoryNum : categoryNum
+        }
+        loadTeam(data,drawMyTeam)
+    }
+}
+
+gotoHome = (path) =>{
+    alert('로그인 후 이용 가능한 서비스입니다.');
+    location.href = path+"/loginView.me";
 }
