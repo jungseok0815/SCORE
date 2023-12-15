@@ -71,9 +71,6 @@ public class MemberController {
 
 	        mv.setViewName("redirect:/");
 	        
-	    } else {
-	    	mv.addObject("errorMsg", "충전 실패");
-	    	mv.setViewName("common/errorPage");
 	    }
 
 	    return mv;

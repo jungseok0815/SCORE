@@ -294,7 +294,6 @@ public class TeamController {
 	@RequestMapping("update.tm")
 	public ModelAndView teamProfileUpdate(Team t, TeamImg ti, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
 		System.out.println(t);
-		int resultContent = teamService.updateTeam(t);
 		int resultImg = 0;
 		
 	
@@ -313,12 +312,13 @@ public class TeamController {
 	    }
 	    
 	    resultImg = teamService.updateTeamImg(ti);
+	    int resultContent = teamService.updateTeam(t);
 	    
-	    if(resultContent * resultImg > 0) {//성공 => 게시글 리스트 페이지 redirect: "list.bo"
+	    if(resultContent > 0) {
 	        session.setAttribute("alertMsg", "팀 수정 완료");
-	        mv.setViewName("redirect:teamProfile.tm");
+	        mv.setViewName("redirect:teamProfile.tm?teamNo=" + t.getTeamNo());
 	    }else {
-	    	session.setAttribute("alertMsg", "사진을 첨부해주세요");
+	    	session.setAttribute("alertMsg", "다시 수정해주세요");
 	    }
 	      
 	      return mv;

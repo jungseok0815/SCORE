@@ -19,7 +19,7 @@
 				<div class="team-profile-update">
 					<div class="profile-imgbox">
 						<label for="file">
-							<div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg"
+							<div class="btn-upload"><img src="${team.teamChangeName}"
 									alt="" id="update-file"></div>
 						</label>
 						<input type="file" id="file" class="form-control-file border" name="reupfile"
@@ -65,9 +65,9 @@
 				<p>성별</p>
 				<div class="team-gender">
 					<div>
-						<input type="radio" name="teamGender" class="btn-check team-gender-sl" value="남녀모두"
-							id="team-gender1" autocomplete="off" ${team.teamGender eq '남녀모두' ? 'checked' : '' }>
-						<label class="btn btn-outline-primary" for="team-gender1">남녀모두</label><br>
+						<input type="radio" name="teamGender" class="btn-check team-gender-sl" value="남녀 모두"
+							id="team-gender1" autocomplete="off" ${team.teamGender eq '남녀 모두' ? 'checked' : '' }>
+						<label class="btn btn-outline-primary" for="team-gender1">남녀 모두</label><br>
 					</div>
 					<div>
 						<input type="radio" name="teamGender" class="btn-check team-gender-sl" value="남자"
@@ -124,8 +124,8 @@
 					<div class="team-level">
 						<div>
 							<input type="radio" name="teamLevel" class="btn-check" id="btn-check-outlined10"
-								autocomplete="off" value="상관없음" ${team.teamLevel eq '상관없음' ? 'checked' : '' }>
-							<label class="btn btn-outline-primary" for="btn-check-outlined10">상관없음</label><br>
+								autocomplete="off" value="실력무관" ${team.teamLevel eq '실력무관' ? 'checked' : '' }>
+							<label class="btn btn-outline-primary" for="btn-check-outlined10">실력무관</label><br>
 						</div>
 						<div>
 							<input type="radio" name="teamLevel" class="btn-check" id="btn-check-outlined11"
@@ -173,7 +173,7 @@
 		const age = "${team.teamUserAge}";
 		console.log(age)
 		const arr = age.split(',');
-		//console.log(arr)
+		console.log(arr)
 		for (let i = 0; i < arr.length; i++) {
 			for (let j = 0; j < checkBoxList.length; j++) {
 				if (arr[i].includes(checkBoxList[j].value)) {

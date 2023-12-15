@@ -1,7 +1,3 @@
-init = (data) =>{
-    console.log(data.teamName)
-    console.log(data.categoryNum)
-}
 loadImg = (inputFile) => {
 
     if(inputFile.files.length == 1){ 

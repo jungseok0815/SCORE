@@ -33,7 +33,7 @@
                             </div>
                             <div class="profile-image">
                                 <div>
-                                    <img class="profile-photo" src="./resources/img/team/teamProfile/liverpool.png" alt="">
+                                    <img class="profile-photo" src="${team.teamChangeName}" alt="">
                                 </div>
                             </div>
                         </div>
