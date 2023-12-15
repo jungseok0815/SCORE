@@ -19,10 +19,17 @@
     <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=4"></script>
     <script src="resources/js/common/commonTeam/commonTeam.js?ver=3"></script>
     <link rel="stylesheet" href="/final/resources/css/common/header.css?ver=1">
+    
 
 
 </head>
 <body>
+    <c:if test="${ !empty alertMsg}">
+        <script>
+           alert('${alertMsg}');
+        </script>
+        <c:remove var="alertMsg" scope="session" />
+    </c:if>
     <div class="header-body">
         <div class="header">
             <div class="header-left">
@@ -69,6 +76,7 @@
                 	<c:otherwise>
 		                <!-- 로그인 후 -->
 			              	<a href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+
 	                </c:otherwise>
 	            </c:choose>         
                 </div>

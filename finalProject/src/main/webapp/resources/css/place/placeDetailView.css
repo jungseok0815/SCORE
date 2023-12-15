@@ -62,6 +62,9 @@ img {
     width: 100%;
     margin: 0px 10px;
 }
+#copy_text{
+    margin-bottom: 0px;
+}
 .body_right span{
     display: inline-flex;
     align-items: center;
@@ -193,4 +196,8 @@ img {
     .section_div{
         max-width: 500px;
     }
+}
+#soldoutBtn:hover{
+    background-color: #6c757d;
+    cursor: auto;
 }

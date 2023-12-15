@@ -32,29 +32,17 @@
     border-radius: 10px;
     font-weight: 500;
     cursor: pointer;
-    display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50px;
     border: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 .btn-upload img{
-    width: 100%;
-    height: 100%;
+    width: 250px;
+    height: 125px;
 }
-/* .filebox .upload-name {
-    display: inline-block;
-    height: 40px;
-    padding: 0 10px;
-    vertical-align: middle;
-    border: 1px solid #dddddd;
-    width: 200px;
-    color: #999999;
-    margin-bottom: 10px;
-}
-#file-upload-button{
-    display: none;
-} */
 
 .filebox input[type="file"] {
     position: absolute;
@@ -67,25 +55,16 @@
 .field-insert-input input[type="time"]{
     width: 75px;
 }
-/* .btn-upload {
-    width: 150px;
-    height: 30px;
-    background: #fff;
-    border: 1px solid rgb(77,77,77);
-    border-radius: 10px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover {
-      background: rgb(77,77,77);
-      color: #fff;
-    }
-    margin-top: 10px;
-    margin-bottom: 20px;
-  } */
-  
-  #fileImgFile {
-    display: none;
-  }
+#fileImgFile {
+display: none;
+}
+.manager-select-box{
+    width: 500px;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.address-input{
+    width: 430px;
+    height: 40px;
+}

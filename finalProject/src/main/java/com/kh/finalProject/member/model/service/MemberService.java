@@ -30,6 +30,8 @@ public interface MemberService {
 	ArrayList<Member> searchMember(String searchMain);
 	int sendPostFriend(Friend f);
 	ArrayList<Friend> selectReqResFriendList(int userNo);
+	int updateMyPageMember(Member m);
+	int updateMyPageSport(SportInfo sport);
 	int checkFriendStatus(Friend f);
 	int insertAuth(MessageAuth auth);
 	int checkPhoneAuth(MessageAuth auth);

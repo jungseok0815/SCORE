@@ -15,41 +15,42 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 		 <div class="main">
-	        <div class="all"> 
-	        <div class="choice-sports">
-        <div onclick="choiceSports(2)" class="baseball-btn">
-            <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
-            <p>Baseball</p>
-        </div>
-        <div onclick="choiceSports(1)" class="football-btn">
-            <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
-            <p>Football</p>
-        </div>
-        <div onclick="choiceSports(3)" class="basketball-btn">
-            <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
-            <p>Basketball</p>
-        </div>
-    </div>
-    <br>
+	        <div class="all">
+	         
+	    <div class="choice-sports">
+	        <div onclick="choiceSports(2)" class="baseball-btn">
+	            <img class="baseball-img"src="./resources/img/main/bb_img.png" alt="">
+	            <p>Baseball</p>
+	        </div>
+	        <div onclick="choiceSports(1)" class="football-btn">
+	            <img class="sports-img" src="./resources/img/main/soccerImg.png" alt="">
+	            <p>Football</p>
+	        </div>
+	        <div onclick="choiceSports(3)" class="basketball-btn">
+	            <img class="sports-img" src="./resources/img/main/basketballImg.png" alt="">
+	            <p>Basketball</p>
+	        </div>
+	   </div>
+	   <br>
     
 			  
 	            <div class="topWrapper">
 	                <div class="top_container">
 	                    <ul>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="all" value="all" onclick="teamList()" checked><label for="all">전체</label>
+	                            <input type="radio" name="local" id="all" value="all" onclick="choiceCity()" checked><label for="all">전체</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="seoul"  value="서울" onclick="teamList()"><label for="seoul">서울</label>
+	                            <input type="radio" name="local" id="seoul"  value="서울" onclick="choiceCity()"><label for="seoul">서울</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="incheon" value="인천" onclick="teamList()"><label for="incheon">인천</label>
+	                            <input type="radio" name="local" id="incheon" value="인천" onclick="choiceCity()"><label for="incheon">인천</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="deagu" value="대구" onclick="teamList()" ><label for="deagu">대구</label>
+	                            <input type="radio" name="local" id="deagu" value="대구" onclick="choiceCity()" ><label for="deagu">대구</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="busan" value="부산" onclick="teamList()" ><label for="busan">부산</label>
+	                            <input type="radio" name="local" id="busan" value="부산" onclick="choiceCity()" ><label for="busan">부산</label>
 	                        </li>
 	                    </ul> 
 	                </div>
@@ -61,7 +62,7 @@
 	                            <c:forEach var="t" items="${list}"> 
 	                                <a onclick="location.href='offerDetailView.tm?tno=${t.offerNo}'" class="list-link" >
 	                                    <div class="list-img-all">
-	                                        <img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>
+	                                        <img src="list.teamChangeName"  class="list-img"/>
 	                                    </div>
 	                                    <div class="list-content">
 	                                        <div class="list-title">

@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reservation;
 
 @Repository
 public class PlaceDao {
@@ -36,6 +38,9 @@ public class PlaceDao {
 	public Place placeDetailview(SqlSessionTemplate sqlSession, int fieldNo) {
 		return sqlSession.selectOne("placeMapper.placeDetailview", fieldNo);
 	}
+	public int placeResCount(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.selectOne("placeMapper.placeResCount", fieldNo);
+	}
 	public ArrayList<Place> selectResPlaceList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectResPlaceList");
 	}
@@ -43,4 +48,18 @@ public class PlaceDao {
 	public ArrayList<Place> searchPlace(SqlSessionTemplate sqlSession, String selectValue) {
 		return (ArrayList)sqlSession.selectList("placeMapper.searchPlace",selectValue);
 	}
+	
+	public int insertResMatch(SqlSessionTemplate sqlSession, Reservation res) {
+		return sqlSession.insert("placeMapper.insertResMatch", res);
+	}
+	public int payPoint(SqlSessionTemplate sqlSession, Member loginUser) {
+		return sqlSession.update("memberMapper.payPoint", loginUser);
+	}
+	public int checkResMatch(SqlSessionTemplate sqlSession, Reservation res) {
+		return sqlSession.selectOne("placeMapper.checkResMatch", res);
+	}
+	public ArrayList<PlaceImg> placeImgList(SqlSessionTemplate sqlSession, int fieldNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.placeImgList", fieldNo);
+	}
+	
 }
