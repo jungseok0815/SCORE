@@ -43,7 +43,16 @@
 		<result column="PHONE" property="phone" />
 		<result column="SEND_DATE" property="sendDate" />
 	</resultMap>
-
+	
+	<resultMap type="MemberImg" id="memberImgResult">
+		<result column="MEMBER_IMG_NO" property="memberImgNo" />
+		<result column="MEMBER_URL" property="memberUrl" />
+		<result column="MEMBER_ORIGIN_NAME" property="memberOriginName" />
+		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
+		<result column="DELETE_MEMBER_IMG" property="deleteMemberImg" />
+		<result column="USER_NO" property="userNo" />
+	</resultMap>
+	
 	<select id="getPostFriends" resultMap="memberResult">
 			SELECT 
 		 	USER_NO,
@@ -248,25 +257,6 @@
 			and friend_status = 'Y'
 	</select>
 	
-	<update id="updateMyPageMember">
-		UPDATE MEMBER
-		SET USER_NAME = #{userName},
-				USER_PHONE = #{phone},
-				USER_BIRTH = #{age},
-				CITY = #{address},
-				GENDER = #{gender}
-		WHERE USER_NO = #{userNo}
-	</update>
-	
-
-	<update id="updateMyPageSport">
-		UPDATE SPORTINFO
-		SET  CATEGORY_NUM = #{categoryNum},
-				STYLE = #{style},
-				SKILL = #{skill}
-		WHERE CATEGORY_NUM = #{categoryNum}
-	</update>
-	
 	<select id="checkFriendStatus" resultType="_int">
 			SELECT COUNT(*)
 			  FROM FRIEND
@@ -322,5 +312,45 @@
    <!--      SYSDATE BEWEEN SEND_DATE AND (SEND_DATE + 3/24/60)  -->
 	</select>
 	
+	<!--  마이페이지 멤버 수정-->
+	<update id="updateMyPageMember">
+		UPDATE MEMBER
+		SET USER_NAME = #{userName},
+				USER_PHONE = #{phone},
+				USER_BIRTH = #{age},
+				CITY = #{address},
+				GENDER = #{gender}
+		WHERE USER_NO = #{userNo}
+	</update>
 	
+	<!--  마이페이지 스포츠 수정-->
+	<update id="updateMyPageSport">
+		UPDATE SPORTINFO
+		SET STYLE = #{style},
+				SKILL = #{skill}
+		WHERE USER_NO = #{userNo}
+		 	AND CATEGORY_NUM = #{categoryNum}
+	</update>
+	
+	<!--  마이페이지 이미지 수정-->
+	 	<insert id="updateMemImg">
+ 		INSERT INTO MEMBER_IMG
+ 					(
+ 						MEMBER_IMG_NO,
+ 						MEMBER_URL, 
+ 						MEMBER_ORIGIN_NAME,
+ 						MEMBER_CHANGE_NAME,
+ 						DELETE_MEMBER_IMG,
+						USER_NO
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_MEMBER_IMG.NEXTVAL,
+ 		  			   #{memberUrl},
+ 		  			   #{memberOriginName},
+ 		  			   #{memberChangeName},
+ 		  			  	'N',
+ 		  			   #{userNo}
+ 		  		    )
+ 	</insert>
 </mapper>

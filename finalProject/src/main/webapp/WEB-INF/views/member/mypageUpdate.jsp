@@ -13,18 +13,21 @@
 <body>
    <jsp:include page="../common/header.jsp" />   
    
-   <div class="title">
-        <form action="reMyPageUpdate.me" class="formUpdate">
+   <div class="title"> 
+        <form action="reMyPageUpdate.me" method="post"  enctype="multipart/form-data" class="formUpdate">
+            <input type="hidden" name="userNo" value="${loginUser.userNo}" />
             <div class="title2">
+                
                 <div class="imgUpload">
-                    <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
+                    <img src="/resources/img/member/memberInsert" class="img3" id="img-upload-my"/>
                 </div>
                 
                 <div class="a-btn">
                     <label for="file">
                         <div class="btn-upload">파일 업로드하기</div>
+                        <div>사진을 수정해주세요</div>
                     </label>
-                    <input type="file" name="upfile" id="file"  onchange="imgChangeUpdate(this)" />
+                    <input type="file" name="reupfile" id="file"  onchange="imgChangeUpdate(this)" />
                 </div>
                 
             
@@ -68,8 +71,8 @@
                 
                 <div class="title4">성별</div>
                 <div class="select">
-                    <input type="radio" id="select" name="gender" value="gender"><label for="select">남자</label>
-                    <input type="radio" id="select2" name="gender" value="gender"><label for="select2">여자</label>
+                    <input type="radio" id="select" name="gender" value="남자"><label for="select">남자</label>
+                    <input type="radio" id="select2" name="gender" value="여자"><label for="select2">여자</label>
                 </div>
 
                 <div class="like-style">
@@ -77,17 +80,17 @@
                     <div class="like-position-lineONe" id="like-position">
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkStyle" value="attack" name="attack"><span>공격</span>
+                            <input type="checkbox" class="checkStyle" value="attack" name="style"><span>공격</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkStyle" value="balance" name="balance"><span>밸런스</span>
+                            <input type="checkbox" class="checkStyle" value="balance" name="style"><span>밸런스</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkStyle" value="defence" name="defence"><span>수비</span>
+                            <input type="checkbox" class="checkStyle" value="defence" name="style"><span>수비</span>
                             </label>
                         </div>  
                     </div>
@@ -98,34 +101,34 @@
                     <div class="like-position-lineONe position1">
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkSkill" value="shoot" name="shoot"><span>슛</span>
+                            <input type="checkbox" class="checkSkill" value="shoot" name="skill"><span>슛</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkSkill" value="pass" name="pass"><span>패스</span>
+                            <input type="checkbox" class="checkSkill" value="pass" name="skill"><span>패스</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkSkill" value="drible" name="drible"><span>드리블</span>
+                            <input type="checkbox" class="checkSkill" value="drible" name="skill"><span>드리블</span>
                             </label>
                         </div>
                     </div>
                     <div class="like-position-lineTwo position2">   
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox" class="checkSkill" value="speed" name="speed"><span>스피드</span>
+                            <input type="checkbox" class="checkSkill" value="speed" name="skill"><span>스피드</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox"class="checkSkill" value="physical" name="physical"><span>피지컬</span>
+                            <input type="checkbox"class="checkSkill" value="physical" name="skill"><span>피지컬</span>
                             </label>
                         </div>
                         <div class="cat comedy">
                             <label>
-                            <input type="checkbox"class="checkSkill" value="tikitaka" name="tikitaka"><span>티키타카</span>
+                            <input type="checkbox"class="checkSkill" value="tikitaka" name="skill"><span>티키타카</span>
                             </label>
                         </div>   
                     </div>
@@ -189,9 +192,6 @@
                 }
             }
         }
-
-
-
     </script>
    
    <jsp:include page="../common/footer.jsp" />
