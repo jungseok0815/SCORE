@@ -34,26 +34,25 @@
                             </div>
                             <div class="profile-image">
                                 <div>
-                                    <img class="profile-photo" src="./resources/img/team/teamProfile/liverpool.png" alt="">
+                                    <img class="profile-photo" src="${team.teamChangeName}" alt="">
                                 </div>
                             </div>
                         </div>
                         <c:choose>
-         
                             <c:when test="${myGrade eq 3}">
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm?tno=${team.teamNo}'">
                                         팀 프로필 설정
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm?tno=${team.teamNo}'">
                                         가입신청 보기
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                        구인글 작성
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm?tno=${team.teamNo}'">
+                                        구인글 작성  
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
@@ -62,7 +61,6 @@
                                     </button>
                                 </div>
                             </c:when>
-                         
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-danger" onclick="teamOutside('${team.teamNo}')">

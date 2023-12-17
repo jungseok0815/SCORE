@@ -213,7 +213,7 @@
 
   
                   <div class="profile-imgbox">
-                      <label for="file">
+                      <label for="file" style="display: flex; justify-content: center;">
                           <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
                       </label>
                       <input type="file" name="upfile" id="file" onchange="imgChange(this)" required>

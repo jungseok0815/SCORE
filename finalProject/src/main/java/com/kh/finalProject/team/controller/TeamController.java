@@ -27,6 +27,7 @@ import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
+import com.kh.finalProject.team.model.vo.TeamReq;
 
 @Controller
 public class TeamController {
@@ -41,92 +42,55 @@ public class TeamController {
 		
 		ArrayList<TeamOffer> list = teamService.selectList(pi);
 		
-//		for (TeamOffer t : list) {
-//		    int teamNo = t.getTeamNo();
-//		    System.out.println("팀 번호" + teamNo);
-//		
-//		    String img = teamService.selectTeamImg(teamNo);
-////		    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo, pi);
-//		    System.out.println("팀 이미지" + img);
-//		    
-//		    mv.addObject("pi", pi)
-//			  .addObject("list", list)
-//			  .addObject("img", img)
-//			  .setViewName("team/teamOfferBoardList");
-//			
-//			return mv;
-//		}
-		
-//		for (TeamOffer t : list) {
-//		    int teamNo = t.getTeamNo();
-//		    System.out.println("팀 번호" + teamNo);
-//		    
-//		    String img = teamService.selectTeamImg(teamNo);
-//		    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo);
-//		}
-		
-//		mv.addObject("pi", pi)
-//		  .addObject("list", list)
-//		  .setViewName("team/teamOfferBoardList");
-		
-		
-//		for(int i= 0; i < list.size(); i++) {
-//			System.out.println(list.size());
-//			
-//			for (TeamOffer t : list) {
-//				System.out.println(t);
-//			    int teamNo = t.getTeamNo();
-//			    System.out.println("팀 번호" + teamNo);
-//			    
-//			    String img = teamService.selectTeamImg(teamNo);  // 팀번호가 일치하는 이미지 가져 오기 
-////			    ArrayList<TeamOffer> img = teamService.selectTeamImg(teamNo);
-//			    
-//			    list.get(i).setTeamChangeName(img);
-//				System.out.println(list + "sssss");
-//				
-//				mv.addObject("pi", pi)
-//				  .addObject("list", list)
-//				  .setViewName("team/teamOfferBoardList");
-//				
-//				return mv;
-//			}
-//		}
 		
 		for(int i= 0; i < list.size(); i++) {
-			System.out.println("팀 번호" + list.get(i).getTeamNo());
-			
 			String img = teamService.selectTeamImg(list.get(i).getTeamNo());
 //			String img = teamService.selectTeamImg(teamNo);
-			System.out.println("이미지 이름" + img);
 			
+			// 리스트에 팀 프로필 이미지 담아 주기
 			list.get(i).setTeamChangeName(img);
-			System.out.println("체인지 들어감" + list);
 			
 			mv.addObject("pi", pi)
 			  .addObject("list", list)
 			  .setViewName("team/teamOfferBoardList");
 			
-			return mv;
 		}
-		
-		mv.addObject("pi", pi)
-		  .addObject("list", list)
-		  .setViewName("team/teamOfferBoardList");
 		
 		return mv;
 	}
 	
 	@RequestMapping("offerDetailView.tm")
-	public String teamOfferDetailView(int tno, Model model, HttpSession session) {
-		int result = teamService.increaseCount(tno);  // tno는 게시물 번호 
+	public String teamOfferDetailView(int tno, int teamNo, Model model, HttpSession session) {
+					// tno는 게시물 번호  teamNo 팀 번호
+		int result = teamService.increaseCount(tno);  
 
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int isMyteam = 0;
+		
+		if (loginUser != null) {
+			ArrayList<TeamMember> tlist = teamService.selectLoginUserNo(loginUser.getUserNo());
+
+			//tlist 반복하면 서  팀넘버랑 teamNo비교 동일한게 있다면 isMyteam = 1
+			for(TeamMember teamList : tlist) {
+				if(teamList.getTeamNo() == teamNo) {
+					isMyteam = 1;
+					break;
+				}
+			}
+		}
+		
 		if (result > 0) {
 			TeamOffer teamOffer = teamService.selectOfferDetail(tno);
 			TeamImg teamImg = teamService.selectOfferImg(tno);
+			TeamImg profileImg = teamService.offerProfileImg(teamNo);
+			
 			
 			model.addAttribute("teamOffer", teamOffer);
 			// 어쏘를 데이터베이스로부터 조회해서 넘겨주자
 			model.addAttribute("teamImg", teamImg);
+			model.addAttribute("profileImg", profileImg);
+			model.addAttribute("teamNo", teamNo);
+			model.addAttribute("isMyteam", isMyteam);
 			
 			return "team/teamOfferListDetailView";
 		} else {
@@ -139,87 +103,105 @@ public class TeamController {
 	@RequestMapping(value="offerAjax.tm", produces="application/json; charset=UTF-8")
 	public String teamOfferAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, int category, ModelAndView mv) {
 		
-//		int offerCount = teamService.selectOfferListCount(activityAtea);
-//		PageInfo pi = Pagenation.getPageInfo(offerCount, currentPage, 10, 5);
-
-		// 게시물 갯수와 페이징 
-//		PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea), currentPage, 10, 5);
-		
 		if(activityAtea.equals("all") && category == 0) {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 			
 			ArrayList<TeamOffer> list = teamService.selectList(pi);
 			
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectList(pi));
-			
-			return new Gson().toJson(mv);
-		}
-		
-		
-		if(activityAtea.equals("all")) {
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCountCate(category), currentPage, 10, 5);
-			
-																// 카테고리 조건으로 
-			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectCityAll(category, pi);
-			
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectCityAll(category, pi));
+			if(list == null) {
+				mv.addObject("pi", pi)
+				  .addObject("list", list)
+				  .setViewName("team/teamOfferBoardList");
+				return new Gson().toJson(mv);
+			} else {
+				for(int i= 0; i < list.size(); i++) {
+					
+					String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+					
+					list.get(i).setTeamChangeName(img);
+					
+					mv.addObject("pi", pi)
+					  .addObject("list", list)
+					  .setViewName("team/teamOfferBoardList");
+				}
+			}
 
 			return new Gson().toJson(mv);
 			
-		} else if(!activityAtea.equals("all") && category == 0){
+		} else if(!activityAtea.equals("all") && category == 0) {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectNotCategory(activityAtea), currentPage, 10, 5);
-			// 게시물 리스트 
+
 			ArrayList<TeamOffer> list = teamService.selectOnlyCity(activityAtea, pi);
-				
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectOnlyCity(activityAtea, pi));
 			
+			if(list != null) {
+				for(int i= 0; i < list.size(); i++) {
+					
+					String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+					
+					list.get(i).setTeamChangeName(img);
+					
+					mv.addObject("pi", pi)
+					  .addObject("list", list)
+					  .setViewName("team/teamOfferBoardList");
+				}
+			}
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("team/teamOfferBoardList");
+
 			return new Gson().toJson(mv);
+			
+		} else if(activityAtea.equals("all") && category != 0) {
+			PageInfo pi = Pagenation.getPageInfo(teamService.selectListCountCate(category), currentPage, 10, 5);
+
+			ArrayList<TeamOffer> list = teamService.selectCityAll(category, pi);
+			
+			if(list != null) {
+				for(int i= 0; i < list.size(); i++) {
+					
+					String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+					
+					list.get(i).setTeamChangeName(img);
+					
+					mv.addObject("pi", pi)
+					  .addObject("list", list)
+					  .setViewName("team/teamOfferBoardList");
+				}
+			}
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("team/teamOfferBoardList");
+			
+			return new Gson().toJson(mv);	
+			
 		} else {
 			PageInfo pi = Pagenation.getPageInfo(teamService.selectOfferListCount(activityAtea, category), currentPage, 10, 5);
 			// 게시물 리스트 
 			ArrayList<TeamOffer> list = teamService.selectCity(activityAtea, category, pi);
 			
-			mv.addObject("pi", pi)						
-			  .addObject("list", teamService.selectCity(activityAtea, category, pi));
+			if(list != null) {
+				for(int i= 0; i < list.size(); i++) {
+					
+					String img = teamService.selectTeamImg(list.get(i).getTeamNo());
+					
+					list.get(i).setTeamChangeName(img);
+					
+					mv.addObject("pi", pi)
+					  .addObject("list", list)
+					  .setViewName("team/teamOfferBoardList");
+				}
+			}
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("team/teamOfferBoardList");
 			
 			return new Gson().toJson(mv);
-		}
+		}	
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="choiceSportsAjax.tm", produces="application/json; charset=UTF-8")
-	public String teamChoiceSportsAjax(@RequestParam(value="cpage", defaultValue="1") int currentPage, String activityAtea, int category, ModelAndView mv) {
-		
-		if(activityAtea.equals("all")) {
-			int choiceCount = teamService.selectChoiceAllCount(category);
 
-			
-			// 게시물 갯수와 페이징 
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceAllCount(category), currentPage, 10, 5);
-			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectChoiceAllList(category, pi);
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectChoiceAllList(category, pi));
-			
-			return new Gson().toJson(mv);
-		
-		} else {
-			int choiceCount = teamService.selectChoiceSportsCount(category, activityAtea);
-			
-			// 게시물 갯수와 페이징 
-			PageInfo pi = Pagenation.getPageInfo(teamService.selectChoiceSportsCount(category, activityAtea), currentPage, 10, 5);
-			// 게시물 리스트 
-			ArrayList<TeamOffer> list = teamService.selectChoiceList(category, activityAtea, pi);
-			mv.addObject("pi", pi)
-			  .addObject("list", teamService.selectChoiceList(category, activityAtea, pi));
-			
-			return new Gson().toJson(mv);
-		}
-	}
 	
 	@RequestMapping("offerDelete.tm")
 	public String teamOfferDelete(int tno, String filePath, HttpSession session, Model model) {
@@ -261,9 +243,9 @@ public class TeamController {
 		int taa = teamService.teamAvgAge(tno);
 		
 		Team t = teamService.teamProfile(tno);
-		System.out.println(t);
+
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
-		
+
 		int myGrade = 1;
 		for (TeamMember m : tm) {
 			System.out.println(m.getPhone());
@@ -284,20 +266,104 @@ public class TeamController {
 	
 	
 	@RequestMapping("updateForm.tm")
-	public String teamProfileUpdateForm() {
-		return "team/teamProfileUpdate";
-	}
-	@RequestMapping("joinList.tm")
-	public String teamJoinListForm() {
-		return "team/teamJoinList";
+	public ModelAndView teamUpdateForm(int tno, ModelAndView mv) {
+		System.out.println(tno);
+		Team t = teamService.teamProfile(tno);
+		System.out.println(t);
+		mv.addObject("team", t).setViewName("team/teamProfileUpdate");
+		return mv;
 	}
 	
+	@RequestMapping("update.tm")
+	public ModelAndView teamProfileUpdate(Team t, TeamImg ti, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
+		System.out.println(t);
+		int resultImg = 0;
+		
+	
+		System.out.println(t);
+	    System.out.println(reupfile);
+	    //새로운 첨부파일 존재유무 확인
+	    if(!reupfile.getOriginalFilename().equals("")) {
+	       String changeName = saveFile(reupfile, session, "resources/img/team/teamProfile/");
+	       if(ti.getTeamOriginName() != null) {
+	          new File(session.getServletContext().getRealPath(ti.getTeamChangeName())).delete();
+	       }      
+	       
+	       ti.setTeamOriginName(reupfile.getOriginalFilename());
+	       ti.setTeamChangeName("resources/img/team/teamProfile/" + changeName); 
+	      
+	    }
+	    
+	    resultImg = teamService.updateTeamImg(ti);
+	    int resultContent = teamService.updateTeam(t);
+	    
+	    if(resultContent > 0) {
+	        session.setAttribute("alertMsg", "팀 수정 완료");
+	        mv.setViewName("redirect:teamProfile.tm?teamNo=" + t.getTeamNo());
+	    }else {
+	    	session.setAttribute("alertMsg", "다시 수정해주세요");
+	    }
+	      
+	      return mv;
+	}
+	
+	@RequestMapping("joinList.tm")
+	public ModelAndView teamJoinListForm(int tno, ModelAndView mv) {
+		System.out.println("수락" + tno);
+		
+		ArrayList<TeamReq> list = teamService.selectReqList(tno);
+		System.out.println(list);
+
+		String tName = teamService.selectTeamName(tno);
+		
+		String tProfile = teamService.selectTeamProImg(tno);
+		
+		// reqUserNo에 회원 번호 들어 옴 
+
+		mv.addObject("list", list)
+		.addObject("tName", tName)
+		.addObject("tProfile", tProfile)
+		.setViewName("team/teamJoinList");
+		
+		return mv;
+	}
+	
+	@RequestMapping("accept.tm")
+	public String reqAccept(int reqNo, HttpSession session, Model model) {
+
+		int req = teamService.teamReqAccept(reqNo);
+		
+		if(req > 0) {
+			session.setAttribute("alertMsg", "수락 성공");
+			return "redirect:/"; // return "teamProfile.tm?teamNo=${tno}"
+		} else {
+			model.addAttribute("errorMsg", "신청 실패");
+			return "common/errorMsg";
+		}
+	}
+	
+	@RequestMapping("refuse.tm")
+	public String reqRefuse(int reqNo, HttpSession session, Model model) {
+	
+		int req = teamService.teamReqReqRefuse(reqNo);
+		
+		if(req > 0) {
+			session.setAttribute("alertMsg", "거절 성공");
+			return "redirect:/";
+		} else {
+			model.addAttribute("errorMsg", "신청 실패");
+			return "common/errorMsg";
+		}
+	}
 
 	
 	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
 	@RequestMapping("insertTeamOfferForm.tm")
-	public String teamOfferInsertForm() {
-		return "team/teamOfferInsert";
+	public ModelAndView teamOfferInsertForm(String tno, ModelAndView mv) {
+
+		mv.addObject("tno", tno).setViewName("team/teamOfferInsert");
+
+		return mv;
 	}
 	
 
@@ -336,17 +402,17 @@ public class TeamController {
 	
 	// 구인글 작성 
 	@RequestMapping("insertOffer.tm")
-	public String InsertOffer(TeamOffer t, int userNo, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
+	public String InsertOffer(TeamOffer t, int userNo, int teamNo, TeamImg ti, MultipartFile upfile, HttpSession session, Model model) {
 		
 		// userPo이 안에 팀 번호 있음
-		TeamMember userPo = teamService.selectInformation(userNo);
+//		TeamMember userPo = teamService.selectInformation(userNo);
 		
 		// tno에 팀 번호 담음 
-		int tno = userPo.getTeamNo();
+//		int tno = userPo.getTeamNo();
 		int resultImg = 0;
 		
 		// 게시글 등록 
-		int result = teamService.insertOfferList(t, tno);
+		int result = teamService.insertOfferList(t, teamNo);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
@@ -356,7 +422,7 @@ public class TeamController {
 			ti.setTeamOriginName(upfile.getOriginalFilename());
 			ti.setTeamChangeName("resources/img/team/teamOfferListDetailView/" + changeName);
 			
-			resultImg = teamService.insertOfferImg(ti, tno);
+			resultImg = teamService.insertOfferImg(ti, teamNo);
 		}
 		
 		if(result * resultImg > 0) {
