@@ -198,6 +198,29 @@ public class TeamDao {
 		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeamList", map);
 	}
 	
+	public int deleteTeam(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeam", tNo);
+	}
+	
+	public int deleteTeamMemberAll(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeamMemberAll", tNo);
+	}
+	
+	public int deleteTeamImg(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeamImg", tNo);
+	}
+	
+	public int changeTeamGradeUp(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.update("teamMapper.changeTeamGradeUp", tm);
+	}
+	
+	public int changeTeamGradeDown(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.update("teamMapper.changeTeamGradeDown", tm);
+	}
+	public int deleteTeamMember(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.delete("teamMapper.deleteTeamMember", tm);
+	}
+
 	// 유저 팀 번호 가져오기
 	public ArrayList<TeamMember> selectLoginUserNo(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("teamMapper.selectLoginUserNo", userNo);

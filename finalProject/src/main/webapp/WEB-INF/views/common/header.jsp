@@ -16,8 +16,8 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5b03f739e9.js" crossorigin="anonymous"></script>
-    <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=4"></script>
-    <script src="resources/js/common/commonTeam/commonTeam.js?ver=3"></script>
+    <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=5"></script>
+    <script src="resources/js/common/commonTeam/commonTeam.js?ver=5"></script>
     <link rel="stylesheet" href="/final/resources/css/common/header.css?ver=1">
     
 

@@ -248,6 +248,7 @@ public class TeamController {
 
 		int myGrade = 1;
 		for (TeamMember m : tm) {
+			System.out.println(m.getPhone());
 			if(m.getUserNo() == loginUser.getUserNo())
 				myGrade = m.getGrade();
 			
@@ -489,4 +490,54 @@ public class TeamController {
 		ArrayList<TeamMember> tm = teamService.teamMemberList(teamNo);
 		return tm;
 	}
+	
+	
+
+	@RequestMapping("deleteTeam.tm")
+	public String deleteTeam(int tNo){
+		int result1 = teamService.deleteTeamMemberAll(tNo);
+		int result3 = teamService.deleteTeamImg(tNo);
+		if(result1 * result3 > 0) {
+			int result2  =teamService.deleteTeam(tNo);
+		}
+		return "main";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="changeTeamGrade.tm")
+	public String changeTeamGrade(TeamMember tm){
+		System.out.print(tm);
+		if(tm.getGrade() == 1) {
+			return  teamService.changeTeamGradeUp(tm) > 0 ? "changeTeamGradeOk" :  "changeTeamGradeFail";
+		}else {
+			return  teamService.changeTeamGradeDown(tm) > 0 ? "changeTeamGradeOk" :  "changeTeamGradeFail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="deleteTeamMember.tm")
+	public String deleteTeamMember(TeamMember tm){
+		System.out.print(tm);
+		return  teamService.deleteTeamMember(tm) > 0 ? "deleteTeamMemberGradeOk" :  "deleteTeamMemberGradeFail";
+	}
+	
+	//팀 프로필 뷰 셀렉트
+	@RequestMapping("teamOutside.tm")
+	public ModelAndView teamOutside(TeamMember tm, ModelAndView mv,HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		Member m = (Member) session.getAttribute("loginUser");
+		tm.setUserNo(m.getUserNo());
+		int result = teamService.deleteTeamMember(tm);
+		
+		if(result> 0) {
+			mv.setViewName("main");
+			
+		}else {
+			mv.addObject("errorMsg", "로그인 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;	
+	}
 }
+

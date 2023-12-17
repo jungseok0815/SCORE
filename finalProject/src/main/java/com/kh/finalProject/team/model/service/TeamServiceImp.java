@@ -103,7 +103,21 @@ public interface TeamServiceImp {
 	
 	// ㅇㅇㅇㅇ
 	String selectTeamImg(int teamNo);
-
+	
+	
+	int deleteTeam(int tNo);
+	
+	int deleteTeamMemberAll(int tNo);
+//	ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi);
+	
+	int deleteTeamImg(int tNo);
+	
+	//팀 멤버 등급올리는 
+	int changeTeamGradeUp(TeamMember tm);
+	//팀 멤버 등급 내리는 것 
+	int changeTeamGradeDown(TeamMember tm);
+	int deleteTeamMember(TeamMember tm);
+	
 	//	ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi);
 
 
