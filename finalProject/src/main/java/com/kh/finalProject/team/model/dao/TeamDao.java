@@ -14,6 +14,7 @@ import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
+import com.kh.finalProject.team.model.vo.TeamReq;
 
 
 @Repository
@@ -74,39 +75,6 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectOfferListCount", params);
 	}
 	
-	public int selectChoiceSportsCount(SqlSessionTemplate sqlSession, int category, String activityAtea) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("category", category);
-		params.put("activityAtea", activityAtea);
-		    
-		return sqlSession.selectOne("teamMapper.selectChoiceSportsCount", params);
-	}
-	
-	public ArrayList<TeamOffer> selectChoiceList(SqlSessionTemplate sqlSession, int category, String activityAtea, PageInfo pi){
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("category", category);
-		params.put("activityAtea", activityAtea);
-		
-		return (ArrayList)sqlSession.selectList("teamMapper.selectChoiceList", params, rowBounds);
-	}
-	
-	public int selectChoiceAllCount(SqlSessionTemplate sqlSession, int category) {
-		return sqlSession.selectOne("teamMapper.selectChoiceAllCount", category);
-	}
-	
-	public ArrayList<TeamOffer> selectChoiceAllList(SqlSessionTemplate sqlSession, int category, PageInfo pi){
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("teamMapper.selectChoiceAllList", category, rowBounds);
-	}
-	
 	public int deleteOffer(SqlSessionTemplate sqlSession, int offerNo) {
 		return sqlSession.update("teamMapper.deleteOffer", offerNo);
 	}
@@ -124,19 +92,20 @@ public class TeamDao {
 	public TeamMember selectInformation(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("teamMapper.selectInformation", userNo);
 	}
+	
 	// 게시판 등록
-	public int insertOfferList(SqlSessionTemplate sqlSession, TeamOffer t, int tno) {
+	public int insertOfferList(SqlSessionTemplate sqlSession, TeamOffer t, int teamNo) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("t", t);
-		params.put("tno", tno);
+		params.put("teamNo", teamNo);
 		
 		return sqlSession.insert("teamMapper.insertOfferList", params);
 	}
 	// 사진 삽입
-	public int insertOfferImg(SqlSessionTemplate sqlSession, TeamImg ti, int tno) {
+	public int insertOfferImg(SqlSessionTemplate sqlSession, TeamImg ti, int teamNo) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("ti", ti);
-		params.put("tno", tno);
+		params.put("teamNo", teamNo);
 		
 		return sqlSession.insert("teamMapper.insertOfferImg", params);
 	}
@@ -199,6 +168,14 @@ public class TeamDao {
 	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
 		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
 	}
+	
+	public int updateTeam(SqlSessionTemplate sqlSession, Team t) {
+		return sqlSession.update("teamMapper.updateTeam", t);
+	}
+	
+	public int updateTeamImg(SqlSessionTemplate sqlSession, TeamImg ti) {
+		return sqlSession.update("teamMapper.updateTeamImg", ti);
+	}
 
 	
 	// 팀 번호 조회 
@@ -211,19 +188,67 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectTeamImg", teamNo);
 	}
 	
-//	public ArrayList<TeamOffer> selectTeamImg(SqlSessionTemplate sqlSession, int teamNo, PageInfo pi) { 
-//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//		int limit = pi.getBoardLimit();
-//		
-//		RowBounds rowBounds = new RowBounds(offset, limit);
-//		
-//		return (ArrayList)sqlSession.selectList("teamMapper.selectTeamImg", teamNo, rowBounds);
-//	}
-	
+	// 팀 프로필 가져오기
+	public TeamImg offerProfileImg(SqlSessionTemplate sqlSession, int teamNo) {
+		return sqlSession.selectOne("teamMapper.offerProfileImg", teamNo);
+	}
 	
 
 	public ArrayList<Team> selectMyTeamList(SqlSessionTemplate sqlSession, HashMap<String,Integer> map) {
 		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeamList", map);
 	}
+	
+	public int deleteTeam(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeam", tNo);
+	}
+	
+	public int deleteTeamMemberAll(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeamMemberAll", tNo);
+	}
+	
+	public int deleteTeamImg(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteTeamImg", tNo);
+	}
+	
+	public int changeTeamGradeUp(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.update("teamMapper.changeTeamGradeUp", tm);
+	}
+	
+	public int changeTeamGradeDown(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.update("teamMapper.changeTeamGradeDown", tm);
+	}
+	public int deleteTeamMember(SqlSessionTemplate sqlSession, TeamMember tm) {
+		return sqlSession.delete("teamMapper.deleteTeamMember", tm);
+	}
 
+	// 유저 팀 번호 가져오기
+	public ArrayList<TeamMember> selectLoginUserNo(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectLoginUserNo", userNo);
+	}
+
+	// 팀 요청 리스트 가져오기
+	public ArrayList<TeamReq> selectReqList(SqlSessionTemplate sqlSession, int tno) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectReqList", tno);
+	}
+	
+	// 팀요청 수락
+	public int teamReqAccept(SqlSessionTemplate sqlSession, int reqNo) {
+		return sqlSession.update("teamMapper.teamReqAccept", reqNo);
+	}
+	
+	// 팀요청 거절
+	public int teamReqReqRefuse(SqlSessionTemplate sqlSession, int reqNo) {
+		return sqlSession.delete("teamMapper.teamReqReqRefuse", reqNo);
+	}
+	
+	// 팀 이름 가져오기
+	public String selectTeamName(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.selectTeamName", tno);
+	}
+	
+	// 팀 프로필 가져오기
+	public String selectTeamProImg(SqlSessionTemplate sqlSession, int tno) {
+		return sqlSession.selectOne("teamMapper.selectTeamProImg", tno);
+	}
+	
 }

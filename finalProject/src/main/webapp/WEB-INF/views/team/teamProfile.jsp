@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/team/teamProfile.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="resources/js/team/teamJs/teamProfile.js"></script>
-<script src="resources/js/team/teamAjax/teamProfileAjax.js"></script>
+<script src="resources/js/team/teamJs/teamProfile.js?ver=3"></script>
+<script src="resources/js/team/teamAjax/teamProfileAjax.js?ver=2"></script>
+
 
 </head>
 <body onload="init()">	
@@ -33,38 +34,36 @@
                             </div>
                             <div class="profile-image">
                                 <div>
-                                    <img class="profile-photo" src="./resources/img/team/teamProfile/liverpool.png" alt="">
+                                    <img class="profile-photo" src="${team.teamChangeName}" alt="">
                                 </div>
                             </div>
                         </div>
                         <c:choose>
-                            <!-- 로그인한 유저가 주장일 때 보여주는 버튼(팀 생성자) -->
                             <c:when test="${myGrade eq 3}">
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm?tno=${team.teamNo}'">
                                         팀 프로필 설정
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm?tno=${team.teamNo}'">
                                         가입신청 보기
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                        구인글 작성
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm?tno=${team.teamNo}'">
+                                        구인글 작성  
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-danger" onclick="">
+                                    <button class="btn btn-outline-danger" onclick="deleteTeamCheck('${team.teamNo}')">
                                         팀 해체
                                     </button>
                                 </div>
                             </c:when>
-                            <!-- 로그인한 유저가 일반 멤버일 때 보여주는 버튼(운영진, 멤버) -->
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-danger" onclick="">
+                                    <button class="btn btn-outline-danger" onclick="teamOutside('${team.teamNo}')">
                                         팀 탈퇴
                                     </button>
                                 </div>
@@ -185,37 +184,37 @@
                                             <!-- 로그인한 유저가 주장일 때(팀생성한 사람) -->
                                             <c:if test="${myGrade eq 3}">
                                                 <div class="d-grid gap-2">
-                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <button class="btn btn-outline-secondary" onclick=" sendPostFriend('${list.userNo}')"type="button">친구신청</button>
                                                     <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
                                                         <c:choose>
                                                             <c:when test="${list.grade ne 1}">
-                                                                <button class="btn btn-outline-secondary" type="button">일반멤버로 변경</button>
+                                                                <button class="btn btn-outline-secondary" onclick="changeTeamGrade('${list.userNo}','${list.grade}','${team.teamNo}')" type="button">일반멤버로 변경</button>
                                                             </c:when>
                                                             <c:when test="${list.grade ne 2}">
-                                                                <button class="btn btn-outline-secondary" type="button">운영진으로 추가</button>
+                                                                <button class="btn btn-outline-secondary" onclick="changeTeamGrade('${list.userNo}','${list.grade}','${team.teamNo}')" type="button">운영진으로 추가</button>
                                                             </c:when>
                                                         </c:choose>
-                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
-                                                    <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                    <button class="btn btn-outline-secondary"  onclick="copyToClipboard('${list.phone}')"  type="button">연락처 복사</button>
+                                                    <button class="btn btn-outline-danger" type="button" onclick="deleteTeamMember('${list.userNo}','${team.teamNo}')">강제 퇴장</button>
                                                 </div>
                                             </c:if>
                                             <!-- 로그인한 유저가 운영진일 때 -->
                                             <c:if test="${myGrade eq 2}">
                                                 <div class="d-grid gap-2">
-                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <button class="btn btn-outline-secondary" type="button" onclick=" sendPostFriend('${list.userNo}')">친구신청</button>
                                                     <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
-                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <button class="btn btn-outline-secondary" onclick="copyToClipboard('${list.phone}')" type="button">연락처 복사</button>
                                                     <c:if test="${ list.grade eq 1 }">
-                                                        <button class="btn btn-outline-danger" type="button">강제 퇴장</button>
+                                                        <button class="btn btn-outline-danger" onclick="deleteTeamMember('${list.userNo}','${team.teamNo}')" type="button">강제 퇴장</button>
                                                     </c:if>
                                                 </div>
                                             </c:if>
                                             <!-- 로그인한 유저가 일반 멤버일 때 -->
                                             <c:if test="${myGrade eq 1}">
                                                 <div class="d-grid gap-2">
-                                                    <button class="btn btn-outline-secondary" type="button">친구신청</button>
+                                                    <button class="btn btn-outline-secondary" type="button" onclick=" sendPostFriend('${list.userNo}')">친구신청</button>
                                                     <!-- <button class="btn btn-outline-secondary" type="button">친구신청 취소</button> -->
-                                                    <button class="btn btn-outline-secondary" type="button">연락처 복사</button>
+                                                    <button class="btn btn-outline-secondary"  onclick="copyToClipboard('${list.phone}')"  type="button">연락처 복사</button>
                                                 </div>
                                             </c:if>
                                         </div>

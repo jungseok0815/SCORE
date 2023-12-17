@@ -80,9 +80,7 @@
                                 <p>팀 생성</p>
                             </a>
                         </c:when>
-
-                        <c:otherwise>
-
+						<c:otherwise>
                             <a href="${pageContext.request.contextPath}/insertTeam.tm" type="button" data-bs-toggle="modal" data-bs-target="#myModal" >
 
                                 <img src="./resources/img/main/searchPeople.png" alt="">
@@ -215,7 +213,7 @@
 
   
                   <div class="profile-imgbox">
-                      <label for="file">
+                      <label for="file" style="display: flex; justify-content: center;">
                           <div class="btn-upload"><img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" id="profile-img"></div>
                       </label>
                       <input type="file" name="upfile" id="file" onchange="imgChange(this)" required>

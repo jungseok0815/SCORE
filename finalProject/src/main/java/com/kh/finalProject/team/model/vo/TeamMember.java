@@ -13,6 +13,7 @@ public class TeamMember {
 	private String city;
 	private String memberOriginName;
 	private String memberChangeName;
+	private String phone;
 	
 	
 	public TeamMember() {
@@ -21,7 +22,7 @@ public class TeamMember {
 
 
 	public TeamMember(int tmemberNo, Date enrollDate, int teamNo, int userNo, int grade, String userName, String city,
-			String memberOriginName, String memberChangeName) {
+			String memberOriginName, String memberChangeName, String phone) {
 		super();
 		this.tmemberNo = tmemberNo;
 		this.enrollDate = enrollDate;
@@ -32,6 +33,17 @@ public class TeamMember {
 		this.city = city;
 		this.memberOriginName = memberOriginName;
 		this.memberChangeName = memberChangeName;
+		this.phone = phone;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 

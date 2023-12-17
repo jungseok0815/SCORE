@@ -121,7 +121,7 @@ drawSearchResult = (selectResult) =>{
                 selectPlaceBtn.innerText = "경기장 보러가기"
                 selectPlaceBtn.className="btn btn-outline-primary";
                 selectPlaceBtn.onclick = () =>{
-                    selectPlace();
+                    selectPlace(a.fieldNo);
                 }
               
                 const divtag2 =  document.createElement("div")
@@ -148,13 +148,13 @@ drawSearchResult = (selectResult) =>{
                 selectTeamBtn.innerText = "팀 프로필 보기"
                 selectTeamBtn.className="btn btn-outline-primary";
                 selectTeamBtn.onclick=()=>{
-                    selectTeam();
+                    selectTeam(a.teamNo);
                 }
            
                 const divtag2 =  document.createElement("div")
                 const spanTag =  document.createElement("span");
                 const spanTag2 =  document.createElement("span");
-                spanTag.innerHTML = "팀 이름 : " + a.teamName;
+                spanTag.innerHTML = "팀 이름 : " + a.teamName+ " ";
                 spanTag2.innerHTML = "종목: " + category;
                 divtag2.appendChild(spanTag);
                 divtag2.appendChild(spanTag2);
@@ -179,6 +179,7 @@ checkCategory = (categoryNum) =>{
 
 
 sendPostFriend = (reqUser) =>{
+    console.log(reqUser)
     if(window.confirm("친구 신청을 하겠습니까?")){
         data = {
             friendReqUser  :reqUser
@@ -190,13 +191,13 @@ sendPostFriend = (reqUser) =>{
 
 }
 
-// selectPlace=()=>{
-//     console.log("나는 농구가 하고싶다.");
-// }
+selectPlace=(fieldNo)=>{
+   location.href = "detail.pl?fno=" + fieldNo
+}
 
-// selectTeam=()=>{
-//     console.log("차정석 팀")
-// }
+selectTeam=(teamNo)=>{
+    location.href = "teamProfile.tm?teamNo=" + teamNo
+}
 
 
 

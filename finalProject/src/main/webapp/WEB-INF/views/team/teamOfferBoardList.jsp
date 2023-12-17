@@ -60,9 +60,9 @@
 	                        <ul>
 	                            <li class="team-list-item">
 	                            <c:forEach var="t" items="${list}"> 
-	                                <a onclick="location.href='offerDetailView.tm?tno=${t.offerNo}'" class="list-link" >
+	                                <a onclick="location.href='offerDetailView.tm?tno=${t.offerNo}&teamNo=${t.teamNo}'" class="list-link" >
 	                                    <div class="list-img-all">
-	                                        <img src="list.teamChangeName"  class="list-img"/>
+	                                        <img src="${t.teamChangeName}"  class="list-img"/>
 	                                    </div>
 	                                    <div class="list-content">
 	                                        <div class="list-title">

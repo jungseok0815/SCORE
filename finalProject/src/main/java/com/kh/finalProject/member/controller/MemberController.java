@@ -62,7 +62,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updatePoint.me")
-	public ModelAndView updateMember(HttpSession session, ModelAndView mv, @RequestParam(name = "point", defaultValue = "0") int point) {
+	public ModelAndView updatePoint(HttpSession session, ModelAndView mv, @RequestParam(name = "point", defaultValue = "0") int point) {
 		Member m = (Member)session.getAttribute("loginUser");
 		m.setPoint(point);
 	    int result = memberService.updateUserPoint(m);
@@ -71,14 +71,11 @@ public class MemberController {
 	    if(result > 0) {
 	        // DB로부터 수정된 회원정보를 다시 조회해서
 	        // session 영역에 loginUser라는 키값으로 덮어씌워야 함
-	        session.setAttribute("loginUser", loginUser);
+	    	session.setAttribute("loginUser", loginUser);
 	        session.setAttribute("alertMsg", "충전이 완료되었습니다.");
 
 	        mv.setViewName("redirect:/");
 	        
-	    } else {
-	    	mv.addObject("errorMsg", "충전 실패");
-	    	mv.setViewName("common/errorPage");
 	    }
 
 	    return mv;
@@ -231,9 +228,9 @@ public class MemberController {
 	
 	@RequestMapping("/login.me") 
 	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {	
-		System.out.print(m);
+		
 		Member loginUser = memberService.loginMember(m.getUserId()); //아이디로만 멤버객체 가져오기
-		System.out.print(loginUser);
+		
 		if(loginUser == null || !bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { // 로그인실패 => 에러문구를 requestScope에 담고 에러페이지로 포워딩
 			mv.addObject("errorMsg", "로그인 실패");
 			mv.setViewName("common/errorPage");
@@ -338,7 +335,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value= "/checkPhoneAuth.me")
 	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
-		System.out.println();
+	
 	
 		int reusult = memberService.checkPhoneAuth(auth);
 		System.out.println();
