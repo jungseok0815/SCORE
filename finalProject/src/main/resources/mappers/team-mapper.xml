@@ -44,6 +44,7 @@
     		<result column="CITY" property="city"/>
     		<result column="MEMBER_ORIGIN_NAME" property="memberOriginName"/>
     		<result column="MEMBER_CHANGE_NAME" property="memberChangeName"/>
+    		<result column="USER_PHONE" property="phone"/>
     </resultMap>
 
 
@@ -529,7 +530,8 @@
 		 	   USER_NAME, 
 		 	   CITY, 
 		 	   MEMBER_ORIGIN_NAME, 
-		 	   MEMBER_CHANGE_NAME
+		 	   MEMBER_CHANGE_NAME,
+		 	   USER_PHONE
 		FROM TEAM_MEMBER
 		JOIN MEMBER USING (USER_NO)
 		LEFT JOIN MEMBER_IMG USING (USER_NO)
@@ -564,4 +566,44 @@
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
  	</select>
+ 
+ 	<delete id="deleteTeam">
+ 		DELETE FROM TEAM
+		WHERE TEAM_NO = #{tNo}
+ 	</delete>
+ 	
+ 	 <delete id="deleteTeamMemberAll">
+ 		DELETE FROM TEAM_MEMBER
+		WHERE TEAM_NO = #{tNo}
+ 	</delete>
+ 	
+ 	 <delete id="deleteTeamImg">
+      	DELETE FROM TEAM_IMG
+      	WHERE TEAM_NO = #{tNo}
+      	AND OFFER_NO IS NULL
+ 	</delete>
+ 	<update id="changeTeamGradeUp">
+ 		UPDATE TEAM_MEMBER 
+ 		SET
+ 			GRADE = 2
+ 		WHERE 
+ 			USER_NO = #{userNo} AND
+ 			TEAM_NO = #{teamNo}
+ 	</update>
+ 	<update id="changeTeamGradeDown">
+ 		UPDATE TEAM_MEMBER 
+ 		SET
+ 			GRADE = 1
+ 		WHERE 
+ 			USER_NO = #{userNo} AND
+ 			TEAM_NO = #{teamNo}
+ 	</update>
+ 	
+ 	 <delete id="deleteTeamMember">
+      	DELETE FROM TEAM_MEMBER
+      	WHERE TEAM_NO = #{teamNo}
+      	AND USER_NO = #{userNo}
+ 	</delete>
+ 	
+ 	
  </mapper>

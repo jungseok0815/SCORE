@@ -17,4 +17,71 @@ overviewView = () => {
     document.querySelector('.team-member').style.display = 'none';
 }
 
+deleteTeamCheck = (tNo) =>{
+    console.log(tNo)
+    if(window.confirm("팀을 삭제하시겠습니끼?")){
+        location.href ='deleteTeam.tm?tNo= '+tNo
+    }
+   
+}
 
+changeTeamGrade = (userNo, grade, teamNo) =>{
+    console.log(userNo)
+    console.log(grade);
+    data = {
+        userNo,
+        grade,
+        teamNo
+    }
+    teamProfileAjaxController.changeTeamGradeAjax(data,reloadChangeTeamGrade);
+}
+
+reloadChangeTeamGrade = (result) =>{
+    if(result === "changeTeamGradeOk"){
+        alert("등급변경 완료") 
+        location.reload();
+    }else{
+        alert("등급변경 실패")
+    }
+}
+
+deleteTeamMember = (userNo,teamNo) =>{
+    data = {
+        userNo,
+        teamNo
+    }
+    if(window.confirm("해당 팀원을 방출하겠습니까?")){
+        teamProfileAjaxController.deleteTeamMemberCheckAjax(data,reloaddeleteTeamMember);
+    }
+}
+reloaddeleteTeamMember= (result) =>{
+    if(result === "deleteTeamMemberGradeOk"){
+        alert("팀원추방 완료") 
+        location.reload();
+    }else{
+        alert("팀원추방 실패")
+    }
+}
+copyToClipboard = (phone) =>{
+    const textarea = document.createElement('textarea');
+    textarea.textContent = phone;
+
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, 9999);
+    document.execCommand('copy');
+    document.body.removeChild(textarea)
+
+    // 복사 완료 메시지 (예를 들어, 알림 등으로 표시 가능)
+    alert("텍스트가 클립보드에 복사되었습니다.");
+}
+
+teamOutside=(teamNo)=>{
+    console.log(teamNo);
+    location.href = "teamOutside.tm?teamNo="+teamNo;
+}
+
+
+    
+
+   

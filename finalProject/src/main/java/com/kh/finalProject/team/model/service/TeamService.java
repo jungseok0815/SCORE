@@ -186,4 +186,35 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.selectMyTeamList(sqlSession, map);
 	}
 
+	@Override
+	public int deleteTeam(int tNo) {
+		return teamDao.deleteTeam(sqlSession, tNo);
+	}
+
+	@Override
+	public int deleteTeamMemberAll(int tNo) {
+		return teamDao.deleteTeamMemberAll(sqlSession, tNo);
+	}
+
+	@Override
+	public int deleteTeamImg(int tNo) {
+		return teamDao.deleteTeamImg(sqlSession, tNo);
+	}
+
+	@Override
+	public int changeTeamGradeUp(TeamMember tm) {
+		return teamDao.changeTeamGradeUp(sqlSession, tm);
+	}
+
+	@Override
+	public int changeTeamGradeDown(TeamMember tm) {
+		return teamDao.changeTeamGradeDown(sqlSession, tm);
+	}
+
+	@Override
+	public int deleteTeamMember(TeamMember tm) {
+		return teamDao.deleteTeamMember(sqlSession, tm);
+	}
+
+
 }
