@@ -14,6 +14,7 @@ import com.kh.finalProject.team.model.vo.Team;
 import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import com.kh.finalProject.team.model.vo.TeamOffer;
+import com.kh.finalProject.team.model.vo.TeamReq;
 
 @Service
 public class TeamService implements TeamServiceImp{
@@ -70,26 +71,6 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public int selectChoiceSportsCount(int category, String activityAtea) {
-		return teamDao.selectChoiceSportsCount(sqlSession, category, activityAtea);
-	}
-
-	@Override
-	public ArrayList<TeamOffer> selectChoiceList(int category, String activityAtea, PageInfo pi) {
-		return teamDao.selectChoiceList(sqlSession, category, activityAtea, pi);
-	}
-
-	@Override
-	public int selectChoiceAllCount(int category) {
-		return teamDao.selectChoiceAllCount(sqlSession, category);
-	}
-
-	@Override
-	public ArrayList<TeamOffer> selectChoiceAllList(int category, PageInfo pi) {
-		return teamDao.selectChoiceAllList(sqlSession, category, pi);
-	}
-
-	@Override
 	public int deleteOffer(int offerNo) {
 		return teamDao.deleteOffer(sqlSession, offerNo);
 	}
@@ -105,13 +86,13 @@ public class TeamService implements TeamServiceImp{
 	}
 
 	@Override
-	public int insertOfferList(TeamOffer t, int tno) {
-		return teamDao.insertOfferList(sqlSession, t, tno);
+	public int insertOfferList(TeamOffer t, int teamNo) {
+		return teamDao.insertOfferList(sqlSession, t, teamNo);
 	}
 
 	@Override
-	public int insertOfferImg(TeamImg ti, int tno) {
-		return teamDao.insertOfferImg(sqlSession, ti, tno);
+	public int insertOfferImg(TeamImg ti, int teamNo) {
+		return teamDao.insertOfferImg(sqlSession, ti, teamNo);
 	}
 
 	@Override
@@ -184,6 +165,41 @@ public class TeamService implements TeamServiceImp{
 	@Override
 	public ArrayList<Team> selectMyTeamList(HashMap<String, Integer> map) {
 		return teamDao.selectMyTeamList(sqlSession, map);
+	}
+
+	@Override
+	public TeamImg offerProfileImg(int teamNo) {
+		return teamDao.offerProfileImg(sqlSession, teamNo);
+	}
+
+	@Override
+	public ArrayList<TeamMember> selectLoginUserNo(int userNo) {
+		return teamDao.selectLoginUserNo(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<TeamReq> selectReqList(int tno) {
+		return teamDao.selectReqList(sqlSession, tno);
+	}
+
+	@Override
+	public int teamReqAccept(int reqNo) {
+		return teamDao.teamReqAccept(sqlSession, reqNo);
+	}
+
+	@Override
+	public int teamReqReqRefuse(int reqNo) {
+		return teamDao.teamReqReqRefuse(sqlSession, reqNo);
+	}
+
+	@Override
+	public String selectTeamName(int tno) {
+		return teamDao.selectTeamName(sqlSession, tno);
+	}
+
+	@Override
+	public String selectTeamProImg(int tno) {
+		return teamDao.selectTeamProImg(sqlSession, tno);
 	}
 
 }

@@ -57,7 +57,19 @@
     		<result column="OFFER_NO" property="offerNo"/>
     </resultMap>
 
-    
+    <resultMap type = "TeamReq" id = "teamReqResult">
+    		<result column="REQ_NO" property="reqNo"/>
+    		<result column="REQ_STATUS" property="reqStatus"/>
+    		<result column="REQ_USER_NO" property="reqUserNo"/>
+    		<result column="OFFER_NO" property="offerNo"/>
+    		<result column="REQ_CONTENT" property="reqContent"/>
+    		<result column="USER_NAME" property="userName"/>
+    		<result column="GENDER" property="gender"/>
+    		<result column="USER_LEVEL" property="userLevel"/>
+    		<result column="CITY" property="city"/>
+    		<result column="USER_BIRTH" property="userBirth"/>
+    		<result column="MEMBER_CHANGE_NAME" property="memberChangeName"/>
+    </resultMap>
   
 
 
@@ -187,70 +199,6 @@
           AND OFFER_STATUS = 'Y'
  	</select>
  	
- 	<!-- 초이스 스포츠 총 갯수 -->
- 	<select id="selectChoiceSportsCount" resultType="_int" parameterType="map">
-		SELECT COUNT(*)
-		  FROM TEAM_OFFER
-          JOIN TEAM USING(TEAM_NO)
-          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
-          WHERE CATEGORY_NUM = #{category}
-          AND OFFER_STATUS = 'Y'
-          AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
- 	</select>
- 	
- 	<!-- ajax로 지역순 초이스 스포츠 리스트 가져오는 쿼리 -->
- 	<select id="selectChoiceList" resultMap="teamOfferResult" parameterType="map">
- 		SELECT OFFER_NO,
- 			   OFFER_TITLE,
- 			   OFFER_CONTENT,
- 			   OFFER_GENDER,
- 			   OFFER_LEVEL,
- 			   OFFER_AGE,
- 			   OFFER_COUNT,
-               USER_NO,
-               TEAM_NO,
-               TEAM_NAME,
-               ACTIVITY_ATEA
- 		  FROM TEAM_OFFER
-          JOIN TEAM USING(TEAM_NO)
-          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
-           WHERE CATEGORY_NUM = #{category}
-           AND OFFER_STATUS = 'Y'
-           AND ACTIVITY_ATEA LIKE '%' || #{activityAtea} || '%'
-          ORDER BY OFFER_NO DESC
- 	</select>
- 	
- 	<!-- 초이스 스포츠 ALL 총 갯수  -->
- 	<select id="selectChoiceAllCount" resultType="_int">
-		SELECT COUNT(*)
-		  FROM TEAM_OFFER
-          JOIN TEAM USING(TEAM_NO)
-          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
-          WHERE CATEGORY_NUM = #{category}
-          AND OFFER_STATUS = 'Y'
- 	</select>
- 
- 	<!-- ajax로 지역순 초이스 스포츠 ALL 리스트 가져오는 쿼리 -->
- 	<select id="selectChoiceAllList" resultMap="teamOfferResult">
- 		SELECT OFFER_NO,
- 			   OFFER_TITLE,
- 			   OFFER_CONTENT,
- 			   OFFER_GENDER,
- 			   OFFER_LEVEL,
- 			   OFFER_AGE,
- 			   OFFER_COUNT,
-               USER_NO,
-               TEAM_NO,
-               TEAM_NAME,
-               ACTIVITY_ATEA
- 		  FROM TEAM_OFFER
-          JOIN TEAM USING(TEAM_NO)
-          JOIN SPORT_CATEGORY USING(CATEGORY_NUM)
-           WHERE CATEGORY_NUM = #{category}
-           AND OFFER_STATUS = 'Y'
-          ORDER BY OFFER_NO DESC
- 	</select>
- 	
  	<!-- 게시글 삭제 -->
  	<update id="deleteOffer">
  		UPDATE TEAM_OFFER
@@ -288,6 +236,7 @@
 		    FROM TEAM_MEMBER 
 		    JOIN TEAM USING(TEAM_NO)
 		   WHERE USER_NO = #{userNo} 
+		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
  	</select>
  	
  	<!-- 게시글 작성  -->
@@ -314,7 +263,7 @@
 			        #{t.offerAge}, 
 			        0, 
 			        #{t.userNo}, 
-			        #{tno}, 
+			        #{teamNo}, 
 			        'Y')
    </insert>
    
@@ -337,7 +286,7 @@
                     #{ti.teamOriginName},
                     #{ti.teamChangeName},
                     'N', 
-                    #{tno},
+                    #{teamNo},
                     SEQ_TEAD_OFFER.CURRVAL 
                     )	
    </insert>
@@ -519,6 +468,7 @@
 	    FROM TEAM
 	    LEFT JOIN TEAM_IMG USING (TEAM_NO)
 	    WHERE TEAM_NO = #{teamNo}
+	    AND OFFER_NO IS NULL
  	</select>
  	
  	<!-- 팀 멤버리스트 불러오기 -->
@@ -546,8 +496,8 @@
 	    WHERE USER_NO = #{userNo}
  	</select>
  	
- 	<!-- 이미지 가져오기 resultType="string"  -->
-   <select id="selectTeamImg" resultMap="teamImgResult">
+ 	<!-- 이미지 가져오기 resultType="string" resultMap="teamImgResult" -->
+   <select id="selectTeamImg" resultType="string">
          SELECT TEAM_CHANGE_NAME
 			FROM TEAM_IMG
 			WHERE TEAM_NO = #{teamNo}
@@ -564,4 +514,91 @@
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
  	</select>
+ 	
+ 	<!-- 팀 프로필 이미지 가져오기 -->
+   <select id="offerProfileImg" resultMap="teamImgResult">
+         SELECT TEAM_CHANGE_NAME
+			FROM TEAM_IMG
+			WHERE TEAM_NO = #{teamNo}
+			 AND OFFER_NO IS NULL
+ 	</select>
+ 	
+ 	<!-- 유저 팀 번호 가져오기 -->
+   <select id="selectLoginUserNo" resultMap="teamMemberResult">
+         SELECT
+         		TEAM_NO,
+		        USER_NO
+		      FROM TEAM_MEMBER
+		     WHERE USER_NO = #{userNo}
+ 	</select>
+ 	
+ 	<!-- 팀 신청 리스트  -->
+ 	<select id="selectReqList" resultMap="teamReqResult">
+         <!--  SELECT OFFER_NO,
+		       REQ_USER_NO,
+		       REQ_STATUS,
+		       REQ_CONTENT,
+		       REQ_NO,
+		       USER_NAME,
+		       GENDER,
+		       USER_LEVEL,
+		       USER_BIRTH,
+		       CITY
+		    FROM TEAM_REQ
+		    JOIN MEMBER ON(REQ_USER_NO = USER_NO)
+		    JOIN TEAM_OFFER USING(OFFER_NO)
+		    WHERE TEAM_NO = #{tno}
+		    AND REQ_STATUS = 'N'-->
+		    
+		    SELECT 
+	               OFFER.OFFER_NO,
+			       TR.REQ_USER_NO,
+			       TR.REQ_STATUS,
+			       TR.REQ_CONTENT,
+			       TR.REQ_NO,
+			       ME.USER_NAME,
+			       ME.GENDER,
+			       ME.USER_LEVEL,
+			       ME.USER_BIRTH,
+			       ME.CITY,
+	               MI.MEMBER_CHANGE_NAME
+	          FROM TEAM_REQ "TR"
+			  JOIN MEMBER "ME" ON(TR.REQ_USER_NO = ME.USER_NO)
+			  JOIN TEAM_OFFER "OFFER" ON(OFFER.OFFER_NO = TR.OFFER_NO)
+	          LEFT JOIN MEMBER_IMG "MI" ON(TR.REQ_USER_NO = ME.USER_NO)
+			 WHERE OFFER.TEAM_NO = #{tno}
+			   AND TR.REQ_STATUS = 'N'
+ 	</select>
+ 	
+ 	<!-- 팀 수락 -->
+ 	<update id="teamReqAccept">
+		UPDATE TEAM_REQ
+		    SET REQ_STATUS = 'Y'
+		    WHERE REQ_NO = #{REQ_NO}
+	</update>
+	
+	<!-- 팀 거절 -->
+	<delete id="teamReqReqRefuse">
+		DELETE FROM TEAM_REQ
+			WHERE
+			REQ_NO = #{REQ_NO}
+	</delete>
+	
+	<!-- 팀 이름 가져오기 -->
+	<select id="selectTeamName" resultType="string">
+		SELECT 
+		        TEAM_NAME
+		   FROM TEAM
+		  WHERE TEAM_NO = #{tno}
+	</select>
+	
+	<!-- 팀 프로필 가져오기 -->
+	<select id="selectTeamProImg" resultType="string">
+		SELECT 
+		        TEAM_CHANGE_NAME
+		   FROM TEAM_IMG
+		  WHERE TEAM_NO = #{tno}
+		    AND OFFER_NO IS NULL
+	</select>
+ 	
  </mapper>

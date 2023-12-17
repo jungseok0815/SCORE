@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <c:choose>
-                            <!-- 로그인한 유저가 주장일 때 보여주는 버튼(팀 생성자) -->
+                            
                             <c:when test="${myGrade eq 3}">
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/updateForm.tm'">
@@ -46,13 +46,13 @@
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm?tno=${team.teamNo}'">
                                         가입신청 보기
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                        구인글 작성
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm?tno=${team.teamNo}'">
+                                        구인글 작성  
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
@@ -61,7 +61,7 @@
                                     </button>
                                 </div>
                             </c:when>
-                            <!-- 로그인한 유저가 일반 멤버일 때 보여주는 버튼(운영진, 멤버) -->
+                           
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-danger" onclick="">

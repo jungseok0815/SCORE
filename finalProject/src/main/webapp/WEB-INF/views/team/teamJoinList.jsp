@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,156 +17,55 @@
 	        <div class="all"> 
 	            <div class="topWrapper">
 	                <div class="top_container">
-	                    <span class="memberListCount"><img src="./resources/img/team/teamOfferBoardList/oulbe.png"  class="top-member-img"/>울버FC / 멤버관리</span>
+	                    <span class="memberListCount"><img src="${tProfile}"  class="top-member-img"/>${tName} | 멤버관리</span>
 	                </div>
-	
+	                
 	                <div class="team-list">
 	                    <div class="team-list-container">
 	                        <ul>
-	                        
+	                        <c:forEach var="r" items="${list}"> 
 	                            <li class="team-list-item">
 	                                <div>
 	                                    <a href="" class="list-link">
 	                                       <div class="list-img-all">
-	                                            <img src="./resources/img/team/teamJoinList/ffff.jpg" class="list-img"/>
+	                                            <img src="${r.memberChangeName}" class="list-img"/>
 	                                        </div>
 	                                        <div class="list-content">
 	                                            <div class="list-title">
-	                                                <span class="memberName">리바이</span>
+	                                                <span class="memberName">${r.userName}</span>
 	                                            </div>
-	                                            <span class="list-member">남자 · 초보1 · 44세 · 서울시 갱남구</span>
+	                                            <span class="list-member">${r.gender} · ${r.userLevel} · ${r.userBirth}세 · ${r.city}</span>
 	                                        </div>
 	                                    </a>
 	                                </div> 
 	                                <div>
 	                                    <div class="list-member-x">
-	                                        <a><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
+	                                        <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}'"><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
 	                                    </div>
 	                                </div>
 	                                <div>
 	                                    <div class="list-text">
-	                                        안녕하십니까 <br>
-	                                        저는 강남에서 왔슴다. 축구도 하고 친해져서 <br> 
-	                                        진격거 같이 봅시다~<br>
+	                                        ${r.reqContent}
 	                                    </div>
 	                                </div>
 	                                <div>
 	                                    <a>
 	                                        <div class="btnList">
-	                                            <p class="buttonRe btnFloat btnLightBlue"></p>
-	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
+	                                       
+	                                            <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}'" class="buttonRe btnFloat btnLightBlue"></a>
+	                                            
+	                                            <a onclick="location.href='accept.tm?reqNo=${r.reqNo}'" class="buttonAc btnFloat2 btnLightBlue2"></a>
 	                                        </div>
 	                                    </a>
 	                                </div>
 	                            </li>
+							</c:forEach>
 	
 	
-	                            <li class="team-list-item">
-	                                <div>
-	                                    <a href="" class="list-link">
-	                                        <div class="list-img-all">
-	                                            <img src="./resources/img/team/teamJoinList/LOOPY.jpg" class="list-img"/>
-	                                        </div>
-	                                        <div class="list-content">
-	                                            <div class="list-title">
-	                                                <span class="memberName">루피</span>
-	                                            </div>
-	                                            <span class="list-member">여자 · 아마추어3 · 20세 · 경기도 루피시</span>
-	                                        </div>
-	                                        
-	                                    </a>
-	                                </div>
-	                                <div class="list-member-x">
-	                                    <a><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
-	                                </div>
-	                                <div>
-	                                    <div class="list-text">
-	                                        안녕하세여~! <br>
-	                                        저는 군포에서 온 루피입니다. 언넝 축구하면서 <br> 
-	                                        좋은 기억 만들고싶습니다.!<br>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <a>
-	                                        <div class="btnList">
-												<p class="buttonRe btnFloat btnLightBlue"></p>
-	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
-											</div>
-	                                    </a>
-	                                </div>
-	                            </li>
-	
-	                             <li class="team-list-item">
-	                                <div>
-	                                    <a href="" class="list-link">
-	                                        <div class="list-img-all">
-	                                            <img src="./resources/img/team/teamJoinList/ffff.jpg" class="list-img"/>
-	                                        </div>
-	                                        <div class="list-content">
-	                                            <div class="list-title">
-	                                                <span class="memberName">리바이</span>
-	                                            </div>
-	                                            <span class="list-member">남자 · 초보1 · 44세 · 서울시 갱남구</span>
-	                                        </div>
-	                                    </a>
-	                                </div> 
-	                                <div>
-	                                    <div class="list-member-x">
-	                                        <a><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <div class="list-text">
-	                                        안녕하십니까 <br>
-	                                        저는 강남에서 왔슴다. 축구도 하고 친해져서 <br> 
-	                                        진격거 같이 봅시다~<br>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <a>
-	                                        <div class="btnList">
-												<p class="buttonRe btnFloat btnLightBlue"></p>
-	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
-	                                        </div>
-	                                    </a>
-	                                </div>
-	                            </li>
+	                             
 	
 	
-	                            <li class="team-list-item">
-	                                <div>
-	                                    <a href="" class="list-link">
-	                                        <div class="list-img-all">
-	                                            <img src="./resources/img/team/teamJoinList/LOOPY.jpg" class="list-img"/>
-	                                        </div>
-	                                        <div class="list-content">
-	                                            <div class="list-title">
-	                                                <span class="memberName">루피</span>
-	                                            </div>
-	                                            <span class="list-member">여자 · 아마추어3 · 20세 · 경기도 루피시</span>
-	                                        </div>
-	                                        
-	                                    </a>
-	                                </div>
-	                                <div class="list-member-x">
-	                                   <a><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
-	                                </div>
-	                                <div>
-	                                    <div class="list-text">
-	                                        안녕하세여~! <br>
-	                                        저는 군포에서 온 루피입니다. 언넝 축구하면서 <br> 
-	                                        좋은 기억 만들고싶습니다.!<br>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <a>
-	                                        <div class="btnList">
-												<p class="buttonRe btnFloat btnLightBlue"></p>
-	                                            <p class="buttonAc btnFloat2 btnLightBlue2"></p>
-	                                        </div>
-	                                    </a>
-	                                </div>
-	                            </li>
+	                            
 	
 	                        </ul> 
 	                    </div>
