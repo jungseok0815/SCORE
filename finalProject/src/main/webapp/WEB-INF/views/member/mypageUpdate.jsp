@@ -18,10 +18,23 @@
             <input type="hidden" name="userNo" value="${loginUser.userNo}" />
             <div class="title2">
                 
-                <div class="imgUpload">
-                    <img src="/resources/img/member/memberInsert" class="img3" id="img-upload-my"/>
-                </div>
+             <!--     <div class="imgUpload">
+                    <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
+                </div>  -->
                 
+              <c:choose>
+                    <c:when test="${!empty memberImg.memberOriginName}">
+                        <div class="imgUpload">
+                            <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="imgUpload">
+                            <img src="${memberImg.memberOriginName}" class="img3" id="img-upload-my"/>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
                 <div class="a-btn">
                     <label for="file">
                         <div class="btn-upload">파일 업로드하기</div>

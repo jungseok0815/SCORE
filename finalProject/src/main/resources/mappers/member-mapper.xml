@@ -93,10 +93,7 @@
 				AND  FRIEND_RES_USER = #{friendReqUser}
 				AND FRIEND_STATUS = 'Y'
 	</delete>
-	
 
-
-	
 	<!-- 회원가입을 위한 쿼리문 -->
 	<insert id="joinMember">
 		INSERT INTO MEMBER(
@@ -333,7 +330,7 @@
 	</update>
 	
 	<!--  마이페이지 이미지 수정-->
-	 	<insert id="updateMemImg">
+	 <insert id="updateMemImg">
  		INSERT INTO MEMBER_IMG
  					(
  						MEMBER_IMG_NO,
@@ -353,4 +350,17 @@
  		  			   #{userNo}
  		  		    )
  	</insert>
+ 	
+ 	<!-- 마이페이지 이미지 조회 -->
+ 	 <select id="selectMemberImg" resultMap="memberImgResult">
+ 			SELECT  MEMBER_IMG_NO,
+ 						  MEMBER_URL,
+ 						  MEMBER_ORIGIN_NAME,
+ 						  MEMBER_CHANGE_NAME,
+ 						  DELETE_MEMBER_IMG,
+ 						  USER_NO
+ 				FROM MEMBER_IMG
+ 			 WHERE USER_NO = #{userNo}
+ 			 AND 
+ 	</select>
 </mapper>

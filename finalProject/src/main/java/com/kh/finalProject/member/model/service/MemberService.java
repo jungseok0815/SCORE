@@ -41,5 +41,7 @@ public interface MemberService {
 	int updateMyPageMember(Member m);
 	//마이페이지 스포츠 수정
 	int updateMyPageSport(SportInfo sport);
+	//마이페이지 이미지 조회
+	MemberImg selectMemberImg(int userNo);
 }
 

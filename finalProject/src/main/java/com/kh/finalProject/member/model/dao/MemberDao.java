@@ -102,13 +102,17 @@ public class MemberDao {
 	
 	//마이페이지 멤버 수정
 	public int updateMyPageMember(SqlSessionTemplate sqlSession, Member m) {
-		System.out.println(m);
 		return sqlSession.update("memberMapper.updateMyPageMember", m);
 	}
 	
 	//마이페이지 이미지 수정
 	public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
 		return sqlSession.insert("memberMapper.updateMemImg", mi);
+	}
+	
+	//마이페이지 이미지 조회
+	public MemberImg selectMemberImg(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
 	}
 	
 }

@@ -99,13 +99,16 @@ public class MemberController {
 	
 	
 	@RequestMapping("/myPageUpdate.me")
-	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv, MemberImg mi) {
+	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv){
 		Member m = (Member) session.getAttribute("loginUser");
+		MemberImg mi = memberService.selectMemberImg(m.getUserNo());
+		System.out.println(mi);
 		SportInfo sport = new SportInfo();
 		sport.setUserNo(m.getUserNo());
 		sport.setCategoryNum(1);
 		SportInfo sportInfo = memberService.getUserSportInfo(sport);
 		System.out.println(sportInfo);
+		System.out.println(mi);
 		mv.addObject("sportInfo", sportInfo).addObject("memberImg", mi).setViewName("member/mypageUpdate");
 		return mv;
 	}
@@ -130,8 +133,8 @@ public class MemberController {
 	//마이페이지 수정
 	@ResponseBody
 	@RequestMapping(value= "/reMyPageUpdate.me",produces="application/json; charset=UTF-8")
-	public ModelAndView updateMyPageMember(HttpSession session,ModelAndView mv, MultipartFile reupfile,  String[] skill, String[] style, SportInfo sport, MemberImg mi) {
-		Member m =  (Member) session.getAttribute("loginUser");
+	public ModelAndView updateMyPageMember(Member m, HttpSession session,ModelAndView mv, MultipartFile reupfile,  String[] skill, String[] style, SportInfo sport, MemberImg mi) {
+		Member login =  (Member) session.getAttribute("loginUser");
 		
 		//System.out.println(sport+"asad");
 		//System.out.println(m+"asdas");
@@ -140,7 +143,7 @@ public class MemberController {
 //		Member m = (Member) session.getAttribute("loginUser");
 		sport.setUserNo(m.getUserNo());
 		System.out.println(sport);
-		int resultMemImg = 1;
+		int resultMemImg =0;
 
 		//System.out.println("reupfile : " + (reupfile != null));
 		if(!reupfile.getOriginalFilename().equals("")) {
@@ -156,16 +159,19 @@ public class MemberController {
 		int result = memberService.updateMyPageMember(m);
 		int result2 = memberService.updateMyPageSport(sport);
 		System.out.println(result + "," +result2 + "," + resultMemImg);
-		System.out.println(m);
-		Member loginUser = memberService.loginMember(m.getUserId());
+		
 	    if(result * result2 * resultMemImg > 0) {
+	    	Member loginInfo = memberService.loginMember(login.getUserId());
 		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		    session.setAttribute("loginUser", loginUser);
+		    System.out.println(loginInfo + "2222222222");
+			
+		    System.out.println(mi+"1111111");
+		    session.setAttribute("loginUser", loginInfo);
 		    mv.addObject("sportInfo", sportInfo)
-		    .addObject("member", m)
+		    .addObject("userInfo", loginInfo)
 		    .addObject("memberImg", mi)
-		    .setViewName("redirect:myPage.me?userNo=" + loginUser.getUserNo());
-		    System.out.println(mi);
+		    .setViewName("redirect:myPage.me?userNo=" + login.getUserNo());
+		  
 		    
 	    } else {
 	    	mv.addObject("errorMsg", "수정  실패");
