@@ -60,7 +60,7 @@
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_max_player_cnt.svg" class="icon">
                                 <div>
-                                    <p>${pl.fieldCount}</p>
+                                    <p>${pl.fieldCount}명</p>
                                 </div>
                             </li>
                             <li>

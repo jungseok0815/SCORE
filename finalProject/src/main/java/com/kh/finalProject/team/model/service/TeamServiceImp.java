@@ -61,6 +61,13 @@ public interface TeamServiceImp {
 	ArrayList<TeamMember> teamMemberList(int tno);
 
 	ArrayList<Team> searchTeam(String selectValue);
+	
+	//팀 프로필 업데이트
+	int updateTeam(Team t);
+	
+	//팀 프로필 이미지 엄데이트
+	int updateTeamImg(TeamImg ti);
+	
 	//나의 팀 리스트 불러오기
 	ArrayList<Team> selectMyTeamList(HashMap<String, Integer> map);
 
@@ -96,6 +103,10 @@ public interface TeamServiceImp {
 	
 	// ㅇㅇㅇㅇ
 	String selectTeamImg(int teamNo);
+
+	//	ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi);
+
+
 	
 	// 유저 팀 번호 가져오기
 	ArrayList<TeamMember> selectLoginUserNo(int userNo);
@@ -114,4 +125,5 @@ public interface TeamServiceImp {
 	
 	// 팀 프로필 이미지 가져오기 
 	String selectTeamProImg(int tno);
+
 }

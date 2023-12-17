@@ -84,7 +84,7 @@ public class Team {
 	}
 
 
-	public int getCategotyNum() {
+	public int getCategoryNum() {
 		return categoryNum;
 	}
 

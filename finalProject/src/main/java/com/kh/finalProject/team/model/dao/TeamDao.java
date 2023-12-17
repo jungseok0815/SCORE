@@ -168,6 +168,14 @@ public class TeamDao {
 	public ArrayList<TeamMember> teamMemberList(SqlSessionTemplate sqlSession, int tno){
 		return (ArrayList)sqlSession.selectList("teamMapper.teamMemberList", tno);
 	}
+	
+	public int updateTeam(SqlSessionTemplate sqlSession, Team t) {
+		return sqlSession.update("teamMapper.updateTeam", t);
+	}
+	
+	public int updateTeamImg(SqlSessionTemplate sqlSession, TeamImg ti) {
+		return sqlSession.update("teamMapper.updateTeamImg", ti);
+	}
 
 	
 	// 팀 번호 조회 

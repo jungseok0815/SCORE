@@ -146,7 +146,15 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.teamMemberList(sqlSession, tno);
 	}
 
+	@Override
+	public int updateTeam(Team t) {
+		return teamDao.updateTeam(sqlSession, t);
+	}
 
+	@Override
+	public int updateTeamImg(TeamImg ti) {
+		return teamDao.updateTeamImg(sqlSession, ti);
+	}
 	// 팀 번호 조회
 	@Override
 	public int getTeamNumber(int userNo) {

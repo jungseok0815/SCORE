@@ -245,7 +245,7 @@ public class TeamController {
 		Team t = teamService.teamProfile(tno);
 
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
-		
+
 		int myGrade = 1;
 		for (TeamMember m : tm) {
 			if(m.getUserNo() == loginUser.getUserNo())
@@ -265,8 +265,45 @@ public class TeamController {
 	
 	
 	@RequestMapping("updateForm.tm")
-	public String teamProfileUpdateForm() {
-		return "team/teamProfileUpdate";
+	public ModelAndView teamUpdateForm(int tno, ModelAndView mv) {
+		System.out.println(tno);
+		Team t = teamService.teamProfile(tno);
+		System.out.println(t);
+		mv.addObject("team", t).setViewName("team/teamProfileUpdate");
+		return mv;
+	}
+	
+	@RequestMapping("update.tm")
+	public ModelAndView teamProfileUpdate(Team t, TeamImg ti, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
+		System.out.println(t);
+		int resultImg = 0;
+		
+	
+		System.out.println(t);
+	    System.out.println(reupfile);
+	    //새로운 첨부파일 존재유무 확인
+	    if(!reupfile.getOriginalFilename().equals("")) {
+	       String changeName = saveFile(reupfile, session, "resources/img/team/teamProfile/");
+	       if(ti.getTeamOriginName() != null) {
+	          new File(session.getServletContext().getRealPath(ti.getTeamChangeName())).delete();
+	       }      
+	       
+	       ti.setTeamOriginName(reupfile.getOriginalFilename());
+	       ti.setTeamChangeName("resources/img/team/teamProfile/" + changeName); 
+	      
+	    }
+	    
+	    resultImg = teamService.updateTeamImg(ti);
+	    int resultContent = teamService.updateTeam(t);
+	    
+	    if(resultContent > 0) {
+	        session.setAttribute("alertMsg", "팀 수정 완료");
+	        mv.setViewName("redirect:teamProfile.tm?teamNo=" + t.getTeamNo());
+	    }else {
+	    	session.setAttribute("alertMsg", "다시 수정해주세요");
+	    }
+	      
+	      return mv;
 	}
 	
 	@RequestMapping("joinList.tm")

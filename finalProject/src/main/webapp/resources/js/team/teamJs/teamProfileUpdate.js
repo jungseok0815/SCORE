@@ -10,3 +10,4 @@ loadImg = (inputFile) => {
         document.getElementById('update-file').src = null;   
     }
 }
+
