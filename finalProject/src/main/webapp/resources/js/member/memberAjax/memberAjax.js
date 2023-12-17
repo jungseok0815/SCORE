@@ -81,6 +81,7 @@ const memberAjaxController = {
             }
         })
     },
+    // 친구 삭제
     deleteFriend : (data) =>{
         $.ajax({
             url: "deleteFriend.me",
@@ -94,6 +95,7 @@ const memberAjaxController = {
             }
         })
     },
+    //나의 팀 리스트를 보기위한 
     selectMyteamListAjax : (data, callback) =>{
         $.ajax({
             url: "selectMyTeam.me",
@@ -123,6 +125,7 @@ const memberAjaxController = {
         })
 
     },
+    //핸드폰 문자를 보내기위한 
     sendPhoneAuthAjax: (data,callback) =>{
         $.ajax({
             url: "send-one",
@@ -137,6 +140,7 @@ const memberAjaxController = {
             }
         })
     },
+    //사용자가 입력한 인증번호 확인
     checkPhoneAuthAjax: (data,callback) =>{
         $.ajax({
             url: "checkPhoneAuth.me",

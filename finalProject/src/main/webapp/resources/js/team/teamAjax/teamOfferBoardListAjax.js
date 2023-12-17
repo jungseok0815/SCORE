@@ -11,6 +11,6 @@ const teamAjaxController = {
                 console.log("에러")
             }
         })
-    },
+    }
 }
 

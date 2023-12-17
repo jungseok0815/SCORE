@@ -84,10 +84,8 @@
         border: 2px solid rgb(55, 131, 255);
     }
     .select{
-        margin-left: 90px;
-        margin-right: 10%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .cat{
@@ -149,7 +147,7 @@
             position: absolute;
         }
         .subm-btn{
-            width: 800px;
+            width: 600px;
             height: 50px;
             background-color: rgb(55, 131, 255);
             color: white;
