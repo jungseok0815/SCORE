@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MemberImg;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
@@ -81,14 +82,6 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectReqResFriendList", userNo);
 	}
 	
-	public int updateMyPageSport(SqlSessionTemplate sqlSession, SportInfo sport) {
-		return sqlSession.update("memberMapper.updateMyPageSport", sport);
-	}
-	
-	public int updateMyPageMember(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateMyPageMember", m);
-	}
-	
 	public int checkFriendStatus(SqlSessionTemplate sqlSession, Friend f) {
 		return sqlSession.selectOne("memberMapper.checkFriendStatus",f);
 	}
@@ -102,5 +95,24 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.checkPhoneAuth",auth);
 	}
 	
+	//마이페이지 스포츠 수정
+	public int updateMyPageSport(SqlSessionTemplate sqlSession, SportInfo sport) {
+		return sqlSession.update("memberMapper.updateMyPageSport", sport);
+	}
+	
+	//마이페이지 멤버 수정
+	public int updateMyPageMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMyPageMember", m);
+	}
+	
+	//마이페이지 이미지 수정
+	public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+		return sqlSession.insert("memberMapper.updateMemImg", mi);
+	}
+	
+	//마이페이지 이미지 조회
+	public MemberImg selectMemberImg(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
+	}
 	
 }

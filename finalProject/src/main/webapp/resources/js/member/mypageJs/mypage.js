@@ -38,7 +38,7 @@ drawUpdateMypage =(sportInfo) =>{
 
         for(let i=0; i<footballStyle.length; i++){
         const str =  "<div class ='cat comedy'> <label>"+
-                    "<input type='checkbox' class='checkStyle' value='"+footballStyle[i]+ "' name="+footballStyle[i]+">"+
+                    "<input type='checkbox' class='checkStyle' value='"+footballStyle[i]+ "' name=style>" +
                     "<span>"+footballStyleKor[i]+"</span>"+
                     "</label> </div>"
         checkStyle.innerHTML += str
@@ -46,7 +46,7 @@ drawUpdateMypage =(sportInfo) =>{
         checkStyle2(sportInfo.style);
         for(let i = 0; i<footballSkill.length; i++){
             const str =  "<div class ='cat comedy'> <label>"+
-            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name="+footballSkill[i]+">"+
+            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name=skill>"+
             "<span>"+footballSkillKor[i]+"</span>"+
             "</label> </div>"
             if(i<=2){
@@ -70,7 +70,7 @@ drawUpdateMypage =(sportInfo) =>{
 
         for(let i=0; i<baseballStyle.length; i++){
         const str =  "<div class ='cat comedy'> <label>"+
-                    "<input type='checkbox' class='checkStyle' value='"+baseballStyle[i]+ "' name="+baseballStyle[i]+">"+
+                    "<input type='checkbox' class='checkStyle' value='"+baseballStyle[i]+ "' name=style>"+
                     "<span>"+baseballStyleKor[i]+"</span>"+
                     "</label> </div>"
         checkStyle.innerHTML += str
@@ -80,7 +80,7 @@ drawUpdateMypage =(sportInfo) =>{
 
         for(let i = 0; i<footballSkill.length; i++){
             const str =  "<div class ='cat comedy'> <label>"+
-            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name="+footballSkill[i]+">"+
+            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name=skill>"+
             "<span>"+footballSkillKor[i]+"</span>"+
             "</label> </div>"
             if(i<=2){
@@ -102,7 +102,7 @@ drawUpdateMypage =(sportInfo) =>{
 
         for(let i=0; i<footballStyle.length; i++){
         const str =  "<div class ='cat comedy'> <label>"+
-                    "<input type='checkbox' class='checkStyle' value='"+footballStyle[i]+ "' name="+footballStyle[i]+">"+
+                    "<input type='checkbox' class='checkStyle' value='"+footballStyle[i]+ "' name=style>"+
                     "<span>"+footballStyleKor[i]+"</span>"+
                     "</label> </div>"
         checkStyle.innerHTML += str
@@ -113,7 +113,7 @@ drawUpdateMypage =(sportInfo) =>{
 
         for(let i = 0; i<footballSkill.length; i++){
             const str =  "<div class ='cat comedy'> <label>"+
-            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name="+footballSkill[i]+">"+
+            "<input type='checkbox' class='checkSkill' value='"+footballSkill[i]+ "' name=skill>"+
             "<span>"+footballSkillKor[i]+"</span>"+
             "</label> </div>"
             if(i<=2){
@@ -127,6 +127,7 @@ drawUpdateMypage =(sportInfo) =>{
     }
  
 }
+
 checkStyle2 = (style) =>{
     const checkBoxList2 = document.querySelectorAll('.checkStyle');
     const styles = style
@@ -136,7 +137,7 @@ checkStyle2 = (style) =>{
    }else{
        arr2 = []
    }
-    //console.log(arr2);w
+    //console.log(arr2);
     for(let i =0; i<arr2.length; i++){
         for(let j=0; j<checkBoxList2.length; j++){
             if(arr2[i].includes(checkBoxList2[j].value)){
