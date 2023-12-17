@@ -17,6 +17,7 @@
         <form action="insertOffer.tm" method="POST" enctype="multipart/form-data">
         
         	<input type="hidden" name="userNo" value="${loginUser.userNo}">
+        	<input type="hidden" name="teamNo" value="${tno}">
         	
             <table>
                 <h1 align="center" style="font-size: 30px; color: dodgerblue;">팀 구인글 작성</h1>

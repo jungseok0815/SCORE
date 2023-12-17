@@ -45,13 +45,13 @@
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm'">
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/joinList.tm?tno=${team.teamNo}'">
                                         가입신청 보기
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm'">
-                                        구인글 작성
+                                    <button class="btn btn-outline-secondary" onclick="location.href='${pageContext.request.contextPath}/insertTeamOfferForm.tm?tno=${team.teamNo}'">
+                                        구인글 작성  
                                     </button>
                                 </div>
                                 <div class="profile-btn d-grid gap-2">

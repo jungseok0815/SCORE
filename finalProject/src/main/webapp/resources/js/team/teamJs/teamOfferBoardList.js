@@ -23,9 +23,9 @@ choiceCity = () => {
 }
 
 drawTeamList = (result) =>{
-	console.log(result)
+	console.log(result);
     let list = result.model.list;
-    let pi = result.model.pi
+    let pi = result.model.pi;
     console.log(list)
     console.log(pi)
     
@@ -34,9 +34,9 @@ drawTeamList = (result) =>{
         str += '<div class="team-list-container">'
                     + '<ul>'
                         + '<li class="team-list-item">'
-                            + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + `'" class="list-link">`
+                            + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + '&teamNo=' + te.teamNo + `'" class="list-link">`
                                 + '<div class="list-img-all">'
-                                    + '<img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>'
+                                    + '<img src="' + te.teamChangeName + '"  class="list-img"/>'
                                 + '</div>'
                                 + '<div class="list-content">'
                                     + '<div class="list-title">'
@@ -87,9 +87,9 @@ drawChoiceSports = (result) =>{
         str += '<div class="team-list-container">'
                     + '<ul>'
                         + '<li class="team-list-item">'
-                            + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + `'" class="list-link">`
+                            + `<a onclick="location.href='offerDetailView.tm?tno=` + te.offerNo + '&teamNo=' + te.teamNo + `'" class="list-link">`
                                 + '<div class="list-img-all">'
-                                    + '<img src="./resources/img/team/teamOfferBoardList/arsenal.jpg"  class="list-img"/>'
+                                    + '<img src="' + te.teamChangeName + '"  class="list-img"/>'
                                 + '</div>'
                                 + '<div class="list-content">'
                                     + '<div class="list-title">'
