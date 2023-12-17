@@ -175,9 +175,9 @@ public class MemberController {
 	
 	@RequestMapping("/login.me") 
 	public ModelAndView loginMember(Member m, ModelAndView mv, HttpSession session) {	
-		System.out.print(m);
+		
 		Member loginUser = memberService.loginMember(m.getUserId()); //아이디로만 멤버객체 가져오기
-		System.out.print(loginUser);
+		
 		if(loginUser == null || !bcryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) { // 로그인실패 => 에러문구를 requestScope에 담고 에러페이지로 포워딩
 			mv.addObject("errorMsg", "로그인 실패");
 			mv.setViewName("common/errorPage");
@@ -283,7 +283,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value= "/checkPhoneAuth.me")
 	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
-		System.out.println();
+	
 	
 		int reusult = memberService.checkPhoneAuth(auth);
 		System.out.println();

@@ -28,7 +28,7 @@
 	                    <div class="left-header">
 	                        <a class="list-link">
 	                            <div class="list-img-all">
-	                                <img src="./resources/img/team/teamOfferBoardList/totunum.png" class="list-img"/>
+	                                <img src="${profileImg.teamChangeName}" class="list-img"/>
 	                            </div>
 	                            <div class="list-content">
 	                                <div class="list-title">
@@ -60,13 +60,15 @@
 	                    </div>
 	                    <div class="btn-wrap">
 							<!-- Button to Open the Modal -->
-							<c:if test="${empty loginUser and teamOffer.teamNo eq loginUser.teamNo}">
+							<c:if test="${empty loginUser and isMyteam == 1}"> <!-- loginUser에 팀 번호를 담아 줘야 할거 같음 -->
 							    <!-- 로그인이 안 되어 있을 때 버튼을 보이지 않게 함 그리고 이미 팀원인 사람은 안보이게 -->
-							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal" style="display: none;">가입 신청</button>
-							</c:if>
-							<c:if test="${not empty loginUser and teamOffer.teamNo ne loginUser.teamNo}"> 
-							    <!-- 로그인이 되어 있을 때 버튼을 보이게 함 -->
 							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
+								
+							</c:if>
+							<c:if test="${not empty loginUser and isMyteam == 0}"> 
+							    <!-- 로그인이 되어 있을 때 버튼을 보이게 함 그리고 팀 번호가 다르면 보이게 함-->
+							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
+								
 							</c:if>
 						</div>
 						<c:if test="${teamOffer.userNo eq loginUser.userNo}">
@@ -87,7 +89,6 @@
 	                    
 	                    <div class="content-footer">
 	                       	조회수 ${teamOffer.offerCount}
-	                        
 	                    </div>
 	                </div>
 	            </div>

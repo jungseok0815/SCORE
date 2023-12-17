@@ -9,6 +9,7 @@ import com.kh.finalProject.team.model.vo.TeamImg;
 import com.kh.finalProject.team.model.vo.TeamMember;
 import java.util.HashMap;
 import com.kh.finalProject.team.model.vo.TeamOffer;
+import com.kh.finalProject.team.model.vo.TeamReq;
 
 public interface TeamServiceImp {
 
@@ -67,13 +68,16 @@ public interface TeamServiceImp {
 	TeamMember selectInformation(int userNo);
 	
 	// 구인글 등록 
-	int insertOfferList(TeamOffer t, int tno);
+	int insertOfferList(TeamOffer t, int teamNo);
 	
 	// 구인글 사진 등록 
-	int insertOfferImg(TeamImg ti, int tno);
+	int insertOfferImg(TeamImg ti, int teamNo);
 	
 	// 디테일뷰 이미지 가져오기 
 	TeamImg selectOfferImg(int tno);
+	
+	// 팀 프로필 가져오기
+	TeamImg offerProfileImg(int teamNo);
 	
 	// 가테고리별 전체 지역까지 가져오기
 	int selectListCountCate(int category);
@@ -92,5 +96,22 @@ public interface TeamServiceImp {
 	
 	// ㅇㅇㅇㅇ
 	String selectTeamImg(int teamNo);
-//	ArrayList<TeamOffer> selectTeamImg(int teamNo, PageInfo pi);
+	
+	// 유저 팀 번호 가져오기
+	ArrayList<TeamMember> selectLoginUserNo(int userNo);
+	
+	// 팀요청 리스트 가져오기
+	ArrayList<TeamReq> selectReqList(int tno);
+	
+	// 친구요청 수락
+	int teamReqAccept(int reqNo);
+	
+	// 친구요청 거절
+	int teamReqReqRefuse(int reqNo);
+	
+	// 팀 이름 가져오기  
+	String selectTeamName(int tno);
+	
+	// 팀 프로필 이미지 가져오기 
+	String selectTeamProImg(int tno);
 }
