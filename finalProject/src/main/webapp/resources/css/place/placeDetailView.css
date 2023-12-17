@@ -201,3 +201,10 @@ img {
     background-color: #6c757d;
     cursor: auto;
 }
+
+#fieldMap{
+    width:1000px;
+    height:448px;
+    display: none;
+    margin: auto;
+}

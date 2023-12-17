@@ -24,6 +24,7 @@
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamMember" alias="TeamMember" />
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamImg" alias="TeamImg" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.MessageAuth" alias="MessageAuth" />
+  		<typeAlias type="com.kh.finalProject.place.model.vo.Reservation" alias="Reservation" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.MemberImg" alias="MemberImg" />
 		<typeAlias type="com.kh.finalProject.team.model.vo.TeamReq" alias="TeamReq" />
   	</typeAliases>

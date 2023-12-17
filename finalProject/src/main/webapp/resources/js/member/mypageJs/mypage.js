@@ -1,3 +1,7 @@
+let contextPath = "";
+mypageInit=(path)=>{
+    contextPath = path;
+}
 function imgChangeUpdate(file){
     if(file.files.length == 1){
         const reader = new FileReader();
@@ -168,4 +172,38 @@ checkSkill = (skill) =>{
                 }
             }
         }
+}
+selectResListBtn = (userNo) =>{
+    data = {
+        userNo :userNo
+    }
+    mypageAjaxController.selectResListAjax(data,drawResList)
+}
+drawResList = (data) =>{
+    let str = "";
+    for (let i in data.model.arrayRes){
+        const tmp = data.model.arrayRes[i];
+        let category;
+        switch(tmp.categoryNum){
+            case 1: 
+                category = ' (축구)';
+                break;
+            case 2: 
+                category = ' (야구)';
+                break;
+            case 3: 
+                category = ' (농구)';
+                break;
+        }
+        str += `<div class="resListModal">`+
+                `<div style="text-align: justify;">`+
+                    `<span style="font-size: 20px;">`+tmp.fieldName+category+`</span><br>`+
+                    `<span style="font-size: 14px;">`+" "+tmp.fieldDate+` / `+tmp.startTime+`</span>`+
+                `</div>`+
+                `<div>`+
+                    `<button class="btn btn-danger" style="margin-top: 10px;"`+
+                    `onclick="location.href='`+contextPath+`/deleteRes.pl?resNo=`+tmp.resNo+`&fieldNo=`+tmp.fieldNo+`'">예약취소</button>`+
+                `</div></div>`
+    }
+    document.querySelector('.resListBody').innerHTML = str;
 }

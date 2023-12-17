@@ -90,5 +90,15 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.placeImgList(sqlSession, fno);
 	}
 
+	@Override
+	public ArrayList<Reservation> selectResList(int userNo) {
+		return pDao.selectResList(sqlSession, userNo);
+	}
+
+	@Override
+	public int deleteReservation(int resNo) {
+		return pDao.deleteReservation(sqlSession, resNo);
+	}
+
 
 }

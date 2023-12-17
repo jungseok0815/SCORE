@@ -17,7 +17,7 @@
     }
     .title2{
         width: 354px;
-        height: 550px;
+        height: 430px;
         background-color: white;
     }
     .img-teul{
@@ -71,6 +71,8 @@
     }
     .bot03{
         display: flex;
+        justify-content: space-around;
+        margin-right: 30px;
         padding-top: 40px;
         padding-left: 10px;
     }
@@ -322,4 +324,12 @@
     border-radius: 50%;
     margin-right: 5px;
     margin-bottom: 16px;
+}
+
+/* 예약목록 모달 css*/
+
+.resListModal{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
 }

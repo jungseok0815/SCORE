@@ -29,6 +29,16 @@
   		<result column="DLELTE_FIELD_IMG" property="deleteFieldImg" />
   		<result column="FIELD_NO" property="fieldNo" />
   	</resultMap>
+  	<resultMap type="Reservation" id="reservationResultSet">
+  		<result column="RES_NO" property="resNo" />
+  		<result column="RES_DATE" property="resDate" />
+  		<result column="RES_USER_NO" property="resUserNo" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="FIELD_DATE" property="fieldDate" />
+  		<result column="START_TIME" property="startTime" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
   	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
@@ -190,5 +200,22 @@
 		  FROM FIELD_IMG
 		 WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	<select id="selectResList" resultMap="reservationResultSet">
+	 	SELECT RES_NO,
+		       RES_USER_NO,
+		       FIELD_NO,
+		       FIELD_NAME,
+		       FIELD_DATE,
+		       START_TIME,
+		       CATEGORY_NUM
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{resUserNo}
+		 ORDER BY FIELD_DATE, START_TIME
+ 	</select>
+ 	<delete id="deleteReservation">
+	 	DELETE FROM RESERVATION
+		 WHERE RES_NO = #{resNo}	
+ 	</delete>
 
 </mapper>
