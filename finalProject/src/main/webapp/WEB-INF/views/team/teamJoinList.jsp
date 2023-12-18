@@ -30,7 +30,7 @@
 	                                <div>
 	                                    <a href="" class="list-link">
 	                                       <div class="list-img-all">
-	                                            <img src="${r.memberChangeName}" class="list-img"/>
+	                                            <img src=".${r.memberChangeName}" class="list-img"/>
 	                                        </div>
 	                                        <div class="list-content">
 	                                            <div class="list-title">
