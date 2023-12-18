@@ -259,7 +259,7 @@ public class TeamController {
 				myGrade = m.getGrade();
 			
 		}
-		
+		System.out.println(tm);
 		mv.addObject("teamMemberCount", tmc)
 		.addObject("teamAvgAge", taa)
 		.addObject("team", t)
