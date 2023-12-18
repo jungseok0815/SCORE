@@ -251,4 +251,18 @@ public class TeamDao {
 		return sqlSession.selectOne("teamMapper.selectTeamProImg", tno);
 	}
 	
+	// 회원 번호 가져오기
+	public int reqList(SqlSessionTemplate sqlSession, int reqNo) {
+		return sqlSession.selectOne("teamMapper.reqList", reqNo);
+	}
+	
+	// 회원 번호 가져오기
+	public int acceptTeamMember(SqlSessionTemplate sqlSession, int reqList, int tno) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("reqList", reqList);
+		params.put("tno", tno);
+		
+		return sqlSession.insert("teamMapper.acceptTeamMember", params);
+	}
+	
 }
