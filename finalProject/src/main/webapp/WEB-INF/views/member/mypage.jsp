@@ -13,8 +13,10 @@
 
     <script src="resources/js/member/memberJs/member.js?ver=5"></script>
     <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
+    <script src="resources/js/member/mypageJs/mypage.js"></script>
+    <script src="resources/js/member/mypageAjax/mypageAjax.js"></script>
 </head>
-<body>
+<body onload="mypageInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="../common/header.jsp"/>
 	
 	<div class="title"> 
@@ -43,6 +45,9 @@
 	            <div class="bot02">
 	                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
 	            </div>
+              <div class="bot02">
+                  <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="selectResListBtn('${loginUser.userNo}')">나의 예약목록보기</button>
+              </div>
 	        </c:when>
 	        <c:otherwise>
 	        	 <div class="bot01">
@@ -58,10 +63,6 @@
 	            </div>
 	        </c:otherwise>
 			</c:choose>
-            <div class="bot03">
-                <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
-                <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">${sportInfo.sportLever}</div></div>
-            </div>
         </div>
 
         <div class="title5">
@@ -83,8 +84,12 @@
                 <div class="btn-5 yellow-card">옐로우 카드 <div class="ipbox2">${sportInfo.sportYellow}</div></div>
                 
                 <div class="btn-5 red-card">레드 카드 <div class="ipbox2">${sportInfo.sportRed}</div></div>
-            </div>
-            
+                
+                <div class="bot03">
+                  <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
+                  <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">${sportInfo.sportLever}</div></div>
+                </div>
+              </div>
         </div>
     </div>
 
@@ -180,6 +185,22 @@
         </div>
       </div>
     </div>
+    <!-- 내 예약목록 보기 모달-->
+    <div class="modal fade" id="viewMyResListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">예약목록</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="resListBody">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로</button>
+          </div>
+      </div>
+    </div>
+  </div>
 	
 	<jsp:include page="../common/footer.jsp" />
 </body>
