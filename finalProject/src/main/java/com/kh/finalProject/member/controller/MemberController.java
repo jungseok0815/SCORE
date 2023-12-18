@@ -99,13 +99,10 @@ public class MemberController {
 	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv){
 		Member m = (Member) session.getAttribute("loginUser");
 		MemberImg mi = memberService.selectMemberImg(m.getUserNo());
-		System.out.println(mi);
 		SportInfo sport = new SportInfo();
 		sport.setUserNo(m.getUserNo());
 		sport.setCategoryNum(1);
 		SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		System.out.println(sportInfo);
-		System.out.println(mi);
 		mv.addObject("sportInfo", sportInfo).addObject("memberImg", mi).setViewName("member/mypageUpdate");
 		return mv;
 	}
@@ -132,44 +129,32 @@ public class MemberController {
 	@RequestMapping(value= "/reMyPageUpdate.me",produces="application/json; charset=UTF-8")
 	public ModelAndView updateMyPageMember(Member m, HttpSession session,ModelAndView mv, MultipartFile reupfile,  String[] skill, String[] style, SportInfo sport, MemberImg mi) {
 		Member login =  (Member) session.getAttribute("loginUser");
-		
-		//System.out.println(sport+"asad");
-		//System.out.println(m+"asdas");
-		System.out.println(reupfile+"asdasd");
-		//System.out.println(mi+"aaaa");
-//		Member m = (Member) session.getAttribute("loginUser");
 		sport.setUserNo(m.getUserNo());
-		System.out.println(sport);
 		int resultMemImg =0;
 
-		//System.out.println("reupfile : " + (reupfile != null));
 		if(!reupfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
-
 			mi.setMemberUrl("/resources/img/member/memberInsert/");
 			mi.setMemberOriginName(reupfile.getOriginalFilename());
 			mi.setMemberChangeName("/resources/img/member/memberInsert/" + changeName);
-			
-			resultMemImg = memberService.updateMemImg(mi);
-		}
-		
+			if(memberService.selectMemberImg(m.getUserNo()) == null) {
+				resultMemImg = memberService.insertMemImg(mi);
+			}else {
+				resultMemImg = memberService.updateMemImg(mi);
+			}
+		}	
 		int result = memberService.updateMyPageMember(m);
 		int result2 = memberService.updateMyPageSport(sport);
 		System.out.println(result + "," +result2 + "," + resultMemImg);
 		
-	    if(result * result2 * resultMemImg > 0) {
+	    if(result * result2  > 0) {
 	    	Member loginInfo = memberService.loginMember(login.getUserId());
 		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		    System.out.println(loginInfo + "2222222222");
-			
-		    System.out.println(mi+"1111111");
 		    session.setAttribute("loginUser", loginInfo);
 		    mv.addObject("sportInfo", sportInfo)
 		    .addObject("userInfo", loginInfo)
 		    .addObject("memberImg", mi)
 		    .setViewName("redirect:myPage.me?userNo=" + login.getUserNo());
-		  
-		    
 	    } else {
 	    	mv.addObject("errorMsg", "수정  실패");
 	    }

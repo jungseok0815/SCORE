@@ -12,8 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
-    <script src="resources/js/member/memberJs/member.js?ver=5"></script>
-    <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
+    <script src="resources/js/member/memberJs/member.js?ver=8"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js?ver=6"></script>
 </head>
 
 

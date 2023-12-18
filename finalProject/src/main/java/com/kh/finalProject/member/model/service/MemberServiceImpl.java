@@ -153,8 +153,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int insertMemImg(MemberImg mi) {
+		return memberDao.insertMemImg(sqlSession, mi);
+	}
+
+	@Override
 	public MemberImg selectMemberImg(int userNo) {
 		return memberDao.selectMemberImg(sqlSession, userNo);
 	}
+
 	
 }
