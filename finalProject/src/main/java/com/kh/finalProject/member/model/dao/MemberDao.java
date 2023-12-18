@@ -106,9 +106,13 @@ public class MemberDao {
 	}
 	
 	//마이페이지 이미지 수정
-	public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
-		return sqlSession.insert("memberMapper.updateMemImg", mi);
+	public int insertMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+		return sqlSession.insert("memberMapper.insertMemImg", mi);
 	}
+	//마이페이지 이미지 수정
+		public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+			return sqlSession.update("memberMapper.updateMemImg", mi);
+		}
 	
 	//마이페이지 이미지 조회
 	public MemberImg selectMemberImg(SqlSessionTemplate sqlSession, int userNo) {

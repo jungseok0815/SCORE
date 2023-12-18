@@ -17,6 +17,7 @@
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
 		<result column="TEAM_NO" property="teamNo" />
+		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
 	</resultMap>
 	
 	<resultMap type="SportInfo" id="sportInfoResult">
@@ -269,7 +270,6 @@
 		 WHERE USER_NO = #{userNo}
  	</update>
 		
-			
 	<select id="userInfo" resultMap="memberResult">
 			SELECT 
 				USER_NO, 
@@ -280,8 +280,10 @@
 				GENDER,
 				CITY,
 				USER_POINT,
-				USER_LEVEL
+				USER_LEVEL,
+				MEMBER_CHANGE_NAME
 			  FROM MEMBER
+			 LEFT JOIN MEMBER_IMG USING(USER_NO) 
 			 WHERE
 				USER_NO = #{userNo}
 				AND
@@ -330,7 +332,7 @@
 	</update>
 	
 	<!--  마이페이지 이미지 수정-->
-	 <insert id="updateMemImg">
+	 <insert id="insertMemImg">
  		INSERT INTO MEMBER_IMG
  					(
  						MEMBER_IMG_NO,
@@ -351,6 +353,18 @@
  		  		    )
  	</insert>
  	
+ 		<!--  마이페이지 이미지 수정-->
+	 <update id="updateMemImg">
+ 			UPDATE MEMBER_IMG
+			SET 
+				MEMBER_URL =  #{memberUrl},
+				MEMBER_ORIGIN_NAME = #{memberOriginName},
+				MEMBER_CHANGE_NAME = #{memberChangeName},
+				DELETE_MEMBER_IMG = 'N',
+				USER_NO =  #{userNo}
+			WHERE USER_NO = #{userNo}
+ 	</update>
+ 	
  	<!-- 마이페이지 이미지 조회 -->
  	 <select id="selectMemberImg" resultMap="memberImgResult">
  			SELECT  MEMBER_IMG_NO,
@@ -361,6 +375,6 @@
  						  USER_NO
  				FROM MEMBER_IMG
  			 WHERE USER_NO = #{userNo}
- 			 AND 
+ 			 
  	</select>
 </mapper>
