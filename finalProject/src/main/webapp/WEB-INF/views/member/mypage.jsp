@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-  <link rel="stylesheet" href="/final/resources/css/member/myPage.css" >
+  <link rel="stylesheet" href="/final/resources/css/member/myPage.css?ver=1" >
   <link rel="stylesheet" href="/final/resources/css/common/main.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -62,9 +62,12 @@
               <div class="bot02">
                   <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="selectResListBtn('${loginUser.userNo}')">나의 예약목록보기</button>
               </div>
+              <div class="bot02">
+                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="logOut()" >로그아웃</button>
+            </div>
 	        </c:when>
 	        <c:otherwise>
-	        	 <div class="bot01">
+	        	 <!-- <div class="bot01">
 	                <button class="btn-1" disabled onclick="location.href='${pageContext.request.contextPath}/myPageUpdate.me'">프로필 설정</button>
 	            </div>
 	                
@@ -74,7 +77,7 @@
 	
 	            <div class="bot02">
 	                <button class="btn-1" disabled data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
-	            </div>
+	            </div> -->
 	        </c:otherwise>
 			</c:choose>
         </div>
