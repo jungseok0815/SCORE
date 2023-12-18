@@ -154,7 +154,7 @@ public class PlaceController {
 		int result = pService.insertResMatch(res);
 		if(result>0) {
 			loginUser.setPoint(loginUser.getPoint()-matchPay);
-			int resultPay = pService.payPoint(loginUser);
+			int resultPay = pService.changePoint(loginUser);
 			if(resultPay>0) {
 				session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
 			}else {
@@ -194,7 +194,7 @@ public class PlaceController {
 			int result = pService.insertResMatch(res);
 		}
 		loginUser.setPoint(loginUser.getPoint()-(teamMember.size()*matchPay));
-		int resultPay = pService.payPoint(loginUser);
+		int resultPay = pService.changePoint(loginUser);
 		if(resultPay>0) {
 			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
 		}
@@ -209,13 +209,25 @@ public class PlaceController {
 	}
 	@RequestMapping("/deleteRes.pl")
 	public String deleteReservation(int resNo, int fieldNo, HttpSession session) {
-		int result = pService.deleteReservation(resNo);
-		if(result>0) {
-			session.setAttribute("alertMsg", "성공적으로 예약취소 되었습니다.");
-			return "redirect:/";
-		}else{
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int matchPay = pService.selectMatchPay(fieldNo);
+		loginUser.setPoint(loginUser.getPoint()+matchPay);
+		//포인트 페이백
+		int result1 = pService.changePoint(loginUser);
+		if(result1>0) {
+			int result2 = pService.deleteReservation(resNo);
+			if(result2>0) {
+					session.setAttribute("alertMsg", "성공적으로 예약취소 되었습니다.");
+			}else{
+				//예약취소에 실패하면 다시 포인트차감
+				loginUser.setPoint(loginUser.getPoint()-matchPay);
+				pService.changePoint(loginUser);
+				session.setAttribute("alertMsg", "예약취소에 실패하였습니다.");
+			}
+		}else {
 			session.setAttribute("alertMsg", "예약취소에 실패하였습니다.");
-			return "redirect:/";
 		}
+//		return "redirect:teamProfile.tm?teamNo=";
+		return "redirect:myPage.me?userNo="+loginUser.getUserNo();
 	}
 }

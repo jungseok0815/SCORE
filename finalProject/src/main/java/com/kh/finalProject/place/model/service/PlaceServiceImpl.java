@@ -76,8 +76,8 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public int payPoint(Member loginUser) {
-		return pDao.payPoint(sqlSession, loginUser);
+	public int changePoint(Member loginUser) {
+		return pDao.changePoint(sqlSession, loginUser);
 	}
 
 	@Override
@@ -98,6 +98,11 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int deleteReservation(int resNo) {
 		return pDao.deleteReservation(sqlSession, resNo);
+	}
+
+	@Override
+	public int selectMatchPay(int fieldNo) {
+		return pDao.selectMatchPay(sqlSession, fieldNo);
 	}
 
 

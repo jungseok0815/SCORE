@@ -30,7 +30,7 @@ function drawMyTeam(res){
                             `onclick="selectTeamMember(`+tmp.teamNo+`,`+function(res){
                                 drawTeamMemberList(res);
                                 }+`)">`+
-                            `<img src="./em_K09.png" alt="">`+
+                            `<img src="`+tmp.teamChangeName+`" alt="">`+
                             `<label>`+tmp.teamName+`</label>`+
                             `</button></div>`
     }
@@ -41,7 +41,7 @@ function drawTeamMemberList(res){
     let myTeamMemberListStr = "";
     for(let i = 0; i < res.length; i++){
         myTeamMemberListStr += `<div class="team-member">`+
-                                    `<img src="./person.png" alt="">`+
+                                    `<img src="`+res[i].memberChangeName+`" alt="">`+
                                     `<div>`+
                                     `<span>`+res[i].userName+`</span><p>`+res[i].city+`</p>`+
                                    `</div>`+

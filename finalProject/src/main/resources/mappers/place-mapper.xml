@@ -217,5 +217,10 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
+ 	<select id="selectMatchPay" resultType="_int">
+ 		SELECT MATCH_PAY
+		  FROM FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</select>
 
 </mapper>

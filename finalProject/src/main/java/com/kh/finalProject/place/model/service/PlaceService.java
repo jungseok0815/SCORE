@@ -22,11 +22,12 @@ public interface PlaceService {
 	int placeResCount(int fno);
 	ArrayList<Place> searchPlace(String selectValue);
 	int insertResMatch(Reservation res);
-	int payPoint(Member loginUser);
+	int changePoint(Member loginUser);
 	int checkResMatch(Reservation res);
 	ArrayList<PlaceImg> placeImgList(int fno);
 	ArrayList<Reservation> selectResList(int userNo);
 	int deleteReservation(int resNo);
+	int selectMatchPay(int fieldNo);
 	
 
 }

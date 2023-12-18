@@ -263,7 +263,7 @@
 			 AND
 			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
- 	<update id="payPoint">
+ 	<update id="changePoint">
  		UPDATE MEMBER
 		   SET USER_POINT = #{point}
 		 WHERE USER_NO = #{userNo}
