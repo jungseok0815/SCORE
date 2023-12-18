@@ -140,4 +140,9 @@ public interface TeamServiceImp {
 	// 팀 프로필 이미지 가져오기 
 	String selectTeamProImg(int tno);
 
+	// 회원 번호 가져오기
+	int reqList(int reqNo);
+	
+	// 수락시 팀 멤버에 넘겨주기 
+	int acceptTeamMember(int reqList, int tno);
 }
