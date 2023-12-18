@@ -130,7 +130,7 @@
                                 <li>
                                     <div class="team-member-item">
                                         <a class="team-member-profile" type="button">
-                                            <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
+                                            <img class="team-member-profile-img" src=".${list.memberChangeName}">
                                             <div class="team-member-profile-info">
                                                 <div class="team-member-profile-info-wrapper">
                                                     <p class="team-member-profile-info-name">
