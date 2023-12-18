@@ -420,6 +420,7 @@
  		  		    )
  	</insert>
 
+	<!-- 팀 생성할 때 주장 insert해주는 쿼리문 -->
  	<insert id="insertTeamMember">
  			INSERT INTO TEAM_MEMBER
  					(

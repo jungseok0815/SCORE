@@ -248,7 +248,6 @@ public class TeamController {
 
 		int myGrade = 1;
 		for (TeamMember m : tm) {
-			System.out.println(m.getPhone());
 			if(m.getUserNo() == loginUser.getUserNo())
 				myGrade = m.getGrade();
 			
