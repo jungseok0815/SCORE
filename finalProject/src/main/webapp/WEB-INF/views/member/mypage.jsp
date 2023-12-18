@@ -29,9 +29,18 @@
                 <div style="font-size: 14px; width: 80px; height: 0px;">${countfriends}명의 친구</div><br><br>
             </div>
 
-            <div class="img-teul">
-                <img src="/img/img1.jpg" alt="" class="img1">
-            </div>
+            <c:choose>
+              <c:when test="${empty userInfo.memberChangeName}">
+                <div class="img-teul">
+                    <img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" class="img1">
+                </div>
+               </c:when>
+              <c:otherwise>
+                <div class="img-teul">
+                  <img src=".${userInfo.memberChangeName}" alt="" class="img1">
+                </div>
+              </c:otherwise>
+            </c:choose>
             <c:choose>
             <c:when test="${loginUser.userNo eq userInfo.userNo}">
 	            <div class="bot01">
