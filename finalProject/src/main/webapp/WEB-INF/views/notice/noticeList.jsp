@@ -26,7 +26,7 @@
 				<c:forEach var="i" begin="0" end="${noticeList.size() > 0 ? noticeList.size()-1 : 0}">
 					<div class="accordion-item">
 						<h2 class="accordion-header">
-							<button class="accordion-button" type="button"
+							<button class="accordion-button collapsed" type="button"
 								data-bs-toggle="collapse" data-bs-target="#collapseOne${i}"
 								aria-expanded="true" aria-controls="collapseOne${i}">
 								${noticeList[i].noticeTitle}</button>

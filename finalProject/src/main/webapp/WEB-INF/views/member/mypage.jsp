@@ -22,25 +22,30 @@
 	<div class="title"> 
 
         <div class="title2">
-            <div style="float: left; width: 35%; padding:10px;">
-                <div style="font-size: 22px; width: 80px; height: 30px;">${userInfo.userName}</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">${userInfo.userId}</div><br>
-                <div style="font-size: 14px; width: 90px; height: 20px;">선호 지역 : ${userInfo.address}</div><br>
-                <div style="font-size: 14px; width: 80px; height: 0px;">${countfriends}명의 친구</div><br><br>
-            </div>
+          <div class="titleWrap">
+              <div class="myPageLeft">
+                  <div style="font-size: 22px; width: 80px; height: 30px;">${userInfo.userName}</div><br>
+                  <div style="font-size: 14px; width: 90px; height: 20px; color: cadetblue;">${userInfo.userId}</div><br>
+                  <div style="font-size: 14px; width: 90px; height: 20px;">선호 지역 : ${userInfo.address}</div><br>
+                  <div style="font-size: 14px; width: 80px; height: 0px;">${countfriends}명의 친구</div><br><br>
+              </div>
 
-            <c:choose>
-              <c:when test="${empty userInfo.memberChangeName}">
-                <div class="img-teul">
-                    <img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" class="img1">
-                </div>
-               </c:when>
-              <c:otherwise>
-                <div class="img-teul">
-                  <img src=".${userInfo.memberChangeName}" alt="" class="img1">
-                </div>
-              </c:otherwise>
-            </c:choose>
+              <div class="myPageImg">
+                <c:choose>
+                  <c:when test="${empty userInfo.memberChangeName}">
+                    <div class="img-teul">
+                        <img src="./resources/img/team/teamOfferBoardList/profile.jpg" alt="" class="img1">
+                    </div>
+                  </c:when>
+                  <c:otherwise>
+                    <div class="img-teul">
+                      <img src=".${userInfo.memberChangeName}" alt="" class="img1">
+                    </div>
+                  </c:otherwise>
+                </c:choose>
+              </div>
+          </div>
+
             <c:choose>
             <c:when test="${loginUser.userNo eq userInfo.userNo}">
 	            <div class="bot01">
