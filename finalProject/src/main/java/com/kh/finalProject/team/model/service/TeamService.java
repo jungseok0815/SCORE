@@ -240,5 +240,15 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.selectTeamProImg(sqlSession, tno);
 	}
 
+	@Override
+	public int reqList(int reqNo) {
+		return teamDao.reqList(sqlSession, reqNo);
+	}
+
+	@Override
+	public int acceptTeamMember(int reqList, int tno) {
+		return teamDao.acceptTeamMember(sqlSession, reqList, tno);
+	}
+
 
 }

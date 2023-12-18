@@ -9,11 +9,13 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/final/resources/css/team/teamJoinList.css">
-
+	<script src="resources/js/team/teamJs/teamJoinList.js"></script>
+	<script src="resources/js/team/teamAjax/teamJoinListAjax.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 		<jsp:include page="../common/header.jsp" />
-		  <div class="main">
+		  <div class="main" id="joinTeam">
 	        <div class="all"> 
 	            <div class="topWrapper">
 	                <div class="top_container">
@@ -28,7 +30,7 @@
 	                                <div>
 	                                    <a href="" class="list-link">
 	                                       <div class="list-img-all">
-	                                            <img src="${r.memberChangeName}" class="list-img"/>
+	                                            <img src=".${r.memberChangeName}" class="list-img"/>
 	                                        </div>
 	                                        <div class="list-content">
 	                                            <div class="list-title">
@@ -40,7 +42,7 @@
 	                                </div> 
 	                                <div>
 	                                    <div class="list-member-x">
-	                                        <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}'"><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
+	                                        <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}&tno=${tno}'"><img src="./resources/img/team/teamJoinList/x.png" class="list-img-x"/></a>
 	                                    </div>
 	                                </div>
 	                                <div>
@@ -52,9 +54,9 @@
 	                                    <a>
 	                                        <div class="btnList">
 	                                       
-	                                            <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}'" class="buttonRe btnFloat btnLightBlue"></a>
-	                                            
-	                                            <a onclick="location.href='accept.tm?reqNo=${r.reqNo}'" class="buttonAc btnFloat2 btnLightBlue2"></a>
+	                                            <a onclick="location.href='refuse.tm?reqNo=${r.reqNo}&tno=${tno}'" class="buttonRe btnFloat btnLightBlue"></a>  
+	                                           
+	                                            <a onclick="location.href='accept.tm?reqNo=${r.reqNo}&tno=${tno}'" class="buttonAc btnFloat2 btnLightBlue2"></a>
 	                                        </div>
 	                                    </a>
 	                                </div>
