@@ -102,6 +102,7 @@ const memberAjaxController = {
             type: "post",
             data,
             success: (result) => {
+                console.log(result)
                 callback(result);
             },
             error: (err) => {

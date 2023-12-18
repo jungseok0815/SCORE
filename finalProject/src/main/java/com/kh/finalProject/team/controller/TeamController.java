@@ -37,24 +37,28 @@ public class TeamController {
 	
 	@RequestMapping("offerBoardList.tm")
 	public ModelAndView teamOfferBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
-		
 		PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
-		
 		ArrayList<TeamOffer> list = teamService.selectList(pi);
-		
-		
 		for(int i= 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
 			String img = teamService.selectTeamImg(list.get(i).getTeamNo());
-//			String img = teamService.selectTeamImg(teamNo);
-			
+
 			// 리스트에 팀 프로필 이미지 담아 주기
 			list.get(i).setTeamChangeName(img);
 			
-			mv.addObject("pi", pi)
-			  .addObject("list", list)
-			  .setViewName("team/teamOfferBoardList");
+//			mv.addObject("pi", pi)
+//			  .addObject("list", list)
+//			  .setViewName("team/teamOfferBoardList");
 			
+
+//			String img = teamService.selectTeamImg(teamNo);
+			// 리스트에 팀 프로필 이미지 담아 주기
+			list.get(i).setTeamChangeName(img);
+
 		}
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .setViewName("team/teamOfferBoardList");
 		
 		return mv;
 	}
@@ -120,11 +124,14 @@ public class TeamController {
 					
 					list.get(i).setTeamChangeName(img);
 					
-					mv.addObject("pi", pi)
-					  .addObject("list", list)
-					  .setViewName("team/teamOfferBoardList");
+//					mv.addObject("pi", pi)
+//					  .addObject("list", list)
+//					  .setViewName("team/teamOfferBoardList");
 				}
 			}
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("team/teamOfferBoardList");
 
 			return new Gson().toJson(mv);
 			
@@ -140,9 +147,9 @@ public class TeamController {
 					
 					list.get(i).setTeamChangeName(img);
 					
-					mv.addObject("pi", pi)
-					  .addObject("list", list)
-					  .setViewName("team/teamOfferBoardList");
+//					mv.addObject("pi", pi)
+//					  .addObject("list", list)
+//					  .setViewName("team/teamOfferBoardList");
 				}
 			}
 			mv.addObject("pi", pi)
@@ -163,9 +170,9 @@ public class TeamController {
 					
 					list.get(i).setTeamChangeName(img);
 					
-					mv.addObject("pi", pi)
-					  .addObject("list", list)
-					  .setViewName("team/teamOfferBoardList");
+//					mv.addObject("pi", pi)
+//					  .addObject("list", list)
+//					  .setViewName("team/teamOfferBoardList");
 				}
 			}
 			
@@ -187,9 +194,9 @@ public class TeamController {
 					
 					list.get(i).setTeamChangeName(img);
 					
-					mv.addObject("pi", pi)
-					  .addObject("list", list)
-					  .setViewName("team/teamOfferBoardList");
+//					mv.addObject("pi", pi)
+//					  .addObject("list", list)
+//					  .setViewName("team/teamOfferBoardList");
 				}
 			}
 			
@@ -308,18 +315,18 @@ public class TeamController {
 	
 	@RequestMapping("joinList.tm")
 	public ModelAndView teamJoinListForm(int tno, ModelAndView mv) {
-		System.out.println("수락" + tno);
 		
 		ArrayList<TeamReq> list = teamService.selectReqList(tno);
 		System.out.println(list);
-
 		String tName = teamService.selectTeamName(tno);
 		
 		String tProfile = teamService.selectTeamProImg(tno);
+		System.out.println(tProfile);
 		
 		// reqUserNo에 회원 번호 들어 옴 
 
 		mv.addObject("list", list)
+		.addObject("tno", tno)
 		.addObject("tName", tName)
 		.addObject("tProfile", tProfile)
 		.setViewName("team/teamJoinList");
@@ -328,13 +335,18 @@ public class TeamController {
 	}
 	
 	@RequestMapping("accept.tm")
-	public String reqAccept(int reqNo, HttpSession session, Model model) {
+	public String reqAccept(int reqNo, int tno, HttpSession session, Model model) {
 
 		int req = teamService.teamReqAccept(reqNo);
 		
-		if(req > 0) {
+		int reqList = teamService.reqList(reqNo);
+		
+		int insert = teamService.acceptTeamMember(reqList, tno);
+		
+		if(req * insert > 0) {
 			session.setAttribute("alertMsg", "수락 성공");
-			return "redirect:/"; // return "teamProfile.tm?teamNo=${tno}"
+//			return "redirect:/teamProfile.tm?teamNo=" + tno;
+			return "redirect:/joinList.tm?tno=" + tno;
 		} else {
 			model.addAttribute("errorMsg", "신청 실패");
 			return "common/errorMsg";
@@ -342,20 +354,21 @@ public class TeamController {
 	}
 	
 	@RequestMapping("refuse.tm")
-	public String reqRefuse(int reqNo, HttpSession session, Model model) {
-	
+	public String reqRefuse(int reqNo, int tno, HttpSession session, Model model) {
+		
 		int req = teamService.teamReqReqRefuse(reqNo);
 		
 		if(req > 0) {
 			session.setAttribute("alertMsg", "거절 성공");
-			return "redirect:/";
+//			return "redirect:/teamProfile.tm?teamNo=" + tno;
+			return "redirect:/joinList.tm?tno=" + tno;
 		} else {
 			model.addAttribute("errorMsg", "신청 실패");
 			return "common/errorMsg";
 		}
+
 	}
 
-	
 	//팀프로필에서 버튼 눌렀을 때 보내주는 메소드
 	@RequestMapping("insertTeamOfferForm.tm")
 	public ModelAndView teamOfferInsertForm(String tno, ModelAndView mv) {
