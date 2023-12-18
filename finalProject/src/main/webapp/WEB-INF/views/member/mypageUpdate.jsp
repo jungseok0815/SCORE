@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +24,14 @@
                 </div>  -->
                 
               <c:choose>
-                    <c:when test="${!empty memberImg.memberOriginName}">
+                    <c:when test="${empty memberImg.memberOriginName}">
                         <div class="imgUpload">
                             <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div class="imgUpload">
-                            <img src="${memberImg.memberOriginName}" class="img3" id="img-upload-my"/>
+                            <img src=".${memberImg.memberChangeName}" class="img3" id="img-upload-my"/>
                         </div>
                     </c:otherwise>
                 </c:choose>

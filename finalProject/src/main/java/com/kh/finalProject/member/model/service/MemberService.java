@@ -37,6 +37,7 @@ public interface MemberService {
 	
 	//마이페이지 이미지 수정
 	int updateMemImg(MemberImg mi);
+	int insertMemImg(MemberImg mi);
 	//마이페이지 멤버 수정
 	int updateMyPageMember(Member m);
 	//마이페이지 스포츠 수정
