@@ -24,11 +24,12 @@ handleMemberJoin=()=>{
    };
    
    if(checkJoin() === "ok"){
-        //  if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
+          if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
+
              memberAjaxController.getJoinMemeber(data,memberJoin)
-        //  }else{
-        //      alert("휴대폰 인증을 진행해주세요")
-        //  }
+          }else{
+              alert("휴대폰 인증을 진행해주세요")
+          }
      
    }else if(checkJoin() ==="fail1"){
         alert("비밀번호 형식에 맞추어 작성해주세요")
