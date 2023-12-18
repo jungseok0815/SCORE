@@ -78,10 +78,13 @@
 			SELECT TEAM_NO
 					,TEAM_NAME
 					,CATEGORY_NUM
+					,TEAM_CHANGE_NAME
 				FROM TEAM_MEMBER
 				JOIN TEAM USING(TEAM_NO)
+				JOIN TEAM_IMG USING(TEAM_NO)
 				WHERE USER_NO = #{userNo}
 				AND CATEGORY_NUM = #{categoryNum}
+				AND OFFER_NO IS NULL
 	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
@@ -93,7 +96,7 @@
 		SELECT USER_NO
 		FROM TEAM_MEMBER
 	</select>
-
+	
  
  	<!-- 게시글 총 갯수 -->
  	<select id="selectListCount" resultType="_int">

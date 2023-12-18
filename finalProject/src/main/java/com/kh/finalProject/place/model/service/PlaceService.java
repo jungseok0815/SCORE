@@ -25,6 +25,8 @@ public interface PlaceService {
 	int payPoint(Member loginUser);
 	int checkResMatch(Reservation res);
 	ArrayList<PlaceImg> placeImgList(int fno);
+	ArrayList<Reservation> selectResList(int userNo);
+	int deleteReservation(int resNo);
 	
 
 }

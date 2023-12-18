@@ -1,9 +1,13 @@
 package com.kh.finalProject.member.controller;
 
 import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -23,6 +27,7 @@ import com.google.gson.Gson;
 import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MemberImg;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.TeamMember;
@@ -91,22 +96,22 @@ public class MemberController {
 	
 	
 	@RequestMapping("/myPageUpdate.me")
-	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv) {
+	public ModelAndView myPageUpdate(HttpSession session,ModelAndView mv){
 		Member m = (Member) session.getAttribute("loginUser");
+		MemberImg mi = memberService.selectMemberImg(m.getUserNo());
 		SportInfo sport = new SportInfo();
-		sport.setCategoryNum(1);
 		sport.setUserNo(m.getUserNo());
+		sport.setCategoryNum(1);
 		SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		System.out.println(sportInfo);
-		mv.addObject("sportInfo", sportInfo).setViewName("member/mypageUpdate");
+		mv.addObject("sportInfo", sportInfo).addObject("memberImg", mi).setViewName("member/mypageUpdate");
 		return mv;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/myPageCheckCategory.me",produces="application/json; charset=UTF-8")
 	public String myPageCheckCategory(HttpSession session,SportInfo sport) {
-		System.out.println("hihihi");
 		Member m = (Member) session.getAttribute("loginUser");
+		//System.out.println(sport.getCategoryNum());
 		sport.setUserNo(m.getUserNo());
 		SportInfo info = memberService.getUserSportInfo(sport);
 		if(info.getSkill() == null) {
@@ -119,28 +124,64 @@ public class MemberController {
 	
 	}
 	
-	
 	//마이페이지 수정
 	@ResponseBody
 	@RequestMapping(value= "/reMyPageUpdate.me",produces="application/json; charset=UTF-8")
-	public ModelAndView updateMyPageMember(HttpSession session,ModelAndView mv, MultipartFile reupfile,  SportInfo sport) {
-		Member m = (Member) session.getAttribute("loginUser");
+	public ModelAndView updateMyPageMember(Member m, HttpSession session,ModelAndView mv, MultipartFile reupfile,  String[] skill, String[] style, SportInfo sport, MemberImg mi) {
+		Member login =  (Member) session.getAttribute("loginUser");
 		sport.setUserNo(m.getUserNo());
-		System.out.println(sport);
+		int resultMemImg =0;
 
+		if(!reupfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
+			mi.setMemberUrl("/resources/img/member/memberInsert/");
+			mi.setMemberOriginName(reupfile.getOriginalFilename());
+			mi.setMemberChangeName("/resources/img/member/memberInsert/" + changeName);
+			if(memberService.selectMemberImg(m.getUserNo()) == null) {
+				resultMemImg = memberService.insertMemImg(mi);
+			}else {
+				resultMemImg = memberService.updateMemImg(mi);
+			}
+		}	
 		int result = memberService.updateMyPageMember(m);
 		int result2 = memberService.updateMyPageSport(sport);
-	    
-	    if(result * result2 > 0) {
+		System.out.println(result + "," +result2 + "," + resultMemImg);
+		
+	    if(result * result2  > 0) {
+	    	Member loginInfo = memberService.loginMember(login.getUserId());
 		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
-		    mv.addObject("sportInfo", sportInfo).addObject("skills",sportInfo.getSkill()).addObject("styles",sportInfo.getStyle()).setViewName("member/mypageUpdate");
+		    session.setAttribute("loginUser", loginInfo);
+		    mv.addObject("sportInfo", sportInfo)
+		    .addObject("userInfo", loginInfo)
+		    .addObject("memberImg", mi)
+		    .setViewName("redirect:myPage.me?userNo=" + login.getUserNo());
 	    } else {
 	    	mv.addObject("errorMsg", "수정  실패");
-	    	mv.setViewName("common/errorPage");
 	    }
-		
 		return mv;
 	}
+	
+	 public String saveFile(MultipartFile upfile, HttpSession session, String path) {
+	      String originName = upfile.getOriginalFilename();
+	      
+	      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	      
+	      int ranNum = (int)(Math.random() * 90000) + 10000;
+	      
+	      String ext = originName.substring(originName.lastIndexOf("."));
+	      
+	      String changeName = currentTime + ranNum + ext;
+	      
+	      String savePath = session.getServletContext().getRealPath(path);
+	      
+	      try {
+	         upfile.transferTo(new File(savePath + changeName));
+	      } catch (IllegalStateException | IOException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      return changeName;
+	   }
 	
 	@ResponseBody
 	@RequestMapping(value= "/join.me",produces="application/json; charset=UTF-8" )
@@ -272,7 +313,6 @@ public class MemberController {
 	@RequestMapping(value= "/selectReqResList.me",produces="application/json; charset=UTF-8" )
 	public String selectReqResList(HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
 	}
 	

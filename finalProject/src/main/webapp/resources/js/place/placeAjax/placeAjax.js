@@ -1,9 +1,8 @@
-function loadTeam(userNo,categoryNum,callback){
+function loadTeam(data,callback){
     $.ajax({
         type:"get",
         url:"resMatch.tm",
-        data:{userNo:userNo,
-            categoryNum:categoryNum},  
+        data:data,  
         success: function(res){
             callback(res);
         },

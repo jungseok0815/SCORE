@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.finalProject.member.model.dao.MemberDao;
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MemberImg;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
@@ -115,11 +116,6 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Friend> selectReqResFriendList(int userNo) {
 		return memberDao.selectReqResFriendList(sqlSession,userNo);
 	}
-
-	@Override
-	public int updateMyPageMember(Member m) {
-		return memberDao.updateMyPageMember(sqlSession, m);
-	}
 	
 	@Override
 	public int checkFriendStatus(Friend f) {
@@ -145,5 +141,26 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMyPageSport(SportInfo sport) {
 		return memberDao.updateMyPageSport(sqlSession, sport);
 	}
+
+	@Override
+	public int updateMyPageMember(Member m) {
+		return memberDao.updateMyPageMember(sqlSession, m);
+	}
+	
+	@Override
+	public int updateMemImg(MemberImg mi) {
+		return memberDao.updateMemImg(sqlSession, mi);
+	}
+
+	@Override
+	public int insertMemImg(MemberImg mi) {
+		return memberDao.insertMemImg(sqlSession, mi);
+	}
+
+	@Override
+	public MemberImg selectMemberImg(int userNo) {
+		return memberDao.selectMemberImg(sqlSession, userNo);
+	}
+
 	
 }

@@ -147,6 +147,10 @@ public class PlaceController {
 		Reservation res = new Reservation();
 		res.setFieldNo(fieldNo);
 		res.setResUserNo(loginUser.getUserNo());
+		if(pService.checkResMatch(res) > 0) {
+			session.setAttribute("alertMsg", "이미 예약된 경기입니다.");
+			return "main";
+		}
 		int result = pService.insertResMatch(res);
 		if(result>0) {
 			loginUser.setPoint(loginUser.getPoint()-matchPay);
@@ -196,5 +200,22 @@ public class PlaceController {
 		}
 		return "main";
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="/selectResList.pl",produces="application/json; charset=UTF-8")
+	public String selectResList(int userNo, ModelAndView mv) {
+		ArrayList<Reservation> arrayRes = pService.selectResList(userNo);
+		mv.addObject("arrayRes",arrayRes);
+		return new Gson().toJson(mv);
+	}
+	@RequestMapping("/deleteRes.pl")
+	public String deleteReservation(int resNo, int fieldNo, HttpSession session) {
+		int result = pService.deleteReservation(resNo);
+		if(result>0) {
+			session.setAttribute("alertMsg", "성공적으로 예약취소 되었습니다.");
+			return "redirect:/";
+		}else{
+			session.setAttribute("alertMsg", "예약취소에 실패하였습니다.");
+			return "redirect:/";
+		}
+	}
 }

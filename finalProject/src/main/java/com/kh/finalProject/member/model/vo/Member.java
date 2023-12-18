@@ -13,6 +13,7 @@ public class Member {
 	private int point;
 	private int userLevel;
 	private int teamNo;
+	private String memberChangeName;
 	
 	
 	public Member() {
@@ -20,7 +21,7 @@ public class Member {
 	}
 
 	public Member(int userNo, String userId, String userPwd, String userName, String gender, String age, String phone,
-			String address, String status, int point, int userLevel) {
+			String address, String status, int point, int userLevel,String memberChangeName) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -33,6 +34,7 @@ public class Member {
 		this.status = status;
 		this.point = point;
 		this.userLevel = userLevel;
+		this.memberChangeName = memberChangeName;
 	}
 	
 	
@@ -52,7 +54,19 @@ public class Member {
 		this.point = point;
 		this.userLevel = userLevel;
 		this.teamNo = teamNo;
+		this.memberChangeName = memberChangeName;
 	}
+	
+	
+	
+	public String getMemberChangeName() {
+		return memberChangeName;
+	}
+
+	public void setMemberChangeName(String memberChangeName) {
+		this.memberChangeName = memberChangeName;
+	}
+
 	// 지워 버려 
 	public int getTeamNo() {
 		return teamNo;

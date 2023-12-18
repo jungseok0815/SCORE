@@ -3,6 +3,7 @@ package com.kh.finalProject.place.model.dao;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -60,6 +61,12 @@ public class PlaceDao {
 	}
 	public ArrayList<PlaceImg> placeImgList(SqlSessionTemplate sqlSession, int fieldNo){
 		return (ArrayList)sqlSession.selectList("placeMapper.placeImgList", fieldNo);
+	}
+	public ArrayList<Reservation> selectResList(SqlSessionTemplate sqlSession, int resUserNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.selectResList", resUserNo);
+	}
+	public int deleteReservation(SqlSessionTemplate sqlSession, int resNo) {
+		return sqlSession.delete("placeMapper.deleteReservation", resNo);
 	}
 	
 }

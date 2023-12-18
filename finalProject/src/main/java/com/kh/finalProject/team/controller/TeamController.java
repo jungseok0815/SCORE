@@ -37,15 +37,12 @@ public class TeamController {
 	
 	@RequestMapping("offerBoardList.tm")
 	public ModelAndView teamOfferBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
-		
 		PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
-		
 		ArrayList<TeamOffer> list = teamService.selectList(pi);
-		
-		
 		for(int i= 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
 			String img = teamService.selectTeamImg(list.get(i).getTeamNo());
-			
+
 			// 리스트에 팀 프로필 이미지 담아 주기
 			list.get(i).setTeamChangeName(img);
 			
@@ -53,6 +50,11 @@ public class TeamController {
 //			  .addObject("list", list)
 //			  .setViewName("team/teamOfferBoardList");
 			
+
+//			String img = teamService.selectTeamImg(teamNo);
+			// 리스트에 팀 프로필 이미지 담아 주기
+			list.get(i).setTeamChangeName(img);
+
 		}
 		mv.addObject("pi", pi)
 		  .addObject("list", list)

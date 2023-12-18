@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.kh.finalProject.member.model.vo.Friend;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.MemberImg;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.team.model.vo.Team;
@@ -30,10 +31,18 @@ public interface MemberService {
 	ArrayList<Member> searchMember(String searchMain);
 	int sendPostFriend(Friend f);
 	ArrayList<Friend> selectReqResFriendList(int userNo);
-	int updateMyPageMember(Member m);
-	int updateMyPageSport(SportInfo sport);
 	int checkFriendStatus(Friend f);
 	int insertAuth(MessageAuth auth);
 	int checkPhoneAuth(MessageAuth auth);
+	
+	//마이페이지 이미지 수정
+	int updateMemImg(MemberImg mi);
+	int insertMemImg(MemberImg mi);
+	//마이페이지 멤버 수정
+	int updateMyPageMember(Member m);
+	//마이페이지 스포츠 수정
+	int updateMyPageSport(SportInfo sport);
+	//마이페이지 이미지 조회
+	MemberImg selectMemberImg(int userNo);
 }
 

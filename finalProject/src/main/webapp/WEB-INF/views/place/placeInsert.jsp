@@ -58,7 +58,7 @@
                             <option value="차두리">차두리</option>
                             <option value="박지성">박지성</option>
                             <option value="리오넬 메시">리오넬 메시</option>
-                            <option value="즐라탄 이브라히모비치">즐라탄 이브라히모비치</option>
+                            <option value="즐라탄 이브라히모비치">즐라탄</option>
                         </select>
                     </td>
                 </tr>

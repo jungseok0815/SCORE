@@ -17,6 +17,7 @@
 		<result column="CITY" property="address" />
 		<result column="USER_POINT" property="point" />
 		<result column="TEAM_NO" property="teamNo" />
+		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
 	</resultMap>
 	
 	<resultMap type="SportInfo" id="sportInfoResult">
@@ -43,7 +44,16 @@
 		<result column="PHONE" property="phone" />
 		<result column="SEND_DATE" property="sendDate" />
 	</resultMap>
-
+	
+	<resultMap type="MemberImg" id="memberImgResult">
+		<result column="MEMBER_IMG_NO" property="memberImgNo" />
+		<result column="MEMBER_URL" property="memberUrl" />
+		<result column="MEMBER_ORIGIN_NAME" property="memberOriginName" />
+		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
+		<result column="DELETE_MEMBER_IMG" property="deleteMemberImg" />
+		<result column="USER_NO" property="userNo" />
+	</resultMap>
+	
 	<select id="getPostFriends" resultMap="memberResult">
 			SELECT 
 		 	USER_NO,
@@ -84,10 +94,7 @@
 				AND  FRIEND_RES_USER = #{friendReqUser}
 				AND FRIEND_STATUS = 'Y'
 	</delete>
-	
 
-
-	
 	<!-- 회원가입을 위한 쿼리문 -->
 	<insert id="joinMember">
 		INSERT INTO MEMBER(
@@ -248,25 +255,6 @@
 			and friend_status = 'Y'
 	</select>
 	
-	<update id="updateMyPageMember">
-		UPDATE MEMBER
-		SET USER_NAME = #{userName},
-				USER_PHONE = #{phone},
-				USER_BIRTH = #{age},
-				CITY = #{address},
-				GENDER = #{gender}
-		WHERE USER_NO = #{userNo}
-	</update>
-	
-
-	<update id="updateMyPageSport">
-		UPDATE SPORTINFO
-		SET  CATEGORY_NUM = #{categoryNum},
-				STYLE = #{style},
-				SKILL = #{skill}
-		WHERE CATEGORY_NUM = #{categoryNum}
-	</update>
-	
 	<select id="checkFriendStatus" resultType="_int">
 			SELECT COUNT(*)
 			  FROM FRIEND
@@ -282,7 +270,6 @@
 		 WHERE USER_NO = #{userNo}
  	</update>
 		
-			
 	<select id="userInfo" resultMap="memberResult">
 			SELECT 
 				USER_NO, 
@@ -293,8 +280,10 @@
 				GENDER,
 				CITY,
 				USER_POINT,
-				USER_LEVEL
+				USER_LEVEL,
+				MEMBER_CHANGE_NAME
 			  FROM MEMBER
+			 LEFT JOIN MEMBER_IMG USING(USER_NO) 
 			 WHERE
 				USER_NO = #{userNo}
 				AND
@@ -322,5 +311,70 @@
    <!--      SYSDATE BEWEEN SEND_DATE AND (SEND_DATE + 3/24/60)  -->
 	</select>
 	
+	<!--  마이페이지 멤버 수정-->
+	<update id="updateMyPageMember">
+		UPDATE MEMBER
+		SET USER_NAME = #{userName},
+				USER_PHONE = #{phone},
+				USER_BIRTH = #{age},
+				CITY = #{address},
+				GENDER = #{gender}
+		WHERE USER_NO = #{userNo}
+	</update>
 	
+	<!--  마이페이지 스포츠 수정-->
+	<update id="updateMyPageSport">
+		UPDATE SPORTINFO
+		SET STYLE = #{style},
+				SKILL = #{skill}
+		WHERE USER_NO = #{userNo}
+		 	AND CATEGORY_NUM = #{categoryNum}
+	</update>
+	
+	<!--  마이페이지 이미지 수정-->
+	 <insert id="insertMemImg">
+ 		INSERT INTO MEMBER_IMG
+ 					(
+ 						MEMBER_IMG_NO,
+ 						MEMBER_URL, 
+ 						MEMBER_ORIGIN_NAME,
+ 						MEMBER_CHANGE_NAME,
+ 						DELETE_MEMBER_IMG,
+						USER_NO
+ 					)
+ 		  VALUES
+ 		  		    (
+ 		  			   SEQ_MEMBER_IMG.NEXTVAL,
+ 		  			   #{memberUrl},
+ 		  			   #{memberOriginName},
+ 		  			   #{memberChangeName},
+ 		  			  	'N',
+ 		  			   #{userNo}
+ 		  		    )
+ 	</insert>
+ 	
+ 		<!--  마이페이지 이미지 수정-->
+	 <update id="updateMemImg">
+ 			UPDATE MEMBER_IMG
+			SET 
+				MEMBER_URL =  #{memberUrl},
+				MEMBER_ORIGIN_NAME = #{memberOriginName},
+				MEMBER_CHANGE_NAME = #{memberChangeName},
+				DELETE_MEMBER_IMG = 'N',
+				USER_NO =  #{userNo}
+			WHERE USER_NO = #{userNo}
+ 	</update>
+ 	
+ 	<!-- 마이페이지 이미지 조회 -->
+ 	 <select id="selectMemberImg" resultMap="memberImgResult">
+ 			SELECT  MEMBER_IMG_NO,
+ 						  MEMBER_URL,
+ 						  MEMBER_ORIGIN_NAME,
+ 						  MEMBER_CHANGE_NAME,
+ 						  DELETE_MEMBER_IMG,
+ 						  USER_NO
+ 				FROM MEMBER_IMG
+ 			 WHERE USER_NO = #{userNo}
+ 			 
+ 	</select>
 </mapper>
