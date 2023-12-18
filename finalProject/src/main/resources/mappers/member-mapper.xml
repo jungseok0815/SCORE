@@ -361,6 +361,5 @@
  						  USER_NO
  				FROM MEMBER_IMG
  			 WHERE USER_NO = #{userNo}
- 			 AND 
  	</select>
 </mapper>
