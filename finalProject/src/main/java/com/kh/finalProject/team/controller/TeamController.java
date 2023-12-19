@@ -552,5 +552,11 @@ public class TeamController {
 		}
 		return mv;	
 	}
+	
+	//팀 리뷰 상세보기
+	@RequestMapping("/teamReviewDetail.tm")
+	public String teamReviewDetail() {
+		return "team/teamReviewDetail";
+	}
 }
 
