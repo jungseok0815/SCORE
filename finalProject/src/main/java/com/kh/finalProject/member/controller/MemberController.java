@@ -151,6 +151,7 @@ public class MemberController {
 	    	Member loginInfo = memberService.loginMember(login.getUserId());
 		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
 		    session.setAttribute("loginUser", loginInfo);
+		    session.setAttribute("alertMsg", "수정 성공");
 		    mv.addObject("sportInfo", sportInfo)
 		    .addObject("userInfo", loginInfo)
 		    .addObject("memberImg", mi)
@@ -226,6 +227,15 @@ public class MemberController {
 		return mv;
 	}
 	
+	@RequestMapping("/logOut.me") 
+	public String logOut(HttpSession session) {	
+		
+		session.removeAttribute("loginUser");
+	
+		return "redirect:/";
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value= "/getPostFriend.me",produces="application/json; charset=UTF-8" )
@@ -252,7 +262,15 @@ public class MemberController {
 	@RequestMapping(value= "/selectFriendList.me",produces="application/json; charset=UTF-8" )
 	public String selectFriendList(HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		return new Gson().toJson(memberService.selectFriendList(m.getUserNo()));
+		ArrayList<Member> friendList = memberService.selectFriendList(m.getUserNo());
+	
+		for(Member i : friendList) {
+			System.out.println(i);
+			if(i.getMemberChangeName() == null) {
+				i.setMemberChangeName("null");
+			}
+		}
+		return new Gson().toJson(friendList);
 	}
 	
 	

@@ -24,11 +24,12 @@ handleMemberJoin=()=>{
    };
    
    if(checkJoin() === "ok"){
-         if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
-            memberAjaxController.getJoinMemeber(data,memberJoin)
-         }else{
-             alert("휴대폰 인증을 진행해주세요")
-         }
+          if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
+
+             memberAjaxController.getJoinMemeber(data,memberJoin)
+          }else{
+              alert("휴대폰 인증을 진행해주세요")
+          }
      
    }else if(checkJoin() ==="fail1"){
         alert("비밀번호 형식에 맞추어 작성해주세요")
@@ -297,6 +298,7 @@ selectFriendList = () =>{
 
 
 drawSelectfriendList= (friendList) =>{
+    console.log(friendList)
     document.querySelector("#bbbb").innerText = "친구" + friendList.length+"명 |";
     const PostList  = document.querySelector("#friendList");
     PostList.innerHTML = "<div class = 'list-title'>친구요청 리스트</div>"
@@ -309,9 +311,16 @@ drawSelectfriendList= (friendList) =>{
         listbtn.onclick = () =>{
             deleteFriend(a.userNo);
         };
-        const str = "<img class='img5'/>"+
+        let str = "";
+        if(a.memberChangeName === "null"){
+            str = "<img src ='./resources/img/team/teamOfferBoardList/profile.jpg'>"+
                     "<div class='main-title'>"+a.userName+"</div>"+
                     "<div class='sub-title'>"+a.address+"</div>";
+        }else{
+            str = "<img src = ."+a.memberChangeName+"/>"+
+                    "<div class='main-title'>"+a.userName+"</div>"+
+                    "<div class='sub-title'>"+a.address+"</div>";
+        }
         postListDiv.innerHTML += str;
         postListDiv.appendChild(listbtn);
         PostList.appendChild(postListDiv);
@@ -404,7 +413,7 @@ drawAuthInput = () =>{
 }
 
 checkAuthTime = () =>{
-    let time = 30;
+    let time = 180;
     let min = ""
     let sec = "";
    
@@ -435,6 +444,7 @@ checkPhoneAuth =()=>{
 }
 
 drawCheckPhoneAuth = (result) =>{
+    console.log(result)
     if(result === "authOk"){
         alert("인증성공")
         document.querySelector("#auth-modal-close").click()
@@ -443,6 +453,11 @@ drawCheckPhoneAuth = (result) =>{
     }else{
         alert("인증번호가 다릅니다.")
     }
+}
+
+
+logOut = () =>{
+    location.href ="/final/logOut.me"
 }
 
 
