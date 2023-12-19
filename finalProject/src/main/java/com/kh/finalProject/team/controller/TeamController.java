@@ -294,7 +294,7 @@ public class TeamController {
 	       String changeName = saveFile(reupfile, session, "resources/img/team/teamProfile/");
 	       if(ti.getTeamOriginName() != null) {
 	          new File(session.getServletContext().getRealPath(ti.getTeamChangeName())).delete();
-	       }      
+	       }     
 	       
 	       ti.setTeamOriginName(reupfile.getOriginalFilename());
 	       ti.setTeamChangeName("resources/img/team/teamProfile/" + changeName); 
@@ -319,10 +319,11 @@ public class TeamController {
 		
 		ArrayList<TeamReq> list = teamService.selectReqList(tno);
 		System.out.println(list);
+		
 		String tName = teamService.selectTeamName(tno);
 		
 		String tProfile = teamService.selectTeamProImg(tno);
-		System.out.println(tProfile);
+		
 		
 		// reqUserNo에 회원 번호 들어 옴 
 

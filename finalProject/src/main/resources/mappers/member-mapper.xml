@@ -377,4 +377,21 @@
  			 WHERE USER_NO = #{userNo}
  			 
  	</select>
+ 	
+ 	<!-- 운영진인 사람들만 조회 -->
+ 	 <select id="levelMember" resultMap="memberResult">
+ 			SELECT USER_NO,
+					USER_ID,
+					USER_PWD,
+					USER_PHONE,
+					USER_NAME,
+					USER_BIRTH,
+					GENDER,
+					USER_STATUS,
+					USER_LEVEL,
+					CITY,
+					USER_POINT
+					FROM MEMBER 
+				WHERE USER_LEVEL = 1
+ 	</select>
 </mapper>

@@ -137,12 +137,38 @@ public class MemberController {
 			mi.setMemberUrl("/resources/img/member/memberInsert/");
 			mi.setMemberOriginName(reupfile.getOriginalFilename());
 			mi.setMemberChangeName("/resources/img/member/memberInsert/" + changeName);
+			 // 파일에 있던거 지웠던거 처럼 DB에서도 지워 줘야 함 
 			if(memberService.selectMemberImg(m.getUserNo()) == null) {
 				resultMemImg = memberService.insertMemImg(mi);
 			}else {
 				resultMemImg = memberService.updateMemImg(mi);
 			}
 		}	
+		
+//		MemberImg existingImg = memberService.selectMemberImg(m.getUserNo());
+//		
+//		String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
+//		mi.setMemberUrl("/resources/img/member/memberInsert/");
+//		mi.setMemberOriginName(reupfile.getOriginalFilename());
+//		mi.setMemberChangeName("/resources/img/member/memberInsert/" + changeName);
+//		// 파일에 있던거 지웠던거 처럼 DB에서도 지워 줘야 함 
+//		
+//		if (existingImg != null) {
+//	        String existingFilePath = session.getServletContext().getRealPath(existingImg.getMemberChangeName());
+//	        boolean deleteResult = new File(existingFilePath).delete();
+//	        if (deleteResult) {
+//	            System.out.println("기존 파일 삭제 성공");
+//	        } else {
+//	            System.out.println("기존 파일 삭제 실패");
+//	        }
+//	    }
+//		
+//		if(existingImg == null) {
+//			resultMemImg = memberService.insertMemImg(mi);
+//		}else {
+//			resultMemImg = memberService.updateMemImg(mi);
+//		}
+		
 		int result = memberService.updateMyPageMember(m);
 		int result2 = memberService.updateMyPageSport(sport);
 		System.out.println(result + "," +result2 + "," + resultMemImg);

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
@@ -33,9 +34,16 @@ public class PlaceController {
 	@Autowired
 	private PlaceServiceImpl pService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	//placeInsert로 보내주는 메소드
 	@RequestMapping("/insertForm.pl")
-	public String insertPlaceForm() {
+	public String insertPlaceForm(Model m) {
+		ArrayList<Member> list = memberService.levelMember();
+		
+		m.addAttribute("list", list);
+		
 		return "place/placeInsert";
 	}
 
