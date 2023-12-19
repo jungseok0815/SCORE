@@ -10,6 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="resources/js/place/placeDetailView.js"></script>
 <script src="resources/js/place/placeAjax/placeAjax.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+  integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('955fd1b6a15de821bfc4496937d1d8d2'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=955fd1b6a15de821bfc4496937d1d8d2&libraries=services"></script>
 </head>
 <body onload="init()">
@@ -107,8 +112,12 @@
                 <div class="body_right section_div">
                     <p>${pl.fieldDate} ${pl.startTime}</p>
                     <h1>${pl.fieldName}</h1>
-                    <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a></h6></span>
-                    <br>
+                    <p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a>
+                        <a id="kakaotalk-sharing-btn" href="javascript:;">
+                          <img src="${pageContext.request.contextPath}/resources/img/place/share.svg"
+                            alt="카카오톡 공유 보내기 버튼" style="width: 20px;" />
+                      </h6>
+                    </a>
                     <hr>
                     <h1 class="body_right_pay">${matchPay}</h1><h6 class="body_right_pay">/2시간</h6>
                     <hr>
@@ -187,6 +196,47 @@
           </div>
         </div>
       </div>
+      <i class="bi bi-share"></i>
+      
+      
+      <script>
+        Kakao.Share.createDefaultButton({
+          container: '#kakaotalk-sharing-btn',
+          objectType: 'feed',
+          content: {
+            title: '운동하고싶을때 Score',
+            description: '#언제 #어디서나 #운동 #풋살 #농구 #야구',
+            imageUrl:
+              'https://images.chosun.com/resizer/XS25tuQ_2KXA2CMPdqBdw7ViWig=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/MSV2XPCK75E7NAYYBMMTMIPZBQ.jpg',
+            link: {
+              // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+          social: {
+            likeCount: 286,
+            commentCount: 45,
+            sharedCount: 845,
+          },
+          buttons: [
+            {
+              title: '웹으로 보기',
+              link: {
+                mobileWebUrl: 'https://developers.kakao.com',
+                webUrl: 'https://developers.kakao.com',
+              },
+            },
+            {
+              title: '앱으로 보기',
+              link: {
+                mobileWebUrl: 'https://developers.kakao.com',
+                webUrl: 'https://developers.kakao.com',
+              },
+            },
+          ],
+        });
+      </script>
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

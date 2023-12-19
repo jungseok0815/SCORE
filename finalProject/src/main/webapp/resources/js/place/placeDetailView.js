@@ -41,7 +41,7 @@ function drawTeamMemberList(res){
     let myTeamMemberListStr = "";
     for(let i = 0; i < res.length; i++){
         myTeamMemberListStr += `<div class="team-member">`+
-                                    `<img src="`+res[i].memberChangeName+`" alt="">`+
+                                    `<img src=".`+res[i].memberChangeName+`" alt="">`+
                                     `<div>`+
                                     `<span>`+res[i].userName+`</span><p>`+res[i].city+`</p>`+
                                    `</div>`+

@@ -105,5 +105,20 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.selectMatchPay(sqlSession, fieldNo);
 	}
 
+	@Override
+	public ArrayList<Place> selectResDay(int userNo) {
+		return pDao.selectResDay(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Reservation> dateChoiceResList(Reservation res) {
+		return pDao.dateChoiceResList(sqlSession, res);
+	}
+
+	@Override
+	public ArrayList<Reservation> dateAllResList(int resUserNo) {
+		return pDao.dateAllResList(sqlSession, resUserNo);
+	}
+
 
 }

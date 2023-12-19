@@ -227,7 +227,39 @@ public class PlaceController {
 		}else {
 			session.setAttribute("alertMsg", "예약취소에 실패하였습니다.");
 		}
-//		return "redirect:teamProfile.tm?teamNo=";
-		return "redirect:myPage.me?userNo="+loginUser.getUserNo();
+		return "redirect:detail.pl?fno="+fieldNo;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/calendar.pl",produces="application/json; charset=UTF-8")
+	public ModelAndView calendarView(int userNo, HttpSession session, ModelAndView mv) {
+		if(userNo == 0) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+			mv.setViewName("member/memberLogin");
+			return mv;
+		}
+		mv.addObject("list", new Gson().toJson(pService.selectResDay(userNo)));
+		mv.setViewName("member/calendar");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/dateChoiceRes.pl",produces="application/json; charset=UTF-8")
+	public String dateChoiceResList(@RequestParam("fieldDate") String fieldDate, HttpSession session, ModelAndView mv) {
+		Reservation res = new Reservation();
+		res.setResUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
+		res.setFieldDate(fieldDate);
+		ArrayList<Reservation> list = pService.dateChoiceResList(res);
+		mv.addObject("list", pService.dateChoiceResList(res));
+		return new Gson().toJson(mv);
+	}
+	@ResponseBody
+	@RequestMapping(value="/dateAllRes.pl",produces="application/json; charset=UTF-8")
+	public String dateAllResList(HttpSession session, ModelAndView mv) {
+		
+		ArrayList<Reservation> list = pService.dateAllResList(((Member)session.getAttribute("loginUser")).getUserNo());
+		mv.addObject("list", list);
+		return new Gson().toJson(mv);
+	}
+	
 }

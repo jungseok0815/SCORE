@@ -156,8 +156,32 @@ const memberAjaxController = {
                 console.log(err)
             }
         })
+    },
+    getResDrawAjax: (data,callback) =>{
+        $.ajax({
+            url: "dateChoiceRes.pl",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result)
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    getAllResDrawAjax:(callback) =>{
+        $.ajax({
+            url: "dateAllRes.pl",
+            type: "post",
+            success: (result) => {
+                callback(result)
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
     }
-
 
 
 

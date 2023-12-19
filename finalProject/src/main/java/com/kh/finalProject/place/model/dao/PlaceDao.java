@@ -71,5 +71,13 @@ public class PlaceDao {
 	public int selectMatchPay(SqlSessionTemplate sqlSession, int fieldNo) {
 		return sqlSession.selectOne("placeMapper.selectMatchPay", fieldNo);
 	}
-	
+	public ArrayList<Place> selectResDay(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.selectResDay", userNo);
+	}
+	public ArrayList<Reservation> dateChoiceResList(SqlSessionTemplate sqlSession, Reservation res){
+		return (ArrayList)sqlSession.selectList("placeMapper.dateChoiceResList", res);
+	}
+	public ArrayList<Reservation> dateAllResList(SqlSessionTemplate sqlSession, int resUserNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.dateAllResList", resUserNo);
+	}
 }

@@ -28,6 +28,8 @@ public interface PlaceService {
 	ArrayList<Reservation> selectResList(int userNo);
 	int deleteReservation(int resNo);
 	int selectMatchPay(int fieldNo);
-	
+	ArrayList<Place> selectResDay(int userNo);
+	ArrayList<Reservation> dateChoiceResList(Reservation res);
+	ArrayList<Reservation> dateAllResList(int resUserNo);
 
 }

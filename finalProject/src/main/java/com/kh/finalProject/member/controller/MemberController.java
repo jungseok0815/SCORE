@@ -331,6 +331,7 @@ public class MemberController {
 	
 		return "authFail";
 	}
+	
 
 }
 
