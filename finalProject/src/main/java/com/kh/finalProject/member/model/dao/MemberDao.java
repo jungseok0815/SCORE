@@ -55,7 +55,7 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.addFriend2", f);
 	}
 	
-	public ArrayList<Friend> selectFriendList(SqlSessionTemplate sqlSession, int userNo) {
+	public ArrayList<Member> selectFriendList(SqlSessionTemplate sqlSession, int userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectFriendList", userNo);
 	}
 	

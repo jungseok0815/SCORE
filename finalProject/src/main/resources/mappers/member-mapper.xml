@@ -66,15 +66,17 @@
 		 		FRIEND_RES_USER = #{userNo}
 				 AND FRIEND_STATUS = 'N'
 	</select>
-	
+
 	<select id="selectFriendList" resultMap="memberResult">
 			SELECT 
 		 	USER_NO,
             USER_ID,
             USER_NAME,
-            CITY
+            CITY,
+            MEMBER_CHANGE_NAME
 		 FROM MEMBER
 		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
+		 LEFT JOIN MEMBER_IMG USING(USER_NO)
 		 WHERE 
 		 		FRIEND_RES_USER = #{friendResUser}
 				 AND FRIEND_STATUS = 'Y'
@@ -375,7 +377,6 @@
  						  USER_NO
  				FROM MEMBER_IMG
  			 WHERE USER_NO = #{userNo}
- 			 
  	</select>
  	
  	<!-- 운영진인 사람들만 조회 -->

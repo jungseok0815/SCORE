@@ -77,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Friend> selectFriendList(int userNo) {
+	public ArrayList<Member> selectFriendList(int userNo) {
 		return memberDao.selectFriendList(sqlSession,userNo);
 	}
 

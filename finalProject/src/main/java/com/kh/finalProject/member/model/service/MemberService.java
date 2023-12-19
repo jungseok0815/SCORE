@@ -23,7 +23,7 @@ public interface MemberService {
 	int updateUserPoint(Member m);
 	ArrayList<Member> getPostFriends(int userNo);
 	int addFriend(Friend f);
-	ArrayList<Friend> selectFriendList(int userNo);
+	ArrayList<Member> selectFriendList(int userNo);
 	int deleteFriend(Friend f);
 	ArrayList<Team>selectMyTeam(HashMap teamMap);
 	int addFriend2(Friend f);

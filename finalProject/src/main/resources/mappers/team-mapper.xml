@@ -423,6 +423,7 @@
  		  		    )
  	</insert>
 
+	<!-- 팀 생성할 때 주장 insert해주는 쿼리문 -->
  	<insert id="insertTeamMember">
  			INSERT INTO TEAM_MEMBER
  					(
@@ -616,23 +617,34 @@
 		    AND REQ_STATUS = 'N'-->
 		    
 		    SELECT 
-	               OFFER.OFFER_NO,
-			       TR.REQ_USER_NO,
-			       TR.REQ_STATUS,
-			       TR.REQ_CONTENT,
-			       TR.REQ_NO,
-			       ME.USER_NAME,
-			       ME.GENDER,
-			       ME.USER_LEVEL,
-			       ME.USER_BIRTH,
-			       ME.CITY,
-	               MI.MEMBER_CHANGE_NAME
-	          FROM TEAM_REQ "TR"
-			  JOIN MEMBER "ME" ON(TR.REQ_USER_NO = ME.USER_NO)
-			  JOIN TEAM_OFFER "OFFER" ON(OFFER.OFFER_NO = TR.OFFER_NO)
-	          LEFT JOIN MEMBER_IMG "MI" ON(TR.REQ_USER_NO = ME.USER_NO)
-			 WHERE OFFER.TEAM_NO = #{tno}
-			   AND TR.REQ_STATUS = 'N'
+			    OFFER.OFFER_NO,
+			    TR.REQ_USER_NO,
+			    TR.REQ_STATUS,
+			    TR.REQ_CONTENT,
+			    TR.REQ_NO,
+			    ME.USER_NAME,
+			    ME.GENDER,
+			    ME.USER_LEVEL,
+			    ME.USER_BIRTH,
+			    ME.CITY,
+			    MAX(MI.MEMBER_CHANGE_NAME) AS MEMBER_CHANGE_NAME
+			FROM TEAM_REQ "TR"
+			JOIN MEMBER "ME" ON (TR.REQ_USER_NO = ME.USER_NO)
+			JOIN TEAM_OFFER "OFFER" ON (OFFER.OFFER_NO = TR.OFFER_NO)
+			LEFT JOIN MEMBER_IMG "MI" ON (TR.REQ_USER_NO = ME.USER_NO)
+			WHERE OFFER.TEAM_NO = #{tno}
+			AND TR.REQ_STATUS = 'N'
+			GROUP BY 
+			    OFFER.OFFER_NO,
+			    TR.REQ_USER_NO,
+			    TR.REQ_STATUS,
+			    TR.REQ_CONTENT,
+			    TR.REQ_NO,
+			    ME.USER_NAME,
+			    ME.GENDER,
+			    ME.USER_LEVEL,
+			    ME.USER_BIRTH,
+			    ME.CITY
  	</select>
  	
  	<!-- 팀 수락 -->
