@@ -253,7 +253,7 @@ public class TeamController {
 
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
 
-		int myGrade = 1;
+		int myGrade = 0;
 		for (TeamMember m : tm) {
 			if(m.getUserNo() == loginUser.getUserNo())
 				myGrade = m.getGrade();

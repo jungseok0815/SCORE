@@ -218,4 +218,11 @@ public class PlaceController {
 			return "redirect:/";
 		}
 	}
+	
+	//placeInfoList로 보내주는 메소드
+	@RequestMapping("/placeReviewList.pl")
+	public String placeInfoListView() {
+		return "place/placeReviewList";
+	}
+	
 }
