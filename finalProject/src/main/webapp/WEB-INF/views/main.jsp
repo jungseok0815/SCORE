@@ -88,6 +88,10 @@
                             </a>
                         </c:otherwise>
                     </c:choose>
+                    <a href="${pageContext.request.contextPath}/placeReviewList.pl">
+                        <img src="./resources/img/main/stadiumInfo.png" alt="">
+                        <p>경기장 리뷰</p>
+                    </a>
                 </div>
             </div>
         </div>

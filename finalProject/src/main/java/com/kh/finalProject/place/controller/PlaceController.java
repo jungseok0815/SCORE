@@ -234,6 +234,7 @@ public class PlaceController {
 			return "redirect:/";
 		}
 	}
+
 	@ResponseBody
 	@RequestMapping(value="manager.pl", produces="application/json; charset=UTF-8")
 	public String evaluationManager(String userName, ModelAndView mv) {
@@ -321,6 +322,16 @@ public class PlaceController {
 		}
 		
 		return resultMap;
+	}
+	
+	
+	
+	
+	//placeInfoList로 보내주는 메소드
+	@RequestMapping("/placeReviewList.pl")
+	public String placeInfoListView() {
+		return "place/placeReviewList";
+
 	}
 	
 }

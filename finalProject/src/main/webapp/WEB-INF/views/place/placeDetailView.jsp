@@ -106,7 +106,7 @@
                 </div>
                 <div class="body_right section_div">
                     <p>${pl.fieldDate} ${pl.startTime}</p>
-                    <h1>${pl.fieldName}</h1>
+                    <h1 onclick="location.href='${pageContext.request.contextPath}/placeInfo.pl'" style="cursor: pointer;">${pl.fieldName}</h1>
                     <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a></h6></span>
                     <br>
                     <hr>
