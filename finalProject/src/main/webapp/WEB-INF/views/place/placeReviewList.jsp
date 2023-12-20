@@ -47,63 +47,23 @@
             <table align="center" class="list-area">      
                 <thead style="border-bottom: 1px solid #ddd; border-top: 1px solid #ddd;">
                     <tr id="table-head">
-                        <th width="70">지역</th>
-                        <th width="300">구장 이름</th>
                         <th width="100">작성자</th>
+                        <th width="300">구장 이름</th>
                         <th width="50">조회수</th>
                         <th width="130">작성일</th>
                         <th width="130">별점</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
+                    <c:forEach var="pl" items="${pList}">
+                        <tr onclick="">
+                            <td>${pl.userName}</td>
+                            <td class="review-name">${pl.fieldName}</td>
+                            <td>${pl.reviewCount}</a></td>
+                            <td>${pl.reviewEnrollDate}</td>
+                            <td class="star-rating">${pl.starRating}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <div id="enroll-btn">
@@ -141,7 +101,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="mb-3" name="myform" id="myform" method="post">
+                <form class="mb-3" action="insertReview.pl" method="post" enctype="multipart/form-data">
                     <div class="star-area">
                         <p>별점</p>
                         <fieldset class="rate">
@@ -157,34 +117,13 @@
                             <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
                         </fieldset>
                     </div>
-                    <div class="modal-middle" style="margin-bottom: 5px;">
-                        <div style="display: flex;">
-                            <select name=" " id="">
-                                <option value="">종목</option>
-                                <option>축구</option>
-                                <option>야구</option>
-                                <option>농구</option>
+                    <div class="select-myPlace" style="margin-bottom: 5px;">
+                        <div style="width: 100%;">
+                            <select name="" id="" style="width: 100%;">
+                                <c:forEach var="item" items="${rList}">
+                                    <option value="${item.fieldNo}">${item.fieldName}</option>
+                                </c:forEach>
                             </select>
-                            <select name=" " id="">
-                                <option value="">지역</option>
-                                <option>서울</option>
-                                <option>경상</option>
-                                <option>대구</option>
-                                <option>대전</option>
-                                <option>경기</option>
-                                <option>광주</option>
-                                <option>부산</option>
-                                <option>충청</option>
-                                <option>인천</option>
-                                <option>전라</option>
-                                <option>울산</option>
-                                <option>세종</option>
-                                <option>강원</option>
-                                <option>제주</option>
-                            </select>
-                        </div>
-                        <div style="width: 100%">
-                            <input type="text" placeholder="경기장 이름" style="width: 100%">
                         </div>
                     </div>
                     <tr>
@@ -206,13 +145,12 @@
                         <textarea class="col-auto form-control" type="text" id="reviewContents"
                                   placeholder="경기장 이용 후 느낀점을 적어주세요!"></textarea>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" type="submit">등록</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">등록</button>
-            </div>
-        </div>
         </div>
     </div>
 

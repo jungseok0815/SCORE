@@ -25,7 +25,9 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.team.model.vo.TeamOffer;
 
 @Controller
 public class PlaceController {
@@ -202,7 +204,7 @@ public class PlaceController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectResList.pl",produces="application/json; charset=UTF-8")
-	public String selectResList(int userNo, ModelAndView mv) {
+	public String selectResList(String userNo, ModelAndView mv) {
 		ArrayList<Reservation> arrayRes = pService.selectResList(userNo);
 		mv.addObject("arrayRes",arrayRes);
 		return new Gson().toJson(mv);
@@ -219,10 +221,43 @@ public class PlaceController {
 		}
 	}
 	
-	//placeInfoList로 보내주는 메소드
+	//placeReviewList로 보내주는 메소드
 	@RequestMapping("/placeReviewList.pl")
-	public String placeInfoListView() {
-		return "place/placeReviewList";
+	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, int currentPage) {
+		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 10, 5);
+		ArrayList<Reservation> rList = new ArrayList<Reservation>();
+		ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
+		if(!userNo.equals("")) {
+			rList = pService.selectResList(userNo);
+		}
+		
+		mv.addObject("pList", pList)
+		  .addObject("rList", rList)
+		  .addObject("pi", pi)
+		  .setViewName("place/placeReviewList");
+		return mv;
+	}
+	
+	//경기장 리뷰 insert
+	@RequestMapping("/insertReview.pl")
+	public String insertPlaceReview(PlaceReview pr, PlaceImg pi, MultipartFile upfile, HttpSession session, Model model) {
+		
+		int resultReview = pService.insertPlaceReview(pr);
+		int resultImg = 1;
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(upfile, session);
+			
+			pi.setFieldUrl("resources/img/place/");
+			pi.setFieldOriginName(upfile.getOriginalFilename());
+			pi.setFieldChangeName("resources/img/place/placeReview/" + changeName);
+			
+			resultImg = resultImg * pService.insertPlaceReviewImg(pi);
+			 
+		}
+		return "redirect:/";
 	}
 	
 }

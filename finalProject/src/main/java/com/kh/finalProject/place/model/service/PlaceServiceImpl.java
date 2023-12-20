@@ -11,6 +11,7 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 
 
@@ -91,13 +92,34 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectResList(int userNo) {
+	public ArrayList<Reservation> selectResList(String userNo) {
 		return pDao.selectResList(sqlSession, userNo);
 	}
 
 	@Override
 	public int deleteReservation(int resNo) {
 		return pDao.deleteReservation(sqlSession, resNo);
+	}
+
+	@Override
+	public ArrayList<PlaceReview> placeReviewList(PageInfo pi) {
+		return pDao.placeReviewList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertPlaceReviewImg(PlaceImg pi) {
+		return pDao.insertPlaceReviewImg(sqlSession, pi);
+	}
+
+	@Override
+	public int selectReviewListCount() {
+		return pDao.selectReviewListCount(sqlSession);
+	}
+
+	@Override
+	public int insertPlaceReview(PlaceReview pr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

@@ -39,6 +39,20 @@
   		<result column="START_TIME" property="startTime" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
+  	<resultMap type="PlaceReview" id="PlaceReviewResultSet">
+  		<result column="REVIEW_NO" property="reviewNo" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="RES_NO" property="resNo" />
+  		<result column="REVIEW_COUNT" property="reviewCount" />
+  		<result column="REVIEW_CONTENT" property="reviewContent" />
+  		<result column="REVIEW_ENROLL_DATE" property="reviewEnrollDate" />
+  		<result column="STAR_RATING" property="starRating" />
+  		<result column="FIELD_REVIEW_STATUS" property="fieldReviewStatus" />
+  		<result column="USER_NAME" property="userName" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  	</resultMap>
   	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
@@ -217,5 +231,24 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
+ 	
+ 	<!-- 게시글 총 갯수 -->
+ 	<select id="selectReviewListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM FIELD_REVIEW
+ 	</select>
+ 	
+ 	<select id="placeReviewList" resultMap="PlaceReviewResultSet">
+ 		SELECT REVIEW_NO,
+	 		   USER_NAME,
+		       FIELD_NAME,
+		       REVIEW_COUNT,
+		       REVIEW_ENROLL_DATE,
+		       STAR_RATING
+	    FROM FIELD_REVIEW
+	    JOIN MEMBER USING (USER_NO)
+	    JOIN FIELD USING (FIELD_NO)
+	    WHERE FIELD_REVIEW_STATUS = 'Y'
+ 	</select>
 
 </mapper>
