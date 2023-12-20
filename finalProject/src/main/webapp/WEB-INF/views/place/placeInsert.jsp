@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+    
 	<link rel="stylesheet" href="/final/resources/css/place/placeInsert.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script type="text/javascript" src="./resources/js/place/placeInsert.js"></script>

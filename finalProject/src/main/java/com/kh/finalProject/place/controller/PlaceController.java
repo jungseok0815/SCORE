@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +21,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
+import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reservation;
@@ -226,4 +234,93 @@ public class PlaceController {
 			return "redirect:/";
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value="manager.pl", produces="application/json; charset=UTF-8")
+	public String evaluationManager(String userName, ModelAndView mv) {
+		
+		ArrayList<Field> list = pService.selectManager(userName);
+		
+		mv.addObject("list", list);
+		// 운영자 평가 페이지로 넘길때 필드 번호도 같이 넘김
+		return new Gson().toJson(mv);
+	}
+	
+	@RequestMapping("/evaluation.pl")
+	public ModelAndView evaluationPage(int fieldNo, int categoryNum, ModelAndView mv) {
+
+		ArrayList<SportInfo> list = pService.selectMember(fieldNo, categoryNum);
+//		System.out.println("결과" + list);
+		
+		mv.addObject("list", list)
+		  .setViewName("place/evaluation");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="evaluationUpdate.pl", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> evaluationUpdate(String realdata, Model model, HttpSession session) {
+		
+		Gson gson = new Gson();
+		int updateSpo = 0;
+		ArrayList<SportInfo> list = new ArrayList<>();
+		
+		JsonArray  jsonArray  = new JsonParser().parseString(realdata).getAsJsonArray();
+//		System.out.println("나와라: " + realdata);
+//		System.out.println("변환: " + jsonArray);
+
+		JsonElement firstElement = jsonArray.get(0); // 1번째 인덱스의 요소 가져오기
+		JsonObject firstObject = firstElement.getAsJsonObject(); // JsonObject로 변환
+
+		int fieldNo = firstObject.get("fieldNo").getAsInt(); // "fieldNo" 키의 값을 가져와서 int로 변환
+
+		System.out.println("1번째 인덱스의 fieldNo: " + fieldNo);
+	
+        for (JsonElement element : jsonArray) {
+        	SportInfo spoInfo = gson.fromJson(element, SportInfo.class);
+//            System.out.println("진짜다: " + spoInfo);
+
+            list.add(spoInfo);
+        }
+        
+        for (SportInfo spoInfo : list) {
+        	System.out.println("플리즈" + spoInfo);
+            updateSpo = pService.updateEval(spoInfo);
+        }
+        Member m = (Member)session.getAttribute("loginUser");
+        
+        Map<String, Object> resultMap = new HashMap<>();
+        if(updateSpo > 0) {
+        	resultMap.put("fieldNo", fieldNo);
+        	resultMap.put("result", "success");
+            resultMap.put("message", "게임 평가 완료");
+            resultMap.put("userNo", m.getUserNo());
+        } else {
+        	 resultMap.put("result", "failure");
+             resultMap.put("message", "게임 평가 실패");
+        }
+        return resultMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="fieldDel.pl", produces="application/json; charset=UTF-8")
+	public Map<String, Object> fieldDelImg(int fieldNo) {
+	
+		System.out.println(fieldNo);
+		
+		int fieldImgDel = pService.fieldNoDel(fieldNo);
+		int fieldDel = pService.fieldDelet(fieldNo);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		if(fieldImgDel * fieldDel > 0) {
+			resultMap.put("result", "success");
+		}else {
+			resultMap.put("result", "failure");
+            resultMap.put("message", "게임 평가 실패");
+		}
+		
+		return resultMap;
+	}
+	
 }

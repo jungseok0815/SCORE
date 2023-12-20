@@ -60,7 +60,7 @@
 	                    </div>
 	                    <div class="btn-wrap">
 							<!-- Button to Open the Modal -->
-							<c:if test="${empty loginUser and isMyteam == 1}"> <!-- loginUser에 팀 번호를 담아 줘야 할거 같음 -->
+							<c:if test="${empty loginUser and isMyteam == 1}"> 
 							    <!-- 로그인이 안 되어 있을 때 버튼을 보이지 않게 함 그리고 이미 팀원인 사람은 안보이게 -->
 							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
 								

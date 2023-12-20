@@ -15,6 +15,8 @@
     <script src="resources/js/member/memberAjax/memberAjax.js?ver=4"></script>
     <script src="resources/js/member/mypageJs/mypage.js"></script>
     <script src="resources/js/member/mypageAjax/mypageAjax.js"></script>
+    <script src="resources/js/member/evaluationJs/evaluation.js"></script>
+    <script src="resources/js/member/evaluationAjax/evaluationAjax.js"></script>
 </head>
 <body onload="mypageInit(`${pageContext.request.contextPath}`)">
 	<jsp:include page="../common/header.jsp"/>
@@ -59,12 +61,19 @@
 	            <div class="bot02">
 	                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyTeamsModal">나의 팀보기</button>
 	            </div>
-              <div class="bot02">
-                  <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="selectResListBtn('${loginUser.userNo}')">나의 예약목록보기</button>
-              </div>
-              <div class="bot02">
-                <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="logOut()" >로그아웃</button>
-            </div>
+                <div class="bot02">
+                    <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="selectResListBtn('${loginUser.userNo}')">나의 예약목록보기</button>
+                </div>
+                
+                <c:if test="${loginUser.userLevel == 1}"> 
+	                <div class="bot02">
+	                  <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyManagerModal" onclick="selectPlaceLecer('${loginUser.userName}')">운영진 경기 평가</button>
+	                </div>
+                </c:if>
+                
+                <div class="bot02">
+                  <button class="btn-1" data-bs-toggle="modal" data-bs-target="#viewMyResListModal" onclick="logOut()" >로그아웃</button>
+                </div>
 	        </c:when>
 	        <c:otherwise>
 	        	 <!-- <div class="bot01">
@@ -211,6 +220,23 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="resListBody">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 매니저 경기 조회 모달-->
+    <div class="modal fade" id="viewMyManagerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">운영진 경기 목록</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="managerBody">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로</button>

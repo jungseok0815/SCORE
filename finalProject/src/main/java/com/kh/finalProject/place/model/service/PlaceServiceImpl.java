@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.dao.PlaceDao;
+import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reservation;
@@ -98,6 +100,31 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int deleteReservation(int resNo) {
 		return pDao.deleteReservation(sqlSession, resNo);
+	}
+
+	@Override
+	public ArrayList<Field> selectManager(String userName) {
+		return pDao.selectManager(sqlSession, userName);
+	}
+
+	@Override
+	public ArrayList<SportInfo> selectMember(int fieldNo, int categoryNum) {
+		return pDao.selectMember(sqlSession, fieldNo, categoryNum);
+	}
+
+	@Override
+	public int updateEval(SportInfo spoInfo) {
+		return pDao.updateEval(sqlSession, spoInfo);
+	}
+
+	@Override
+	public int fieldNoDel(int fieldNo) {
+		return pDao.fieldNoDel(sqlSession, fieldNo);
+	}
+
+	@Override
+	public int fieldDelet(int fieldNo) {
+		return pDao.fieldDelet(sqlSession, fieldNo);
 	}
 
 

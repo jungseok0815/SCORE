@@ -39,6 +39,42 @@
   		<result column="START_TIME" property="startTime" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
+  	<resultMap type="Field" id="fieldResultSet">
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="FIELD_AREA" property="fieldArea" />
+  		<result column="FIELD_DATE" property="fieldDate" />
+  		<result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
+  		<result column="FIELD_COUNT" property="fieldCount" />
+  		<result column="FIELD_SIZE" property="fieldSize" />
+  		<result column="PARKING" property="parking" />
+  		<result column="MATCH_GENDER" property="matchGender" />
+  		<result column="SHOES" property="shoes" />
+  		<result column="MANAGER" property="manager" />
+  		<result column="MATCH_LEVEL" property="matchLevel" />
+  		<result column="MATCH_TYPE" property="startTime" />
+  		<result column="END_TIME" property="endTime" />
+  		<result column="MATCH_PAY" property="matchPay" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
+  	<resultMap type="SportInfo" id="sportInfoResultSet">
+		<result column="SPORT_LEVEL" property="sportLever" />
+		<result column="SPORT_SCORE" property="sportScore" />
+		<result column="SPORT_COUNT" property="sportCount" />
+		<result column="SPORT_SMILE" property="sportSmile" />
+		<result column="SPORT_YELLOW" property="sportYellow" />
+		<result column="SPORT_RED" property="sportRed" />
+		<result column="STYLE" property="style" />
+		<result column="SKILL" property="skill" />
+		<result column="USER_NO" property="userNo" />
+		<result column="CATEGORY_NUM" property="categoryNum" />
+		<result column="RES_NO" property="resNo" />
+		<result column="RES_DATE" property="resDate" />
+		<result column="RES_USER_NO" property="resUserNo" />
+		<result column="FIELD_NO" property="fieldNo" />
+		<result column="USER_NAME" property="userName" />
+	</resultMap>
+  	
   	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
@@ -217,5 +253,81 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
-
+ 	
+ 	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
+	<select id="selectManager" resultMap="fieldResultSet">
+	 	 SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				FIELD_ENROLL_DATE,
+				FIELD_COUNT,
+				FIELD_SIZE,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_TYPE,
+				START_TIME,
+				END_TIME,
+				MATCH_PAY,
+				CATEGORY_NUM
+		   FROM FIELD 
+		  WHERE MANAGER = #{userName}
+		    AND <![CDATA[ FIELD_DATE < SYSDATE ]]>
+		  
+ 	</select>
+ 	
+ 	<!-- 게임에 참가했던 사람들 조회 -->
+	<select id="selectMember" resultMap="sportInfoResultSet" parameterType="map">
+	 	 SELECT MB.USER_NAME,
+	 	        MB.USER_NO,
+				RES.RES_NO,
+				RES.RES_DATE,
+				RES.RES_USER_NO,
+				RES.FIELD_NO,
+				SPO.SPORT_LEVEL,
+				SPO.SPORT_SCORE,
+				SPO.SPORT_COUNT,
+				SPO.SPORT_SMILE,
+				SPO.SPORT_YELLOW,
+				SPO.SPORT_RED,
+				SPO.STYLE,
+				SPO.SKILL,
+				SPO.USER_NO,
+				SPO.CATEGORY_NUM
+		   FROM SPORTINFO "SPO"
+		   JOIN RESERVATION "RES" ON(RES.RES_USER_NO = SPO.USER_NO)
+		   JOIN MEMBER "MB" ON(MB.USER_NO = SPO.USER_NO)
+	      WHERE FIELD_NO = #{fieldNo}
+	        AND CATEGORY_NUM = #{categoryNum}
+ 	</select>
+ 	
+ 	<!-- 경기 결과 업데이트 시켜주기 -->
+	<update id="updateEval">
+ 		UPDATE SPORTINFO
+			   SET 
+			   SPORT_LEVEL = #{sportLever},
+			   SPORT_SMILE = SPORT_SMILE + #{sportSmile},
+			   SPORT_YELLOW = SPORT_YELLOW + #{sportYellow},
+			   SPORT_RED = SPORT_RED + #{sportRed},
+			   SPORT_COUNT = SPORT_COUNT + 1,
+			   SPORT_SCORE = #{sportScore}
+	     WHERE USER_NO = #{userNo}
+	       AND CATEGORY_NUM = #{categoryNum}
+ 	</update>
+ 	
+ 	<delete id="fieldNoDel">
+	 	DELETE FROM 
+	 	       FIELD_IMG
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<delete id="fieldDelet">
+	 	DELETE FROM 
+	 	       FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
 </mapper>
