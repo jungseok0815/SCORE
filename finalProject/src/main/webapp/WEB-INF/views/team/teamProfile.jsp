@@ -61,10 +61,17 @@
                                     </button>
                                 </div>
                             </c:when>
-                            <c:otherwise>
+                            <c:when test="${myGrade eq 2 || myGrade eq 1}">
                                 <div class="profile-btn d-grid gap-2">
                                     <button class="btn btn-outline-danger" onclick="teamOutside('${team.teamNo}')">
                                         팀 탈퇴
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="profile-btn d-grid gap-2">
+                                    <button class="btn btn-outline-primary" onclick="">
+                                        가입신청
                                     </button>
                                 </div>
                             </c:otherwise>
@@ -130,7 +137,14 @@
                                 <li>
                                     <div class="team-member-item">
                                         <a class="team-member-profile" type="button">
-                                            <img class="team-member-profile-img" src=".${list.memberChangeName}">
+                                            <c:choose>
+                                                <c:when test="${list.memberChangeName != null}">
+                                                    <img class="team-member-profile-img" src=".${list.memberChangeName}">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img class="team-member-profile-img" src="https://d31wz4d3hgve8q.cloudfront.net/static/img/img_profile_default.png">
+                                                </c:otherwise>
+                                            </c:choose>
                                             <div class="team-member-profile-info">
                                                 <div class="team-member-profile-info-wrapper">
                                                     <p class="team-member-profile-info-name">
