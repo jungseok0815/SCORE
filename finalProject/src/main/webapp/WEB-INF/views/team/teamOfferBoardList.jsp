@@ -44,7 +44,7 @@
 	                            <input type="radio" name="local" id="seoul"  value="서울" onclick="choiceCity()"><label for="seoul">서울</label>
 	                        </li>
 	                        <li class="btnLocal">
-	                            <input type="radio" name="local" id="incheon" value="인천" onclick="choiceCity()"><label for="incheon">인천</label>
+	                            <input type="radio" name="local" id="incheon" value="경기" onclick="choiceCity()"><label for="incheon">경기</label>
 	                        </li>
 	                        <li class="btnLocal">
 	                            <input type="radio" name="local" id="deagu" value="대구" onclick="choiceCity()" ><label for="deagu">대구</label>

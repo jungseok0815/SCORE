@@ -226,6 +226,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/insertSportInfo.me")
 	public String insertSportInfo(SportInfo info,ModelAndView mv, HttpSession session) {
+		
+		System.out.println("스타일" + info);
 		int result = memberService.insertSportInfo(info);
 		return "tt";
 	}

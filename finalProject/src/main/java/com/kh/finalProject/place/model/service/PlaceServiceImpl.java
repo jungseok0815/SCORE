@@ -127,5 +127,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.fieldDelet(sqlSession, fieldNo);
 	}
 
+	@Override
+	public int fieldReqDel(int fieldNo) {
+		return pDao.fieldReqDel(sqlSession, fieldNo);
+	}
+
 
 }

@@ -24,12 +24,12 @@ handleMemberJoin=()=>{
    };
    
    if(checkJoin() === "ok"){
-          if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
+        //   if(document.querySelector("#phone-certified-btn").innerText === "인증완료"){
 
              memberAjaxController.getJoinMemeber(data,memberJoin)
-          }else{
-              alert("휴대폰 인증을 진행해주세요")
-          }
+        //   }else{
+        //       alert("휴대폰 인증을 진행해주세요")
+        //   }
      
    }else if(checkJoin() ==="fail1"){
         alert("비밀번호 형식에 맞추어 작성해주세요")
@@ -72,7 +72,7 @@ memberJoin = (result) =>{
       
         let i = 0;
         tmp(modalSportInfo[i]);
-     document.querySelector("#userInfo-modal-btn2").onclick = ()=>{
+     document.querySelector("#userInfo-modal-btn2").onclick = ()=>{  // 확인 버튼 누름
         const data = handleMemberSportInfo(result.userNo,modalSportInfo[i].categoryNum);
         memberAjaxController.getMemberSportInfo(data, () => {
             if(i === modalSportInfo.length-1) {
@@ -84,15 +84,32 @@ memberJoin = (result) =>{
             }
         })
      }
-     document.querySelector("#userInfo-modal-btn").onclick = () =>{
-        if(i === modalSportInfo.length-1) {
-            alert("회원가입 성공")
-            location.href = "loginView.me"
-        } else {
-            i = i+1;
-            tmp(modalSportInfo[i]);
-        }
+     document.querySelector("#userInfo-modal-btn").onclick = () =>{ // 건너띄기 버튼 누름 
+        // 데이터를 담아서 서버로 전송 해야 해 
+        
+        modalSportInfo[i].favoriteStyle = null;
+        modalSportInfo[i].favoriteStyleValue = null;
+        modalSportInfo[i].ability = null;
+        modalSportInfo[i].abilityValue = null;
+
+        // 나머지 데이터 처리 로직 (예시로 console.log를 사용)
+        console.log("Skipped data:", modalSportInfo[i]);
+
+        // 데이터를 서버로 전송하는 로직을 여기에 추가
+        const data = handleMemberSportInfo(result.userNo, modalSportInfo[i].categoryNum);
+        memberAjaxController.getMemberSportInfo(data, () => {
+            // 서버로 전송 후의 로직을 여기에 추가
+            if (i === modalSportInfo.length - 1) {
+                alert("회원가입 성공");
+                location.href = "loginView.me";
+            } else {
+                i = i + 1;
+                tmp(modalSportInfo[i]);
+            }
+        });
+    
      }
+
 }
 
 tmp = (infodata) =>{

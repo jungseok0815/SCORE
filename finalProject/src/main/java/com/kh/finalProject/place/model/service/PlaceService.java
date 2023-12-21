@@ -40,5 +40,7 @@ public interface PlaceService {
 	int fieldNoDel(int fieldNo);
 	// 평가 한 후 필드 삭제
 	int fieldDelet(int fieldNo);
+	// 평가 한 후 예약자 삭제
+	int fieldReqDel(int fieldNo);
 
 }

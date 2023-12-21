@@ -248,9 +248,9 @@ public class PlaceController {
 	
 	@RequestMapping("/evaluation.pl")
 	public ModelAndView evaluationPage(int fieldNo, int categoryNum, ModelAndView mv) {
-
+		
 		ArrayList<SportInfo> list = pService.selectMember(fieldNo, categoryNum);
-//		System.out.println("결과" + list);
+		System.out.println("결과" + list);
 		
 		mv.addObject("list", list)
 		  .setViewName("place/evaluation");
@@ -306,16 +306,20 @@ public class PlaceController {
 	
 	@ResponseBody
 	@RequestMapping(value="fieldDel.pl", produces="application/json; charset=UTF-8")
-	public Map<String, Object> fieldDelImg(int fieldNo) {
+	public Map<String, Object> fieldDelImg(int fieldNo, HttpSession session) {
 	
 		System.out.println(fieldNo);
 		
 		int fieldImgDel = pService.fieldNoDel(fieldNo);
+		int fieldReq = pService.fieldReqDel(fieldNo);
 		int fieldDel = pService.fieldDelet(fieldNo);
 		
+		Member m = (Member)session.getAttribute("loginUser");
+		
 		Map<String, Object> resultMap = new HashMap<>();
-		if(fieldImgDel * fieldDel > 0) {
+		if(fieldImgDel * fieldDel * fieldReq > 0) {
 			resultMap.put("result", "success");
+			resultMap.put("userNo", m.getUserNo());
 		}else {
 			resultMap.put("result", "failure");
             resultMap.put("message", "게임 평가 실패");

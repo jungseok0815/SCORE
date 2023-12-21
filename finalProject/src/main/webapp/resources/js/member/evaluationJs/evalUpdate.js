@@ -35,14 +35,21 @@ test2 = (result) =>{
     if (result.result === "success") {
         alert("게임 평가 완료");
 
- 
         data = {
             fieldNo :  fieldNo,
         }
 
         evaluationAjaxController.fieldDel(data,(result) => {
             console.log("성공: " + result)
-            window.location.href = "/final/myPage.me?userNo=" + userNo; 
+            const userNo = result.userNo
+
+            if (result.result === "success") {
+                alert("경기장 삭제 완료");
+                window.location.href = "/final/myPage.me?userNo=" + userNo; 
+            }else{
+                alert("경기장 삭제 실패");
+            }
+            
         })
 
     } else{

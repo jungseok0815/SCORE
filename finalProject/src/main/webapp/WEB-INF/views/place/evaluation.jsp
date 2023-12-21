@@ -78,7 +78,7 @@
         
 
             <div class="inpo-btn">
-                <button type="reset" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px;" onclick="location.href=''">뒤로가기</button>
+                <button type="reset" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px;" onclick="location.href='myPage.me?userNo=${loginUser.userNo}'">뒤로가기</button>
                 <button type="button" onclick ="updateEnal()" class="btn btn-primary" style="margin-top: 10px;">등록하기</button>
             </div>
 

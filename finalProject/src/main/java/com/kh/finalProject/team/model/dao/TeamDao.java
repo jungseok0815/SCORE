@@ -228,6 +228,7 @@ public class TeamDao {
 
 	// 팀 요청 리스트 가져오기
 	public ArrayList<TeamReq> selectReqList(SqlSessionTemplate sqlSession, int tno) {
+		
 		return (ArrayList)sqlSession.selectList("teamMapper.selectReqList", tno);
 	}
 	
@@ -265,4 +266,13 @@ public class TeamDao {
 		return sqlSession.insert("teamMapper.acceptTeamMember", params);
 	}
 	
+	// 팀 요청 리스트에서 유저 번호 가져오기
+	public ArrayList<TeamReq> selectReqUserNo(SqlSessionTemplate sqlSession, int tno) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectReqUserNo", tno);
+	}
+	
+	// 개인 프로필 가져오기
+	public String selectMemberProImg(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("teamMapper.selectMemberProImg", userNo);
+	}
 }

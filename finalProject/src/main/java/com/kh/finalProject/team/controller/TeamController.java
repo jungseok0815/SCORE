@@ -1,5 +1,6 @@
 package com.kh.finalProject.team.controller;
 
+import java.awt.List;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class TeamController {
 		PageInfo pi = Pagenation.getPageInfo(teamService.selectListCount(), currentPage, 10, 5);
 		ArrayList<TeamOffer> list = teamService.selectList(pi);
 		for(int i= 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
+//			System.out.println(list.get(i));
 			String img = teamService.selectTeamImg(list.get(i).getTeamNo());
 
 			// 리스트에 팀 프로필 이미지 담아 주기
@@ -259,7 +260,7 @@ public class TeamController {
 				myGrade = m.getGrade();
 			
 		}
-		System.out.println(tm);
+//		System.out.println(tm);
 		mv.addObject("teamMemberCount", tmc)
 		.addObject("teamAvgAge", taa)
 		.addObject("team", t)
@@ -273,21 +274,21 @@ public class TeamController {
 	
 	@RequestMapping("updateForm.tm")
 	public ModelAndView teamUpdateForm(int tno, ModelAndView mv) {
-		System.out.println(tno);
+//		System.out.println(tno);
 		Team t = teamService.teamProfile(tno);
-		System.out.println(t);
+//		System.out.println(t);
 		mv.addObject("team", t).setViewName("team/teamProfileUpdate");
 		return mv;
 	}
 	
 	@RequestMapping("update.tm")
 	public ModelAndView teamProfileUpdate(Team t, TeamImg ti, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
-		System.out.println(t);
+//		System.out.println(t);
 		int resultImg = 0;
 		
 	
-		System.out.println(t);
-	    System.out.println(reupfile);
+//		System.out.println(t);
+//	    System.out.println(reupfile);
 	    //새로운 첨부파일 존재유무 확인
 	    if(!reupfile.getOriginalFilename().equals("")) {
 	       String changeName = saveFile(reupfile, session, "resources/img/team/teamProfile/");
@@ -315,18 +316,28 @@ public class TeamController {
 	
 	@RequestMapping("joinList.tm")
 	public ModelAndView teamJoinListForm(int tno, ModelAndView mv) {
+		// 유저 번호 조회
+		ArrayList<TeamReq> userNoList = teamService.selectReqUserNo(tno);
+		
+		ArrayList<TeamReq> resultList = new ArrayList<>();
+		
+		for (TeamReq teamReq : userNoList) {
+		    int userNo = teamReq.getReqUserNo();
+		  
+		    String memberChangeName = teamService.selectMemberProImg(userNo); // 개인 프로필
+			
+			teamReq.setMemberChangeName(memberChangeName);
+			
+			resultList.add(teamReq);
+		}
 		
 		ArrayList<TeamReq> list = teamService.selectReqList(tno);
-		System.out.println(list);
 		
-		String tName = teamService.selectTeamName(tno);
-		
-		String tProfile = teamService.selectTeamProImg(tno);
-		
-		
-		// reqUserNo에 회원 번호 들어 옴 
+		String tName = teamService.selectTeamName(tno);			// 팀 이름
+		String tProfile = teamService.selectTeamProImg(tno); // 팀 프로필
 
 		mv.addObject("list", list)
+		.addObject("resultList", resultList)
 		.addObject("tno", tno)
 		.addObject("tName", tName)
 		.addObject("tProfile", tProfile)
@@ -520,7 +531,7 @@ public class TeamController {
 	@ResponseBody
 	@RequestMapping(value="changeTeamGrade.tm")
 	public String changeTeamGrade(TeamMember tm){
-		System.out.print(tm);
+//		System.out.print(tm);
 		if(tm.getGrade() == 1) {
 			return  teamService.changeTeamGradeUp(tm) > 0 ? "changeTeamGradeOk" :  "changeTeamGradeFail";
 		}else {
@@ -531,7 +542,7 @@ public class TeamController {
 	@ResponseBody
 	@RequestMapping(value="deleteTeamMember.tm")
 	public String deleteTeamMember(TeamMember tm){
-		System.out.print(tm);
+//		System.out.print(tm);
 		return  teamService.deleteTeamMember(tm) > 0 ? "deleteTeamMemberGradeOk" :  "deleteTeamMemberGradeFail";
 	}
 	

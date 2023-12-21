@@ -90,4 +90,7 @@ public class PlaceDao {
 	public int fieldDelet(SqlSessionTemplate sqlSession, int fieldNo) {
 		return sqlSession.delete("placeMapper.fieldDelet", fieldNo);
 	}
+	public int fieldReqDel(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.delete("placeMapper.fieldReqDel", fieldNo);
+	}
 }

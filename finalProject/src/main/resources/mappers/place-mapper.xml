@@ -275,7 +275,7 @@
 				CATEGORY_NUM
 		   FROM FIELD 
 		  WHERE MANAGER = #{userName}
-		    AND <![CDATA[ FIELD_DATE < SYSDATE ]]>
+		     AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>
 		  
  	</select>
  	
@@ -318,15 +318,24 @@
 	       AND CATEGORY_NUM = #{categoryNum}
  	</update>
  	
+ 	<!-- 평가 한 후 필드 이미지 삭제  -->
  	<delete id="fieldNoDel">
 	 	DELETE FROM 
 	 	       FIELD_IMG
 		 WHERE FIELD_NO = #{fieldNo}
  	</delete>
  	
+ 	<!-- 평가 한 후 필드  삭제  -->
  	<delete id="fieldDelet">
 	 	DELETE FROM 
 	 	       FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 평가 한 후 예약자 삭제  -->
+ 	<delete id="fieldReqDel">
+	 	DELETE FROM 
+	 	       RESERVATION
 		 WHERE FIELD_NO = #{fieldNo}
  	</delete>
  	

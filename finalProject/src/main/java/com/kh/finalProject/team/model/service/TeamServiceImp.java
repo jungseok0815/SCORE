@@ -145,4 +145,11 @@ public interface TeamServiceImp {
 	
 	// 수락시 팀 멤버에 넘겨주기 
 	int acceptTeamMember(int reqList, int tno);
+	
+	// 팀 가입 신청 리스트에서 유저 번호만 빼오기
+	ArrayList<TeamReq> selectReqUserNo(int tno);
+	
+	//// 팀 프로필 이미지 가져오기 
+	String selectMemberProImg(int userNo);
+	
 }
