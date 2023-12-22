@@ -122,5 +122,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.insertPlaceReview(sqlSession, pr);
 	}
 
+	@Override
+	public ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum) {
+		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
+	}
+
 
 }

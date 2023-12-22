@@ -226,26 +226,20 @@ public class PlaceController {
 	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
 	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="categoryNum", defaultValue="4") int categoryNum, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
 		
-		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
-		
-		ArrayList<Reservation> rList = new ArrayList<Reservation>();
-		ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
 		if(!userNo.equals("")) {
-			rList = pService.selectResList(userNo);
+			ArrayList<Reservation> rList = pService.selectResList(userNo);
+			mv.addObject("rList", rList);
 		}
-		
-		mv.addObject("pList", pList)
-		  .addObject("rList", rList)
-		  .addObject("pi", pi)
-		  .setViewName("place/placeReviewList");
+		mv.setViewName("place/placeReviewList");
 		
 		return mv;
 	}
 	
 	//경기장 리뷰 insert
 	@RequestMapping("/insertReview.pl")
-	public String insertPlaceReview(String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertPlaceReview(String categoryNum, String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
 		Member m =  (Member) session.getAttribute("loginUser");
+		pr.setCategoryNum(categoryNum);
 		pr.setUserNo(userNo);
 		
 		int resultReview = pService.insertPlaceReview(pr);
@@ -272,5 +266,28 @@ public class PlaceController {
 		
 		
 	}
+	@ResponseBody
+	@RequestMapping(value="/ReviewListAjax.pl", produces="application/json; charset=UTF-8")
+	public String placeReviewListView(Model m, @RequestParam(value="cpage", defaultValue="1") int currentPage,
+			@RequestParam(value="categoryNum", defaultValue="4") String categoryNum) {
+		System.out.println(categoryNum);
+		int s = Integer.parseInt(categoryNum);
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
+		
+		
+		if(s == 4) {
+			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
+			System.out.println(pList);
+			m.addAttribute("pi",pi);
+			m.addAttribute("pList",pList);
+		}else {
+			ArrayList<PlaceReview> pList =  pService.placeChoiceReviewList(pi, categoryNum);
+			m.addAttribute("pi",pi);
+			m.addAttribute("pList",pList);
+		}
+		
+		return new Gson().toJson(m);
+	}
+		
 	
 }

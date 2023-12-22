@@ -6,41 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/final/resources/css/place/placeReviewList.css">
 <script type="text/javascript" src="./resources/js/place/placeReviewList.js"></script>
-
+<script type="text/javascript" src="./resources/js/place/placeAjax/placeReviewAjax.js"></script>
 </head>
-<body>
+<body onload="init()">
     <jsp:include page="../common/header.jsp" />
 
     <div class="outer">
         <div class="wrapper">
             <h3 align="center" style="color: #0a7ffb;">경기장 리뷰</h3>
             <div class="select-view" style= "float: left; margin-bottom: 5px;">
-                <select name="sport" id="" onchange="selectSports(event)">
+                <select name="categoryNum" id="categoryNumBox">
                     <option value="4">전체종목</option>
                     <option value="1">축구</option>
                     <option value="2">야구</option>
                     <option value="3">농구</option>
-                </select>
-            </div>
-            <div class="select-view" style= "float: right; margin-bottom: 5px;">
-                <select name="" id="">
-                    <option value="">지역</option>
-                    <option>서울</option>
-                    <option>경상</option>
-                    <option>대구</option>
-                    <option>대전</option>
-                    <option>경기</option>
-                    <option>광주</option>
-                    <option>부산</option>
-                    <option>충청</option>
-                    <option>인천</option>
-                    <option>전라</option>
-                    <option>울산</option>
-                    <option>세종</option>
-                    <option>강원</option>
-                    <option>제주</option>
                 </select>
             </div>
 
@@ -54,35 +36,8 @@
                         <th width="130">별점</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <c:forEach var="pl" items="${pList}">
-                        <tr onclick="">
-                            <td>${pl.userName}</td>
-                            <td class="review-name">${pl.fieldName}</td>
-                            <td>${pl.reviewCount}</a></td>
-                            <td>${pl.reviewEnrollDate}</td>
-                            <td class="star-rating">
-                                <c:choose>
-                                    <c:when test="${pl.starRating == 1}">
-                                        ★
-                                    </c:when>
-                                    <c:when test="${pl.starRating == 2}">
-                                        ★★
-                                    </c:when>
-                                    <c:when test="${pl.starRating == 3}">
-                                        ★★★
-                                    </c:when>
-                                    <c:when test="${pl.starRating == 4}">
-                                        ★★★★
-                                    </c:when>
-                                    <c:when test="${pl.starRating == 5}">
-                                        ★★★★★
-                                    </c:when>
-                                </c:choose>
-                                
-                            </td>
-                        </tr>
-                    </c:forEach>
+                <tbody class="review-list">
+                    
                 </tbody>
             </table>
             <div id="enroll-btn">
@@ -102,7 +57,7 @@
         <div id="pagingArea">
             <ul class="pagination">
                <c:choose>
-                  <c:when test = "${pi.currentPage eq 1 }">
+                  <c:when test = "${pi.currentPage ne 1 }">
                      <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
                   </c:when>
                   <c:otherwise>

@@ -1,8 +1,8 @@
-function loadTeam(data,callback){
+function loadTeam(data, callback){
     $.ajax({
         type:"get",
         url:"ReviewListAjax.pl",
-        data,  
+        data,
         success: function(result){
             callback(result);
         },
@@ -11,4 +11,3 @@ function loadTeam(data,callback){
         }
     })
 }
-

@@ -4,10 +4,11 @@ import java.sql.Date;
 
 public class PlaceReview {
 	private int reviewNo;
-	private int categoryNum;
+	private String categoryNum;
 	private int fieldNo;
 	private String userNo;
 	private int resNo;
+	private String fieldArea;
 	private int reviewCount;
 	private String reviewContent;
 	private Date reviewEnrollDate;
@@ -20,15 +21,16 @@ public class PlaceReview {
 	public PlaceReview () {}
 
 
-	public PlaceReview(int reviewNo, int categoryNum, int fieldNo, String userNo, int resNo, int reviewCount,
-			String reviewContent, Date reviewEnrollDate, int starRating, String fieldReviewStatus, String userName,
-			String fieldName) {
+	public PlaceReview(int reviewNo, String categoryNum, int fieldNo, String userNo, int resNo, String fieldArea,
+			int reviewCount, String reviewContent, Date reviewEnrollDate, int starRating, String fieldReviewStatus,
+			String userName, String fieldName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.categoryNum = categoryNum;
 		this.fieldNo = fieldNo;
 		this.userNo = userNo;
 		this.resNo = resNo;
+		this.fieldArea = fieldArea;
 		this.reviewCount = reviewCount;
 		this.reviewContent = reviewContent;
 		this.reviewEnrollDate = reviewEnrollDate;
@@ -49,12 +51,12 @@ public class PlaceReview {
 	}
 
 
-	public int getCategoryNum() {
+	public String getCategoryNum() {
 		return categoryNum;
 	}
 
 
-	public void setCategoryNum(int categoryNum) {
+	public void setCategoryNum(String categoryNum) {
 		this.categoryNum = categoryNum;
 	}
 
@@ -86,6 +88,16 @@ public class PlaceReview {
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
+	}
+
+
+	public String getFieldArea() {
+		return fieldArea;
+	}
+
+
+	public void setFieldArea(String fieldArea) {
+		this.fieldArea = fieldArea;
 	}
 
 
@@ -162,10 +174,10 @@ public class PlaceReview {
 	@Override
 	public String toString() {
 		return "PlaceReview [reviewNo=" + reviewNo + ", categoryNum=" + categoryNum + ", fieldNo=" + fieldNo
-				+ ", userNo=" + userNo + ", resNo=" + resNo + ", reviewCount=" + reviewCount + ", reviewContent="
-				+ reviewContent + ", reviewEnrollDate=" + reviewEnrollDate + ", starRating=" + starRating
-				+ ", fieldReviewStatus=" + fieldReviewStatus + ", userName=" + userName + ", fieldName=" + fieldName
-				+ "]";
+				+ ", userNo=" + userNo + ", resNo=" + resNo + ", fieldArea=" + fieldArea + ", reviewCount="
+				+ reviewCount + ", reviewContent=" + reviewContent + ", reviewEnrollDate=" + reviewEnrollDate
+				+ ", starRating=" + starRating + ", fieldReviewStatus=" + fieldReviewStatus + ", userName=" + userName
+				+ ", fieldName=" + fieldName + "]";
 	}
 
 

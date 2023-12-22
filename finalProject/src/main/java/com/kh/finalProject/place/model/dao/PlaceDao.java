@@ -85,5 +85,12 @@ public class PlaceDao {
 	public int insertPlaceReview(SqlSessionTemplate sqlSession, PlaceReview pr) {
 		return sqlSession.insert("placeMapper.insertPlaceReview", pr);
 	}
+	public ArrayList<PlaceReview> placeChoiceReviewList(SqlSessionTemplate sqlSession, PageInfo pi, String categoryNum) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("placeMapper.placeChoiceReviewList", null, rowBounds);
+	}
 	
 }

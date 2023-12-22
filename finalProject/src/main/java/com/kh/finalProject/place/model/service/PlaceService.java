@@ -32,6 +32,7 @@ public interface PlaceService {
 	
 	//경기장 리뷰 리스트 셀렉트
 	ArrayList<PlaceReview> placeReviewList(PageInfo pi);
+	ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum);
 	//경기장 리뷰 등록
 	int insertPlaceReview(PlaceReview pr);
 	//경기장 리뷰 사진 등록

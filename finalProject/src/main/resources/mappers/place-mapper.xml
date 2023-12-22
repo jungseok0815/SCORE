@@ -248,23 +248,46 @@
  	</select>
  	
  	<select id="placeReviewList" resultMap="PlaceReviewResultSet">
- 		SELECT REVIEW_NO,
-	 		   USER_NAME,
-		       FIELD_NAME,
-		       REVIEW_COUNT,
-		       REVIEW_ENROLL_DATE,
-		       STAR_RATING
-	    FROM FIELD_REVIEW
-	    JOIN MEMBER USING (USER_NO)
-	    JOIN FIELD USING (FIELD_NO)
-	    WHERE FIELD_REVIEW_STATUS = 'Y'
-	    ORDER BY REVIEW_NO DESC
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING,
+		       SC.CATEGORY_NUM
+		FROM FIELD_REVIEW FR
+		LEFT JOIN SPORT_CATEGORY SC ON FR.CATEGORY_NUM = SC.CATEGORY_NUM
+		JOIN MEMBER M ON FR.USER_NO = M.USER_NO
+		JOIN FIELD F ON FR.FIELD_NO = F.FIELD_NO
+		WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+		ORDER BY FR.REVIEW_NO DESC
  	</select>
+ 	
+ 	<select id="placeChoiceReviewList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING,
+		       SC.CATEGORY_NUM
+		FROM FIELD_REVIEW FR
+		LEFT JOIN SPORT_CATEGORY SC ON FR.CATEGORY_NUM = SC.CATEGORY_NUM
+		JOIN MEMBER M ON FR.USER_NO = M.USER_NO
+		JOIN FIELD F ON FR.FIELD_NO = F.FIELD_NO
+		WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+		AND CATEGORY_NUM = #{categoryNum}
+		ORDER BY FR.REVIEW_NO DESC
+ 	</select>
+ 	
  	<insert id="insertPlaceReview">
 	 	INSERT INTO FIELD_REVIEW(
 	                    REVIEW_NO,
 	                    FIELD_NO,
 	                    USER_NO,
+	                    CATEGORY_NUM,
 	                    REVIEW_COUNT,
 	                    REVIEW_CONTENT,
 	                    STAR_RATING
@@ -273,6 +296,7 @@
 	                    SEQ_FIELD_REVIEW.NEXTVAL,
 	                    #{fieldNo},
 	                    #{userNo},
+	                    #{categoryNum},
 	                    0,
 	                    #{reviewContent},
 	                    #{starRating}
