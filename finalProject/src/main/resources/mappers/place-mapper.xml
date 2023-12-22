@@ -40,6 +40,15 @@
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
   	
+  	<resultMap type="Reply" id="replyResultSet">
+  	  	<result column="REPLY_NO" property="replyNo" />
+  		<result column="REPLY_WRITER" property="replyWriter" />
+  		<result column="REPLY_CONTENT" property="replyContent" />
+  		<result column="REPLY_DATE" property="replyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  	</resultMap>
+  	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
       				( 
@@ -217,5 +226,20 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
-
+ 	<select id="selectReplyList" resultMap="replyResultSet">
+ 		SELECT REPLY_NO,
+ 					 REPLY_WRITER,
+ 					 REPLY_CONTENT,
+ 					 REPLY_DATE,
+ 					 USER_NO
+ 		  FROM REPLY
+ 		WHERE FIELD_NO = #{fno}
+ 	</select>
+	<select id="selectReplyField" resultMap="placeResultSet">
+		SELECT FIELD_NO,
+					 FIELD_NAME,
+					 FIELD_AREA
+		  FROM FIELD
+		WHERE FIELD_NO = #{fno}
+	</select>
 </mapper>

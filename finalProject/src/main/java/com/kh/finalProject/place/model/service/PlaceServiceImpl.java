@@ -11,6 +11,7 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.Reservation;
 
 
@@ -98,6 +99,16 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int deleteReservation(int resNo) {
 		return pDao.deleteReservation(sqlSession, resNo);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReplyList(int fno) {
+		return pDao.selectReplyList(sqlSession, fno);
+	}
+
+	@Override
+	public Place selectReplyField(int fno) {
+		return pDao.selectReplyField(sqlSession, fno);
 	}
 
 

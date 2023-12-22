@@ -25,6 +25,7 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.Reservation;
 
 @Controller
@@ -225,4 +226,24 @@ public class PlaceController {
 		return "place/placeReviewList";
 	}
 	
+	//경기장 리뷰 댓글 페이지
+	@RequestMapping("/placeReviewDetail.pl")
+	public String placeReviewDetail(int fno, Model m) {
+		System.out.println(fno);
+		Place p = pService.selectReplyField(fno);
+		System.out.println(p);
+		m.addAttribute("p", p);
+		m.addAttribute("plImgList", pService.placeImgList(fno));
+		return "place/placeReviewDetail";
+	}
+	
+	//댓글 리스트
+	@ResponseBody
+	@RequestMapping(value= "/rlist.pl", produces = "appalication/json; charset = UTF-8")
+	public String placeReplyList(Model m, @RequestParam("fno") int fno) {
+		ArrayList<Reply> rlist = pService.selectReplyList(fno);
+		m.addAttribute("rlist", rlist);
+		return new Gson().toJson(rlist);
+
+	}
 }

@@ -7,6 +7,7 @@ import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.Reservation;
 
 public interface PlaceService {
@@ -28,5 +29,8 @@ public interface PlaceService {
 	ArrayList<Reservation> selectResList(int userNo);
 	int deleteReservation(int resNo);
 	
+	//댓글 리스트
+	ArrayList<Reply> selectReplyList(int fno);
+	Place selectReplyField(int fno);
 
 }

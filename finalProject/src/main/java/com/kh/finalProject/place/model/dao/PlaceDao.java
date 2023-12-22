@@ -11,6 +11,7 @@ import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.Reservation;
 
 @Repository
@@ -69,4 +70,11 @@ public class PlaceDao {
 		return sqlSession.delete("placeMapper.deleteReservation", resNo);
 	}
 	
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int fno) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyList", fno);
+	}
+	
+	public Place selectReplyField(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.selectOne("placeMapper.selectReplyField", fno);
+	}
 }

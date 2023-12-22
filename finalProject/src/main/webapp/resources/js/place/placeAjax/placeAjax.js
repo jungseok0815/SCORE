@@ -25,3 +25,22 @@ function selectTeamMember(teamNo,callback){
     })
     
 }
+
+const replyReviewDetailController={
+    // 댓글 리스트
+    selectReplyListAjax: (data, callback) => {
+        console.log(data)
+        $.ajax({
+            url:"rlist.pl",
+            data,
+            success: function(result){
+                console.log(result);
+                callback(result)
+                
+            },
+            error : (error) => {
+                console.log(error)
+            }
+        })
+    }
+}
