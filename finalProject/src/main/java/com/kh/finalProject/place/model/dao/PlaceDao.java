@@ -12,6 +12,7 @@ import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 @Repository
 public class PlaceDao {
@@ -78,8 +79,11 @@ public class PlaceDao {
 	public int selectReviewListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("placeMapper.selectReviewListCount");
 	}
-	public int insertPlaceImgReview(SqlSessionTemplate sqlSession, PlaceImg pi) {
-		return sqlSession.insert("placeMapper.insertPlaceImgReview", pi);
+	public int insertPlaceReviewImg(SqlSessionTemplate sqlSession, ReviewImg ri) {
+		return sqlSession.insert("placeMapper.insertPlaceReviewImg", ri);
+	}
+	public int insertPlaceReview(SqlSessionTemplate sqlSession, PlaceReview pr) {
+		return sqlSession.insert("placeMapper.insertPlaceReview", pr);
 	}
 	
 }

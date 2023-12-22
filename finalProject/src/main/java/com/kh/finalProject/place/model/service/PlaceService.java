@@ -9,6 +9,7 @@ import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 public interface PlaceService {
 	//경기장 등록
@@ -32,9 +33,9 @@ public interface PlaceService {
 	//경기장 리뷰 리스트 셀렉트
 	ArrayList<PlaceReview> placeReviewList(PageInfo pi);
 	//경기장 리뷰 등록
-	int insertPlaceReviewImg(PlaceReview pr);
+	int insertPlaceReview(PlaceReview pr);
 	//경기장 리뷰 사진 등록
-	int insertReviewImg(PlaceImg pi);
+	int insertPlaceReviewImg(ReviewImg ri);
 	//리뷰 리스트 총 개수
 	int selectReviewListCount();
 	

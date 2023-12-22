@@ -17,15 +17,15 @@
         <div class="wrapper">
             <h3 align="center" style="color: #0a7ffb;">경기장 리뷰</h3>
             <div class="select-view" style= "float: left; margin-bottom: 5px;">
-                <select name=" " id="">
-                    <option value="">전체종목</option>
-                    <option>축구</option>
-                    <option>야구</option>
-                    <option>농구</option>
+                <select name="sport" id="" onchange="selectSports(event)">
+                    <option value="4">전체종목</option>
+                    <option value="1">축구</option>
+                    <option value="2">야구</option>
+                    <option value="3">농구</option>
                 </select>
             </div>
             <div class="select-view" style= "float: right; margin-bottom: 5px;">
-                <select name=" " id="">
+                <select name="" id="">
                     <option value="">지역</option>
                     <option>서울</option>
                     <option>경상</option>
@@ -61,7 +61,26 @@
                             <td class="review-name">${pl.fieldName}</td>
                             <td>${pl.reviewCount}</a></td>
                             <td>${pl.reviewEnrollDate}</td>
-                            <td class="star-rating">${pl.starRating}</td>
+                            <td class="star-rating">
+                                <c:choose>
+                                    <c:when test="${pl.starRating == 1}">
+                                        ★
+                                    </c:when>
+                                    <c:when test="${pl.starRating == 2}">
+                                        ★★
+                                    </c:when>
+                                    <c:when test="${pl.starRating == 3}">
+                                        ★★★
+                                    </c:when>
+                                    <c:when test="${pl.starRating == 4}">
+                                        ★★★★
+                                    </c:when>
+                                    <c:when test="${pl.starRating == 5}">
+                                        ★★★★★
+                                    </c:when>
+                                </c:choose>
+                                
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -73,22 +92,37 @@
             </div>
         </div>
         
+        
         <div  class="search-bar" align="center">
-            <input id="search" type="text" onfocus="" onkeyup="" placeholder="구장 검색">
-            <button><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+            <input id="search1" type="text" placeholder="구장 검색" name="keyword" onkeyup="searchKeyword(event)">
+            <button onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
         </div>
+      
 
-        <div class="paging-area" align="center">
-            <c:if test="${ pi.currentPage ne 1 }">
-                <button class="btn btn-light" onclick="location.href=''">&lt;</button>
-            </c:if>
-
-            <c:forEach var="p" begin="${pi.startPage}" end="${ pi.endPage }" >
-                <button class="btn btn-light" onclick="location.href=''">${p}</button>
-            </c:forEach>
-            <c:if test="${ pi.currentPage ne pi.maxPage }">
-                <button class="btn btn-light" onclick="location.href=''">&gt;</button>
-            </c:if>
+        <div id="pagingArea">
+            <ul class="pagination">
+               <c:choose>
+                  <c:when test = "${pi.currentPage eq 1 }">
+                     <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage - 1 }">이전</a></li>
+                  </c:otherwise>
+               </c:choose>
+                  
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }" >
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${p}">${p}</a></li>
+                </c:forEach>
+            
+                <c:choose>
+                  <c:when test = "${pi.currentPage eq pi.maxPage }">
+                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage + 1 }">다음</a></li>
+                  </c:otherwise>
+               </c:choose>
+            </ul>
         </div>
     </div>
 
@@ -102,24 +136,21 @@
             </div>
             <div class="modal-body">
                 <form class="mb-3" action="insertReview.pl" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="userNo" value="${loginUser.userNo}">
                     <div class="star-area">
                         <p>별점</p>
                         <fieldset class="rate">
-                            <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
-                            <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
-                            <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
-                            <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
-                            <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
-                            <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
-                            <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
-                            <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
-                            <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
-                            <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                            <input type="radio" id="rating10" name="starRating" value="5"><label for="rating10" title="5점"></label>
+                            <input type="radio" id="rating8" name="starRating" value="4"><label for="rating8" title="4점"></label>
+                            <input type="radio" id="rating6" name="starRating" value="3"><label for="rating6" title="3점"></label>
+                            <input type="radio" id="rating4" name="starRating" value="2"><label for="rating4" title="2점"></label>
+                            <input type="radio" id="rating2" name="starRating" value="1"><label for="rating2" title="1점"></label>
+                           
                         </fieldset>
                     </div>
                     <div class="select-myPlace" style="margin-bottom: 5px;">
                         <div style="width: 100%;">
-                            <select name="" id="" style="width: 100%;">
+                            <select name="fieldNo" id="" style="width: 100%;">
                                 <c:forEach var="item" items="${rList}">
                                     <option value="${item.fieldNo}">${item.fieldName}</option>
                                 </c:forEach>
@@ -134,28 +165,26 @@
                     <tr>
                         <td colspan="2">
                             <div class="filebox">
-                                <label class="btn-upload" for="fileImgFile">
+                                <label class="btn-upload" for="file">
                                     <img src="" id="file-img" onclick="">
                                 </label>
-                                <input type="file" name="upfile" id="fileImgFile" onchange="imgChangeUpdate(this)" required>
+                                <input type="file" name="upfile" id="file" onchange="imgChangeUpdate(this)" required>
                             </div>
                         </td>
                     </tr>
                     <div>
-                        <textarea class="col-auto form-control" type="text" id="reviewContents"
+                        <textarea name="reviewContent" class="col-auto form-control" type="text" id="reviewContent"
                                   placeholder="경기장 이용 후 느낀점을 적어주세요!"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" type="submit">등록</button>
+                        <button type="submit" type="button" class="btn btn-primary" >등록</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     
-
     <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

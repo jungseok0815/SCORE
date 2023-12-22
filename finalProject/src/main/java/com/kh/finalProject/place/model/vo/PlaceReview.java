@@ -6,7 +6,7 @@ public class PlaceReview {
 	private int reviewNo;
 	private int categoryNum;
 	private int fieldNo;
-	private int userNo;
+	private String userNo;
 	private int resNo;
 	private int reviewCount;
 	private String reviewContent;
@@ -20,7 +20,7 @@ public class PlaceReview {
 	public PlaceReview () {}
 
 
-	public PlaceReview(int reviewNo, int categoryNum, int fieldNo, int userNo, int resNo, int reviewCount,
+	public PlaceReview(int reviewNo, int categoryNum, int fieldNo, String userNo, int resNo, int reviewCount,
 			String reviewContent, Date reviewEnrollDate, int starRating, String fieldReviewStatus, String userName,
 			String fieldName) {
 		super();
@@ -69,12 +69,12 @@ public class PlaceReview {
 	}
 
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
@@ -168,6 +168,6 @@ public class PlaceReview {
 				+ "]";
 	}
 
-	
+
 	
 }

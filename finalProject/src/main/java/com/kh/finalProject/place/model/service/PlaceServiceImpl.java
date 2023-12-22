@@ -13,6 +13,7 @@ import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 
 
@@ -107,8 +108,8 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public int insertPlaceReviewImg(PlaceImg pi) {
-		return pDao.insertPlaceReviewImg(sqlSession, pi);
+	public int insertPlaceReviewImg(ReviewImg ri) {
+		return pDao.insertPlaceReviewImg(sqlSession, ri);
 	}
 
 	@Override
@@ -118,8 +119,7 @@ public class PlaceServiceImpl implements PlaceService{
 
 	@Override
 	public int insertPlaceReview(PlaceReview pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return pDao.insertPlaceReview(sqlSession, pr);
 	}
 
 

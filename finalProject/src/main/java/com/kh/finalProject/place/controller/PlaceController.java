@@ -27,7 +27,7 @@ import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
-import com.kh.finalProject.team.model.vo.TeamOffer;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 @Controller
 public class PlaceController {
@@ -222,10 +222,12 @@ public class PlaceController {
 	}
 	
 	//placeReviewList로 보내주는 메소드
-	@RequestMapping("/placeReviewList.pl")
-	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, int currentPage) {
+	@ResponseBody
+	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
+	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="categoryNum", defaultValue="4") int categoryNum, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
 		
-		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 10, 5);
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
+		
 		ArrayList<Reservation> rList = new ArrayList<Reservation>();
 		ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
 		if(!userNo.equals("")) {
@@ -236,28 +238,39 @@ public class PlaceController {
 		  .addObject("rList", rList)
 		  .addObject("pi", pi)
 		  .setViewName("place/placeReviewList");
+		
 		return mv;
 	}
 	
 	//경기장 리뷰 insert
 	@RequestMapping("/insertReview.pl")
-	public String insertPlaceReview(PlaceReview pr, PlaceImg pi, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertPlaceReview(String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		pr.setUserNo(userNo);
 		
 		int resultReview = pService.insertPlaceReview(pr);
-		int resultImg = 1;
+		int resultImg = 0;
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
 			String changeName = saveFile(upfile, session);
+			ri.setReviewUrl("resources/img/place//placeReviewList/");
+			ri.setReviewOriginName(upfile.getOriginalFilename());
+			ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName);
 			
-			pi.setFieldUrl("resources/img/place/");
-			pi.setFieldOriginName(upfile.getOriginalFilename());
-			pi.setFieldChangeName("resources/img/place/placeReview/" + changeName);
-			
-			resultImg = resultImg * pService.insertPlaceReviewImg(pi);
+			resultImg = pService.insertPlaceReviewImg(ri);
 			 
 		}
-		return "redirect:/";
+		
+		if(resultReview * resultImg > 0) {
+			session.setAttribute("alertMsg", "리뷰 작성 완료");
+			return "redirect:placeReviewList.pl?userNo=" + m.getUserNo() + "&currentPage=1";
+		}else {
+			session.setAttribute("alertMsg", "리뷰 작성 완료");
+			return "common/errorPage";
+		}
+		
+		
 	}
 	
 }
