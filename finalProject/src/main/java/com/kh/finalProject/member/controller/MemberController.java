@@ -1,15 +1,19 @@
 package com.kh.finalProject.member.controller;
 
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,7 +34,6 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.MemberImg;
 import com.kh.finalProject.member.model.vo.MessageAuth;
 import com.kh.finalProject.member.model.vo.SportInfo;
-import com.kh.finalProject.team.model.vo.TeamMember;
 
 @Controller
 public class MemberController {
@@ -378,6 +381,86 @@ public class MemberController {
 		return "authFail";
 	}
 
+	
+	@ResponseBody
+	@RequestMapping(value="payPoint.me", produces="application/json; charset=UTF-8")
+	public String kakaoPay(int point, HttpSession session) {
+		
+		try {
+			URL address = new URL("https://kapi.kakao.com/v1/payment/ready"); 	// 주소 
+			HttpURLConnection join =  (HttpURLConnection) address.openConnection(); // 서버 연결
+			join.setRequestMethod("POST"); 
+			join.setRequestProperty("Authorization", "KakaoAK 5ec0b38b846924ddb31e67e0cc96795c"); 
+			join.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			join.setDoOutput(true);
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=Score&quantity=1&total_amount=" + point + "&tax_free_amount=0&approval_url=http://localhost:8030/final/kakaoPoint.me&cancel_url=http://localhost:8030/final/kakaoPoint.me&fail_url=http://localhost:8030/final/pointView.me";
+			// parameter = 파라미터 
+			OutputStream sendPay = join.getOutputStream(); // 데이터를 줄수 있게 만듬
+			DataOutputStream sendData = new DataOutputStream(sendPay); // 데이터를 주는 애 
+			sendData.writeBytes(parameter); // 문자열을 형변환 시켜줌
+			sendData.close(); // 자기가 가지고있는 바이트를 서버로 전송함 
+			
+			int result = join.getResponseCode(); // 결과 
+			
+			InputStream getResult; // 받는 애
+			if(result == 200) { // 200이면 성공 나머지는 다 실패
+				getResult = join.getInputStream();
+			} else {
+				getResult = join.getErrorStream();
+			}
+			InputStreamReader captain = new InputStreamReader(getResult); // 받은 거에서 읽어주는 역할
+			BufferedReader charginWrite = new BufferedReader(captain); // 읽어주는거 받아서 형변환 시켜주기
+			
+//			session.setAttribute("loginUser", point);
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			loginUser.setPoint(point);
+			
+			session.setAttribute("loginUser", loginUser);
+			
+			return charginWrite.readLine();
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "";
+	}
+	
+	
+	
+	@RequestMapping(value= "kakaoPoint.me")
+	public ModelAndView successPay(String pg_token, ModelAndView mv, HttpSession session) {
+		System.out.println(pg_token);
+		
+		if(pg_token != null) { // 토큰이 있을 때
+			Member m = (Member)session.getAttribute("loginUser");
+			
+			System.out.println(m.getPoint());
+			System.out.println(m.getUserNo());
+
+			int result = memberService.updatePay(m.getPoint(), m.getUserNo());
+			Member m2 = memberService.loginMember(m.getUserId());
+		    if(result > 0) {
+		    	session.setAttribute("loginUser", m2);
+		        session.setAttribute("alertMsg", "결제가 완료되었습니다.");
+
+		        mv.setViewName("redirect:/");
+		    }
+		} else { // 토큰이 없을 때 
+	        session.setAttribute("alertMsg", "결제가 취소되었습니다.");
+	        mv.setViewName("member/chargingPoint");
+	        
+			return mv;
+		}
+	
+		return mv;
+	}
+	
+	
+	
 }
 
 

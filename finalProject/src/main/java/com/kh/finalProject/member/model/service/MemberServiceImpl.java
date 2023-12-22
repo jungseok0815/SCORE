@@ -167,5 +167,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.levelMember(sqlSession);
 	}
 
+	@Override
+	public int updatePay(int point, int userNo) {
+		return memberDao.updatePay(sqlSession, point, userNo);
+	}
+
 	
 }

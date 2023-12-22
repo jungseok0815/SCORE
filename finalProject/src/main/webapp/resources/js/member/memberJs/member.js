@@ -95,13 +95,11 @@ memberJoin = (result) =>{
         // 나머지 데이터 처리 로직 (예시로 console.log를 사용)
         console.log("Skipped data:", modalSportInfo[i]);
 
-        // 데이터를 서버로 전송하는 로직을 여기에 추가
         const data = handleMemberSportInfo(result.userNo, modalSportInfo[i].categoryNum);
         memberAjaxController.getMemberSportInfo(data, () => {
-            // 서버로 전송 후의 로직을 여기에 추가
             if (i === modalSportInfo.length - 1) {
                 alert("회원가입 성공");
-                location.href = "loginView.me";
+                location.href = "loginView.me"; 
             } else {
                 i = i + 1;
                 tmp(modalSportInfo[i]);

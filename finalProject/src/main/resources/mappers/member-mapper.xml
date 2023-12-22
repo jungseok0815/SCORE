@@ -395,4 +395,12 @@
 					FROM MEMBER 
 				WHERE USER_LEVEL = 1
  	</select>
+ 	
+ 	<!-- 카카오페이 결제 -->
+ 	<update id="updatePay" parameterType="map">
+		UPDATE MEMBER
+				SET USER_POINT = USER_POINT + #{point} 
+			WHERE USER_NO = #{userNo}
+	</update>
+	
 </mapper>
