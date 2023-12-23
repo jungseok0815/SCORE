@@ -221,10 +221,10 @@ public class PlaceController {
 		}
 	}
 	
-	//placeReviewList로 보내주는 메소드
+	//리뷰 작성할 때 로그인유저가 예약했었던 경기장만 리뷰 쓸 수 있게 하려고
 	@ResponseBody
 	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
-	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="categoryNum", defaultValue="4") int categoryNum, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
+	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
 		
 		if(!userNo.equals("")) {
 			ArrayList<Reservation> rList = pService.selectResList(userNo);
@@ -243,6 +243,7 @@ public class PlaceController {
 		pr.setUserNo(userNo);
 		
 		int resultReview = pService.insertPlaceReview(pr);
+		System.out.println(pr);
 		int resultImg = 0;
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -260,7 +261,7 @@ public class PlaceController {
 			session.setAttribute("alertMsg", "리뷰 작성 완료");
 			return "redirect:placeReviewList.pl?userNo=" + m.getUserNo() + "&currentPage=1";
 		}else {
-			session.setAttribute("alertMsg", "리뷰 작성 완료");
+			session.setAttribute("alertMsg", "리뷰 작성 실패");
 			return "common/errorPage";
 		}
 		
@@ -270,14 +271,14 @@ public class PlaceController {
 	@RequestMapping(value="/ReviewListAjax.pl", produces="application/json; charset=UTF-8")
 	public String placeReviewListView(Model m, @RequestParam(value="cpage", defaultValue="1") int currentPage,
 			@RequestParam(value="categoryNum", defaultValue="4") String categoryNum) {
-		System.out.println(categoryNum);
-		int s = Integer.parseInt(categoryNum);
+		
+		int cno = Integer.parseInt(categoryNum);
 		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
 		
 		
-		if(s == 4) {
+		if(cno == 4) {
 			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
-			System.out.println(pList);
+			
 			m.addAttribute("pi",pi);
 			m.addAttribute("pList",pList);
 		}else {
