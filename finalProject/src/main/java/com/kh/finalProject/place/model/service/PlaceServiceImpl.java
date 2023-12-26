@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 
 
@@ -92,7 +93,7 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectResList(int userNo) {
+	public ArrayList<Reservation> selectResList(String userNo) {
 		return pDao.selectResList(sqlSession, userNo);
 	}
 
@@ -109,6 +110,30 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public Place selectReplyField(int fno) {
 		return pDao.selectReplyField(sqlSession, fno);
+	}	
+		
+	public ArrayList<PlaceReview> placeReviewList(PageInfo pi) {
+		return pDao.placeReviewList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertPlaceReviewImg(ReviewImg ri) {
+		return pDao.insertPlaceReviewImg(sqlSession, ri);
+	}
+
+	@Override
+	public int selectReviewListCount() {
+		return pDao.selectReviewListCount(sqlSession);
+	}
+
+	@Override
+	public int insertPlaceReview(PlaceReview pr) {
+		return pDao.insertPlaceReview(sqlSession, pr);
+	}
+
+	@Override
+	public ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum) {
+		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
 	}
 
 
