@@ -42,5 +42,10 @@ const replyReviewDetailController={
                 console.log(error)
             }
         })
+    },
+
+    //답글 등록
+    insertReplyReplyAjax : ()  => {
+        
     }
 }
