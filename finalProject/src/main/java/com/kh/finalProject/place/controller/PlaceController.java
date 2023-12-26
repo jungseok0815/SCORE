@@ -250,7 +250,7 @@ public class PlaceController {
 	public ModelAndView evaluationPage(int fieldNo, int categoryNum, ModelAndView mv) {
 		
 		ArrayList<SportInfo> list = pService.selectMember(fieldNo, categoryNum);
-		System.out.println("결과" + list);
+//		System.out.println("결과" + list);
 		
 		mv.addObject("list", list)
 		  .setViewName("place/evaluation");
@@ -276,7 +276,7 @@ public class PlaceController {
 
 		int fieldNo = firstObject.get("fieldNo").getAsInt(); // "fieldNo" 키의 값을 가져와서 int로 변환
 
-		System.out.println("1번째 인덱스의 fieldNo: " + fieldNo);
+//		System.out.println("1번째 인덱스의 fieldNo: " + fieldNo);
 	
         for (JsonElement element : jsonArray) {
         	SportInfo spoInfo = gson.fromJson(element, SportInfo.class);
@@ -286,7 +286,6 @@ public class PlaceController {
         }
         
         for (SportInfo spoInfo : list) {
-        	System.out.println("플리즈" + spoInfo);
             updateSpo = pService.updateEval(spoInfo);
         }
         Member m = (Member)session.getAttribute("loginUser");

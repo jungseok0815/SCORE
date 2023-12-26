@@ -30,8 +30,8 @@ drawKaKaoPay = (result) => {
     console.log(result);
 
     var box = result.next_redirect_pc_url;
-    window.open(box);
-    // location.href = box;
+    // window.open(box);
+    location.href = box;
 }
 
 

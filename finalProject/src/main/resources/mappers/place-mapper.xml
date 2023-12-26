@@ -256,7 +256,7 @@
  	
  	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
 	<select id="selectManager" resultMap="fieldResultSet">
-	 	 SELECT FIELD_NO,
+	 	   SELECT FIELD_NO,
 				FIELD_NAME,
 				FIELD_AREA,
 				FIELD_DATE,
@@ -277,6 +277,27 @@
 		  WHERE MANAGER = #{userName}
 		     AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>
 		  
+		  <!-- SELECT FIELD.FIELD_NO,
+				FIELD.FIELD_NAME,
+				FIELD.FIELD_AREA,
+				FIELD.FIELD_DATE,
+				FIELD.FIELD_ENROLL_DATE,
+				FIELD.FIELD_COUNT,
+				FIELD.FIELD_SIZE,
+				FIELD.PARKING,
+				FIELD.MATCH_GENDER,
+				FIELD.SHOES,
+				FIELD.MANAGER,
+				FIELD.MATCH_LEVEL,
+				FIELD.MATCH_TYPE,
+				FIELD.START_TIME,
+				FIELD.END_TIME,
+				FIELD.MATCH_PAY,
+				FIELD.CATEGORY_NUM
+		   FROM FIELD "FIELD"
+           JOIN RESERVATION "ION" ON(FIELD.FIELD_NO = ION.FIELD_NO)
+		  WHERE MANAGER = #{userName}
+		    AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>-->
  	</select>
  	
  	<!-- 게임에 참가했던 사람들 조회 -->
