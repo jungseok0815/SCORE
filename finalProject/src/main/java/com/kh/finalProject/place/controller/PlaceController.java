@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -290,6 +291,34 @@ public class PlaceController {
 		}
 		
 		return new Gson().toJson(m);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/search.pl", produces="application/json; charset=UTF-8")
+	public HashMap selectSearchList(ModelAndView mv,
+										 @RequestParam("condition") String condition,
+										 @RequestParam("keyword") String keyword,
+										 @RequestParam(value="cpage", defaultValue="1") int currentPage,
+										 HttpSession session) {
+		System.out.println(keyword);
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		String userNo = Integer.toString(((Member)session.getAttribute("loginUser")).getUserNo());
+		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 10);
+		System.out.println(pi);
+		ArrayList<PlaceReview> pList =  pService.selectSearchList(map, pi);
+		System.out.println(pList);
+		HashMap result = new HashMap();
+		result.put("pList", pList);
+		result.put("pi", pi);
+		
+		if(userNo != null && !userNo.equals("")) {
+			ArrayList<Reservation> rList = pService.selectResList(userNo);	
+			result.put("rList", rList);
+		}
+		
+		return result ;
 	}
 		
 	
