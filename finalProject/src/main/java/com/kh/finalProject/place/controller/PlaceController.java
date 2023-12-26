@@ -237,13 +237,15 @@ public class PlaceController {
 	
 	//경기장 리뷰 insert
 	@RequestMapping("/insertReview.pl")
-	public String insertPlaceReview(String categoryNum, String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertPlaceReview(int fieldNo, String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
 		Member m =  (Member) session.getAttribute("loginUser");
-		pr.setCategoryNum(categoryNum);
+		Place p = pService.placeDetailview(fieldNo);
+		pr.setCategoryNum(Integer.toString(p.getCategoryNum()));
+		pr.setFieldNo(fieldNo);
 		pr.setUserNo(userNo);
 		
 		int resultReview = pService.insertPlaceReview(pr);
-		System.out.println(pr);
+		
 		int resultImg = 0;
 		
 		if(!upfile.getOriginalFilename().equals("")) {

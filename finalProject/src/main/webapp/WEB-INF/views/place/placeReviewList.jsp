@@ -18,7 +18,7 @@
         <div class="wrapper">
             <h3 align="center" style="color: #0a7ffb;">경기장 리뷰</h3>
             <div class="select-view" style= "float: left; margin-bottom: 5px;">
-                <select name="categoryNum" id="categoryNumBox">
+                <select name="categoryNum" id="categoryNumBox" onchange="changeSports()">
                     <option value="4">전체종목</option>
                     <option value="1">축구</option>
                     <option value="2">야구</option>
@@ -48,10 +48,26 @@
         </div>
         
         
-        <div  class="search-bar" align="center">
-            <input id="search1" type="text" placeholder="구장 검색" name="keyword" onkeyup="searchKeyword(event)">
-            <button onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+        <div class="search-bar" align="center">
+            <form action="search.pl">
+                <input type="hidden" name="cpage" value="1">
+                <select name="condition" class="pl">
+                    <option value="writer">작성자</option>
+                    <option value="title">구장이름</option>
+                    <option value="content">내용</option>
+                </select>
+                <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
+                <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+            </form>
         </div>
+        <c:if test="${ not empty condition }">
+            <script>
+                window.onload = function(){
+                    const opt = document.querySelector(".search-bar option[value=${condition}]");
+                    opt.setAttribute("selected", true);
+                }
+            </script>
+        </c:if>
       
 
         <div id="pagingArea">

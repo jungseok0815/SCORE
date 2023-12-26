@@ -31,9 +31,9 @@ init = () =>{
     }
     loadTeam(data,drawReviewList)
 }
-xxxx = () =>{
+changeSports = () =>{
     let categoryNum = document.getElementById("categoryNumBox")
-    let categoryNumValue = (categoryNum.options[selectArea.selectedIndex].value)
+    let categoryNumValue = (categoryNum.options[categoryNumBox.selectedIndex].value)
     reviewValue.categoryNum = categoryNumValue
         data={
             categoryNum : reviewValue.categoryNum

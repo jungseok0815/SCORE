@@ -77,7 +77,7 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.placeReviewList", null, rowBounds);
 	}
 	public int selectReviewListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("placeMapper.selectReviewListCount");
+		return sqlSession.selectOne("placeMapper.selectReviewListCount");
 	}
 	public int insertPlaceReviewImg(SqlSessionTemplate sqlSession, ReviewImg ri) {
 		return sqlSession.insert("placeMapper.insertPlaceReviewImg", ri);
@@ -90,7 +90,10 @@ public class PlaceDao {
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("placeMapper.placeChoiceReviewList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("placeMapper.placeChoiceReviewList", categoryNum, rowBounds);
+	}
+	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("placeMapper.selectSearchCount", keyword);
 	}
 	
 }
