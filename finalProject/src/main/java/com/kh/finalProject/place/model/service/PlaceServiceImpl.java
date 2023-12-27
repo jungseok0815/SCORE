@@ -13,7 +13,9 @@ import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 
 
@@ -93,7 +95,7 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectResList(int userNo) {
+	public ArrayList<Reservation> selectResList(String userNo) {
 		return pDao.selectResList(sqlSession, userNo);
 	}
 
@@ -130,6 +132,30 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int fieldReqDel(int fieldNo) {
 		return pDao.fieldReqDel(sqlSession, fieldNo);
+	}
+
+	public ArrayList<PlaceReview> placeReviewList(PageInfo pi) {
+		return pDao.placeReviewList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertPlaceReviewImg(ReviewImg ri) {
+		return pDao.insertPlaceReviewImg(sqlSession, ri);
+	}
+
+	@Override
+	public int selectReviewListCount() {
+		return pDao.selectReviewListCount(sqlSession);
+	}
+
+	@Override
+	public int insertPlaceReview(PlaceReview pr) {
+		return pDao.insertPlaceReview(sqlSession, pr);
+	}
+
+	@Override
+	public ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum) {
+		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
 	}
 
 

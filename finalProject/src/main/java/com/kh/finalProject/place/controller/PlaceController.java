@@ -34,7 +34,9 @@ import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 @Controller
 public class PlaceController {
@@ -218,7 +220,7 @@ public class PlaceController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectResList.pl",produces="application/json; charset=UTF-8")
-	public String selectResList(int userNo, ModelAndView mv) {
+	public String selectResList(String userNo, ModelAndView mv) {
 		ArrayList<Reservation> arrayRes = pService.selectResList(userNo);
 		mv.addObject("arrayRes",arrayRes);
 		return new Gson().toJson(mv);
@@ -330,11 +332,85 @@ public class PlaceController {
 	
 	
 	
+
 	//placeInfoList로 보내주는 메소드
 	@RequestMapping("/placeReviewList.pl")
 	public String placeInfoListView() {
 		return "place/placeReviewList";
+	}
+
+
+	//리뷰 작성할 때 로그인유저가 예약했었던 경기장만 리뷰 쓸 수 있게 하려고
+	@ResponseBody
+	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
+	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
+		
+		if(!userNo.equals("")) {
+			ArrayList<Reservation> rList = pService.selectResList(userNo);
+			mv.addObject("rList", rList);
+		}
+		mv.setViewName("place/placeReviewList");
+		
+		return mv;
 
 	}
+	
+	//경기장 리뷰 insert
+	@RequestMapping("/insertReview.pl")
+	public String insertPlaceReview(int fieldNo, String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
+		Member m =  (Member) session.getAttribute("loginUser");
+		Place p = pService.placeDetailview(fieldNo);
+		pr.setCategoryNum(Integer.toString(p.getCategoryNum()));
+		pr.setFieldNo(fieldNo);
+		pr.setUserNo(userNo);
+		
+		int resultReview = pService.insertPlaceReview(pr);
+		
+		int resultImg = 0;
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(upfile, session);
+			ri.setReviewUrl("resources/img/place//placeReviewList/");
+			ri.setReviewOriginName(upfile.getOriginalFilename());
+			ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName);
+			
+			resultImg = pService.insertPlaceReviewImg(ri);
+			 
+		}
+		
+		if(resultReview * resultImg > 0) {
+			session.setAttribute("alertMsg", "리뷰 작성 완료");
+			return "redirect:placeReviewList.pl?userNo=" + m.getUserNo() + "&currentPage=1";
+		}else {
+			session.setAttribute("alertMsg", "리뷰 작성 실패");
+			return "common/errorPage";
+		}
+		
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/ReviewListAjax.pl", produces="application/json; charset=UTF-8")
+	public String placeReviewListView(Model m, @RequestParam(value="cpage", defaultValue="1") int currentPage,
+			@RequestParam(value="categoryNum", defaultValue="4") String categoryNum) {
+		
+		int cno = Integer.parseInt(categoryNum);
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
+		
+		
+		if(cno == 4) {
+			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
+			
+			m.addAttribute("pi",pi);
+			m.addAttribute("pList",pList);
+		}else {
+			ArrayList<PlaceReview> pList =  pService.placeChoiceReviewList(pi, categoryNum);
+			m.addAttribute("pi",pi);
+			m.addAttribute("pList",pList);
+		}
+		
+		return new Gson().toJson(m);
+	}
+		
 	
 }

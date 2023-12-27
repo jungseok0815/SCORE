@@ -15,6 +15,8 @@
   	<typeAliases>
   		<typeAlias type="com.kh.finalProject.place.model.vo.Place" alias="Place" />
   		<typeAlias type="com.kh.finalProject.place.model.vo.PlaceImg" alias="PlaceImg" />
+  		<typeAlias type="com.kh.finalProject.place.model.vo.ReviewImg" alias="ReviewImg" />
+  		<typeAlias type="com.kh.finalProject.place.model.vo.PlaceReview" alias="PlaceReview" />
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamOffer" alias="teamOffer"/>
   		<typeAlias type="com.kh.finalProject.notice.model.vo.Notice" alias="Notice"/>
   		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />

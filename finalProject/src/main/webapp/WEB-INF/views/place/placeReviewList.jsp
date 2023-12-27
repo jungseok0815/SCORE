@@ -6,104 +6,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/final/resources/css/place/placeReviewList.css">
 <script type="text/javascript" src="./resources/js/place/placeReviewList.js"></script>
-
+<script type="text/javascript" src="./resources/js/place/placeAjax/placeReviewAjax.js"></script>
 </head>
-<body>
+<body onload="init()">
     <jsp:include page="../common/header.jsp" />
 
     <div class="outer">
         <div class="wrapper">
             <h3 align="center" style="color: #0a7ffb;">경기장 리뷰</h3>
             <div class="select-view" style= "float: left; margin-bottom: 5px;">
-                <select name=" " id="">
-                    <option value="">전체종목</option>
-                    <option>축구</option>
-                    <option>야구</option>
-                    <option>농구</option>
-                </select>
-            </div>
-            <div class="select-view" style= "float: right; margin-bottom: 5px;">
-                <select name=" " id="">
-                    <option value="">지역</option>
-                    <option>서울</option>
-                    <option>경상</option>
-                    <option>대구</option>
-                    <option>대전</option>
-                    <option>경기</option>
-                    <option>광주</option>
-                    <option>부산</option>
-                    <option>충청</option>
-                    <option>인천</option>
-                    <option>전라</option>
-                    <option>울산</option>
-                    <option>세종</option>
-                    <option>강원</option>
-                    <option>제주</option>
+                <select name="categoryNum" id="categoryNumBox" onchange="changeSports()">
+                    <option value="4">전체종목</option>
+                    <option value="1">축구</option>
+                    <option value="2">야구</option>
+                    <option value="3">농구</option>
                 </select>
             </div>
 
             <table align="center" class="list-area">      
                 <thead style="border-bottom: 1px solid #ddd; border-top: 1px solid #ddd;">
                     <tr id="table-head">
-                        <th width="70">지역</th>
-                        <th width="300">구장 이름</th>
                         <th width="100">작성자</th>
+                        <th width="300">구장 이름</th>
                         <th width="50">조회수</th>
                         <th width="130">작성일</th>
                         <th width="130">별점</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
+                <tbody class="review-list">
+                    
                 </tbody>
             </table>
             <div id="enroll-btn">
@@ -113,24 +47,57 @@
             </div>
         </div>
         
-        <div  class="search-bar" align="center">
-            <input id="search" type="text" onfocus="" onkeyup="" placeholder="구장 검색">
-            <button><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+        
+        <div class="search-bar" align="center">
+            <form action="search.pl">
+                <input type="hidden" name="cpage" value="1">
+                <select name="condition" class="pl">
+                    <option value="writer">작성자</option>
+                    <option value="title">구장이름</option>
+                    <option value="content">내용</option>
+                </select>
+                <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
+                <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
+            </form>
         </div>
+        <c:if test="${ not empty condition }">
+            <script>
+                window.onload = function(){
+                    const opt = document.querySelector(".search-bar option[value=${condition}]");
+                    opt.setAttribute("selected", true);
+                }
+            </script>
+        </c:if>
+      
 
-        <div class="paging-area" align="center">
-            <c:if test="${ pi.currentPage ne 1 }">
-                <button class="btn btn-light" onclick="location.href=''">&lt;</button>
-            </c:if>
-
-            <c:forEach var="p" begin="${pi.startPage}" end="${ pi.endPage }" >
-                <button class="btn btn-light" onclick="location.href=''">${p}</button>
-            </c:forEach>
-            <c:if test="${ pi.currentPage ne pi.maxPage }">
-                <button class="btn btn-light" onclick="location.href=''">&gt;</button>
-            </c:if>
+        <div id="pagingArea">
+            <ul class="pagination">
+               <c:choose>
+                  <c:when test = "${pi.currentPage ne 1 }">
+                     <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage - 1 }">이전</a></li>
+                  </c:otherwise>
+               </c:choose>
+                  
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }" >
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${p}">${p}</a></li>
+                </c:forEach>
+            
+                <c:choose>
+                  <c:when test = "${pi.currentPage eq pi.maxPage }">
+                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage + 1 }">다음</a></li>
+                  </c:otherwise>
+               </c:choose>
+            </ul>
         </div>
     </div>
+
+    <jsp:include page="../common/footer.jsp" />
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -141,50 +108,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="mb-3" name="myform" id="myform" method="post">
+                <form class="mb-3" action="insertReview.pl" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="userNo" value="${loginUser.userNo}">
                     <div class="star-area">
                         <p>별점</p>
                         <fieldset class="rate">
-                            <input type="radio" id="rating10" name="rating" value="10"><label for="rating10" title="5점"></label>
-                            <input type="radio" id="rating9" name="rating" value="9"><label class="half" for="rating9" title="4.5점"></label>
-                            <input type="radio" id="rating8" name="rating" value="8"><label for="rating8" title="4점"></label>
-                            <input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label>
-                            <input type="radio" id="rating6" name="rating" value="6"><label for="rating6" title="3점"></label>
-                            <input type="radio" id="rating5" name="rating" value="5"><label class="half" for="rating5" title="2.5점"></label>
-                            <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="2점"></label>
-                            <input type="radio" id="rating3" name="rating" value="3"><label class="half" for="rating3" title="1.5점"></label>
-                            <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="1점"></label>
-                            <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label>
+                            <input type="radio" id="rating10" name="starRating" value="5"><label for="rating10" title="5점"></label>
+                            <input type="radio" id="rating8" name="starRating" value="4"><label for="rating8" title="4점"></label>
+                            <input type="radio" id="rating6" name="starRating" value="3"><label for="rating6" title="3점"></label>
+                            <input type="radio" id="rating4" name="starRating" value="2"><label for="rating4" title="2점"></label>
+                            <input type="radio" id="rating2" name="starRating" value="1"><label for="rating2" title="1점"></label>
+                           
                         </fieldset>
                     </div>
-                    <div class="modal-middle" style="margin-bottom: 5px;">
-                        <div style="display: flex;">
-                            <select name=" " id="">
-                                <option value="">종목</option>
-                                <option>축구</option>
-                                <option>야구</option>
-                                <option>농구</option>
+                    <div class="select-myPlace" style="margin-bottom: 5px;">
+                        <div style="width: 100%;">
+                            <select name="fieldNo" id="" style="width: 100%;">
+                                <c:forEach var="item" items="${rList}">
+                                    <option value="${item.fieldNo}">${item.fieldName}</option>
+                                </c:forEach>
                             </select>
-                            <select name=" " id="">
-                                <option value="">지역</option>
-                                <option>서울</option>
-                                <option>경상</option>
-                                <option>대구</option>
-                                <option>대전</option>
-                                <option>경기</option>
-                                <option>광주</option>
-                                <option>부산</option>
-                                <option>충청</option>
-                                <option>인천</option>
-                                <option>전라</option>
-                                <option>울산</option>
-                                <option>세종</option>
-                                <option>강원</option>
-                                <option>제주</option>
-                            </select>
-                        </div>
-                        <div style="width: 100%">
-                            <input type="text" placeholder="경기장 이름" style="width: 100%">
                         </div>
                     </div>
                     <tr>
@@ -195,29 +138,26 @@
                     <tr>
                         <td colspan="2">
                             <div class="filebox">
-                                <label class="btn-upload" for="fileImgFile">
+                                <label class="btn-upload" for="file">
                                     <img src="" id="file-img" onclick="">
                                 </label>
-                                <input type="file" name="upfile" id="fileImgFile" onchange="imgChangeUpdate(this)" required>
+                                <input type="file" name="upfile" id="file" onchange="imgChangeUpdate(this)" required>
                             </div>
                         </td>
                     </tr>
                     <div>
-                        <textarea class="col-auto form-control" type="text" id="reviewContents"
+                        <textarea name="reviewContent" class="col-auto form-control" type="text" id="reviewContent"
                                   placeholder="경기장 이용 후 느낀점을 적어주세요!"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="submit" type="button" class="btn btn-primary" >등록</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">등록</button>
-            </div>
-        </div>
         </div>
     </div>
-
     
-
-    <jsp:include page="../common/footer.jsp" />
+    
 </body>
 </html>

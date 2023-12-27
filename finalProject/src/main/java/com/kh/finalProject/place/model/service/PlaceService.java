@@ -9,7 +9,9 @@ import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
+import com.kh.finalProject.place.model.vo.ReviewImg;
 
 public interface PlaceService {
 	//경기장 등록
@@ -27,9 +29,10 @@ public interface PlaceService {
 	int payPoint(Member loginUser);
 	int checkResMatch(Reservation res);
 	ArrayList<PlaceImg> placeImgList(int fno);
-	ArrayList<Reservation> selectResList(int userNo);
+	ArrayList<Reservation> selectResList(String userNo);
 	int deleteReservation(int resNo);
 	
+
 	// 매니저 게임 다 가져오기
 	ArrayList<Field> selectManager(String userName);
 	// 게임에 참가했던 애들 조회
@@ -42,5 +45,17 @@ public interface PlaceService {
 	int fieldDelet(int fieldNo);
 	// 평가 한 후 예약자 삭제
 	int fieldReqDel(int fieldNo);
+
+	//경기장 리뷰 리스트 셀렉트
+	ArrayList<PlaceReview> placeReviewList(PageInfo pi);
+	ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum);
+	//경기장 리뷰 등록
+	int insertPlaceReview(PlaceReview pr);
+	//경기장 리뷰 사진 등록
+	int insertPlaceReviewImg(ReviewImg ri);
+	//리뷰 리스트 총 개수
+	int selectReviewListCount();
+	
+
 
 }
