@@ -362,6 +362,7 @@
    						)
    </insert>
    
+<<<<<<< HEAD
    <!-- 리뷰 이미지 조회 -->
     <select id="placeReviewImgList" resultMap="reviewImgResultSet">
  		SELECT REVIEW_IMG_NO,
@@ -388,6 +389,51 @@
 				#{replyNo}
 				 )
    </insert>
+
+   <!-- 리뷰 검색 게시글 총 갯수 -->
+ 	<select id="selectSearchCount" resultType="_int">
+		SELECT COUNT(*)
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+ 	</select>
+ 	
+ 	<!-- 리뷰검색 리스트 -->
+ 	<select id="selectSearchList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+          ORDER BY FR.REVIEW_NO DESC
+ 	</select>
 
       <select id="selectReplyReply" resultMap="replyReplyResultSet">
  			SELECT USER_NAME, 

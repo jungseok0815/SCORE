@@ -1,6 +1,7 @@
 package com.kh.finalProject.place.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -94,8 +95,15 @@ public class PlaceDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("placeMapper.placeChoiceReviewList", categoryNum, rowBounds);
 	}
-	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
-		return sqlSession.selectOne("placeMapper.selectSearchCount", keyword);
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("placeMapper.selectSearchCount", map);
+	}
+	public ArrayList<PlaceReview> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("placeMapper.selectSearchList", map, rowBounds);
 	}
 	
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int fno) {

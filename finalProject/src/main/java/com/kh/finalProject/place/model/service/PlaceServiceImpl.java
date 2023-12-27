@@ -1,6 +1,7 @@
 package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,16 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public ArrayList<ReplyReply> selectReplyReply(int replyNo) {
 		return pDao.selectReplyReply(sqlSession, replyNo);
+	}
+	
+	@Override
+	public int selectSearchCount(HashMap<String, String> map) {
+		return pDao.selectSearchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<PlaceReview> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		return pDao.selectSearchList(sqlSession, map, pi);
 	}
 
 

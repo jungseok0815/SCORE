@@ -37,6 +37,7 @@
                     </tr>
                 </thead>
 
+<<<<<<< HEAD
                 <tbody>
                     <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
                         <td>부산</td>
@@ -87,38 +88,33 @@
                         <td class="star-rating">★</td>
                     </tr>
 
+=======
+                <!-- 리뷰 리스트 ajax불러오는 곳 -->
+>>>>>>> f578ad711bb88af08357003f17be1e96d832164a
                 <tbody class="review-list">
                     
                 </tbody>
             </table>
             <div id="enroll-btn">
+                <c:if test="${loginUser.userLevel eq 1 or loginUser.userLevel eq 2}">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         리뷰작성
                     </button>
+				</c:if>
             </div>
         </div>
         
         
         <div class="search-bar" align="center">
-            <form action="search.pl">
-                <input type="hidden" name="cpage" value="1">
-                <select name="condition" class="pl">
-                    <option value="writer">작성자</option>
-                    <option value="title">구장이름</option>
-                    <option value="content">내용</option>
-                </select>
-                <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
-                <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
-            </form>
+            <input type="hidden" name="cpage" value="1">
+            <select name="condition" class="pl" id="condition">
+                <option value="writer">작성자</option>
+                <option value="title">구장이름</option>
+                <option value="content">내용</option>
+            </select>
+            <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
+            <button type="button" onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" ></button>  
         </div>
-        <c:if test="${ not empty condition }">
-            <script>
-                window.onload = function(){
-                    const opt = document.querySelector(".search-bar option[value=${condition}]");
-                    opt.setAttribute("selected", true);
-                }
-            </script>
-        </c:if>
       
 
         <div id="pagingArea">

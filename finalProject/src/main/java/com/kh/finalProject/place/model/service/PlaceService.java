@@ -2,6 +2,7 @@ package com.kh.finalProject.place.model.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
@@ -46,6 +47,9 @@ public interface PlaceService {
 	int insertPlaceReviewImg(ReviewImg ri);
 	//리뷰 리스트 총 개수
 	int selectReviewListCount();
+	//리뷰 게시글 검색
+	int selectSearchCount(HashMap<String, String> map);
+	ArrayList<PlaceReview> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
 	int addReplyReply(ReplyReply p);
 	ArrayList<ReplyReply> selectReplyReply(int replyNo);
