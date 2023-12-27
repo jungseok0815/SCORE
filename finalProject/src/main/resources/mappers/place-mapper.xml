@@ -47,7 +47,7 @@
   		<result column="START_TIME" property="startTime" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
-<<<<<<< HEAD
+
   	<resultMap type="Field" id="fieldResultSet">
   		<result column="FIELD_NO" property="fieldNo" />
   		<result column="FIELD_NAME" property="fieldName" />
@@ -84,7 +84,6 @@
 		<result column="USER_NAME" property="userName" />
 	</resultMap>
   	
-=======
   	<resultMap type="PlaceReview" id="PlaceReviewResultSet">
   		<result column="REVIEW_NO" property="reviewNo" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
@@ -100,7 +99,6 @@
   		<result column="USER_NAME" property="userName" />
   		<result column="FIELD_NAME" property="fieldName" />
   	</resultMap>
->>>>>>> 5d50d09de3ad56a473a466845c63d27da5d31bf6
   	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
