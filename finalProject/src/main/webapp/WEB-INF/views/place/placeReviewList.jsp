@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
 
-<<<<<<< HEAD
+
                 <tbody>
                     <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
                         <td>부산</td>
@@ -87,12 +87,9 @@
                         <td>2023-12-17</td>
                         <td class="star-rating">★</td>
                     </tr>
-
-=======
-                <!-- 리뷰 리스트 ajax불러오는 곳 -->
->>>>>>> f578ad711bb88af08357003f17be1e96d832164a
-                <tbody class="review-list">
                     
+                <!-- 리뷰 리스트 ajax불러오는 곳 -->
+                <tbody class="review-list">
                 </tbody>
             </table>
             <div id="enroll-btn">
