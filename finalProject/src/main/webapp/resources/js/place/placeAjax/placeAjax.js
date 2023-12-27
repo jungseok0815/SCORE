@@ -45,7 +45,29 @@ const replyReviewDetailController={
     },
 
     //답글 등록
-    insertReplyReplyAjax : ()  => {
-        
+    insertReplyReplyAjax : (data,callback)  => {
+        $.ajax({
+            url:"addReplyReply.pl",
+            data,
+            success: function(result){
+                  callback(result)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+     //답글 불러오기
+     selectReplyReplyAjax : (data,callback)  => {
+        $.ajax({
+            url:"selectReplyReply.pl",
+            data,
+            success: function(result){
+               callback(result);
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
     }
 }

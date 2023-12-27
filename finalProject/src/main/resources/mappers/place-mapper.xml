@@ -71,6 +71,15 @@
   		<result column="USER_NO" property="userNo" />
   		<result column="FIELD_NO" property="fieldNo" />
   	</resultMap>
+
+  	<resultMap type="ReplyReply" id="replyReplyResultSet">
+  	  	<result column="REPLYREPLY_NO" property="replyReplyNo" />
+  		<result column="REPLYREPLY_CONTENT" property="replyReplyContent" />
+  		<result column="REPLYREPLY_DATE" property="replyReplyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="REPLY_NO" property="replyNo" />
+  		<result column="USER_NAME" property="userName" />
+  	</resultMap>
   	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
@@ -250,6 +259,7 @@
 		 WHERE RES_NO = #{resNo}	
  	</delete>
  	
+ 	<!-- 리뷰 댓글 조회 -->
  	<select id="selectReplyList" resultMap="replyResultSet">
  		SELECT REPLY_NO,
  					 REPLY_WRITER,
@@ -259,11 +269,14 @@
  		  FROM REPLY
  		WHERE FIELD_NO = #{fno}
  	</select>
-	<select id="selectReplyField" resultMap="placeResultSet">
+	
+	<!-- 리뷰 게시글 정보 불러옴 -->
+	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
 		SELECT FIELD_NO,
-					 FIELD_NAME,
-					 FIELD_AREA
-		  FROM FIELD
+		             FIELD_NAME,
+		             FIELD_AREA
+			FROM FIELD_REVIEW
+		JOIN FIELD USING (FIELD_NO)
 		WHERE FIELD_NO = #{fno}
 	</select>
  	
@@ -348,5 +361,41 @@
 			            SEQ_FIELD_REVIEW.CURRVAL
    						)
    </insert>
+   
+   <!-- 리뷰 이미지 조회 -->
+    <select id="placeReviewImgList" resultMap="reviewImgResultSet">
+ 		SELECT REVIEW_IMG_NO,
+		       REVIEW_URL,
+		       REVIEW_ORIGIN_NAME,
+		       REVIEW_CHANGE_NAME
+		  FROM REVIEW_IMG
+		 WHERE REVIEW_NO = #{rno}
+ 	</select>
+ 	
+ 	<insert id= "addReplyReply">
+   		INSERT INTO REPLYREPLY
+				 (
+				REPLYREPLY_NO,
+				REPLYREPLY_CONTENT,
+				USER_NO,
+				REPLY_NO
+				 )
+		 VALUES
+				 (
+				SEQ_REPLYREPLY.NEXTVAL,
+				#{replyReplyContent},
+				#{userNo},
+				#{replyNo}
+				 )
+   </insert>
 
+      <select id="selectReplyReply" resultMap="replyReplyResultSet">
+ 			SELECT USER_NAME, 
+ 						 REPLYREPLY_DATE, 
+ 						 REPLYREPLY_CONTENT,
+ 						 USER_NO
+ 			FROM REPLYREPLY
+ 			JOIN MEMBER USING(USER_NO)
+ 			WHERE REPLY_NO = #{replyNo}
+ 	</select>
 </mapper>

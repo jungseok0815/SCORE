@@ -38,7 +38,7 @@
                 </thead>
 
                 <tbody>
-                    <tr onclick="location.href = 'placeReviewDetail.pl?fno=2';">
+                    <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
                         <td>부산</td>
                         <td class="review-name">구덕운동장</td>
                         <td>금남식</td>

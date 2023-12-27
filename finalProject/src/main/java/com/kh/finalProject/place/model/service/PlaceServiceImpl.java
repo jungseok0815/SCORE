@@ -11,6 +11,7 @@ import com.kh.finalProject.place.model.dao.PlaceDao;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
@@ -108,7 +109,7 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public Place selectReplyField(int fno) {
+	public PlaceReview selectReplyField(int fno) {
 		return pDao.selectReplyField(sqlSession, fno);
 	}	
 		
@@ -134,6 +135,21 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum) {
 		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
+	}
+
+	@Override
+	public ArrayList<ReviewImg> placeReviewImgList(int rno) {
+		return pDao.placeReviewImgList(sqlSession, rno);
+	}
+
+	@Override
+	public int addReplyReply(ReplyReply p) {
+		return pDao.addReplyReply(sqlSession, p);
+	}
+
+	@Override
+	public ArrayList<ReplyReply> selectReplyReply(int replyNo) {
+		return pDao.selectReplyReply(sqlSession, replyNo);
 	}
 
 

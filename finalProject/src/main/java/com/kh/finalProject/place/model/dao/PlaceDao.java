@@ -11,6 +11,7 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
@@ -101,7 +102,22 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyList", fno);
 	}
 	
-	public Place selectReplyField(SqlSessionTemplate sqlSession, int fno) {
+	public PlaceReview selectReplyField(SqlSessionTemplate sqlSession, int fno) {
 		return sqlSession.selectOne("placeMapper.selectReplyField", fno);
 	}
+	
+	public int addReplyReply(SqlSessionTemplate sqlSession, ReplyReply p) {
+		return sqlSession.insert("placeMapper.addReplyReply", p);
+	}
+	
+	
+	public ArrayList<ReviewImg> placeReviewImgList(SqlSessionTemplate sqlSession, int rno) {
+		return (ArrayList)sqlSession.selectList("placeMapper.placeReviewImgList", rno);
+	}
+	
+	public ArrayList<ReplyReply> selectReplyReply(SqlSessionTemplate sqlSession, int reply) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
+	}
+	
+	
 }
