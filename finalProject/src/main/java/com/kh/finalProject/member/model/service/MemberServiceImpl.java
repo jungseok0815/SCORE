@@ -163,6 +163,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	public ArrayList<Member> levelMember() {
 		return memberDao.levelMember(sqlSession);
 	}
@@ -170,6 +171,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updatePay(int point, int userNo) {
 		return memberDao.updatePay(sqlSession, point, userNo);
+
+	public ArrayList<Member> chattingSelectFriend(HashMap info) {
+		return memberDao.chattingSelectFriend(sqlSession, info);
+
 	}
 
 	

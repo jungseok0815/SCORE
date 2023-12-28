@@ -564,5 +564,13 @@ public class TeamController {
 		return mv;	
 	}
 
+	
+	@ResponseBody 
+	@RequestMapping(value= "/selectMyteam.tm",produces="application/json; charset=UTF-8" )
+	public String selectMyteam(HttpSession session) {
+			Member m =  (Member) session.getAttribute("loginUser");
+			return new Gson().toJson(teamService.selectMyteam(m.getUserNo()));
+	}
+
 }
 

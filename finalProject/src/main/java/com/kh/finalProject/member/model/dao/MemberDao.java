@@ -120,6 +120,7 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
 	}
 	
+
 	// 운영진인 사람들만 조회
 	public ArrayList<Member> levelMember(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.levelMember");
@@ -132,4 +133,10 @@ public class MemberDao {
 		
 		return sqlSession.update("memberMapper.updatePay", params);
 	}
+
+	public ArrayList<Member> chattingSelectFriend(SqlSessionTemplate sqlSession, HashMap info) {
+		return (ArrayList)sqlSession.selectList("memberMapper.chattingSelectFriend", info);
+	}
+	
+
 }

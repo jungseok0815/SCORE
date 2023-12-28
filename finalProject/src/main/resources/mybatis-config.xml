@@ -28,10 +28,15 @@
   		<typeAlias type="com.kh.finalProject.member.model.vo.MessageAuth" alias="MessageAuth" />
   		<typeAlias type="com.kh.finalProject.place.model.vo.Reservation" alias="Reservation" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.MemberImg" alias="MemberImg" />
-		<typeAlias type="com.kh.finalProject.team.model.vo.TeamReq" alias="TeamReq" />
-		<typeAlias type="com.kh.finalProject.place.model.vo.Field" alias="Field" />
+      <typeAlias type="com.kh.finalProject.team.model.vo.TeamReq" alias="TeamReq" />
+      <typeAlias type="com.kh.finalProject.place.model.vo.Field" alias="Field" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingRoom" alias="ChattingRoom" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingMember" alias="ChattingMember" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingMessage" alias="ChattingMessage" />
+
 		<typeAlias type="com.kh.finalProject.place.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.kh.finalProject.place.model.vo.ReplyReply" alias="ReplyReply" />
+
   	</typeAliases>
 
 
@@ -40,6 +45,7 @@
   		<mapper resource="/mappers/team-mapper.xml" /> 
   		<mapper resource="/mappers/member-mapper.xml" />
   		<mapper resource="/mappers/notice-mapper.xml" />
+  		<mapper resource="/mappers/chatting-mapper.xml" />
   	</mappers>
 
  

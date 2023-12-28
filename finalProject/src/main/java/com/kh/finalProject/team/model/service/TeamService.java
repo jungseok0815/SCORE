@@ -258,6 +258,16 @@ public class TeamService implements TeamServiceImp{
 	@Override
 	public String selectMemberProImg(int userNo) {
 		return teamDao.selectMemberProImg(sqlSession, userNo);
+  }
+	@Override
+	public ArrayList<Team> selectMyteam(int userNo) {
+		return teamDao.selectMyteam(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Team> chattingSelectTeam(HashMap info) {
+		return teamDao.chattingSelectTeam(sqlSession, info);
+
 	}
 
 
