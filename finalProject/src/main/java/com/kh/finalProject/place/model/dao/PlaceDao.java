@@ -2,6 +2,7 @@ package com.kh.finalProject.place.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.SportInfo;
+import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
@@ -72,6 +75,27 @@ public class PlaceDao {
 	public int deleteReservation(SqlSessionTemplate sqlSession, int resNo) {
 		return sqlSession.delete("placeMapper.deleteReservation", resNo);
 	}
+	public ArrayList<Field> selectManager(SqlSessionTemplate sqlSession, String userName) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectManager", userName);
+	}
+	public ArrayList<SportInfo> selectMember(SqlSessionTemplate sqlSession, int fieldNo, int categoryNum) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fieldNo", fieldNo);
+		params.put("categoryNum", categoryNum);
+		return (ArrayList)sqlSession.selectList("placeMapper.selectMember", params);
+	}
+	public int updateEval(SqlSessionTemplate sqlSession, SportInfo spoInfo) {
+		return sqlSession.update("placeMapper.updateEval", spoInfo);
+	}
+	public int fieldNoDel(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.delete("placeMapper.fieldNoDel", fieldNo);
+	}
+	public int fieldDelet(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.delete("placeMapper.fieldDelet", fieldNo);
+	}
+	public int fieldReqDel(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.delete("placeMapper.fieldReqDel", fieldNo);
+	}
 	public ArrayList<PlaceReview> placeReviewList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -104,6 +128,9 @@ public class PlaceDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("placeMapper.selectSearchList", map, rowBounds);
+	}
+	public ArrayList<Field> selectReservation(SqlSessionTemplate sqlSession, int fieldNo) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReservation", fieldNo);
 	}
 	
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int fno) {

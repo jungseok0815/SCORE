@@ -47,6 +47,43 @@
   		<result column="START_TIME" property="startTime" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
   	</resultMap>
+
+  	<resultMap type="Field" id="fieldResultSet">
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="FIELD_AREA" property="fieldArea" />
+  		<result column="FIELD_DATE" property="fieldDate" />
+  		<result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
+  		<result column="FIELD_COUNT" property="fieldCount" />
+  		<result column="FIELD_SIZE" property="fieldSize" />
+  		<result column="PARKING" property="parking" />
+  		<result column="MATCH_GENDER" property="matchGender" />
+  		<result column="SHOES" property="shoes" />
+  		<result column="MANAGER" property="manager" />
+  		<result column="MATCH_LEVEL" property="matchLevel" />
+  		<result column="MATCH_TYPE" property="startTime" />
+  		<result column="END_TIME" property="endTime" />
+  		<result column="MATCH_PAY" property="matchPay" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
+  	<resultMap type="SportInfo" id="sportInfoResultSet">
+		<result column="SPORT_LEVEL" property="sportLever" />
+		<result column="SPORT_SCORE" property="sportScore" />
+		<result column="SPORT_COUNT" property="sportCount" />
+		<result column="SPORT_SMILE" property="sportSmile" />
+		<result column="SPORT_YELLOW" property="sportYellow" />
+		<result column="SPORT_RED" property="sportRed" />
+		<result column="STYLE" property="style" />
+		<result column="SKILL" property="skill" />
+		<result column="USER_NO" property="userNo" />
+		<result column="CATEGORY_NUM" property="categoryNum" />
+		<result column="RES_NO" property="resNo" />
+		<result column="RES_DATE" property="resDate" />
+		<result column="RES_USER_NO" property="resUserNo" />
+		<result column="FIELD_NO" property="fieldNo" />
+		<result column="USER_NAME" property="userName" />
+	</resultMap>
+  	
   	<resultMap type="PlaceReview" id="PlaceReviewResultSet">
   		<result column="REVIEW_NO" property="reviewNo" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
@@ -153,6 +190,7 @@
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
  	</select>
+ 	
  	<select id="selectPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -170,6 +208,7 @@
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
  	</select>
+ 	
  	<select id="placeDetailview" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -191,11 +230,13 @@
  		  FROM FIELD
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO, COUNT(*) as "FIELD_COUNT"
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+ 	
 	<select id="placeResCount" resultType="_int">
  		SELECT COUNT(*)
 		FROM RESERVATION
@@ -210,6 +251,7 @@
 		FROM FIELD
 		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
 	</select>
+	
 	<insert id= "insertResMatch">
    	INSERT INTO RESERVATION
 				 (
@@ -233,6 +275,7 @@
 		 WHERE FIELD_NO = #{fieldNo}
 		   AND RES_USER_NO = #{resUserNo}
  	</select>
+ 	
  	<select id="placeImgList" resultMap="placeImgResultSet">
  		SELECT FIELD_IMG_NO,
 		       FIELD_URL,
@@ -241,6 +284,7 @@
 		  FROM FIELD_IMG
 		 WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResList" resultMap="reservationResultSet">
 	 	SELECT RES_NO,
 		       RES_USER_NO,
@@ -254,9 +298,116 @@
 		 WHERE RES_USER_NO = #{resUserNo}
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
+ 	
  	<delete id="deleteReservation">
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
+ 	</delete>
+ 	
+ 	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
+	<select id="selectManager" resultMap="fieldResultSet">
+	 	   SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				FIELD_ENROLL_DATE,
+				FIELD_COUNT,
+				FIELD_SIZE,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_TYPE,
+				START_TIME,
+				END_TIME,
+				MATCH_PAY,
+				CATEGORY_NUM
+		   FROM FIELD 
+		  WHERE MANAGER = #{userName}
+		     AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>
+		  
+		  <!-- SELECT FIELD.FIELD_NO,
+				FIELD.FIELD_NAME,
+				FIELD.FIELD_AREA,
+				FIELD.FIELD_DATE,
+				FIELD.FIELD_ENROLL_DATE,
+				FIELD.FIELD_COUNT,
+				FIELD.FIELD_SIZE,
+				FIELD.PARKING,
+				FIELD.MATCH_GENDER,
+				FIELD.SHOES,
+				FIELD.MANAGER,
+				FIELD.MATCH_LEVEL,
+				FIELD.MATCH_TYPE,
+				FIELD.START_TIME,
+				FIELD.END_TIME,
+				FIELD.MATCH_PAY,
+				FIELD.CATEGORY_NUM
+		   FROM FIELD "FIELD"
+           JOIN RESERVATION "ION" ON(FIELD.FIELD_NO = ION.FIELD_NO)
+		  WHERE MANAGER = #{userName}
+		    AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>-->
+ 	</select>
+ 	
+ 	<!-- 게임에 참가했던 사람들 조회 -->
+	<select id="selectMember" resultMap="sportInfoResultSet" parameterType="map">
+	 	 SELECT MB.USER_NAME,
+	 	        MB.USER_NO,
+				RES.RES_NO,
+				RES.RES_DATE,
+				RES.RES_USER_NO,
+				RES.FIELD_NO,
+				SPO.SPORT_LEVEL,
+				SPO.SPORT_SCORE,
+				SPO.SPORT_COUNT,
+				SPO.SPORT_SMILE,
+				SPO.SPORT_YELLOW,
+				SPO.SPORT_RED,
+				SPO.STYLE,
+				SPO.SKILL,
+				SPO.USER_NO,
+				SPO.CATEGORY_NUM
+		   FROM SPORTINFO "SPO"
+		   JOIN RESERVATION "RES" ON(RES.RES_USER_NO = SPO.USER_NO)
+		   JOIN MEMBER "MB" ON(MB.USER_NO = SPO.USER_NO)
+	      WHERE FIELD_NO = #{fieldNo}
+	        AND CATEGORY_NUM = #{categoryNum}
+ 	</select>
+ 	
+ 	<!-- 경기 결과 업데이트 시켜주기 -->
+	<update id="updateEval">
+ 		UPDATE SPORTINFO
+			   SET 
+			   SPORT_LEVEL = #{sportLever},
+			   SPORT_SMILE = SPORT_SMILE + #{sportSmile},
+			   SPORT_YELLOW = SPORT_YELLOW + #{sportYellow},
+			   SPORT_RED = SPORT_RED + #{sportRed},
+			   SPORT_COUNT = SPORT_COUNT + 1,
+			   SPORT_SCORE = #{sportScore}
+	     WHERE USER_NO = #{userNo}
+	       AND CATEGORY_NUM = #{categoryNum}
+ 	</update>
+ 	
+ 	<!-- 평가 한 후 필드 이미지 삭제  -->
+ 	<delete id="fieldNoDel">
+	 	DELETE FROM 
+	 	       FIELD_IMG
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 평가 한 후 필드  삭제  -->
+ 	<delete id="fieldDelet">
+	 	DELETE FROM 
+	 	       FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 평가 한 후 예약자 삭제  -->
+ 	<delete id="fieldReqDel">
+	 	DELETE FROM 
+	 	       RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
  	</delete>
  	
  	<!-- 리뷰 댓글 조회 -->
@@ -341,6 +492,7 @@
 	                    #{starRating}
 	                    )
  	</insert>
+ 	
  	<insert id= "insertPlaceReviewImg">
    	INSERT INTO REVIEW_IMG
    						 (
@@ -388,6 +540,12 @@
 				#{replyNo}
 				 )
    </insert>
+
+	<select id="selectReservation" resultMap="fieldResultSet">
+ 		SELECT FIELD_NO
+		  FROM RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+	</select>
 
    <!-- 리뷰 검색 게시글 총 갯수 -->
  	<select id="selectSearchCount" resultType="_int">

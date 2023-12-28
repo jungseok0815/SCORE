@@ -596,24 +596,8 @@
  	</select>
  	
  	<!-- 팀 신청 리스트  -->
- 	<select id="selectReqList" resultMap="teamReqResult">
-         <!--  SELECT OFFER_NO,
-		       REQ_USER_NO,
-		       REQ_STATUS,
-		       REQ_CONTENT,
-		       REQ_NO,
-		       USER_NAME,
-		       GENDER,
-		       USER_LEVEL,
-		       USER_BIRTH,
-		       CITY
-		    FROM TEAM_REQ
-		    JOIN MEMBER ON(REQ_USER_NO = USER_NO)
-		    JOIN TEAM_OFFER USING(OFFER_NO)
-		    WHERE TEAM_NO = #{tno}
-		    AND REQ_STATUS = 'N'-->
-		    
-		    SELECT 
+ 	<select id="selectReqList" resultMap="teamReqResult" parameterType="map">
+         <!--  SELECT 
 	               OFFER.OFFER_NO,
 			       TR.REQ_USER_NO,
 			       TR.REQ_STATUS,
@@ -629,6 +613,25 @@
 			  JOIN MEMBER "ME" ON(TR.REQ_USER_NO = ME.USER_NO)
 			  JOIN TEAM_OFFER "OFFER" ON(OFFER.OFFER_NO = TR.OFFER_NO)
 	          LEFT JOIN MEMBER_IMG "MI" ON(TR.REQ_USER_NO = ME.USER_NO)
+			 WHERE OFFER.TEAM_NO = #{tno}
+			     AND MI.USER_NO = #{userNo}
+			   AND TR.REQ_STATUS = 'N'-->
+		    
+			   SELECT 
+	               OFFER.OFFER_NO,
+			       TR.REQ_USER_NO,
+			       TR.REQ_STATUS,
+			       TR.REQ_CONTENT,
+			       TR.REQ_NO,
+			       ME.USER_NAME,
+                   ME.user_no,
+			       ME.GENDER,
+			       ME.USER_LEVEL,
+			       ME.USER_BIRTH,
+			       ME.CITY
+	          FROM TEAM_REQ "TR"
+			  JOIN MEMBER "ME" ON(TR.REQ_USER_NO = ME.USER_NO)
+			  JOIN TEAM_OFFER "OFFER" ON(OFFER.OFFER_NO = TR.OFFER_NO)
 			 WHERE OFFER.TEAM_NO = #{tno}
 			   AND TR.REQ_STATUS = 'N'
  	</select>
@@ -662,6 +665,31 @@
 		   FROM TEAM_IMG
 		  WHERE TEAM_NO = #{tno}
 		    AND OFFER_NO IS NULL
+	</select>
+
+
+ 	<!-- 팀 신청 리스트에서 유저 번호 가져오기  -->
+ 	<select id="selectReqUserNo" resultMap="teamReqResult">
+ 		SELECT 
+		        REQ_NO,
+		        REQ_STATUS,
+		        REQ_USER_NO,
+		        OFFER_NO,
+		        REQ_CONTENT,
+		        USER_NO
+		   FROM TEAM_REQ 
+		   JOIN TEAM_OFFER USING(OFFER_NO)
+		  WHERE TEAM_NO = #{tno}
+		    AND REQ_STATUS = 'N'   
+ 	</select>
+ 	
+ 	<!-- 개인 프로필 가져오기 -->
+	<select id="selectMemberProImg" resultType="string">
+		SELECT 
+			     MEMBER_CHANGE_NAME,
+			     USER_NO
+            FROM MEMBER_IMG
+           WHERE USER_NO = #{userNo}
 	</select>
 
 
@@ -719,4 +747,5 @@
 		WHERE TEAM_NAME LIKE '%'||#{selectValue}||'%'	
 		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
  	</select>
+
  </mapper>

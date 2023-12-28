@@ -21,7 +21,7 @@ const memberAjaxController = {
             data,
             success: (result) => { 
                
-                callback(result);
+                callback();
             },
             error: (err) => {
                 console.log(err)

@@ -44,6 +44,13 @@ public interface MemberService {
 	int updateMyPageSport(SportInfo sport);
 	//마이페이지 이미지 조회
 	MemberImg selectMemberImg(int userNo);
+
+	// 운영진인 사람들만 조회
+	ArrayList<Member> levelMember();
+	// 카카오페이로 돈 충전하기
+	int updatePay(int point, int userNo);
+
 	ArrayList<Member> chattingSelectFriend(HashMap info);
+
 }
 

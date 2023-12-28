@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.dao.PlaceDao;
+import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
@@ -105,6 +107,36 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
+	public ArrayList<Field> selectManager(String userName) {
+		return pDao.selectManager(sqlSession, userName);
+	}
+
+	@Override
+	public ArrayList<SportInfo> selectMember(int fieldNo, int categoryNum) {
+		return pDao.selectMember(sqlSession, fieldNo, categoryNum);
+	}
+
+	@Override
+	public int updateEval(SportInfo spoInfo) {
+		return pDao.updateEval(sqlSession, spoInfo);
+	}
+
+	@Override
+	public int fieldNoDel(int fieldNo) {
+		return pDao.fieldNoDel(sqlSession, fieldNo);
+	}
+
+	@Override
+	public int fieldDelet(int fieldNo) {
+		return pDao.fieldDelet(sqlSession, fieldNo);
+	}
+
+	@Override
+	public int fieldReqDel(int fieldNo) {
+		return pDao.fieldReqDel(sqlSession, fieldNo);
+	}
+
+
 	public ArrayList<Reply> selectReplyList(int fno) {
 		return pDao.selectReplyList(sqlSession, fno);
 	}
@@ -138,6 +170,11 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
 	}
 
+	@Override
+	public ArrayList<Field> selectReservation(int fieldNo) {
+		return pDao.selectReservation(sqlSession, fieldNo);
+	}
+	
 	@Override
 	public ArrayList<ReviewImg> placeReviewImgList(int rno) {
 		return pDao.placeReviewImgList(sqlSession, rno);

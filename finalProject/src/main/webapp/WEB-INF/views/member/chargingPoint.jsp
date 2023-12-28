@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/member/Point.css" >
 <script src="resources/js/member/memberJs/chargingPoint.js"></script>
+<script src="resources/js/common/KaKaoPay/kakaoPay.js"></script>
+<script src="resources/js/common/KaKaoPay/kakaoPayAjax.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
+<body onload="payment()">
 	<jsp:include page="../common/header.jsp" />
         <div class="no1-title">
             <div class="big-title">
@@ -29,9 +32,9 @@
 
                 <div class="point-4">결제수단 선택</div>
                 <div class="select2">
-                    <input type="radio" name="money-one" id="account"><label for="account">가상계좌</label>
-                    <input type="radio" name="money-one" id="card" checked><label for="card">카드결제</label>
-                    <input type="radio" name="money-one" id="kakao"><label for="kakao">카카오페이</label>
+                    <input type="radio" name="money-one" value="account" onclick="payment()" id="account"><label for="account">가상계좌</label>
+                    <input type="radio" name="money-one" value="card" onclick="payment()" id="card" checked><label for="card">카드결제</label>
+                    <input type="radio" name="money-one" value="kakao" onclick="payment()" id="kakao"><label for="kakao">카카오페이</label>
                 </div>
 
                 <div class="point-tt">
@@ -45,7 +48,11 @@
                 </div>
 
                 <div class="point-tt">
-                    <button class="point-btn" onclick="charging()">충전</button>
+                    <button id="btn-card" class="point-btn" onclick="charging()">충전</button>
+                </div>
+                
+                <div class="point-tt">
+                    <button id="btn-KaKao" class="point-btn" onclick="kakaoPay()">카카오페이 충전</button>
                 </div>
             </div>
         </div>

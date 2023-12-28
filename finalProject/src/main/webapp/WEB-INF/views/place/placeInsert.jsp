@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+    
 	<link rel="stylesheet" href="/final/resources/css/place/placeInsert.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script type="text/javascript" src="./resources/js/place/placeInsert.js"></script>
@@ -55,10 +56,10 @@
                         <!-- <input type="text" value="" class="from-input" placeholder="[매니저 이름]을 입력해주세요" name="manager" required> -->
                         <select name="manager" value="" class="manager-select-box" required>
                             <option value="" selected disabled hidden>담당매니저를 선택해주세요</option>
-                            <option value="차두리">차두리</option>
-                            <option value="박지성">박지성</option>
-                            <option value="리오넬 메시">리오넬 메시</option>
-                            <option value="즐라탄 이브라히모비치">즐라탄</option>
+                            <c:forEach var="t" items="${list}"> 
+                            	<option value="${t.userName}">${t.userName}</option>
+                            </c:forEach>
+                           
                         </select>
                     </td>
                 </tr>

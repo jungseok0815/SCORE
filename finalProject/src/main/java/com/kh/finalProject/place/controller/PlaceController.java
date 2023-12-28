@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
+import com.kh.finalProject.member.model.service.MemberService;
 import com.kh.finalProject.member.model.vo.Member;
+import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
+import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
 import com.kh.finalProject.place.model.vo.Reply;
@@ -36,9 +44,16 @@ public class PlaceController {
 	@Autowired
 	private PlaceServiceImpl pService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	//placeInsert로 보내주는 메소드
 	@RequestMapping("/insertForm.pl")
-	public String insertPlaceForm() {
+	public String insertPlaceForm(Model m) {
+		ArrayList<Member> list = memberService.levelMember();
+		
+		m.addAttribute("list", list);
+		
 		return "place/placeInsert";
 	}
 
@@ -87,7 +102,6 @@ public class PlaceController {
 	      try {
 	         upfile.transferTo(new File(savePath + changeName));
 	      } catch (IllegalStateException | IOException e) {
-	         // TODO Auto-generated catch block
 	         e.printStackTrace();
 	      }
 	      
@@ -221,7 +235,111 @@ public class PlaceController {
 			return "redirect:/";
 		}
 	}
+
+	@ResponseBody
+	@RequestMapping(value="manager.pl", produces="application/json; charset=UTF-8")
+	public String evaluationManager(String userName, ModelAndView mv) {
+		
+		ArrayList<Field> list = pService.selectManager(userName);
+		
+		mv.addObject("list", list);
+		// 운영자 평가 페이지로 넘길때 필드 번호도 같이 넘김
+		return new Gson().toJson(mv);
+	}
 	
+	@RequestMapping("/evaluation.pl")
+	public ModelAndView evaluationPage(int fieldNo, int categoryNum, ModelAndView mv) {
+		
+		ArrayList<SportInfo> list = pService.selectMember(fieldNo, categoryNum);
+		
+		ArrayList<Field> list2 = pService.selectReservation(fieldNo);
+		
+		mv.addObject("list", list)
+		  .addObject("list2", list2)
+		  .setViewName("place/evaluation");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="evaluationUpdate.pl", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> evaluationUpdate(String realdata, Model model, HttpSession session) {
+		
+		Gson gson = new Gson();
+		int updateSpo = 0;
+		ArrayList<SportInfo> list = new ArrayList<>();
+		
+		JsonArray  jsonArray  = new JsonParser().parseString(realdata).getAsJsonArray();
+//		System.out.println("변환: " + jsonArray);
+
+		JsonElement firstElement = jsonArray.get(0); // 1번째 인덱스의 요소 가져오기
+		JsonObject firstObject = firstElement.getAsJsonObject(); // JsonObject로 변환
+
+		int fieldNo = firstObject.get("fieldNo").getAsInt(); // "fieldNo" 키의 값을 가져와서 int로 변환
+
+//		System.out.println("1번째 인덱스의 fieldNo: " + fieldNo);
+	
+        for (JsonElement element : jsonArray) {
+        	SportInfo spoInfo = gson.fromJson(element, SportInfo.class);
+//            System.out.println("진짜다: " + spoInfo);
+
+            list.add(spoInfo);
+        }
+        
+        for (SportInfo spoInfo : list) {
+            updateSpo = pService.updateEval(spoInfo);
+        }
+        Member m = (Member)session.getAttribute("loginUser");
+        
+        Map<String, Object> resultMap = new HashMap<>();
+        if(updateSpo > 0) {
+        	resultMap.put("fieldNo", fieldNo);
+        	resultMap.put("result", "success");
+            resultMap.put("message", "게임 평가 완료");
+            resultMap.put("userNo", m.getUserNo());
+        } else {
+        	 resultMap.put("result", "failure");
+             resultMap.put("message", "게임 평가 실패");
+        }
+        return resultMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="fieldDel.pl", produces="application/json; charset=UTF-8")
+	public Map<String, Object> fieldDelImg(int fieldNo, HttpSession session) {
+	
+		System.out.println(fieldNo);
+		
+		int fieldImgDel = pService.fieldNoDel(fieldNo);
+		int fieldReq = pService.fieldReqDel(fieldNo);
+		int fieldDel = pService.fieldDelet(fieldNo);
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		if(fieldImgDel * fieldDel * fieldReq > 0) {
+			resultMap.put("result", "success");
+			resultMap.put("userNo", m.getUserNo());
+		}else {
+			resultMap.put("result", "failure");
+            resultMap.put("message", "게임 평가 실패");
+		}
+		
+		return resultMap;
+	}
+	
+	
+	
+	
+
+	//placeInfoList로 보내주는 메소드
+	@RequestMapping("/placeReviewList.pl")
+	public String placeInfoListView() {
+		return "place/placeReviewList";
+	}
+
+
 	//리뷰 작성할 때 로그인유저가 예약했었던 경기장만 리뷰 쓸 수 있게 하려고
 	@ResponseBody
 	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
@@ -234,6 +352,7 @@ public class PlaceController {
 		mv.setViewName("place/placeReviewList");
 		
 		return mv;
+
 	}
 	
 	//경기장 리뷰 상세페이지 
