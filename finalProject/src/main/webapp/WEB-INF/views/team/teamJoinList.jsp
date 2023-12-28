@@ -21,17 +21,31 @@
 	                <div class="top_container">
 	                    <span class="memberListCount"><img src="${tProfile}"  class="top-member-img"/>${tName} | 멤버관리</span>
 	                </div>
-	                
-	                <div class="team-list">
+	                 <c:choose>
+	                 	 <c:when test="${empty list}">
+	                 	 	<div style="display: flex; justify-content: center; display: grid;">
+						        <img src="./resources/img/team/teamJoinList/cat.png" style="width: 436px; height: 397px;">
+						        <h1 style="display: flex; justify-content: center;">신청 내역이 없습니다...</h1><br><br>
+						    </div>
+	                 	 </c:when>
+	                 	 <c:otherwise>
+	                 	 	<div class="team-list">
 	                    <div class="team-list-container">
 	                        <ul>
 	                        <c:forEach var="r" items="${list}"> 
 	                            <li class="team-list-item">
 	                                <div>
 	                                    <a href="" class="list-link">
-	                                       <div class="list-img-all">
-	                                            <img src=".${r.memberChangeName}" class="list-img"/>
-	                                        </div>
+	                                    <c:forEach var="m" items="${resultList}"> 
+	                                    
+	                                        <c:if test="${r.reqUserNo eq m.reqUserNo}">
+		                                        <div class="list-img-all">
+		                                            <img src=".${m.memberChangeName}" class="list-img"/>
+		                                        </div>
+	                                        </c:if>
+	                                        
+	                                     </c:forEach>    
+	                                        
 	                                        <div class="list-content">
 	                                            <div class="list-title">
 	                                                <span class="memberName">${r.userName}</span>
@@ -62,16 +76,12 @@
 	                                </div>
 	                            </li>
 							</c:forEach>
-	
-	
-	                             
-	
-	
-	                            
-	
 	                        </ul> 
 	                    </div>
 	                </div>
+	               	</c:otherwise>
+	              </c:choose>
+	                
 	            </div>
 	        </div>
 	    </div>

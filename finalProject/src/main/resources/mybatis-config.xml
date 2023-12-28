@@ -15,6 +15,8 @@
   	<typeAliases>
   		<typeAlias type="com.kh.finalProject.place.model.vo.Place" alias="Place" />
   		<typeAlias type="com.kh.finalProject.place.model.vo.PlaceImg" alias="PlaceImg" />
+  		<typeAlias type="com.kh.finalProject.place.model.vo.ReviewImg" alias="ReviewImg" />
+  		<typeAlias type="com.kh.finalProject.place.model.vo.PlaceReview" alias="PlaceReview" />
   		<typeAlias type="com.kh.finalProject.team.model.vo.TeamOffer" alias="teamOffer"/>
   		<typeAlias type="com.kh.finalProject.notice.model.vo.Notice" alias="Notice"/>
   		<typeAlias type="com.kh.finalProject.member.model.vo.Member" alias="Member" />
@@ -26,7 +28,15 @@
   		<typeAlias type="com.kh.finalProject.member.model.vo.MessageAuth" alias="MessageAuth" />
   		<typeAlias type="com.kh.finalProject.place.model.vo.Reservation" alias="Reservation" />
   		<typeAlias type="com.kh.finalProject.member.model.vo.MemberImg" alias="MemberImg" />
-		<typeAlias type="com.kh.finalProject.team.model.vo.TeamReq" alias="TeamReq" />
+      <typeAlias type="com.kh.finalProject.team.model.vo.TeamReq" alias="TeamReq" />
+      <typeAlias type="com.kh.finalProject.place.model.vo.Field" alias="Field" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingRoom" alias="ChattingRoom" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingMember" alias="ChattingMember" />
+      <typeAlias type="com.kh.finalProject.chatting.model.vo.ChattingMessage" alias="ChattingMessage" />
+
+		<typeAlias type="com.kh.finalProject.place.model.vo.Reply" alias="Reply" />
+		<typeAlias type="com.kh.finalProject.place.model.vo.ReplyReply" alias="ReplyReply" />
+
   	</typeAliases>
 
 
@@ -35,6 +45,7 @@
   		<mapper resource="/mappers/team-mapper.xml" /> 
   		<mapper resource="/mappers/member-mapper.xml" />
   		<mapper resource="/mappers/notice-mapper.xml" />
+  		<mapper resource="/mappers/chatting-mapper.xml" />
   	</mappers>
 
  

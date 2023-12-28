@@ -1,0 +1,151 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.outer{
+    min-height: calc(100vh - 10rem);
+}
+.wrapper{
+    margin-top: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.list-area{
+    margin-top: 20px;
+    width: 100%;
+    text-align:center;
+}
+.list-area>tbody>tr:hover {cursor:pointer;}
+    tbody > tr > td {
+    font-size: 20px;
+}
+.star-rating{
+    text-align:left;
+}
+.review-name{
+    font-weight: 600;
+}
+#enroll-btn{
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.paging-area{
+    margin-top: 30px;
+}
+.select-myPlace{
+    display: flex;
+}
+#modal-select{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+.star-area p {
+    margin-bottom: 0px;
+    color: #f73c32;
+}
+.star-rating{
+    color: #f73c32;
+}
+.file-area{
+    margin-bottom: 5px;
+}
+
+
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+       .rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input {display: none;}
+.rate > label {float: right;color: #ddd}
+.rate > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.rate .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.rate input:checked ~ label, 
+.rate label:hover,.rate label:hover ~ label { color: #f73c32 !important;  } 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  } 
+
+.btn-upload {
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.btn-upload img{
+    width: 400px;
+    height: 200px;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#file {
+display: none;
+}
+
+#pagingArea {
+    width:fit-content; 
+    margin:auto;
+    margin-top: 20px;
+}
+
+.pl{
+    width: 120px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.pl:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #F8E4FF;
+    border-radius: 10px;
+}
+
+#search-input{
+    width: 400px;
+    height: 47px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+#search-input:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #F8E4FF;
+    border-radius: 10px;
+}

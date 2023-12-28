@@ -12,8 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/final/resources/js/common/main-api.js"></script>
     <script src="/final/resources/js/common/main.js"></script>
-    <script src="resources/js/member/memberJs/member.js?ver=8"></script>
-    <script src="resources/js/member/memberAjax/memberAjax.js?ver=6"></script>
+
 </head>
 
 
@@ -88,6 +87,10 @@
                             </a>
                         </c:otherwise>
                     </c:choose>
+                    <a href="${pageContext.request.contextPath}/placeReviewList.pl?userNo=${loginUser.userNo}&currentPage=1">
+                        <img src="./resources/img/main/stadiumInfo.png" alt="">
+                        <p>경기장 리뷰</p>
+                    </a>
                 </div>
             </div>
         </div>

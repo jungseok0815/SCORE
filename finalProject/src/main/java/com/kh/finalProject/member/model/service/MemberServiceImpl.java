@@ -165,6 +165,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Member> selectManegerList() {
 		return memberDao.selectManegerList(sqlSession);
+
+	public ArrayList<Member> levelMember() {
+		return memberDao.levelMember(sqlSession);
+	}
+
+	@Override
+	public int updatePay(int point, int userNo) {
+		return memberDao.updatePay(sqlSession, point, userNo);
+	}
+
+	public ArrayList<Member> chattingSelectFriend(HashMap info) {
+		return memberDao.chattingSelectFriend(sqlSession, info);
+
 	}
 
 	

@@ -18,7 +18,10 @@
     <script src="https://kit.fontawesome.com/5b03f739e9.js" crossorigin="anonymous"></script>
     <script src="resources/js/common/commonTeam/commonTeamAjax.js?ver=5"></script>
     <script src="resources/js/common/commonTeam/commonTeam.js?ver=5"></script>
-    <link rel="stylesheet" href="/final/resources/css/common/header.css?ver=1">
+    <script src="resources/js/common/header/headerJs/header.js"></script>
+    <script src="resources/js/common/header/headerAjax/headerAjax.js"></script>
+    <script src="resources/js/member/memberAjax/memberAjax.js"></script>
+    <link rel="stylesheet" href="/final/resources/css/common/header.css">
     
 
 
@@ -79,10 +82,30 @@
 			            <a href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
 
 	                </c:otherwise>
-	            </c:choose>         
+	            </c:choose>     
+                <a onclick="showChatting()"><i class="fa-regular fa-message fa-lg"></i></i></a>
+                </div>
+                <div class="messageDiv">
+                        <div class="chattin-header">
+                            <div class="chatting-mnueBar">
+                                <div class="muneBar-user" onclick="chattingMemberList()"><i class="fa-regular fa-user fa-2xl"></i></div>
+                                <div class="muneBar-user" onclick="chattingTeamList()"><i class="fa-solid fa-t fa-2xl"></i></div>
+                                <div class="muneBar-user" onclick="chatiingRoomList()"><i class="fa-regular fa-comment fa-2xl"></i></div>
+                            </div>
+                            <div class="chatting-infobar">
+
+
+                               
+                            </div>
+                            <div class="team-member-list-body">
+
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
+
+       
     </div>
    
 

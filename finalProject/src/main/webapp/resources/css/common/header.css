@@ -16,7 +16,7 @@
 }
 
 .header{
-    max-width: 1000px;
+    max-width: 1250px; 
     height: 55px;
     margin: auto;
     display: flex;
@@ -44,6 +44,7 @@
 }
 .header-right{
     display: flex;
+    position: relative;
 }
 .search-bar{
     position: relative;
@@ -100,6 +101,207 @@
 .place-list{
     border-bottom: 1px solid black;
 }
+.messageDiv{
+    right: 0%;
+    display:none;
+    margin-top: 45px;
+    position: absolute;
+    opacity: 0.8;
+    z-index: 1;
+    background: white;
+    height: 500px;
+    width: 80%;
+    max-width: 80%;
+    min-width: 30%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.chattin-header{
+    display: flex;
+    max-width: 375px;
+    height: 100%;
+    position: relative;
+}
+.chatting-mnueBar{
+    width: 20%;
+    height: 100%;
+    border-right:1px solid black;
+}
+.chatting-infobar{
+    width: 80%;
+    height: 100%;
+}
+.muneBar-user{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+    width: auto;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    border-bottom:1px solid black;
+    cursor: pointer;
+}
+.chatting-search{
+    border-radius: 15px;
+    width: 80%;
+}
+.chatting-search-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+.chatting-friend-list{
+    width: 100%;
+    height: 70px;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+}
+
+.chatting-friend-list-botton{
+    border-bottom: 1px solid black;
+}
+.chatting-friend-profile{
+    width: 20%;
+    height: 50px;
+    border-radius: 100%;
+    border-top: 1px solid black;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+.chatting-profile-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+.chatting-friend-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    border-left: 1px solid black;
+}
+.chattingRoomDiv{
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    overflow: scroll;
+}
+.chattingRoominput{
+    width: 100%;
+    height: 20%;
+    border-top: 2px solid black;
+}
+.message-area{
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-bottom: 5%;
+}
+.message-area-img{
+    width: 20%;
+    height: 50px;
+    background: white;
+    border-radius: 100%;
+    border: 1px solid;
+}
+.message-area-middle{
+    width: 75%;
+    margin-left: 5%;
+    position: relative;
+}
+.message-title{
+    border: 1px solid;
+    padding: 7px;
+}
+.message-area-me{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 5%;
+    justify-content: right;
+}
+.team-member-list-body{
+    display: none;
+    position: absolute;
+    width: 150px;
+    height: 500px;
+    border: 1px solid;
+    opacity: 0.8;
+    z-index: 1;
+    background: white;
+    left: 100%;
+    border-radius: 9px;
+}
+.team-member-list-div{
+    height: 75%;
+    overflow: scroll;
+   
+}
+.member-team-list{
+    margin-top: 10%;
+    display: flex;
+    padding: 6%;
+    width: 80%;
+}
+.member-team-list-profile{
+    width: 30%;
+    height: 35px;
+    margin-right: 10%;
+    border-radius: 27px;
+}
+.member-team-list-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 27px;
+}
+.team-member-list-title{
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid;
+    text-align: center;
+    padding: 14px;
+}
+.team-member-button-div{
+    padding: 5%;
+    width: 100%;
+    height: 55px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.team-member-list-button{
+    width: 100%;
+    height: 100%;
+}
+.chatting-chatting-info{
+    position: absolute;
+    left: 28%;
+    top: 0%;
+    width: 70%;
+    height: 100%;
+}
+.chatting-chatting-list{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.chattinglist-area2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+.message-date{
+    font-size: 13px;
+}
+
 
 
 @media screen and (max-width: 720px) {

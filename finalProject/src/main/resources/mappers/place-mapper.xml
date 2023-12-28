@@ -29,6 +29,14 @@
   		<result column="DLELTE_FIELD_IMG" property="deleteFieldImg" />
   		<result column="FIELD_NO" property="fieldNo" />
   	</resultMap>
+  	<resultMap type="ReviewImg" id="reviewImgResultSet">
+  		<result column="REVIEW_IMG_NO" property="reviewImgNo" />
+  		<result column="REVIEW_URL" property="reviewUrl" />
+  		<result column="REVIEW_ORIGIN_NAME" property="reviewOriginName" />
+  		<result column="REVIEW_CHANGE_NAME" property="reviewChangeName" />
+  		<result column="DLELTE_REVIEW_IMG" property="deleteReviewImg" />
+  		<result column="REVIEW_NO" property="reviewNo" />
+  	</resultMap>
   	<resultMap type="Reservation" id="reservationResultSet">
   		<result column="RES_NO" property="resNo" />
   		<result column="RES_DATE" property="resDate" />
@@ -38,6 +46,76 @@
   		<result column="FIELD_DATE" property="fieldDate" />
   		<result column="START_TIME" property="startTime" />
   		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
+
+  	<resultMap type="Field" id="fieldResultSet">
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="FIELD_AREA" property="fieldArea" />
+  		<result column="FIELD_DATE" property="fieldDate" />
+  		<result column="FIELD_ENROLL_DATE" property="fieldEnrollDate" />
+  		<result column="FIELD_COUNT" property="fieldCount" />
+  		<result column="FIELD_SIZE" property="fieldSize" />
+  		<result column="PARKING" property="parking" />
+  		<result column="MATCH_GENDER" property="matchGender" />
+  		<result column="SHOES" property="shoes" />
+  		<result column="MANAGER" property="manager" />
+  		<result column="MATCH_LEVEL" property="matchLevel" />
+  		<result column="MATCH_TYPE" property="startTime" />
+  		<result column="END_TIME" property="endTime" />
+  		<result column="MATCH_PAY" property="matchPay" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  	</resultMap>
+  	<resultMap type="SportInfo" id="sportInfoResultSet">
+		<result column="SPORT_LEVEL" property="sportLever" />
+		<result column="SPORT_SCORE" property="sportScore" />
+		<result column="SPORT_COUNT" property="sportCount" />
+		<result column="SPORT_SMILE" property="sportSmile" />
+		<result column="SPORT_YELLOW" property="sportYellow" />
+		<result column="SPORT_RED" property="sportRed" />
+		<result column="STYLE" property="style" />
+		<result column="SKILL" property="skill" />
+		<result column="USER_NO" property="userNo" />
+		<result column="CATEGORY_NUM" property="categoryNum" />
+		<result column="RES_NO" property="resNo" />
+		<result column="RES_DATE" property="resDate" />
+		<result column="RES_USER_NO" property="resUserNo" />
+		<result column="FIELD_NO" property="fieldNo" />
+		<result column="USER_NAME" property="userName" />
+	</resultMap>
+  	
+  	<resultMap type="PlaceReview" id="PlaceReviewResultSet">
+  		<result column="REVIEW_NO" property="reviewNo" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="RES_NO" property="resNo" />
+  		<result column="FIELD_AREA" property="fieldArea" />
+  		<result column="REVIEW_COUNT" property="reviewCount" />
+  		<result column="REVIEW_CONTENT" property="reviewContent" />
+  		<result column="REVIEW_ENROLL_DATE" property="reviewEnrollDate" />
+  		<result column="STAR_RATING" property="starRating" />
+  		<result column="FIELD_REVIEW_STATUS" property="fieldReviewStatus" />
+  		<result column="USER_NAME" property="userName" />
+  		<result column="FIELD_NAME" property="fieldName" />
+  	</resultMap>
+  	
+  	<resultMap type="Reply" id="replyResultSet">
+  	  	<result column="REPLY_NO" property="replyNo" />
+  		<result column="REPLY_WRITER" property="replyWriter" />
+  		<result column="REPLY_CONTENT" property="replyContent" />
+  		<result column="REPLY_DATE" property="replyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  	</resultMap>
+
+  	<resultMap type="ReplyReply" id="replyReplyResultSet">
+  	  	<result column="REPLYREPLY_NO" property="replyReplyNo" />
+  		<result column="REPLYREPLY_CONTENT" property="replyReplyContent" />
+  		<result column="REPLYREPLY_DATE" property="replyReplyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="REPLY_NO" property="replyNo" />
+  		<result column="USER_NAME" property="userName" />
   	</resultMap>
   	
   	<insert id= "insertPlace">
@@ -98,7 +176,7 @@
 			            #{fieldOriginName},
 			            #{fieldChangeName},
 			            'N', 
-			            SEQ_FIELD.CURRVAL
+			            SEQ_field.CURRVAL
    						)
    </insert>
 
@@ -113,6 +191,7 @@
           AND FIELD_DATE = #{fieldDate}
           AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
+ 	
  	<select id="selectPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -131,6 +210,7 @@
           AND FIELD_DATE = #{fieldDate}
           AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
+ 	
  	<select id="placeDetailview" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -152,11 +232,13 @@
  		  FROM FIELD
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO, COUNT(*) as "FIELD_COUNT"
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+ 	
 	<select id="placeResCount" resultType="_int">
  		SELECT COUNT(*)
 		FROM RESERVATION
@@ -171,6 +253,7 @@
 		FROM FIELD
 		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
 	</select>
+	
 	<insert id= "insertResMatch">
    	INSERT INTO RESERVATION
 				 (
@@ -194,6 +277,7 @@
 		 WHERE FIELD_NO = #{fieldNo}
 		   AND RES_USER_NO = #{resUserNo}
  	</select>
+ 	
  	<select id="placeImgList" resultMap="placeImgResultSet">
  		SELECT FIELD_IMG_NO,
 		       FIELD_URL,
@@ -202,6 +286,7 @@
 		  FROM FIELD_IMG
 		 WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResList" resultMap="reservationResultSet">
 	 	SELECT RES_NO,
 		       RES_USER_NO,
@@ -216,6 +301,7 @@
 		 AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
+ 	
  	<delete id="deleteReservation">
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
@@ -260,5 +346,302 @@
 		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 		 ORDER BY FIELD_DATE
  	</select>
+ 	
+ 	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
+	<select id="selectManager" resultMap="fieldResultSet">
+	 	   SELECT FIELD_NO,
+				FIELD_NAME,
+				FIELD_AREA,
+				FIELD_DATE,
+				FIELD_ENROLL_DATE,
+				FIELD_COUNT,
+				FIELD_SIZE,
+				PARKING,
+				MATCH_GENDER,
+				SHOES,
+				MANAGER,
+				MATCH_LEVEL,
+				MATCH_TYPE,
+				START_TIME,
+				END_TIME,
+				MATCH_PAY,
+				CATEGORY_NUM
+		   FROM FIELD 
+		  WHERE MANAGER = #{userName}
+		     AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>
+		  
+		  <!-- SELECT FIELD.FIELD_NO,
+				FIELD.FIELD_NAME,
+				FIELD.FIELD_AREA,
+				FIELD.FIELD_DATE,
+				FIELD.FIELD_ENROLL_DATE,
+				FIELD.FIELD_COUNT,
+				FIELD.FIELD_SIZE,
+				FIELD.PARKING,
+				FIELD.MATCH_GENDER,
+				FIELD.SHOES,
+				FIELD.MANAGER,
+				FIELD.MATCH_LEVEL,
+				FIELD.MATCH_TYPE,
+				FIELD.START_TIME,
+				FIELD.END_TIME,
+				FIELD.MATCH_PAY,
+				FIELD.CATEGORY_NUM
+		   FROM FIELD "FIELD"
+           JOIN RESERVATION "ION" ON(FIELD.FIELD_NO = ION.FIELD_NO)
+		  WHERE MANAGER = #{userName}
+		    AND <![CDATA[ TO_TIMESTAMP(FIELD_DATE || ' ' || END_TIME, 'YYYY-MM-DD HH24:MI') < SYSTIMESTAMP ]]>-->
+ 	</select>
+ 	
+ 	<!-- 게임에 참가했던 사람들 조회 -->
+	<select id="selectMember" resultMap="sportInfoResultSet" parameterType="map">
+	 	 SELECT MB.USER_NAME,
+	 	        MB.USER_NO,
+				RES.RES_NO,
+				RES.RES_DATE,
+				RES.RES_USER_NO,
+				RES.FIELD_NO,
+				SPO.SPORT_LEVEL,
+				SPO.SPORT_SCORE,
+				SPO.SPORT_COUNT,
+				SPO.SPORT_SMILE,
+				SPO.SPORT_YELLOW,
+				SPO.SPORT_RED,
+				SPO.STYLE,
+				SPO.SKILL,
+				SPO.USER_NO,
+				SPO.CATEGORY_NUM
+		   FROM SPORTINFO "SPO"
+		   JOIN RESERVATION "RES" ON(RES.RES_USER_NO = SPO.USER_NO)
+		   JOIN MEMBER "MB" ON(MB.USER_NO = SPO.USER_NO)
+	      WHERE FIELD_NO = #{fieldNo}
+	        AND CATEGORY_NUM = #{categoryNum}
+ 	</select>
+ 	
+ 	<!-- 경기 결과 업데이트 시켜주기 -->
+	<update id="updateEval">
+ 		UPDATE SPORTINFO
+			   SET 
+			   SPORT_LEVEL = #{sportLever},
+			   SPORT_SMILE = SPORT_SMILE + #{sportSmile},
+			   SPORT_YELLOW = SPORT_YELLOW + #{sportYellow},
+			   SPORT_RED = SPORT_RED + #{sportRed},
+			   SPORT_COUNT = SPORT_COUNT + 1,
+			   SPORT_SCORE = #{sportScore}
+	     WHERE USER_NO = #{userNo}
+	       AND CATEGORY_NUM = #{categoryNum}
+ 	</update>
+ 	
+ 	<!-- 평가 한 후 필드 이미지 삭제  -->
+ 	<delete id="fieldNoDel">
+	 	DELETE FROM 
+	 	       FIELD_IMG
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 평가 한 후 필드  삭제  -->
+ 	<delete id="fieldDelet">
+	 	DELETE FROM 
+	 	       FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 평가 한 후 예약자 삭제  -->
+ 	<delete id="fieldReqDel">
+	 	DELETE FROM 
+	 	       RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</delete>
+ 	
+ 	<!-- 리뷰 댓글 조회 -->
+ 	<select id="selectReplyList" resultMap="replyResultSet">
+ 		SELECT REPLY_NO,
+ 					 REPLY_WRITER,
+ 					 REPLY_CONTENT,
+ 					 REPLY_DATE,
+ 					 USER_NO
+ 		  FROM REPLY
+ 		WHERE FIELD_NO = #{fno}
+ 	</select>
+	
+	<!-- 리뷰 게시글 정보 불러옴 -->
+	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
+		SELECT FIELD_NO,
+		             FIELD_NAME,
+		             FIELD_AREA
+			FROM FIELD_REVIEW
+		JOIN FIELD USING (FIELD_NO)
+		WHERE FIELD_NO = #{fno}
+	</select>
+ 	
+ 	<!-- 리뷰 게시글 총 갯수 -->
+ 	<select id="selectReviewListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM FIELD_REVIEW
+ 	</select>
+ 	
+ 	<select id="placeReviewList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING,
+		       SC.CATEGORY_NUM
+		FROM FIELD_REVIEW FR
+		LEFT JOIN SPORT_CATEGORY SC ON FR.CATEGORY_NUM = SC.CATEGORY_NUM
+		JOIN MEMBER M ON FR.USER_NO = M.USER_NO
+		JOIN FIELD F ON FR.FIELD_NO = F.FIELD_NO
+		WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+		ORDER BY FR.REVIEW_NO DESC
+ 	</select>
+ 	
+ 	<select id="placeChoiceReviewList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING,
+		       SC.CATEGORY_NUM
+		FROM FIELD_REVIEW FR
+		LEFT JOIN SPORT_CATEGORY SC ON FR.CATEGORY_NUM = SC.CATEGORY_NUM
+		JOIN MEMBER M ON FR.USER_NO = M.USER_NO
+		JOIN FIELD F ON FR.FIELD_NO = F.FIELD_NO
+		WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+		AND CATEGORY_NUM = #{categoryNum}
+		ORDER BY FR.REVIEW_NO DESC
+ 	</select>
+ 	
+ 	<insert id="insertPlaceReview">
+	 	INSERT INTO FIELD_REVIEW(
+	                    REVIEW_NO,
+	                    FIELD_NO,
+	                    USER_NO,
+	                    CATEGORY_NUM,
+	                    REVIEW_COUNT,
+	                    REVIEW_CONTENT,
+	                    STAR_RATING
+	                        )
+	            VALUES (
+	                    SEQ_FIELD_REVIEW.NEXTVAL,
+	                    #{fieldNo},
+	                    #{userNo},
+	                    #{categoryNum},
+	                    0,
+	                    #{reviewContent},
+	                    #{starRating}
+	                    )
+ 	</insert>
+ 	
+ 	<insert id= "insertPlaceReviewImg">
+   	INSERT INTO REVIEW_IMG
+   						 (
+   						 REVIEW_IMG_NO,
+   						 REVIEW_URL,
+   						 REVIEW_ORIGIN_NAME,
+   						 REVIEW_CHANGE_NAME,
+   						 DLELTE_REVIEW_IMG,
+   						 REVIEW_NO
+   						 )
+   				VALUES
+   						(
+   						SEQ_REVIEW_IMG.NEXTVAL,
+   						#{reviewUrl}, 
+			            #{reviewOriginName},
+			            #{reviewChangeName},
+			            'N', 
+			            SEQ_FIELD_REVIEW.CURRVAL
+   						)
+   </insert>
+   
+   <!-- 리뷰 이미지 조회 -->
+    <select id="placeReviewImgList" resultMap="reviewImgResultSet">
+ 		SELECT REVIEW_IMG_NO,
+		       REVIEW_URL,
+		       REVIEW_ORIGIN_NAME,
+		       REVIEW_CHANGE_NAME
+		  FROM REVIEW_IMG
+		 WHERE REVIEW_NO = #{rno}
+ 	</select>
+ 	
+ 	<insert id= "addReplyReply">
+   		INSERT INTO REPLYREPLY
+				 (
+				REPLYREPLY_NO,
+				REPLYREPLY_CONTENT,
+				USER_NO,
+				REPLY_NO
+				 )
+		 VALUES
+				 (
+				SEQ_REPLYREPLY.NEXTVAL,
+				#{replyReplyContent},
+				#{userNo},
+				#{replyNo}
+				 )
+   </insert>
 
+	<select id="selectReservation" resultMap="fieldResultSet">
+ 		SELECT FIELD_NO
+		  FROM RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+	</select>
+
+   <!-- 리뷰 검색 게시글 총 갯수 -->
+ 	<select id="selectSearchCount" resultType="_int">
+		SELECT COUNT(*)
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+ 	</select>
+ 	
+ 	<!-- 리뷰검색 리스트 -->
+ 	<select id="selectSearchList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+          ORDER BY FR.REVIEW_NO DESC
+ 	</select>
+
+      <select id="selectReplyReply" resultMap="replyReplyResultSet">
+ 			SELECT USER_NAME, 
+ 						 REPLYREPLY_DATE, 
+ 						 REPLYREPLY_CONTENT,
+ 						 USER_NO
+ 			FROM REPLYREPLY
+ 			JOIN MEMBER USING(USER_NO)
+ 			WHERE REPLY_NO = #{replyNo}
+ 	</select>
 </mapper>
