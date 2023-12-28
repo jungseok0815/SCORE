@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.google.gson.Gson;
 import com.kh.finalProject.common.template.Pagenation;
 import com.kh.finalProject.common.vo.PageInfo;
@@ -26,6 +24,8 @@ import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
@@ -236,6 +236,66 @@ public class PlaceController {
 		return mv;
 	}
 	
+	//경기장 리뷰 상세페이지 
+	@RequestMapping("/placeReviewDetail.pl")
+	public String placeReviewDetail(int fno, Model m, int rno) {
+		System.out.println(fno);
+		System.out.println(rno);
+		PlaceReview pr = pService.selectReplyField(fno);
+		ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
+		System.out.println(pr);
+		System.out.println(rno);
+		m.addAttribute("pr", pr);
+		m.addAttribute("reImgList", ri);
+		return "place/placeReviewDetail";
+	}
+	
+	//댓글 리스트
+	@ResponseBody
+	@RequestMapping(value= "/rlist.pl", produces = "appalication/json; charset = UTF-8")
+	public String placeReplyList(Model m, @RequestParam("fno") int fno) {
+		ArrayList<Reply> rlist = pService.selectReplyList(fno);
+		m.addAttribute("rlist", rlist);
+		return new Gson().toJson(rlist);
+	}
+	//답글 등록
+	@ResponseBody
+	@RequestMapping(value= "/addReplyReply.pl")
+	public HashMap addReplyReply(ReplyReply p, HttpSession session) {
+		p.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
+		
+		System.out.println(p);
+		int result  = pService.addReplyReply(p);
+		HashMap m1 = new HashMap();
+		if(result> 0) {
+			ArrayList<ReplyReply> rlist = pService.selectReplyReply(p.getReplyNo());
+			m1.put("list", rlist);
+			m1.put("loginUser",((Member)session.getAttribute("loginUser")).getUserNo());
+			return m1;
+		}
+		m1.put("list", "fail");
+		return  m1;
+	}
+	
+	//답글 리스트
+	@ResponseBody
+	@RequestMapping(value= "/selectReplyReply.pl")
+	public HashMap selectReplyReply(int replyNo, HttpSession session) {
+		System.out.println(replyNo+"@222222222222222");
+		ArrayList<ReplyReply> rlist = pService.selectReplyReply(replyNo);
+		
+		for(ReplyReply a : rlist) {
+			System.out.println(a);
+		}
+		
+		HashMap m1 = new HashMap();
+		m1.put("list", rlist);
+		m1.put("loginUser",((Member)session.getAttribute("loginUser")).getUserNo());
+		
+		return m1;
+	}
+
+
 	//경기장 리뷰 insert
 	@RequestMapping("/insertReview.pl")
 	public String insertPlaceReview(int fieldNo, String userNo, PlaceReview pr, ReviewImg ri, MultipartFile upfile, HttpSession session, Model model) {
@@ -270,6 +330,7 @@ public class PlaceController {
 		
 		
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/ReviewListAjax.pl", produces="application/json; charset=UTF-8")
 	public String placeReviewListView(Model m, @RequestParam(value="cpage", defaultValue="1") int currentPage,

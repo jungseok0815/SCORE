@@ -3,11 +3,12 @@ package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
@@ -31,10 +32,16 @@ public interface PlaceService {
 	ArrayList<Reservation> selectResList(String userNo);
 	int deleteReservation(int resNo);
 	
+	//댓글 리스트
+	ArrayList<Reply> selectReplyList(int fno);
+	PlaceReview selectReplyField(int fno);
+	//리뷰 이미지 조회
+	ArrayList<ReviewImg> placeReviewImgList(int rno);
+	
 	//경기장 리뷰 리스트 셀렉트
 	ArrayList<PlaceReview> placeReviewList(PageInfo pi);
 	ArrayList<PlaceReview> placeChoiceReviewList(PageInfo pi, String categoryNum);
-	//경기장 리뷰 등록
+	//경기장 리뷰 등록 
 	int insertPlaceReview(PlaceReview pr);
 	//경기장 리뷰 사진 등록
 	int insertPlaceReviewImg(ReviewImg ri);
@@ -43,6 +50,9 @@ public interface PlaceService {
 	//리뷰 게시글 검색
 	int selectSearchCount(HashMap<String, String> map);
 	ArrayList<PlaceReview> selectSearchList(HashMap<String, String> map, PageInfo pi);
+	
+	int addReplyReply(ReplyReply p);
+	ArrayList<ReplyReply> selectReplyReply(int replyNo);
 	
 
 }
