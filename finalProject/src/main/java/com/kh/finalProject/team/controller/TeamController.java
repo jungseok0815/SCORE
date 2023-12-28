@@ -253,7 +253,7 @@ public class TeamController {
 
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
 
-		int myGrade = 1;
+		int myGrade = 0;
 		for (TeamMember m : tm) {
 			if(m.getUserNo() == loginUser.getUserNo())
 				myGrade = m.getGrade();
@@ -551,8 +551,7 @@ public class TeamController {
 		}
 		return mv;	
 	}
-	
-	
+
 	
 	@ResponseBody 
 	@RequestMapping(value= "/selectMyteam.tm",produces="application/json; charset=UTF-8" )
@@ -560,5 +559,6 @@ public class TeamController {
 			Member m =  (Member) session.getAttribute("loginUser");
 			return new Gson().toJson(teamService.selectMyteam(m.getUserNo()));
 	}
+
 }
 

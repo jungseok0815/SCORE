@@ -78,13 +78,10 @@
 			SELECT TEAM_NO
 					,TEAM_NAME
 					,CATEGORY_NUM
-					,TEAM_CHANGE_NAME
 				FROM TEAM_MEMBER
 				JOIN TEAM USING(TEAM_NO)
-				JOIN TEAM_IMG USING(TEAM_NO)
 				WHERE USER_NO = #{userNo}
 				AND CATEGORY_NUM = #{categoryNum}
-				AND OFFER_NO IS NULL
 	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
@@ -96,7 +93,7 @@
 		SELECT USER_NO
 		FROM TEAM_MEMBER
 	</select>
-	
+
  
  	<!-- 게시글 총 갯수 -->
  	<select id="selectListCount" resultType="_int">
@@ -423,7 +420,7 @@
  		  		    )
  	</insert>
 
-	<!-- 팀 생성할 때 주장 insert해주는 쿼리문 -->
+	<!-- 팀 생성할 때 주장 insert해주는 쿼리문ㄴ -->
  	<insert id="insertTeamMember">
  			INSERT INTO TEAM_MEMBER
  					(
@@ -617,34 +614,23 @@
 		    AND REQ_STATUS = 'N'-->
 		    
 		    SELECT 
-			    OFFER.OFFER_NO,
-			    TR.REQ_USER_NO,
-			    TR.REQ_STATUS,
-			    TR.REQ_CONTENT,
-			    TR.REQ_NO,
-			    ME.USER_NAME,
-			    ME.GENDER,
-			    ME.USER_LEVEL,
-			    ME.USER_BIRTH,
-			    ME.CITY,
-			    MAX(MI.MEMBER_CHANGE_NAME) AS MEMBER_CHANGE_NAME
-			FROM TEAM_REQ "TR"
-			JOIN MEMBER "ME" ON (TR.REQ_USER_NO = ME.USER_NO)
-			JOIN TEAM_OFFER "OFFER" ON (OFFER.OFFER_NO = TR.OFFER_NO)
-			LEFT JOIN MEMBER_IMG "MI" ON (TR.REQ_USER_NO = ME.USER_NO)
-			WHERE OFFER.TEAM_NO = #{tno}
-			AND TR.REQ_STATUS = 'N'
-			GROUP BY 
-			    OFFER.OFFER_NO,
-			    TR.REQ_USER_NO,
-			    TR.REQ_STATUS,
-			    TR.REQ_CONTENT,
-			    TR.REQ_NO,
-			    ME.USER_NAME,
-			    ME.GENDER,
-			    ME.USER_LEVEL,
-			    ME.USER_BIRTH,
-			    ME.CITY
+	               OFFER.OFFER_NO,
+			       TR.REQ_USER_NO,
+			       TR.REQ_STATUS,
+			       TR.REQ_CONTENT,
+			       TR.REQ_NO,
+			       ME.USER_NAME,
+			       ME.GENDER,
+			       ME.USER_LEVEL,
+			       ME.USER_BIRTH,
+			       ME.CITY,
+	               MI.MEMBER_CHANGE_NAME
+	          FROM TEAM_REQ "TR"
+			  JOIN MEMBER "ME" ON(TR.REQ_USER_NO = ME.USER_NO)
+			  JOIN TEAM_OFFER "OFFER" ON(OFFER.OFFER_NO = TR.OFFER_NO)
+	          LEFT JOIN MEMBER_IMG "MI" ON(TR.REQ_USER_NO = ME.USER_NO)
+			 WHERE OFFER.TEAM_NO = #{tno}
+			   AND TR.REQ_STATUS = 'N'
  	</select>
  	
  	<!-- 팀 수락 -->
@@ -678,13 +664,7 @@
 		    AND OFFER_NO IS NULL
 	</select>
 
-	<!-- 팀 프로필 가져오기 -->
-	<select id="reqList" resultType="_int">
-		SELECT REQ_USER_NO
-		  FROM TEAM_REQ
-		 WHERE REQ_NO = #{reqNo}
-	</select>
- 	
+
  	<insert id="acceptTeamMember" parameterType="map">
  			INSERT INTO TEAM_MEMBER
  					(
