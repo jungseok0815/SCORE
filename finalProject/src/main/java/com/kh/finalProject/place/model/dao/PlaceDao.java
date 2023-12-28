@@ -120,5 +120,8 @@ public class PlaceDao {
 	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
 		return sqlSession.selectOne("placeMapper.selectSearchCount", keyword);
 	}
+	public ArrayList<Field> selectReservation(SqlSessionTemplate sqlSession, int fieldNo) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReservation", fieldNo);
+	}
 	
 }

@@ -252,9 +252,11 @@ public class PlaceController {
 	public ModelAndView evaluationPage(int fieldNo, int categoryNum, ModelAndView mv) {
 		
 		ArrayList<SportInfo> list = pService.selectMember(fieldNo, categoryNum);
-//		System.out.println("결과" + list);
+		
+		ArrayList<Field> list2 = pService.selectReservation(fieldNo);
 		
 		mv.addObject("list", list)
+		  .addObject("list2", list2)
 		  .setViewName("place/evaluation");
 		
 		return mv;
@@ -270,7 +272,6 @@ public class PlaceController {
 		ArrayList<SportInfo> list = new ArrayList<>();
 		
 		JsonArray  jsonArray  = new JsonParser().parseString(realdata).getAsJsonArray();
-//		System.out.println("나와라: " + realdata);
 //		System.out.println("변환: " + jsonArray);
 
 		JsonElement firstElement = jsonArray.get(0); // 1번째 인덱스의 요소 가져오기

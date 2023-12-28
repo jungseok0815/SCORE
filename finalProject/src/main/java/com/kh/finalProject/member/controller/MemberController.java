@@ -272,7 +272,16 @@ public class MemberController {
 	@RequestMapping(value= "/getPostFriend.me",produces="application/json; charset=UTF-8" )
 	public String getUserInfo(HttpServletRequest req) {
 		Member m = (Member)req.getSession().getAttribute("loginUser");
-		return new Gson().toJson(memberService.getPostFriends(m.getUserNo()));
+		
+		ArrayList<Member> friendList = memberService.getPostFriends(m.getUserNo());
+		for(Member i : friendList) {
+			System.out.println(i);
+			if(i.getMemberChangeName() == null) {
+				i.setMemberChangeName("null");
+			}
+		}
+		
+		return new Gson().toJson(friendList);
 	}
 	
 	@ResponseBody

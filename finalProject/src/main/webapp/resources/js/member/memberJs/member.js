@@ -286,9 +286,17 @@ drawSelectPostFriend = (result) =>{
         listbtn.onclick = () =>{
             addFriend(a.userNo);
         };
-        const str = "<img class='img5'/>"+
+        let str = "";
+        if(a.memberChangeName === "null"){
+            str = "<img class='img5' src ='./resources/img/team/teamOfferBoardList/profile.jpg'>"+
                     "<div class='main-title'>"+a.userName+"</div>"+
                     "<div class='sub-title'>"+a.address+"</div>";
+        }else{
+            str = "<img class='img5' src = ."+a.memberChangeName+"/>"+
+                    "<div class='main-title'>"+a.userName+"</div>"+
+                    "<div class='sub-title'>"+a.address+"</div>";
+        }
+        
         postListDiv.innerHTML += str;
         postListDiv.appendChild(listbtn);
         PostList.appendChild(postListDiv);
@@ -316,7 +324,7 @@ drawSelectfriendList= (friendList) =>{
     console.log(friendList)
     document.querySelector("#bbbb").innerText = "친구" + friendList.length+"명 |";
     const PostList  = document.querySelector("#friendList");
-    PostList.innerHTML = "<div class = 'list-title'>친구요청 리스트</div>"
+    PostList.innerHTML = "<div class = 'list-title'>내 친구 리스트</div>"
     for(let a of friendList){
         const postListDiv = document.createElement("div")
         postListDiv.className = "tt22";
@@ -328,11 +336,11 @@ drawSelectfriendList= (friendList) =>{
         };
         let str = "";
         if(a.memberChangeName === "null"){
-            str = "<img src ='./resources/img/team/teamOfferBoardList/profile.jpg'>"+
+            str = "<img class='img5' src ='./resources/img/team/teamOfferBoardList/profile.jpg'>"+
                     "<div class='main-title'>"+a.userName+"</div>"+
                     "<div class='sub-title'>"+a.address+"</div>";
         }else{
-            str = "<img src = ."+a.memberChangeName+"/>"+
+            str = "<img class='img5' src = ."+a.memberChangeName+"/>"+
                     "<div class='main-title'>"+a.userName+"</div>"+
                     "<div class='sub-title'>"+a.address+"</div>";
         }

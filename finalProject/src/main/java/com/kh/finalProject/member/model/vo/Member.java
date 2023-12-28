@@ -148,8 +148,11 @@ public class Member {
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address + ", status="
-				+ status + ", point=" + point + ", userLever=" + userLevel + "]";
+				+ status + ", point=" + point + ", userLevel=" + userLevel + ", teamNo=" + teamNo
+				+ ", memberChangeName=" + memberChangeName + "]";
 	}
+
+
 	
 	
 	

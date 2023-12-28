@@ -45,6 +45,8 @@ public interface PlaceService {
 	int fieldDelet(int fieldNo);
 	// 평가 한 후 예약자 삭제
 	int fieldReqDel(int fieldNo);
+	// 게임에 참가했던 애들 조회
+	ArrayList<Field> selectReservation(int fieldNo);
 
 	//경기장 리뷰 리스트 셀렉트
 	ArrayList<PlaceReview> placeReviewList(PageInfo pi);

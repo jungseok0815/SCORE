@@ -55,9 +55,29 @@ test2 = (result) =>{
     } else{
         alert("게임 평가 실패");
     }
-
-
 }
 
 
+delField =() => {
+    const fieldNo = document.querySelector("#enalFieldNo").value
+    console.log(fieldNo)
 
+    data = {
+        fieldNo :  fieldNo,
+    }
+
+    evaluationAjaxController.fieldDel(data, deleteField);
+}
+
+deleteField = (result) =>{
+    console.log("성공: " + result)
+
+    const userNo = result.userNo
+
+    if (result.result === "success") {
+        alert("경기장 삭제 완료");
+        window.location.href = "/final/myPage.me?userNo=" + userNo; 
+    }else{
+        alert("경기장 삭제 실패");
+    }
+}

@@ -59,9 +59,11 @@
 		 	USER_NO,
             USER_ID,
             USER_NAME,
-            CITY
+            CITY,
+            MEMBER_CHANGE_NAME
 		 FROM MEMBER
 		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
+		 LEFT JOIN MEMBER_IMG USING(USER_NO)
 		 WHERE 
 		 		FRIEND_RES_USER = #{userNo}
 				 AND FRIEND_STATUS = 'N'

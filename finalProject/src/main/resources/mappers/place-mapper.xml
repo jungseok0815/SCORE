@@ -467,4 +467,9 @@
    						)
    </insert>
 
+	<select id="selectReservation" resultMap="fieldResultSet">
+ 		SELECT FIELD_NO
+		  FROM RESERVATION
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</select>
 </mapper>

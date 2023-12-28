@@ -158,5 +158,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.placeChoiceReviewList(sqlSession, pi, categoryNum);
 	}
 
+	@Override
+	public ArrayList<Field> selectReservation(int fieldNo) {
+		return pDao.selectReservation(sqlSession, fieldNo);
+	}
+
 
 }
