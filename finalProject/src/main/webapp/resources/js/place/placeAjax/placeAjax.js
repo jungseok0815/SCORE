@@ -45,12 +45,12 @@ const replyReviewDetailController={
     },
 
     //답글 등록
-    insertReplyReplyAjax : (data,callback)  => {
+    insertReplyReplyAjax : (data,i,callback)  => {
         $.ajax({
             url:"addReplyReply.pl",
             data,
             success: function(result){
-                  callback(result)
+                  callback(result,i)
             },
             error : (error) => {
                 console.log("Asdasdas")
@@ -58,12 +58,12 @@ const replyReviewDetailController={
         })
     },
      //답글 불러오기
-     selectReplyReplyAjax : (data,callback)  => {
+     selectReplyReplyAjax : (data,i,callback)  => {
         $.ajax({
             url:"selectReplyReply.pl",
             data,
             success: function(result){
-               callback(result);
+               callback(result,i);
             },
             error : (error) => {
                 console.log("Asdasdas")

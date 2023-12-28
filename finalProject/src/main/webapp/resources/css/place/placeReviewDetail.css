@@ -1,0 +1,171 @@
+.allContent{
+    background-color: #f2f5f7;
+    height: 100%;
+}
+
+.content-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contentWrap{
+    display: flex;
+    justify-content: center;
+}
+
+.content-img{
+    width: 1024px;
+}
+
+.imgStadium{
+    width: 100%;
+    object-fit: cover;
+    height: 448px;
+}
+
+.stadium-info{
+    padding: 30px 20px;
+}
+
+.stadium-area{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    margin-bottom: 5px;
+}
+
+.stadium-name{
+    font-size: 22px;
+    line-height: 120%;
+    margin-bottom: 3px;
+}
+
+.contentWrap-info{
+    width: 1024px;
+    background-color: white;
+}
+
+#stadium-address{
+    font-size: 14px;
+    line-height: 120%;
+    margin-right: 4px;
+}
+
+.address-copy{
+    font-size: 14px;
+    line-height: 120%;
+    color: #727f88;
+    text-decoration: underline;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.address-map{
+    font-size: 14px;
+    line-height: 120%;
+    color: #727f88;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.replyLocal{
+    width:1024px;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.replyDate{
+    font-size: 14px;
+    color: #939396;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.replyName{
+    font-size: 18px;
+}
+
+.replyReplyDate{
+    font-size: 14px;
+    color: #939396;
+    float: right;
+}
+
+.replyContent{
+    font-size: 15px;
+    width: 500px;
+}
+
+.replySpan{
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    background: white;
+    width: 80px;
+}
+
+.reply-content-list{
+    border-bottom: 1px solid #c7c7c7;
+}
+
+table tr td{
+    margin-top: 28px;
+}
+
+table{
+    width: 100%;
+}
+
+.btnReply{
+    font-size: 15px;
+    float: right;
+    border: none;
+    border-radius: 10px;
+    width: 60px;
+    height: 40px;
+}
+
+.btnReply:hover{
+    background-color: rgb(204, 204, 204);
+}
+
+input::placeholder{
+    vertical-align: top;
+}
+
+.inputReply{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: 0.4px solid #cdcdcd;
+    margin: 20px 0px 20px 0px;
+    font-size: 14px;
+}
+
+.replyReply-content{
+    border-bottom: 1px solid #c7c7c7;
+    display: none;
+}
+
+.btnInsert{
+    float: right;
+    border: none;
+    width: 60px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.btnInsert:hover{
+    background-color: rgb(204, 204, 204);
+}
+
+#mapImage{
+    width:1000px;
+    height:448px;
+    display: none;
+    margin: auto;
+}
