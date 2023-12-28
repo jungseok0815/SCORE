@@ -151,6 +151,7 @@ public class MemberController {
 	    	Member loginInfo = memberService.loginMember(login.getUserId());
 		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
 		    session.setAttribute("loginUser", loginInfo);
+		    session.setAttribute("alertMsg", "수정 성공");
 		    mv.addObject("sportInfo", sportInfo)
 		    .addObject("userInfo", loginInfo)
 		    .addObject("memberImg", mi)
@@ -311,7 +312,6 @@ public class MemberController {
 	@RequestMapping("/sendPostFriend.me")
 	public String sendPostFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
-
 		f.setFriendResUser(m.getUserNo());
 		int result = memberService.checkFriendStatus(f);
 		if(result > 0) {

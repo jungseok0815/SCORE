@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="chattingMapper">
+	<resultMap type="ChattingRoom" id="ChattingRoomResultSet">
+  		<result column="ROOM_NO" property="roomNo" />
+  	</resultMap>
+  	
+  	<resultMap type="ChattingMember" id="ChattingMemberResultSet">
+  		<result column="CHATTING_MEMBER_NO" property="chattingMemberNo" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="ROOM_NO" property="roomNo" />
+  		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
+  		<result column="USER_NAME" property="userName" />
+  		<result column="USER_ID" property="userId" />
+  		<result column="USER_NAME" property="userName" />
+  		<result column="TEAM_NO" property="teamNo" />
+  		<result column="CATEGORY_NUM" property="categoryNum" />
+  		<result column="TEAM_NAME" property="teamName" />
+  		<result column="TEAM_CHANGE_NAME" property="teamChangeName" />
+  	</resultMap>
+  	<resultMap type="ChattingMessage" id="ChattingMessageResultSet">
+  		<result column="CHATTING_MESSAGE_NO" property="messageNo" />
+  		<result column="CHATTING_MESSAGE_TEXT" property="messageText" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="USER_NAME" property="userName" />
+  		<result column="ROOM_NO" property="roomNo" />
+  		<result column="MEMBER_CHANGE_NAME" property="memberChangeName" />
+  		<result column="SEND_DATE" property="semdDate" />
+  	
+  	</resultMap>
+  	
+
+	<insert id="insertChattingRoom" useGeneratedKeys="true">
+	    <!-- your SQL query here -->
+	    INSERT INTO CHATTING_ROOM (
+	    	ROOM_NO,
+	    	CHATTING_MEMBER,
+	    	TEAM_NO
+	    	)
+	    VALUES (
+	    	SEQ_CHATTING_ROOM.NEXTVAL,
+	    	#{chattingMember},
+	    	#{teamNo}
+	    )
+	    
+	    <selectKey keyProperty="roomNo" resultType="int" order="AFTER">
+         SELECT SEQ_CHATTING_ROOM.CURRVAL FROM DUAL
+      </selectKey>
+	    
+	</insert>
+	
+		<insert id="insertChattingRoom2" useGeneratedKeys="true">
+	    <!-- your SQL query here -->
+	    INSERT INTO CHATTING_ROOM (
+	    	ROOM_NO,
+	    	CHATTING_MEMBER
+	    	)
+	    VALUES (
+	    	SEQ_CHATTING_ROOM.NEXTVAL,
+	    	#{chattingMember}
+	    )
+	    
+	    <selectKey keyProperty="roomNo" resultType="int" order="AFTER">
+         SELECT SEQ_CHATTING_ROOM.CURRVAL FROM DUAL
+      </selectKey>
+	    
+	</insert>
+   
+   <insert id= "addChattingMember">
+   		INSERT INTO CHATTING_ROOM_MEMBER(
+   				CHATTING_MEMBER_NO,
+   				USER_NO,
+   				ROOM_NO,
+  				TEAM_NO)
+   			VALUES
+   				(SEQ_CHATTING_ROOM_MEMBER.NEXTVAL,
+   				#{userNo},
+   				SEQ_CHATTING_ROOM.CURRVAL,
+				#{teamNo})
+   </insert>
+   
+     <insert id= "addChattingMember2">
+   		INSERT INTO CHATTING_ROOM_MEMBER
+   				(CHATTING_MEMBER_NO,
+   				USER_NO,
+   				ROOM_NO,
+  				TEAM_NO)
+   			VALUES
+   				(SEQ_CHATTING_ROOM_MEMBER.NEXTVAL,
+   				#{userNo},
+   				SEQ_CHATTING_ROOM.CURRVAL,
+				#{teamNo})
+   </insert>
+   
+   
+   <select id="selectRoomInfo" resultMap="ChattingRoomResultSet">
+   		SELECT ROOM_NO
+   			FROM CHATTING_ROOM
+   			WHERE CHATTING_MEMBER = #{chList}
+   </select>
+   
+      <insert id= "saveChattingNoReadMessage">
+   		INSERT INTO CHATTING_ROOM_MESSAGE
+   			(
+   				CHATTING_MESSAGE_NO,
+   				CHATTING_MESSAGE_TEXT,
+   				USER_NO,
+   				ROOM_NO
+   			)
+   			VALUES
+   			(
+   				SEQ_CHATTING_MESSAGE.NEXTVAL,
+   				#{messageText},
+   				#{userNo},
+   				#{roomNo}
+   			)
+   </insert>
+    <insert id= "saveChattingReadMessage">
+   		INSERT INTO CHATTING_ROOM_MESSAGE
+   			(
+   				CHATTING_MESSAGE_NO,
+   				CHATTING_MESSAGE_TEXT,
+   				USER_NO,
+   				ROOM_NO,
+   				READ
+   			)
+   			VALUES
+   			(
+   				SEQ_CHATTING_MESSAGE.NEXTVAL,
+   				#{messageText},
+   				#{userNo},
+   				#{roomNo},
+   				0
+   			)
+   </insert>
+    <select id="selectChattingList" resultMap="ChattingMessageResultSet">
+   		SELECT USER_NO, CHATTING_MESSAGE_NO, CHATTING_MESSAGE_TEXT, ROOM_NO, USER_NAME, MEMBER_CHANGE_NAME 
+   		FROM(
+   			SELECT * FROM CHATTING_ROOM_MESSAGE
+   				WHERE ROOM_NO = #{roomNo}
+   		)
+   		JOIN MEMBER USING(USER_NO)
+   		JOIN MEMBER_IMG USING(USER_NO)
+   </select>
+   
+   
+     <select id="selectChatiingRoomList" resultMap="ChattingMemberResultSet">
+   		SELECT ROOM_NO FROM CHATTING_ROOM_MEMBER
+   		WHERE USER_NO = #{userNo}
+   </select>
+   
+
+    <select id="selectChatiingRoomListMem" resultMap="ChattingMemberResultSet">
+   		SELECT USER_NO, ROOM_NO, USER_NAME, USER_ID,CATEGORY_NUM, TEAM_NO, TEAM_NAME, TEAM_CHANGE_NAME, MEMBER_CHANGE_NAME FROM CHATTING_ROOM_MEMBER
+   		JOIN MEMBER USING(USER_NO)
+   		LEFT JOIN MEMBER_IMG USING(USER_NO)
+   		LEFT JOIN TEAM USING(TEAM_NO)
+   		LEFT JOIN TEAM_IMG USING(TEAM_NO)
+   		WHERE ROOM_NO = #{roomNo}
+   		AND OFFER_NO IS NULL
+   </select>
+
+     <select id="selectChattingMessage" resultMap="ChattingMessageResultSet">
+   		SELECT *
+   		FROM(
+   			SELECT 
+   				CHATTING_MESSAGE_NO, 
+   				CHATTING_MESSAGE_TEXT, 
+   				USER_NO, 
+   				ROOM_NO, 
+   				TO_CHAR(SEND_DATE,  'MM-DD HH24:MI') AS SEND_DATE
+   			FROM CHATTING_ROOM_MESSAGE
+   			ORDER BY SEND_DATE DESC
+   		)
+   		WHERE ROWNUM = 1
+   			AND ROOM_NO = #{roomNo}
+   </select>
+   
+
+   
+
+
+
+</mapper>

@@ -119,4 +119,9 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
 	}
 	
+	//마이페이지 이미지 조회
+	public ArrayList<Member> chattingSelectFriend(SqlSessionTemplate sqlSession, HashMap info) {
+		return (ArrayList)sqlSession.selectList("memberMapper.chattingSelectFriend", info);
+	}
+	
 }
