@@ -66,27 +66,28 @@
 
         <div id="pagingArea">
             <ul class="pagination">
-               <c:choose>
-                  <c:when test = "${pi.currentPage ne 1 }">
-                     <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage - 1 }">이전</a></li>
-                  </c:otherwise>
-               </c:choose>
-                  
-                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }" >
-                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${p}">${p}</a></li>
-                </c:forEach>
-            
                 <c:choose>
-                  <c:when test = "${pi.currentPage eq pi.maxPage }">
-                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${pi.currentPage + 1 }">다음</a></li>
-                  </c:otherwise>
-               </c:choose>
+                    <c:when test="${ pi.currentPage eq 1 }">
+                        <li class="page-item disabled"><a class="page-link">이전</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cPage={ pi.currentPage - 1 }">이전</a></li>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:forEach var="p" begin="${pi.startPage}" end="${ pi.endPage }" >
+                       <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&currentPage=${ p }">${ p }</a></li>  
+                </c:forEach>
+         
+                
+                <c:choose>
+                    <c:when test="${ pi.currentPage eq pi.maxPage }">
+                        <li class="page-item disabled"><a class="page-link">다음</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${ pi.currentPage + 1 }">Next</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -141,7 +142,7 @@
                     </tr>
                     <div>
                         <textarea name="reviewContent" class="col-auto form-control" type="text" id="reviewContent"
-                                  placeholder="경기장 이용 후 느낀점을 적어주세요!"></textarea>
+                                  placeholder="경기장 이용 후 느낀점을 적어주세요!" style="margin-top: 5px;"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

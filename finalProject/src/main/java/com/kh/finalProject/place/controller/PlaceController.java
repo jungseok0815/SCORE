@@ -276,13 +276,14 @@ public class PlaceController {
 			@RequestParam(value="categoryNum", defaultValue="4") String categoryNum) {
 		
 		int cno = Integer.parseInt(categoryNum);
-		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
-		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 5);
+		System.out.println(pService.selectReviewListCount());
 		
 		if(cno == 4) {
 			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
 			
 			m.addAttribute("pi",pi);
+			System.out.println(pi);
 			m.addAttribute("pList",pList);
 		}else {
 			ArrayList<PlaceReview> pList =  pService.placeChoiceReviewList(pi, categoryNum);
@@ -300,20 +301,22 @@ public class PlaceController {
 										 @RequestParam("keyword") String keyword,
 										 @RequestParam(value="cpage", defaultValue="1") int currentPage,
 										 HttpSession session) {
-		System.out.println(keyword);
+		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
-		String userNo = Integer.toString(((Member)session.getAttribute("loginUser")).getUserNo());
-		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 10);
-		System.out.println(pi);
+		Member user = (Member)session.getAttribute("loginUser");
+		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 5);
+		
 		ArrayList<PlaceReview> pList =  pService.selectSearchList(map, pi);
-		System.out.println(pList);
+		
 		HashMap result = new HashMap();
 		result.put("pList", pList);
 		result.put("pi", pi);
 		
-		if(userNo != null && !userNo.equals("")) {
+		if(user != null && !user.equals("")) {
+			String userNo = Integer.toString(user.getUserNo());
 			ArrayList<Reservation> rList = pService.selectResList(userNo);	
 			result.put("rList", rList);
 		}
