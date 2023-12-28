@@ -110,8 +110,8 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyList", fno);
 	}
 	
-	public PlaceReview selectReplyField(SqlSessionTemplate sqlSession, int fno) {
-		return sqlSession.selectOne("placeMapper.selectReplyField", fno);
+	public PlaceReview selectReplyField(SqlSessionTemplate sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.selectOne("placeMapper.selectReplyField", map);
 	}
 	
 	public int addReplyReply(SqlSessionTemplate sqlSession, ReplyReply p) {
@@ -125,6 +125,14 @@ public class PlaceDao {
 	
 	public ArrayList<ReplyReply> selectReplyReply(SqlSessionTemplate sqlSession, int reply) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
+	}
+	
+	public int reviewIncreaseCount(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("placeMapper.reviewIncreaseCount", rno);
+	}
+	
+	public int checkReview(SqlSessionTemplate sqlSession, PlaceReview pr) {
+		return sqlSession.selectOne("placeMapper.selectReplyField", pr);
 	}
 	
 	

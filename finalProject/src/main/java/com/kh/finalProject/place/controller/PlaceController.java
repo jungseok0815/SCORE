@@ -52,9 +52,9 @@ public class PlaceController {
 			//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
 			if(!mf.getOriginalFilename().equals("")) {
 				PlaceImg pi = new PlaceImg();
-				String changeName = saveFile(mf, session);
+				String changeName = saveFile(mf, session, "resources/img/place/placeInsert/");
 				
-				pi.setFieldUrl("resources/img/place/");
+				pi.setFieldUrl("resources/img/place/placeInsert/");
 				pi.setFieldOriginName(mf.getOriginalFilename());
 				pi.setFieldChangeName("resources/img/place/placeInsert/" + changeName);
 				
@@ -70,7 +70,7 @@ public class PlaceController {
 		return "redirect:/";
 	}
 	
-	public String saveFile(MultipartFile upfile, HttpSession session) {
+	public String saveFile(MultipartFile upfile, HttpSession session, String filepath) {
 	  
 	      String originName = upfile.getOriginalFilename();
 	      
@@ -82,7 +82,7 @@ public class PlaceController {
 	      
 	      String changeName = currentTime + ranNum + ext;
 	      
-	      String savePath = session.getServletContext().getRealPath("/resources/img/place/placeInsert/");
+	      String savePath = session.getServletContext().getRealPath(filepath);
 	      
 	      try {
 	         upfile.transferTo(new File(savePath + changeName));
@@ -239,14 +239,25 @@ public class PlaceController {
 	//경기장 리뷰 상세페이지 
 	@RequestMapping("/placeReviewDetail.pl")
 	public String placeReviewDetail(int fno, Model m, int rno) {
-		System.out.println(fno);
-		System.out.println(rno);
-		PlaceReview pr = pService.selectReplyField(fno);
-		ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
-		System.out.println(pr);
-		System.out.println(rno);
-		m.addAttribute("pr", pr);
-		m.addAttribute("reImgList", ri);
+		
+		int result = pService.reviewIncreaseCount(rno);
+		
+		//System.out.println(fno);
+		//System.out.println(rno);
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("fno", fno);
+		map.put("rno", rno);
+		//System.out.println(result);
+		
+		if(result > 0) {
+			PlaceReview pr = pService.selectReplyField(map);
+			System.out.println(pr.getReviewCount());
+			ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
+			m.addAttribute("pr", pr);
+			m.addAttribute("reImgList", ri);
+			
+		}
 		return "place/placeReviewDetail";
 	}
 	
@@ -264,7 +275,7 @@ public class PlaceController {
 	public HashMap addReplyReply(ReplyReply p, HttpSession session) {
 		p.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
 		
-		System.out.println(p);
+		//System.out.println(p);
 		int result  = pService.addReplyReply(p);
 		HashMap m1 = new HashMap();
 		if(result> 0) {
@@ -305,14 +316,15 @@ public class PlaceController {
 		pr.setFieldNo(fieldNo);
 		pr.setUserNo(userNo);
 		
+		
 		int resultReview = pService.insertPlaceReview(pr);
 		
 		int resultImg = 0;
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
-			String changeName = saveFile(upfile, session);
-			ri.setReviewUrl("resources/img/place//placeReviewList/");
+			String changeName = saveFile(upfile, session, "resources/img/place/placeReviewList/");
+			ri.setReviewUrl("resources/img/place/placeReviewList/");
 			ri.setReviewOriginName(upfile.getOriginalFilename());
 			ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName);
 			
@@ -338,13 +350,13 @@ public class PlaceController {
 		
 		int cno = Integer.parseInt(categoryNum);
 		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 5);
-		System.out.println(pService.selectReviewListCount());
+		//System.out.println(pService.selectReviewListCount());
 		
 		if(cno == 4) {
 			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
 			
 			m.addAttribute("pi",pi);
-			System.out.println(pi);
+			//System.out.println(pi);
 			m.addAttribute("pList",pList);
 		}else {
 			ArrayList<PlaceReview> pList =  pService.placeChoiceReviewList(pi, categoryNum);

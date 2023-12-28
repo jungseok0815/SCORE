@@ -17,8 +17,8 @@
     <div class="outer">
         <div class="wrapper">
             <h3 align="center" style="color: #0a7ffb;">경기장 리뷰</h3>
-            <div class="select-view" style= "float: left; margin-bottom: 5px;">
-                <select name="categoryNum" id="categoryNumBox" onchange="changeSports()">
+            <div class="select-view" style= "float: left; margin-bottom: 5px; ">
+                <select name="categoryNum" id="categoryNumBox" style="border-radius: 20%;" onchange="changeSports()">
                     <option value="4">전체종목</option>
                     <option value="1">축구</option>
                     <option value="2">야구</option>
@@ -37,57 +37,6 @@
                     </tr>
                 </thead>
 
-
-                <tbody>
-                    <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    
                 <!-- 리뷰 리스트 ajax불러오는 곳 -->
                 <tbody class="review-list">
                 </tbody>
@@ -114,31 +63,7 @@
         </div>
       
 
-        <div id="pagingArea">
-            <ul class="pagination">
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq 1 }">
-                        <li class="page-item disabled"><a class="page-link">이전</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cPage={ pi.currentPage - 1 }">이전</a></li>
-                    </c:otherwise>
-                </c:choose>
-
-                <c:forEach var="p" begin="${pi.startPage}" end="${ pi.endPage }" >
-                       <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&currentPage=${ p }">${ p }</a></li>  
-                </c:forEach>
-         
-                
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq pi.maxPage }">
-                        <li class="page-item disabled"><a class="page-link">다음</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="placeReviewList.pl?userNo=${loginUser.userNo}&cpage=${ pi.currentPage + 1 }">Next</a></li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
+        <div class="paging-area" align="center" style="margin: 50px;">
         </div>
     </div>
 

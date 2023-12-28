@@ -39,6 +39,7 @@
     font-size: 22px;
     line-height: 120%;
     margin-bottom: 3px;
+    font-weight: 600;
 }
 
 .contentWrap-info{
@@ -168,4 +169,18 @@ input::placeholder{
     height:448px;
     display: none;
     margin: auto;
+}
+
+.star-rating{
+    color: #f73c32;
+}
+
+.review-count{
+    font-size: 14px;
+    line-height: 120%;
+    color: #727F88;
+    margin: 10px 10px 20px 0px;
+    display: flex;
+    justify-content: right;
+    align-items: right;
 }

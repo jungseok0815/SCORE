@@ -273,11 +273,15 @@
 	<!-- 리뷰 게시글 정보 불러옴 -->
 	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
 		SELECT FIELD_NO,
-		             FIELD_NAME,
-		             FIELD_AREA
+               FIELD_NAME,
+               FIELD_AREA,
+               REVIEW_CONTENT,
+               STAR_RATING,
+               REVIEW_COUNT     
 			FROM FIELD_REVIEW
 		JOIN FIELD USING (FIELD_NO)
 		WHERE FIELD_NO = #{fno}
+		AND REVIEW_NO = #{rno}
 	</select>
  	
  	<!-- 리뷰 게시글 총 갯수 -->
@@ -288,6 +292,7 @@
  	
  	<select id="placeReviewList" resultMap="PlaceReviewResultSet">
  		SELECT FR.REVIEW_NO,
+ 			   F.FIELD_NO,
 		       M.USER_NAME,
 		       F.FIELD_NAME,
 		       F.FIELD_AREA,
@@ -305,6 +310,7 @@
  	
  	<select id="placeChoiceReviewList" resultMap="PlaceReviewResultSet">
  		SELECT FR.REVIEW_NO,
+ 			   F.FIELD_NO,
 		       M.USER_NAME,
 		       F.FIELD_NAME,
 		       F.FIELD_AREA,
@@ -411,21 +417,22 @@
  	<!-- 리뷰검색 리스트 -->
  	<select id="selectSearchList" resultMap="PlaceReviewResultSet">
  		SELECT FR.REVIEW_NO,
-		       M.USER_NAME,
-		       F.FIELD_NAME,
-		       F.FIELD_AREA,
+ 			   FIELD_NO,
+		       USER_NAME,
+		       FIELD_NAME,
+		       FIELD_AREA,
 		       FR.REVIEW_COUNT,
 		       FR.REVIEW_ENROLL_DATE,
 		       FR.STAR_RATING
 	        FROM FIELD_REVIEW FR
-	        JOIN FIELD F USING (FIELD_NO)
-	        JOIN MEMBER M USING (USER_NO)
+	        JOIN FIELD USING (FIELD_NO)
+	        JOIN MEMBER USING (USER_NO)
 	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
         <if test="condition == 'writer'">
-          AND M.USER_NAME
+          AND USER_NAME
         </if>
         <if test="condition == 'title'">
-          AND F.FIELD_NAME
+          AND FIELD_NAME
         </if>
         <if test="condition == 'content'">
           AND FR.FIELD_CONTENT
@@ -442,5 +449,19 @@
  			FROM REPLYREPLY
  			JOIN MEMBER USING(USER_NO)
  			WHERE REPLY_NO = #{replyNo}
+ 	</select>
+ 	
+ 	<!-- 리뷰 조회수 올리는 쿼리 -->
+	<update id="reviewIncreaseCount">
+ 		UPDATE FIELD_REVIEW
+ 		   SET REVIEW_COUNT = REVIEW_COUNT + 1
+ 		 WHERE REVIEW_NO = #{rno}
+ 	</update>
+ 	
+ 	<select id="checkReview" resultType="_int">
+ 		SELECT COUNT(FIELD_NO + USER_NO)
+		  FROM FIELD_REVIEW
+		 WHERE FIELD_NO = #{fieldNo}
+		   AND USER_NO = #{userNo}
  	</select>
 </mapper>

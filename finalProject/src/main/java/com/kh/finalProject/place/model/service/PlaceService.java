@@ -3,13 +3,14 @@ package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.ReplyReply;
-import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
 
@@ -34,7 +35,7 @@ public interface PlaceService {
 	
 	//댓글 리스트
 	ArrayList<Reply> selectReplyList(int fno);
-	PlaceReview selectReplyField(int fno);
+	PlaceReview selectReplyField(HashMap<String, Integer> map);
 	//리뷰 이미지 조회
 	ArrayList<ReviewImg> placeReviewImgList(int rno);
 	
@@ -53,6 +54,12 @@ public interface PlaceService {
 	
 	int addReplyReply(ReplyReply p);
 	ArrayList<ReplyReply> selectReplyReply(int replyNo);
+	
+	//리뷰게시글 조회수증가(update)
+	int reviewIncreaseCount(int rno);
+	
+	//자기가 리뷰 쓴 경기장 못 쓰게 막음
+	int checkReview(PlaceReview pr);
 	
 
 }

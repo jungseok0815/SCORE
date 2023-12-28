@@ -33,6 +33,31 @@
                     <span id="stadium-address">${pr.fieldArea}</span>
                     <a class="address-copy" onclick="copyAddress()">주소 복사</a>
                     <a class="address-map" onclick="drawMapClick(`${pr.fieldArea}`)">지도 보기</a>
+                    <div class="star-rating">
+                        <c:choose>
+                            <c:when test="${pr.starRating eq 1}">
+                                ★
+                            </c:when>
+                            <c:when test="${pr.starRating eq 2}">
+                                ★★
+                            </c:when>
+                            <c:when test="${pr.starRating eq 3}">
+                                ★★★
+                            </c:when>
+                            <c:when test="${pr.starRating eq 4}">
+                                ★★★★
+                            </c:when>
+                            <c:when test="${pr.starRating eq 5}">
+                                ★★★★★
+                            </c:when>
+                        </c:choose>
+                    </div>
+                    <div class="content-box" style="margin-top: 15px;font-size: 20px;">
+                        ${pr.reviewContent}
+                    </div>
+                    <div class="review-count">
+                        조회수 ${pr.reviewCount}
+                    </div>
                 </div>
             </div>
             <div class="replyLocal">
