@@ -25,3 +25,49 @@ function selectTeamMember(teamNo,callback){
     })
     
 }
+
+const replyReviewDetailController={
+    // 댓글 리스트
+    selectReplyListAjax: (data, callback) => {
+        console.log(data)
+        $.ajax({
+            url:"rlist.pl",
+            data,
+            success: function(result){
+                console.log(result);
+                callback(result)
+                
+            },
+            error : (error) => {
+                console.log(error)
+            }
+        })
+    },
+
+    //답글 등록
+    insertReplyReplyAjax : (data,i,callback)  => {
+        $.ajax({
+            url:"addReplyReply.pl",
+            data,
+            success: function(result){
+                  callback(result,i)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+     //답글 불러오기
+     selectReplyReplyAjax : (data,i,callback)  => {
+        $.ajax({
+            url:"selectReplyReply.pl",
+            data,
+            success: function(result){
+               callback(result,i);
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    }
+}

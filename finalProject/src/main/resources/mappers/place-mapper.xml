@@ -100,6 +100,24 @@
   		<result column="FIELD_NAME" property="fieldName" />
   	</resultMap>
   	
+  	<resultMap type="Reply" id="replyResultSet">
+  	  	<result column="REPLY_NO" property="replyNo" />
+  		<result column="REPLY_WRITER" property="replyWriter" />
+  		<result column="REPLY_CONTENT" property="replyContent" />
+  		<result column="REPLY_DATE" property="replyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="FIELD_NO" property="fieldNo" />
+  	</resultMap>
+
+  	<resultMap type="ReplyReply" id="replyReplyResultSet">
+  	  	<result column="REPLYREPLY_NO" property="replyReplyNo" />
+  		<result column="REPLYREPLY_CONTENT" property="replyReplyContent" />
+  		<result column="REPLYREPLY_DATE" property="replyReplyDate" />
+  		<result column="USER_NO" property="userNo" />
+  		<result column="REPLY_NO" property="replyNo" />
+  		<result column="USER_NAME" property="userName" />
+  	</resultMap>
+  	
   	<insert id= "insertPlace">
       INSERT INTO FIELD
       				( 
@@ -172,6 +190,7 @@
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
  	</select>
+ 	
  	<select id="selectPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -189,6 +208,7 @@
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
  	</select>
+ 	
  	<select id="placeDetailview" resultMap="placeResultSet">
  		SELECT FIELD_NO,
 				FIELD_NAME,
@@ -210,11 +230,13 @@
  		  FROM FIELD
  		  WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResPlaceList" resultMap="placeResultSet">
  		SELECT FIELD_NO, COUNT(*) as "FIELD_COUNT"
 			FROM RESERVATION
 			GROUP BY FIELD_NO
  	</select>
+ 	
 	<select id="placeResCount" resultType="_int">
  		SELECT COUNT(*)
 		FROM RESERVATION
@@ -229,6 +251,7 @@
 		FROM FIELD
 		WHERE FIELD_NAME  like '%'||#{searchMain}||'%'
 	</select>
+	
 	<insert id= "insertResMatch">
    	INSERT INTO RESERVATION
 				 (
@@ -252,6 +275,7 @@
 		 WHERE FIELD_NO = #{fieldNo}
 		   AND RES_USER_NO = #{resUserNo}
  	</select>
+ 	
  	<select id="placeImgList" resultMap="placeImgResultSet">
  		SELECT FIELD_IMG_NO,
 		       FIELD_URL,
@@ -260,6 +284,7 @@
 		  FROM FIELD_IMG
 		 WHERE FIELD_NO = #{fieldNo}
  	</select>
+ 	
  	<select id="selectResList" resultMap="reservationResultSet">
 	 	SELECT RES_NO,
 		       RES_USER_NO,
@@ -273,6 +298,7 @@
 		 WHERE RES_USER_NO = #{resUserNo}
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
+ 	
  	<delete id="deleteReservation">
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
@@ -384,7 +410,27 @@
 		 WHERE FIELD_NO = #{fieldNo}
  	</delete>
  	
-
+ 	<!-- 리뷰 댓글 조회 -->
+ 	<select id="selectReplyList" resultMap="replyResultSet">
+ 		SELECT REPLY_NO,
+ 					 REPLY_WRITER,
+ 					 REPLY_CONTENT,
+ 					 REPLY_DATE,
+ 					 USER_NO
+ 		  FROM REPLY
+ 		WHERE FIELD_NO = #{fno}
+ 	</select>
+	
+	<!-- 리뷰 게시글 정보 불러옴 -->
+	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
+		SELECT FIELD_NO,
+		             FIELD_NAME,
+		             FIELD_AREA
+			FROM FIELD_REVIEW
+		JOIN FIELD USING (FIELD_NO)
+		WHERE FIELD_NO = #{fno}
+	</select>
+ 	
  	<!-- 리뷰 게시글 총 갯수 -->
  	<select id="selectReviewListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -446,6 +492,7 @@
 	                    #{starRating}
 	                    )
  	</insert>
+ 	
  	<insert id= "insertPlaceReviewImg">
    	INSERT INTO REVIEW_IMG
    						 (
@@ -466,10 +513,92 @@
 			            SEQ_FIELD_REVIEW.CURRVAL
    						)
    </insert>
+   
+   <!-- 리뷰 이미지 조회 -->
+    <select id="placeReviewImgList" resultMap="reviewImgResultSet">
+ 		SELECT REVIEW_IMG_NO,
+		       REVIEW_URL,
+		       REVIEW_ORIGIN_NAME,
+		       REVIEW_CHANGE_NAME
+		  FROM REVIEW_IMG
+		 WHERE REVIEW_NO = #{rno}
+ 	</select>
+ 	
+ 	<insert id= "addReplyReply">
+   		INSERT INTO REPLYREPLY
+				 (
+				REPLYREPLY_NO,
+				REPLYREPLY_CONTENT,
+				USER_NO,
+				REPLY_NO
+				 )
+		 VALUES
+				 (
+				SEQ_REPLYREPLY.NEXTVAL,
+				#{replyReplyContent},
+				#{userNo},
+				#{replyNo}
+				 )
+   </insert>
 
 	<select id="selectReservation" resultMap="fieldResultSet">
  		SELECT FIELD_NO
 		  FROM RESERVATION
 		 WHERE FIELD_NO = #{fieldNo}
+	</select>
+
+   <!-- 리뷰 검색 게시글 총 갯수 -->
+ 	<select id="selectSearchCount" resultType="_int">
+		SELECT COUNT(*)
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+ 	</select>
+ 	
+ 	<!-- 리뷰검색 리스트 -->
+ 	<select id="selectSearchList" resultMap="PlaceReviewResultSet">
+ 		SELECT FR.REVIEW_NO,
+		       M.USER_NAME,
+		       F.FIELD_NAME,
+		       F.FIELD_AREA,
+		       FR.REVIEW_COUNT,
+		       FR.REVIEW_ENROLL_DATE,
+		       FR.STAR_RATING
+	        FROM FIELD_REVIEW FR
+	        JOIN FIELD F USING (FIELD_NO)
+	        JOIN MEMBER M USING (USER_NO)
+	        WHERE FR.FIELD_REVIEW_STATUS = 'Y'
+        <if test="condition == 'writer'">
+          AND M.USER_NAME
+        </if>
+        <if test="condition == 'title'">
+          AND F.FIELD_NAME
+        </if>
+        <if test="condition == 'content'">
+          AND FR.FIELD_CONTENT
+        </if>
+          LIKE '%' || #{keyword} ||'%'
+          ORDER BY FR.REVIEW_NO DESC
+ 	</select>
+
+      <select id="selectReplyReply" resultMap="replyReplyResultSet">
+ 			SELECT USER_NAME, 
+ 						 REPLYREPLY_DATE, 
+ 						 REPLYREPLY_CONTENT,
+ 						 USER_NO
+ 			FROM REPLYREPLY
+ 			JOIN MEMBER USING(USER_NO)
+ 			WHERE REPLY_NO = #{replyNo}
  	</select>
 </mapper>

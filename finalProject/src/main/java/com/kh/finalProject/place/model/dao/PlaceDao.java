@@ -14,6 +14,8 @@ import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.Reply;
+import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
@@ -117,11 +119,40 @@ public class PlaceDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("placeMapper.placeChoiceReviewList", categoryNum, rowBounds);
 	}
-	public int selectSearchCount(SqlSessionTemplate sqlSession, String keyword) {
-		return sqlSession.selectOne("placeMapper.selectSearchCount", keyword);
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("placeMapper.selectSearchCount", map);
+	}
+	public ArrayList<PlaceReview> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("placeMapper.selectSearchList", map, rowBounds);
 	}
 	public ArrayList<Field> selectReservation(SqlSessionTemplate sqlSession, int fieldNo) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReservation", fieldNo);
 	}
+	
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int fno) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyList", fno);
+	}
+	
+	public PlaceReview selectReplyField(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.selectOne("placeMapper.selectReplyField", fno);
+	}
+	
+	public int addReplyReply(SqlSessionTemplate sqlSession, ReplyReply p) {
+		return sqlSession.insert("placeMapper.addReplyReply", p);
+	}
+	
+	
+	public ArrayList<ReviewImg> placeReviewImgList(SqlSessionTemplate sqlSession, int rno) {
+		return (ArrayList)sqlSession.selectList("placeMapper.placeReviewImgList", rno);
+	}
+	
+	public ArrayList<ReplyReply> selectReplyReply(SqlSessionTemplate sqlSession, int reply) {
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
+	}
+	
 	
 }

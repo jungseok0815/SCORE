@@ -1,6 +1,7 @@
 const reviewValue ={
     categoryNum: 4,
 }
+
 function imgChangeUpdate(file){
     if(file.files.length == 1){
         const reader = new FileReader();
@@ -17,13 +18,17 @@ function imgChangeUpdate(file){
 
 
 searchKeyword = (event) => {
-    let src = document.querySelector('#search1').value
+    let condition = document.getElementById("condition").value;
+    let keyword = document.querySelector('#search-input').value;
 
-    if(event.keyCode == 13 || !window.event.keyCode){
-        console.log(src);
+    data = {
+        condition: condition,
+        keyword: keyword
+    };
 
-    }
-}
+    searchAjax(data, drawReviewList);
+    
+};
 
 init = () =>{
     data={

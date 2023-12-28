@@ -36,38 +36,82 @@
                         <th width="130">별점</th>
                     </tr>
                 </thead>
-                <tbody class="review-list">
+
+
+                <tbody>
+                    <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
+                        <td>부산</td>
+                        <td class="review-name">구덕운동장</td>
+                        <td>금남식</td>
+                        <td>40</a></td>
+                        <td>2023-12-19</td>
+                        <td class="star-rating">★★★</td>
+                    </tr>
+                    <tr onclick="">
+                        <td>경남</td>
+                        <td class="review-name">엔씨파크</td>
+                        <td>윤구진</td>
+                        <td>70</a></td>
+                        <td>2023-12-18</td>
+                        <td class="star-rating">★★★★★</td>
+                    </tr>
+                    <tr onclick="">
+                        <td>서울</td>
+                        <td class="review-name">성남고등학교 대운동장</td>
+                        <td>임두현</td>
+                        <td>111</a></td>
+                        <td>2023-12-17</td>
+                        <td class="star-rating">★</td>
+                    </tr>
+                    <tr onclick="">
+                        <td>부산</td>
+                        <td class="review-name">구덕운동장</td>
+                        <td>금남식</td>
+                        <td>40</a></td>
+                        <td>2023-12-19</td>
+                        <td class="star-rating">★★★</td>
+                    </tr>
+                    <tr onclick="">
+                        <td>경남</td>
+                        <td class="review-name">엔씨파크</td>
+                        <td>윤구진</td>
+                        <td>70</a></td>
+                        <td>2023-12-18</td>
+                        <td class="star-rating">★★★★★</td>
+                    </tr>
+                    <tr onclick="">
+                        <td>서울</td>
+                        <td class="review-name">성남고등학교 대운동장</td>
+                        <td>임두현</td>
+                        <td>111</a></td>
+                        <td>2023-12-17</td>
+                        <td class="star-rating">★</td>
+                    </tr>
                     
+                <!-- 리뷰 리스트 ajax불러오는 곳 -->
+                <tbody class="review-list">
                 </tbody>
             </table>
             <div id="enroll-btn">
+                <c:if test="${loginUser.userLevel eq 1 or loginUser.userLevel eq 2}">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         리뷰작성
                     </button>
+				</c:if>
             </div>
         </div>
         
         
         <div class="search-bar" align="center">
-            <form action="search.pl">
-                <input type="hidden" name="cpage" value="1">
-                <select name="condition" class="pl">
-                    <option value="writer">작성자</option>
-                    <option value="title">구장이름</option>
-                    <option value="content">내용</option>
-                </select>
-                <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
-                <button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
-            </form>
+            <input type="hidden" name="cpage" value="1">
+            <select name="condition" class="pl" id="condition">
+                <option value="writer">작성자</option>
+                <option value="title">구장이름</option>
+                <option value="content">내용</option>
+            </select>
+            <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
+            <button type="button" onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" ></button>  
         </div>
-        <c:if test="${ not empty condition }">
-            <script>
-                window.onload = function(){
-                    const opt = document.querySelector(".search-bar option[value=${condition}]");
-                    opt.setAttribute("selected", true);
-                }
-            </script>
-        </c:if>
       
 
         <div id="pagingArea">
