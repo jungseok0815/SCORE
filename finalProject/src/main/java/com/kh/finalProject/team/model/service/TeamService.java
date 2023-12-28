@@ -250,5 +250,15 @@ public class TeamService implements TeamServiceImp{
 		return teamDao.acceptTeamMember(sqlSession, reqList, tno);
 	}
 
+	@Override
+	public ArrayList<Team> selectMyteam(int userNo) {
+		return teamDao.selectMyteam(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Team> chattingSelectTeam(HashMap info) {
+		return teamDao.chattingSelectTeam(sqlSession, info);
+	}
+
 
 }

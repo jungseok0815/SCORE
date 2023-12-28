@@ -145,4 +145,10 @@ public interface TeamServiceImp {
 	
 	// 수락시 팀 멤버에 넘겨주기 
 	int acceptTeamMember(int reqList, int tno);
+	
+	ArrayList<Team> selectMyteam(int userNo);
+	
+	ArrayList<Team> chattingSelectTeam(HashMap info);
+	
+	
 }

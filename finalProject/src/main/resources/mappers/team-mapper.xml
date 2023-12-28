@@ -664,5 +664,59 @@
 		    AND OFFER_NO IS NULL
 	</select>
 
+
+ 	<insert id="acceptTeamMember" parameterType="map">
+ 			INSERT INTO TEAM_MEMBER
+ 					(
+						TMEMBER_NO,
+						ENROLL_DATE,
+						TEAM_NO,
+						USER_NO,
+ 						GRADE
+ 					)
+ 			VALUES
+ 					(
+ 						SEQ_TEAM_MEMBER.NEXTVAL,
+ 						SYSDATE,
+ 						#{tno},
+ 						#{reqList},
+ 						1
+ 					)
+ 	</insert>
  	
+ 	<select id="selectMyteam" resultMap="teamResult"> 
+ 		SELECT
+		        TEAM_NO,
+		        TEAM_NAME,
+		        CATEGORY_NUM,
+		        TEAM_CHANGE_NAME
+		    FROM TEAM
+		    JOIN TEAM_IMG USING(TEAM_NO)
+		    JOIN TEAM_MEMBER USING(TEAM_NO)
+		   WHERE USER_NO = #{userNo} 
+		   AND OFFER_NO IS  NULL
+		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
+ 	</select>
+ 	
+ 	 <select id="chattingSelectTeam" resultMap="teamResult"> 
+ 	 SELECT 
+        TEAM_NO,
+        TEAM_NAME,
+        CATEGORY_NUM,
+        TEAM_CHANGE_NAME
+        FROM(
+	 		SELECT
+			        TEAM_NO,
+			        TEAM_NAME,
+			        CATEGORY_NUM,
+			        TEAM_CHANGE_NAME
+			    FROM TEAM
+			    JOIN TEAM_IMG USING(TEAM_NO)
+			    JOIN TEAM_MEMBER USING(TEAM_NO)
+			   WHERE USER_NO = #{userNo} 
+			   AND OFFER_NO IS  NULL
+			 )  
+		WHERE TEAM_NAME LIKE '%'||#{selectValue}||'%'	
+		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
+ 	</select>
  </mapper>

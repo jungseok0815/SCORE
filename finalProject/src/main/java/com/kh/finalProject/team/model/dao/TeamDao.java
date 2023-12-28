@@ -265,4 +265,12 @@ public class TeamDao {
 		return sqlSession.insert("teamMapper.acceptTeamMember", params);
 	}
 	
+	public ArrayList<Team> selectMyteam(SqlSessionTemplate sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectMyteam", userNo);
+	}
+	
+	public ArrayList<Team> chattingSelectTeam(SqlSessionTemplate sqlSession, HashMap info) {
+		return (ArrayList)sqlSession.selectList("teamMapper.chattingSelectTeam", info);
+	}
+	
 }

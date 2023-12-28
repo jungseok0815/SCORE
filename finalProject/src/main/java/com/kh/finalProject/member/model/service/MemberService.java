@@ -44,5 +44,6 @@ public interface MemberService {
 	int updateMyPageSport(SportInfo sport);
 	//마이페이지 이미지 조회
 	MemberImg selectMemberImg(int userNo);
+	ArrayList<Member> chattingSelectFriend(HashMap info);
 }
 

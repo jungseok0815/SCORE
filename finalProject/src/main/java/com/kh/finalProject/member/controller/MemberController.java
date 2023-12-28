@@ -312,7 +312,6 @@ public class MemberController {
 	@RequestMapping("/sendPostFriend.me")
 	public String sendPostFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
-
 		f.setFriendResUser(m.getUserNo());
 		int result = memberService.checkFriendStatus(f);
 		if(result > 0) {

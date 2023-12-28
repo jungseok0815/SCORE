@@ -291,7 +291,6 @@ addFriend = (userNo) =>{
 
 
 selectFriendList = () =>{
-
     memberAjaxController.selectFriendList(drawSelectfriendList)
     
 }
