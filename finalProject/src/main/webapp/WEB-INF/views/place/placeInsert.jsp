@@ -37,10 +37,10 @@
                     <td colspan="2">
                         <div class="filebox">
                                 <div class="btn-upload">
-                                    <img src="" id="file-img1" onclick="clickImg(1)">
-                                    <img src="" id="file-img2" onclick="clickImg(2)">
-                                    <img src="" id="file-img3" onclick="clickImg(3)">
-                                    <img src="" id="file-img4" onclick="clickImg(4)">
+                                    <img id="file-img1" onclick="clickImg(1)">
+                                    <img id="file-img2" onclick="clickImg(2)">
+                                    <img id="file-img3" onclick="clickImg(3)">
+                                    <img id="file-img4" onclick="clickImg(4)">
                                 </div>
                             
                             <input type="file" name="upfile" id="fileImgFile1" onchange="loadImg(this,1)" required>
@@ -55,10 +55,9 @@
                         <!-- <input type="text" value="" class="from-input" placeholder="[매니저 이름]을 입력해주세요" name="manager" required> -->
                         <select name="manager" value="" class="manager-select-box" required>
                             <option value="" selected disabled hidden>담당매니저를 선택해주세요</option>
-                            <option value="차두리">차두리</option>
-                            <option value="박지성">박지성</option>
-                            <option value="리오넬 메시">리오넬 메시</option>
-                            <option value="즐라탄 이브라히모비치">즐라탄</option>
+                            <c:forEach var="item" items="${list}">
+                                <option value="${item.userName}">${item.userName}</option>
+                            </c:forEach>
                         </select>
                     </td>
                 </tr>
@@ -69,8 +68,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="text" style="padding: 10px;" class="address-input" id="sample6_address" name="fieldArea" placeholder="주소">
-                        <input type="button" style="width: 65px; height: 35px;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
+                        <input type="text" style="padding: 10px;" class="address-input" id="sample4_jibunAddress" name="fieldArea" placeholder="주소">
+                        <input type="button" style="width: 65px; height: 35px;" onclick="sample4_execDaumPostcode()" value="주소 찾기">
                     </td>
                 </tr>
                 <tr align="center">

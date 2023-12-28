@@ -378,4 +378,11 @@
  				FROM MEMBER_IMG
  			 WHERE USER_NO = #{userNo}
  	</select>
+ 	<select id="selectManegerList" resultMap="memberResult">
+	 	SELECT USER_NO,
+		       USER_NAME
+		  FROM MEMBER
+		 WHERE USER_LEVEL = 1
+	</select>
+ 	
 </mapper>

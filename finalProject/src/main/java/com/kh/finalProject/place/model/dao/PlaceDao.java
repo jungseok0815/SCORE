@@ -80,4 +80,5 @@ public class PlaceDao {
 	public ArrayList<Reservation> dateAllResList(SqlSessionTemplate sqlSession, int resUserNo){
 		return (ArrayList)sqlSession.selectList("placeMapper.dateAllResList", resUserNo);
 	}
+	
 }

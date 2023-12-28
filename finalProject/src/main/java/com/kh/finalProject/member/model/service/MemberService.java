@@ -44,5 +44,8 @@ public interface MemberService {
 	int updateMyPageSport(SportInfo sport);
 	//마이페이지 이미지 조회
 	MemberImg selectMemberImg(int userNo);
+	
+	//매니저 불러오기
+	ArrayList<Member> selectManegerList();
 }
 

@@ -230,6 +230,7 @@
 		  FROM RESERVATION
 		  JOIN FIELD USING (FIELD_NO)
 		 WHERE RES_USER_NO = #{userNo}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 	  GROUP BY FIELD_DATE
  	</select>
  	<select id="dateChoiceResList" resultMap="reservationResultSet">
