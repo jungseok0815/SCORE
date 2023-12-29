@@ -19,9 +19,9 @@
     <div align="center">
         <h1>${errorMsg}</h1>
         <h3>침착하게 처음부터 확인 해보자</h3>
-        <button href="/views/main.jsp" class="error-btn">홈으로 가기</button>
+        <button onclick="location.href='/final'"  class="error-btn">홈으로 가기</button>
     </div>
-    
+    <br><br>
     
     <jsp:include page="../common/footer.jsp" />
 </body>

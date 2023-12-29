@@ -48,4 +48,30 @@ public class selectController {
 			
 			return new Gson().toJson(selectData);
 	}
+	
+	
+	@ResponseBody 
+	@RequestMapping(value= "/chattingSelectFriend.cm",produces="application/json; charset=UTF-8" )
+	public String chattingSelectFriend(String selectValue,HttpSession session) {
+			Member m =  (Member) session.getAttribute("loginUser");
+			HashMap info = new HashMap();
+			info.put("userNo", m.getUserNo());
+			info.put("selectValue", selectValue);	
+			ArrayList<Member> mList = memberService.chattingSelectFriend(info);
+		
+			return new Gson().toJson(mList);
+	}
+	
+	
+	@ResponseBody 
+	@RequestMapping(value= "/chattingSelectTeam.cm",produces="application/json; charset=UTF-8" )
+	public String chattingSelectTeam(String selectValue,HttpSession session) {
+			Member m =  (Member) session.getAttribute("loginUser");
+			HashMap info = new HashMap();
+			info.put("userNo", m.getUserNo());
+			info.put("selectValue", selectValue);	
+			ArrayList<Team> tList = teamService.chattingSelectTeam(info);
+		
+			return new Gson().toJson(tList);
+	}
 }

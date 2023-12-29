@@ -39,12 +39,8 @@ init = () =>{
     selectReviewList(data)
 }
 selectReviewList = (data) =>{
-    loadReviewList(data,drawReviewList)
+    loadReviewList(data, drawReviewList)
 }
-// choicePage = (page) =>{
-//     teamFilterValue.cpage = page;
-//     teamAjaxController.teamList(teamFilterValue,drawTeamList)
-// }
 
 reLoadReviewList = (num) =>{
     reviewValue.cpage = num
@@ -107,19 +103,19 @@ drawReviewList = (result) =>{
     let str2 = "";
     
         if(pi.currentPage == 1){
-            str2 += '<li class="page-item disabled"><a class="page-link">Previous</a></li>'
+            str2 += '<li class="page-item disabled"><a class="page-link">이전</a></li>'
         } else {
-            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="reLoadReviewList(' + (pi.currentPage - 1 ) + ')">이전</button></li>'
         }
 
         for (let i = pi.startPage; i <= pi.endPage; i++) {
-            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ i +')">' + i + '</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="reLoadReviewList('+ i +')">' + i + '</button></li>'
         }
 
         if(pi.currentPage != pi.maxPage){
-            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ (pi.currentPage + 1) +')">Next</button></li>'
+            str2 += '<li class="page-item"><button class="page-link" onclick="reLoadReviewList('+ (pi.currentPage + 1) +')">다음</button></li>'
         } else {
-            str2 += '<li class="page-item disabled"><a class="page-link">Next</a></li>'
+            str2 += '<li class="page-item disabled"><a class="page-link">다음</a></li>'
         } 
 
     document.querySelector("#pagingArea ul").innerHTML = str2;

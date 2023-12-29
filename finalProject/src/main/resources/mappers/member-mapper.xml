@@ -59,9 +59,11 @@
 		 	USER_NO,
             USER_ID,
             USER_NAME,
-            CITY
+            CITY,
+            MEMBER_CHANGE_NAME
 		 FROM MEMBER
 		 JOIN FRIEND ON (USER_NO = FRIEND_REQ_USER)
+		 LEFT JOIN MEMBER_IMG USING(USER_NO)
 		 WHERE 
 		 		FRIEND_RES_USER = #{userNo}
 				 AND FRIEND_STATUS = 'N'
@@ -296,7 +298,6 @@
 		INSERT INTO MESSAGE_AUTH(
 				AUTH_NUM,
 				PHONE
-				
 				)
 			VALUES (
 				#{authNum},
@@ -377,5 +378,51 @@
  						  USER_NO
  				FROM MEMBER_IMG
  			 WHERE USER_NO = #{userNo}
+ 			 
  	</select>
+
+ 	 <select id="chattingSelectFriend" resultMap="memberResult">
+ 		SELECT 
+ 			USER_NO,
+ 			USER_NAME,
+ 			USER_ID,
+ 			MEMBER_CHANGE_NAME
+ 		FROM
+ 		(
+ 			SELECT *
+	 		FROM
+	 		FRIEND
+	 		JOIN MEMBER ON (USER_NO = FRIEND_REQ_USER)
+	 		JOIN MEMBER_IMG USING (USER_NO)
+	 		WHERE 
+	 			FRIEND_RES_USER = #{userNo} AND
+	 			FRIEND_STATUS = 'Y'
+ 		)
+ 		WHERE USER_NAME LIKE '%'||#{selectValue}||'%'	 
+ 	</select>
+ 	
+ 	<!-- 운영진인 사람들만 조회 -->
+ 	 <select id="levelMember" resultMap="memberResult">
+ 			SELECT USER_NO,
+					USER_ID,
+					USER_PWD,
+					USER_PHONE,
+					USER_NAME,
+					USER_BIRTH,
+					GENDER,
+					USER_STATUS,
+					USER_LEVEL,
+					CITY,
+					USER_POINT
+					FROM MEMBER 
+				WHERE USER_LEVEL = 1
+ 	</select>
+ 	
+ 	<!-- 카카오페이 결제 -->
+ 	<update id="updatePay" parameterType="map">
+		UPDATE MEMBER
+				SET USER_POINT = USER_POINT + #{point} 
+			WHERE USER_NO = #{userNo}
+	</update>
+	
 </mapper>
