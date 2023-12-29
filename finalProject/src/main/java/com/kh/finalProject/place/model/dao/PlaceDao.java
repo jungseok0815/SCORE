@@ -135,5 +135,17 @@ public class PlaceDao {
 		return sqlSession.selectOne("placeMapper.selectReplyField", pr);
 	}
 	
+	public int deleteReview(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("placeMapper.deleteReview", rno);
+	}
+	
+	public int updateReviewImg(SqlSessionTemplate sqlSession, ReviewImg ri) {
+		return sqlSession.update("placeMapper.updateReviewImg", ri);
+	}
+	
+	public int updateReview(SqlSessionTemplate sqlSession, PlaceReview pr) {
+		return sqlSession.update("placeMapper.updateReview", pr);
+	}
+	
 	
 }

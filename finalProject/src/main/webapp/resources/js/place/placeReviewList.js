@@ -39,10 +39,15 @@ init = () =>{
     selectReviewList(data)
 }
 selectReviewList = (data) =>{
-    loadTeam(data,drawReviewList)
+    loadReviewList(data,drawReviewList)
 }
-rrrr =(rkqqt) =>{
-    reviewValue.cpage = rkqqt
+// choicePage = (page) =>{
+//     teamFilterValue.cpage = page;
+//     teamAjaxController.teamList(teamFilterValue,drawTeamList)
+// }
+
+reLoadReviewList = (num) =>{
+    reviewValue.cpage = num
     data={
         categoryNum : reviewValue.categoryNum,
         cpage : reviewValue.cpage
@@ -58,19 +63,15 @@ changeSports = () =>{
             categoryNum : reviewValue.categoryNum
             
         }
-    loadTeam(data,drawReviewList)
+    loadReviewList(data,drawReviewList)
 }
 
-function handleClickPageNum(num){
-    reviewValue.cpage = num
-    handleClickPage()
-}
 
 drawReviewList = (result) =>{
-    const pi = result.model.pi;
+    console.log(result);
+    const pi = result.pi;
     console.log(pi)
     let str = "";
-    let str2 = "";
     for(let i in result.pList){
         let p = result.pList[i]
         console.log(p)
@@ -102,17 +103,26 @@ drawReviewList = (result) =>{
                 `</tr>`;
     }
 
-    if(pi.currentPage != 1){
-        str2 += `<button class="btn btn-light" onclick="handleClickPageNum(`+(pi.currentPage -1)+`)">&lt;</button>`
-    }
+    // 페이징 바 그려주기
+    let str2 = "";
+    
+        if(pi.currentPage == 1){
+            str2 += '<li class="page-item disabled"><a class="page-link">Previous</a></li>'
+        } else {
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage(' + (pi.currentPage - 1 ) + ')">Previous</button></li>'
+        }
 
-    for(let j=1; j<=pi.maxPage; j++){
-        str2 += `<button class="btn btn-light" onclick="handleClickPageNum(`+j+`)">`+j+`</button>`
-    }
-    if(pi.currentPage != pi.maxPage){
-        str2 += `<button class="btn btn-light" onclick="handleClickPageNum(`+(pi.currentPage +1)+`)">&gt;</button>`
-    }
+        for (let i = pi.startPage; i <= pi.endPage; i++) {
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ i +')">' + i + '</button></li>'
+        }
 
+        if(pi.currentPage != pi.maxPage){
+            str2 += '<li class="page-item"><button class="page-link" onclick="choicePage('+ (pi.currentPage + 1) +')">Next</button></li>'
+        } else {
+            str2 += '<li class="page-item disabled"><a class="page-link">Next</a></li>'
+        } 
+
+    document.querySelector("#pagingArea ul").innerHTML = str2;
     document.querySelector(".review-list").innerHTML = str;
-    document.querySelector('.paging-area').innerHTML = str2;
+    
 }

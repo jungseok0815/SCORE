@@ -61,5 +61,14 @@ public interface PlaceService {
 	//자기가 리뷰 쓴 경기장 못 쓰게 막음
 	int checkReview(PlaceReview pr);
 	
+	//리뷰 삭제
+	int deleteReview(int rno);
+	
+	//리뷰 게시글 업데이트
+	int updateReview(PlaceReview pr);
+	
+	//리뷰 사진 업데이트
+	int updateReviewImg(ReviewImg ri);
+	
 
 }

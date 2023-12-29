@@ -61,6 +61,8 @@
   		<result column="FIELD_REVIEW_STATUS" property="fieldReviewStatus" />
   		<result column="USER_NAME" property="userName" />
   		<result column="FIELD_NAME" property="fieldName" />
+  		<result column="REVIEW_ORIGIN_NAME" property="reviewOriginName" />
+  		<result column="REVIEW_CHANGE_NAME" property="reviewChangeName" />
   	</resultMap>
   	
   	<resultMap type="Reply" id="replyResultSet">
@@ -272,14 +274,19 @@
 	
 	<!-- 리뷰 게시글 정보 불러옴 -->
 	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
-		SELECT FIELD_NO,
+		SELECT REVIEW_NO,
+			   FIELD_NO,
+			   USER_NO,
                FIELD_NAME,
                FIELD_AREA,
                REVIEW_CONTENT,
                STAR_RATING,
-               REVIEW_COUNT     
+               REVIEW_COUNT,
+               REVIEW_ORIGIN_NAME, 
+		 	   REVIEW_CHANGE_NAME   
 			FROM FIELD_REVIEW
 		JOIN FIELD USING (FIELD_NO)
+		JOIN REVIEW_IMG USING (REVIEW_NO)
 		WHERE FIELD_NO = #{fno}
 		AND REVIEW_NO = #{rno}
 	</select>
@@ -373,7 +380,8 @@
  		SELECT REVIEW_IMG_NO,
 		       REVIEW_URL,
 		       REVIEW_ORIGIN_NAME,
-		       REVIEW_CHANGE_NAME
+		       REVIEW_CHANGE_NAME,
+		       REVIEW_NO
 		  FROM REVIEW_IMG
 		 WHERE REVIEW_NO = #{rno}
  	</select>
@@ -464,4 +472,27 @@
 		 WHERE FIELD_NO = #{fieldNo}
 		   AND USER_NO = #{userNo}
  	</select>
+ 	
+ 	<!-- 게시글 삭제 -->
+ 	<update id="deleteReview">
+ 		UPDATE FIELD_REVIEW
+ 		   SET FIELD_REVIEW_STATUS = 'N'
+ 	 	 WHERE REVIEW_NO = #{rno}
+ 	</update>
+ 	
+ 	<!-- 리뷰 사진 업데이트 쿼리문 -->
+ 	<update id="updateReviewImg">
+	 	UPDATE REVIEW_IMG
+	 		SET REVIEW_ORIGIN_NAME = #{reviewOriginName},
+				REVIEW_CHANGE_NAME = #{reviewChangeName}
+	 	   	WHERE REVIEW_NO = #{reviewNo}
+ 	</update>
+ 	
+ 	<!-- 리뷰 업데이트 쿼리문 -->
+ 	<update id="updateReview">
+	 	UPDATE FIELD_REVIEW
+	 		SET REVIEW_CONTENT = #{reviewContent},
+				STAR_RATING = #{starRating}
+	 	   	WHERE REVIEW_NO = #{reviewNo}
+ 	</update>
 </mapper>

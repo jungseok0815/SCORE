@@ -287,6 +287,7 @@ public class TeamController {
 		
 	
 		System.out.println(t);
+		System.out.println(ti);
 	    System.out.println(reupfile);
 	    //새로운 첨부파일 존재유무 확인
 	    if(!reupfile.getOriginalFilename().equals("")) {

@@ -173,5 +173,20 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.checkReview(sqlSession, pr);
 	}
 
+	@Override
+	public int deleteReview(int rno) {
+		return pDao.deleteReview(sqlSession, rno);
+	}
+
+	@Override
+	public int updateReviewImg(ReviewImg ri) {
+		return pDao.updateReviewImg(sqlSession, ri);
+	}
+
+	@Override
+	public int updateReview(PlaceReview pr) {
+		return pDao.updateReview(sqlSession, pr);
+	}
+
 
 }

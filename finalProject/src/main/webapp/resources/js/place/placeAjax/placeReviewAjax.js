@@ -1,4 +1,4 @@
-function loadTeam(data, callback){
+function loadReviewList(data, callback){
     $.ajax({
         type:"get",
         url:"ReviewListAjax.pl",
@@ -20,7 +20,7 @@ function searchAjax(data, callback){
         success: function(result){
             callback(result);
         },
-        error:function(){
+        error: function(){
             console.log("ajax에러에러에러");
         }
     })

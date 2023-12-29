@@ -29,6 +29,8 @@ import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
+import com.kh.finalProject.team.model.vo.Team;
+import com.kh.finalProject.team.model.vo.TeamImg;
 
 @Controller
 public class PlaceController {
@@ -252,10 +254,11 @@ public class PlaceController {
 		
 		if(result > 0) {
 			PlaceReview pr = pService.selectReplyField(map);
-			System.out.println(pr.getReviewCount());
 			ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
 			m.addAttribute("pr", pr);
+			System.out.println(pr);
 			m.addAttribute("reImgList", ri);
+			System.out.println(ri);
 			
 		}
 		return "place/placeReviewDetail";
@@ -395,6 +398,57 @@ public class PlaceController {
 		}
 		
 		return result ;
+	}
+	
+	@RequestMapping("reviewDelete.pl")
+	public String deleteReview(int rno, String filePath, HttpSession session, Model model) {
+		System.out.println(rno);
+		int result = pService.deleteReview(rno);
+		
+		if (result > 0) { //삭제성공
+			
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			return "place/placeReviewList";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorMsg";
+		}
+	}
+	
+	@RequestMapping("updateReview.pl")
+	public ModelAndView reviewUpdate(String reviewNo, PlaceReview pr, ReviewImg ri, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
+		
+		
+		pr.setReviewNo(Integer.parseInt(reviewNo));
+		System.out.println(pr);
+		ri.setReviewNo(Integer.parseInt(reviewNo));
+		System.out.println(ri);
+		int resultImg = 0;
+		
+	    System.out.println(reupfile);
+	    //새로운 첨부파일 존재유무 확인
+	    if(!reupfile.getOriginalFilename().equals("")) {
+	       String changeName = saveFile(reupfile, session, "resources/img/place/placeReviewList/");
+	       if(ri.getReviewOriginName() != null) {
+	          new File(session.getServletContext().getRealPath(ri.getReviewChangeName())).delete();
+	       }      
+	       
+	       ri.setReviewOriginName(reupfile.getOriginalFilename());
+	       ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName); 
+	      
+	    }
+	    
+	    resultImg = pService.updateReviewImg(ri);
+	    int resultContent = pService.updateReview(pr);
+	    
+	    if(resultContent > 0) {
+	        session.setAttribute("alertMsg", "리뷰 수정 완료");
+	        mv.setViewName("place/placeReviewList");
+	    }else {
+	    	session.setAttribute("alertMsg", "다시 수정해주세요");
+	    }
+	      
+	      return mv;
 	}
 		
 	

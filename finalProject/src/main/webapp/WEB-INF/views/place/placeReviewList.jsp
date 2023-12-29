@@ -63,7 +63,10 @@
         </div>
       
 
-        <div class="paging-area" align="center" style="margin: 50px;">
+        <div id="pagingArea">
+            <ul class="pagination">
+            
+            </ul>
         </div>
     </div>
 

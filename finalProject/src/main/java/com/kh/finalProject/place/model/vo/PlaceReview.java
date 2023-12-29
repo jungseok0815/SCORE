@@ -16,12 +16,14 @@ public class PlaceReview {
 	private String fieldReviewStatus;
 	private String userName;
 	private String fieldName;
+	private String reviewOriginName;
+	private String reviewChangeName;
 	
 	public PlaceReview () {}
 
 	public PlaceReview(int reviewNo, String categoryNum, int fieldNo, String userNo, int resNo, String fieldArea,
 			int reviewCount, String reviewContent, Date reviewEnrollDate, int starRating, String fieldReviewStatus,
-			String userName, String fieldName) {
+			String userName, String fieldName, String reviewOriginName, String reviewChangeName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.categoryNum = categoryNum;
@@ -36,6 +38,8 @@ public class PlaceReview {
 		this.fieldReviewStatus = fieldReviewStatus;
 		this.userName = userName;
 		this.fieldName = fieldName;
+		this.reviewOriginName = reviewOriginName;
+		this.reviewChangeName = reviewChangeName;
 	}
 
 	public int getReviewNo() {
@@ -142,14 +146,33 @@ public class PlaceReview {
 		this.fieldName = fieldName;
 	}
 
+	public String getReviewOriginName() {
+		return reviewOriginName;
+	}
+
+	public void setReviewOriginName(String reviewOriginName) {
+		this.reviewOriginName = reviewOriginName;
+	}
+
+	public String getReviewChangeName() {
+		return reviewChangeName;
+	}
+
+	public void setReviewChangeName(String reviewChangeName) {
+		this.reviewChangeName = reviewChangeName;
+	}
+
 	@Override
 	public String toString() {
 		return "PlaceReview [reviewNo=" + reviewNo + ", categoryNum=" + categoryNum + ", fieldNo=" + fieldNo
 				+ ", userNo=" + userNo + ", resNo=" + resNo + ", fieldArea=" + fieldArea + ", reviewCount="
 				+ reviewCount + ", reviewContent=" + reviewContent + ", reviewEnrollDate=" + reviewEnrollDate
 				+ ", starRating=" + starRating + ", fieldReviewStatus=" + fieldReviewStatus + ", userName=" + userName
-				+ ", fieldName=" + fieldName + "]";
+				+ ", fieldName=" + fieldName + ", reviewOriginName=" + reviewOriginName + ", reviewChangeName="
+				+ reviewChangeName + "]";
 	}
+
+	
 
 
 }
