@@ -124,6 +124,8 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public ArrayList<Reservation> dateAllResList(int resUserNo) {
 		return pDao.dateAllResList(sqlSession, resUserNo);
+	}
+	@Override
 	public ArrayList<Field> selectManager(String userName) {
 		return pDao.selectManager(sqlSession, userName);
 	}
