@@ -114,14 +114,14 @@
                     <hr>
                     <div class="body_right_btn_div">
                       <c:choose> 
+                        <c:when test="${pl.fieldCount-resCount le 0}">
+                          <p>현재 이 경기는 마감되었습니다.</p>
+                          <button class="btn btn-secondary" id="soldoutBtn">신청마감</button>
+                        </c:when> 
                         <c:when test="${pl.fieldCount-resCount le 5}">
                           <p>마감까지 ${pl.fieldCount-resCount}자리남았어요.</p>
                           <button class="btn btn-primary" data-bs-target="#matchUpModal" data-bs-toggle="modal" 
                           onclick="resMatchBtn('${loginUser.userNo}','${pl.categoryNum}','${pageContext.request.contextPath}')">신청하기</button>
-                        </c:when> 
-                        <c:when test="${pl.fieldCount-resCount le 0}">
-                          <p>현재 이 경기는 마감되었습니다.</p>
-                          <button class="btn btn-secondary" id="soldoutBtn">신청마감</button>
                         </c:when> 
                         <c:otherwise>
                           <p>지금 신청하면<br>진행 확정이 빨라져요!</p>

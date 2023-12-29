@@ -154,5 +154,9 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
 	}
 	
+	public int fieldManagerUpdate(SqlSessionTemplate sqlSession, int fieldNo) {
+		System.out.println("다오" + fieldNo);
+		return sqlSession.update("placeMapper.fieldManagerUpdate", fieldNo);
+	}
 	
 }

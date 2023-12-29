@@ -268,7 +268,7 @@
     width: 110px;
     margin-left: 10px;
     position:absolute; 
-    margin-left: 60px;
+    margin-left: 33px;
  }   
  .img5{
     width: 53px;
@@ -284,9 +284,8 @@
 
  .sub-title{
     /* border: 1px solid black; */
-    width: 99px;
+    width: 62px;
     position:absolute; 
-    margin-left: 10px;
     left: 50px;
     bottom:0px;
     margin-bottom: 5px;

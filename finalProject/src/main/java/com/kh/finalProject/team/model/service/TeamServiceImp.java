@@ -155,5 +155,7 @@ public interface TeamServiceImp {
 	ArrayList<Team> selectMyteam(int userNo);
 	
 	ArrayList<Team> chattingSelectTeam(HashMap info);
+	// 신청한 팀원 리스트
+	int selectReqListCheck(int userNo, int tno);
 	
 }

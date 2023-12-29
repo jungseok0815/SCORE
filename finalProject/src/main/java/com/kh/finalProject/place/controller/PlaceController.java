@@ -166,7 +166,7 @@ public class PlaceController {
 		res.setResUserNo(loginUser.getUserNo());
 		if(pService.checkResMatch(res) > 0) {
 			session.setAttribute("alertMsg", "이미 예약된 경기입니다.");
-			return "main";
+			return "redirect:/";
 		}
 		int result = pService.insertResMatch(res);
 		if(result>0) {
@@ -180,7 +180,7 @@ public class PlaceController {
 		}else {
 			session.setAttribute("errorMsg", "예약 실패!");
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="insertResMatch.pl")
@@ -201,7 +201,7 @@ public class PlaceController {
 			
 			if(pService.checkResMatch(res) > 0) {
 				session.setAttribute("alertMsg", "이미 예약한 인원이 존재합니다.");
-				return "main";
+				return "redirect:/";
 			}
 		}
 		for(int i = 0; i < teamMember.size(); i++) {
@@ -215,7 +215,7 @@ public class PlaceController {
 		if(resultPay>0) {
 			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
 		}
-		return "main";
+		return "redirect:/";
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectResList.pl",produces="application/json; charset=UTF-8")
@@ -501,5 +501,27 @@ public class PlaceController {
 		return result ;
 	}
 		
+	
+	@ResponseBody
+	@RequestMapping(value="fieldUpdate.pl", produces="application/json; charset=UTF-8")
+	public String fieldManagerUpdate(int fieldNo, Model model, HttpSession session) {
+	
+		System.out.println("안녕 : " + fieldNo);
+		
+		int result = pService.fieldManagerUpdate(fieldNo);
+		System.out.println("받음" + result);
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		if(result > 0) {
+			model.addAttribute("userNo", m.getUserNo());
+			model.addAttribute("result", "success");
+		} else {
+			session.setAttribute("alertMsg", "실패");
+			model.addAttribute("result","fail");
+		}
+
+		return new Gson().toJson(model);
+	}
 	
 }

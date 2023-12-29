@@ -28,18 +28,34 @@ const evaluationAjaxController = {
         })
     },
 
-    fieldDel : (data,callback) =>{
+    // fieldDel : (data,callback) =>{
+    //     $.ajax({
+    //         url: "fieldDel.pl",
+    //         type: "post",
+    //         data,
+    //         success: (result) => {
+    //             callback(result)
+    //         },
+    //         error: (err) => {
+    //             console.log(err)
+    //         }
+    //     })
+    // },
+
+    fieldUpdate : (data, callback) => {
+        console.log(data)
         $.ajax({
-            url: "fieldDel.pl",
+            url: "fieldUpdate.pl",
             type: "post",
             data,
             success: (result) => {
-                callback(result)
+                console.log(result);
+                callback(result);
             },
             error: (err) => {
                 console.log(err)
             }
         })
-    },
+    }
  
 }

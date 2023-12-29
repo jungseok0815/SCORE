@@ -200,5 +200,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	@Override
+	public int fieldManagerUpdate(int fieldNo) {
+		return pDao.fieldManagerUpdate(sqlSession, fieldNo);
+	}
+
 
 }

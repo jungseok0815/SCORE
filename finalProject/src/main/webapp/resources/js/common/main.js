@@ -96,15 +96,15 @@ function drawPage(data){
                                     '</div>';
                 for(let j of data.model.resList){
                     if(j.fieldNo == tmp.fieldNo){
-                        if((tmp.fieldCount)-(j.fieldCount)<=5){
-                            btnControll = '<div class="match-status isHurry">'+
-                                                '<p>마감임박</p>'+
-                                            '</div>';
-                        }else if((tmp.fieldCount)-(j.fieldCount) <=0){
+                        if((tmp.fieldCount)-(j.fieldCount) <=0){
                             btnControll = '<div class="match-status isFull">'+
                                                 '<p>마감</p>'+
                                             '</div>';
-                        } 
+                        }else if((tmp.fieldCount)-(j.fieldCount)<=5){
+                            btnControll = '<div class="match-status isHurry">'+
+                                                '<p>마감임박</p>'+
+                                            '</div>';
+                        }
                     }
                 }
                 switch(tmp.matchGender){

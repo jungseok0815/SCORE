@@ -73,6 +73,8 @@ public interface PlaceService {
 	int addReplyReply(ReplyReply p);
 	ArrayList<ReplyReply> selectReplyReply(int replyNo);
 	
+	// 평가 끝난 후 매니저 이름 바꾸기
+	int fieldManagerUpdate(int fieldNo);
 
 
 }
