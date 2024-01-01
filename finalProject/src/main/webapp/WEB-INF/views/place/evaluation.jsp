@@ -76,13 +76,15 @@
             </table>
             
         
-
+			
             <div class="inpo-btn">
 		    <c:choose>
 		        <c:when test="${empty list2}">
                     <button type="reset" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px;" onclick="location.href='myPage.me?userNo=${loginUser.userNo}'">뒤로가기</button>
-		            <button type="reset" onclick="delField()" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px; background-color: rgb(239, 79, 79);">삭제하기</button>
-		        </c:when>
+		            <button type="button" onclick="delField()" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px; background-color: rgb(239, 79, 79);">삭제하기</button>
+                    <input type="hidden" value="${fieldNo}" id="RealFieldNo">
+                    <input type="hidden" value="${loginUser.userNo}" id="RealUserNo">
+                </c:when>
 		        <c:otherwise>
 		            <button type="reset" class="btn btn-secondary" style="margin-top: 10px; margin-right: 55px;" onclick="location.href='myPage.me?userNo=${loginUser.userNo}'">뒤로가기</button>
 		            <button type="button" onclick ="updateEnal()" class="btn btn-primary" style="margin-top: 10px;">등록하기</button>

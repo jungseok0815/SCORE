@@ -29,12 +29,15 @@ public interface PlaceService {
 	int placeResCount(int fno);
 	ArrayList<Place> searchPlace(String selectValue);
 	int insertResMatch(Reservation res);
-	int payPoint(Member loginUser);
+	int changePoint(Member loginUser);
 	int checkResMatch(Reservation res);
 	ArrayList<PlaceImg> placeImgList(int fno);
 	ArrayList<Reservation> selectResList(String userNo);
 	int deleteReservation(int resNo);
-	
+	int selectMatchPay(int fieldNo);
+	ArrayList<Place> selectResDay(int userNo);
+	ArrayList<Reservation> dateChoiceResList(Reservation res);
+	ArrayList<Reservation> dateAllResList(int resUserNo);
 
 	// 매니저 게임 다 가져오기
 	ArrayList<Field> selectManager(String userName);
@@ -71,8 +74,24 @@ public interface PlaceService {
 	int selectSearchCount(HashMap<String, String> map);
 	ArrayList<PlaceReview> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
+	//대댓글 등록
 	int addReplyReply(ReplyReply p);
+	//대댓글 셀렉트
 	ArrayList<ReplyReply> selectReplyReply(int replyNo);
+
+	//댓글 등록
+	int addReply(Reply r);
+	//댓글 수정
+	int upadateReply(Reply r);
+	//댓글 삭제
+	int deleteReply(Reply r);
+	//답글 삭제
+	int deleteReplyReply(ReplyReply rr);
+	//답글 수정
+	int updateReplyReply(ReplyReply rr);
+	//댓글 삭제할때 답글 삭제
+	int deleteReplyRe(Reply rr);
+
 	
 	//리뷰게시글 조회수증가(update)
 	int reviewIncreaseCount(int rno);
@@ -89,6 +108,9 @@ public interface PlaceService {
 	//리뷰 사진 업데이트
 	int updateReviewImg(ReviewImg ri);
 	
+	// 평가 끝난 후 매니저 이름 바꾸기
+	int fieldManagerUpdate(int fieldNo);
+
 
 
 }

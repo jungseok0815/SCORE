@@ -15,7 +15,6 @@
 </head>
 <body onload="selectReply('${pr.reviewNo}', '${pr.fieldNo}')">
     <jsp:include page="../common/header.jsp" /> 
-
     <div class="allContent">
         <div class="content-header">
             <div class="contentWrap">
@@ -69,14 +68,8 @@
             </div>
 
             <div class="replyLocal">
-                <table>
-                    <thead>
-                        <tr class="replyDiv">
-                            <td class="replySpan">댓글(<span id="rcount">0</span>)</td>
-                        </tr>
-                    </thead>
-                    <tbody class="replyTbody">
-                    </tbody>
+                <table class="dbstnwls-qksema">
+                  
                 </table>  
             </div>
         </div>

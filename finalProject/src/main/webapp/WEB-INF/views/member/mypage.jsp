@@ -112,8 +112,23 @@
                 <div class="btn-5 red-card">레드 카드 <div class="ipbox2">${sportInfo.sportRed}</div></div>
                 
                 <div class="bot03">
-                  <div class="box2" style="margin-right: 15px;">매너<img src="/img/good.png" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
-                  <div class="box22">레벨<img src="/img/king.png" class="img2"><div class="ipbox">${sportInfo.sportLever}</div></div>
+                  <div class="box2" style="margin-right: 15px;">매너<img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_manner_card.svg" class="img2"><div class="ipbox">${sportInfo.sportScore}</div></div>
+                  <div class="box22">레벨
+                    <c:choose>
+                      <c:when test="${sportInfo.sportLever eq '스타터'}">
+                        <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/explore_seeding.svg" class="img2">
+                      </c:when>
+                      <c:when test="${sportInfo.sportLever eq '아마추어'}">
+                        <img src="https://d31wz4d3hgve8q.cloudfront.net/media/sunny.svg" class="img2">
+                      </c:when>
+                      <c:when test="${sportInfo.sportLever eq '세미프로'}">
+                        <img src="https://d31wz4d3hgve8q.cloudfront.net/media/thunder.svg" class="img2">
+                      </c:when>
+                      <c:when test="${sportInfo.sportLever eq '프로'}">
+                        <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/explore_fire.svg" class="img2">
+                      </c:when>
+                    </c:choose>
+                    <div class="ipbox">${sportInfo.sportLever}</div></div>
                 </div>
               </div>
         </div>

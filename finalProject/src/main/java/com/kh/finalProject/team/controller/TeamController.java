@@ -88,7 +88,8 @@ public class TeamController {
 			TeamOffer teamOffer = teamService.selectOfferDetail(tno);
 			TeamImg teamImg = teamService.selectOfferImg(tno);
 			TeamImg profileImg = teamService.offerProfileImg(teamNo);
-			
+			int reqList = teamService.selectReqListCheck(loginUser.getUserNo(), tno);
+			System.out.println("신청자들" + reqList);
 			
 			model.addAttribute("teamOffer", teamOffer);
 			// 어쏘를 데이터베이스로부터 조회해서 넘겨주자
@@ -96,6 +97,7 @@ public class TeamController {
 			model.addAttribute("profileImg", profileImg);
 			model.addAttribute("teamNo", teamNo);
 			model.addAttribute("isMyteam", isMyteam);
+			model.addAttribute("reqList", reqList);
 			
 			return "team/teamOfferListDetailView";
 		} else {
@@ -332,6 +334,7 @@ public class TeamController {
 		
 		String tName = teamService.selectTeamName(tno);			// 팀 이름
 		String tProfile = teamService.selectTeamProImg(tno); // 팀 프로필
+		System.out.println(tProfile);
 
 		mv.addObject("list", list)
 		.addObject("resultList", resultList)
@@ -345,13 +348,14 @@ public class TeamController {
 	
 	@RequestMapping("accept.tm")
 	public String reqAccept(int reqNo, int tno, HttpSession session, Model model) {
-
-		int req = teamService.teamReqAccept(reqNo);
 		
+		int req = teamService.teamReqAccept(reqNo);
+		System.out.println("req : " + req);
 		int reqList = teamService.reqList(reqNo);
+		System.out.println("reqList : " + reqList);
 		
 		int insert = teamService.acceptTeamMember(reqList, tno);
-		
+		System.out.println("insert : " + insert);
 		if(req * insert > 0) {
 			session.setAttribute("alertMsg", "수락 성공");
 //			return "redirect:/teamProfile.tm?teamNo=" + tno;

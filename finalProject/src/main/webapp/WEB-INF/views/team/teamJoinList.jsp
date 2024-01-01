@@ -36,15 +36,22 @@
 	                            <li class="team-list-item">
 	                                <div>
 	                                    <a href="" class="list-link">
-	                                    <c:forEach var="m" items="${resultList}"> 
-	                                    
-	                                        <c:if test="${r.reqUserNo eq m.reqUserNo}">
-		                                        <div class="list-img-all">
-		                                            <img src=".${m.memberChangeName}" class="list-img"/>
-		                                        </div>
-	                                        </c:if>
+											<c:forEach var="m" items="${resultList}">
+												<c:if test="${r.reqUserNo eq m.reqUserNo}">
+													<div class="list-img-all">
+														<c:choose>
+															<c:when test="${m.memberChangeName == null}">
+																<img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="list-img"/>
+															</c:when>
+															<c:otherwise>
+																<img src=".${m.memberChangeName}" class="list-img"/>
+															</c:otherwise>
+														</c:choose>
+													</div>
+												</c:if>
+											</c:forEach>
 	                                        
-	                                     </c:forEach>    
+	                               
 	                                        
 	                                        <div class="list-content">
 	                                            <div class="list-title">

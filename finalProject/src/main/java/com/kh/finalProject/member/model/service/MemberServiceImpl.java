@@ -163,7 +163,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-
+	public ArrayList<Member> selectManegerList() {
+		return memberDao.selectManegerList(sqlSession);
+	}
+	@Override
 	public ArrayList<Member> levelMember() {
 		return memberDao.levelMember(sqlSession);
 	}

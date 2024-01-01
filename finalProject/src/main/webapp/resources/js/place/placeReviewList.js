@@ -100,7 +100,7 @@ drawReviewList = (result) =>{
     }
 
     // 페이징 바 그려주기
-    let str2 = "";
+let str2 = "";
     
         if(pi.currentPage == 1){
             str2 += '<li class="page-item disabled"><a class="page-link">이전</a></li>'
