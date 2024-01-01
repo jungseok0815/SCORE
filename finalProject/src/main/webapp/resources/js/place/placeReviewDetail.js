@@ -58,8 +58,8 @@ drewReplyRe = (result,i) =>{
         rereplyTr.className = "reply-content-list-te reply-item" + j;
 
         rereplyTr.innerHTML =  `<td></td><td class="replyName">`+ list[j].userName +`</td>`+
-                               `<td class="replyContent" colspan="1">` + list[j].replyReplyContent + `</td>`+
-                               `<td class="replyDate" colspan="2">` + list[j].replyReplyDate + `</td>`+
+                               `<td class="replyContent" colspan="2">` + list[j].replyReplyContent + `</td>`+
+                               `<td class="replyDate">` + list[j].replyReplyDate + `</td>`+
                                `<td colspan="1"></td>`
                                if(list[j].userNo === loginNo ){ 
                                 rereplyTr.innerHTML +=
@@ -188,12 +188,13 @@ selectReplyList = (result) => {
     let str = "";
     let loginUser = result.loginUser;
     console.log(result.rlist)
+    console.log("==================")
     console.log(loginUser)
    
 
     let str2 = `<thead>`+
                  `<tr class ="replyDiv">`+
-                    `<th class="replyspan" colspan="6">댓글(<span id ="rcount">0</span>)</th>`+
+                    `<th class="replyspan" colspan="6">댓글(<span id ="rcount">`+ result.rlist.length +`</span>)</th>`+
                   `<tr>` +
                `</thead>`
     
@@ -218,8 +219,8 @@ selectReplyList = (result) => {
 
         str+=`<tr class="replyReply-content" id="replyReply`+ i +`">`+
                 `<td></td><td class="replyContent" colspan="2"><input type="text"
-                style="width: 700px;
-                        height: 80px;
+                style="width: 650px;
+                        height: 70px;
                         border-radius: 10px;
                         margin-top: 20px;
                         margin-bottom: 20px;"

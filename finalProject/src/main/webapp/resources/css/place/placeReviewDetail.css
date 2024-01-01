@@ -110,6 +110,7 @@
 
 .replyName{
     font-size: 18px;
+    width: 100px;
 }
 
 .replyReplyDate{
@@ -211,8 +212,8 @@ input::placeholder{
 }
 
 .inputReplyInput{
-    width: 700px;
-    height: 80px;
+    width: 650px;
+    height: 70px;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -233,24 +234,34 @@ input::placeholder{
 }
 
 .updateReplyBtn{
-    width: 10%;
+    float: right;
+    border: none;
+    width: 40px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
 }
 
 .replyReplyBtn{
-    width: 10%;
+    float: right;
+    border: none;
+    width: 40px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
 }
 
 .repluTextArea{
-    width: 700px;
-    height: 80px;
+    width: 650px;
+    height: 70px;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .replyReplyTextArea{
-    width: 700px;
-    height: 80px;
+    width: 650px;
+    height: 70px;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
