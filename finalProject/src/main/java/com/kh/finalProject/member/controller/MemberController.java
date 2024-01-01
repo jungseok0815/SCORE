@@ -411,7 +411,7 @@ public class MemberController {
 			join.setRequestProperty("Authorization", "KakaoAK 5ec0b38b846924ddb31e67e0cc96795c"); 
 			join.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			join.setDoOutput(true);
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=Score&quantity=1&total_amount=" + point + "&tax_free_amount=0&approval_url=http://localhost:8030/final/kakaoPoint.me&cancel_url=http://localhost:8030/final/kakaoPoint.me&fail_url=http://localhost:8030/final/pointView.me";
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=Score&quantity=1&total_amount=" + point + "&tax_free_amount=0&approval_url=http://localhost:8088/final/kakaoPoint.me&cancel_url=http://localhost:8088/final/kakaoPoint.me&fail_url=http://localhost:8088/final/pointView.me";
 			// parameter = 파라미터 
 			OutputStream sendPay = join.getOutputStream(); // 데이터를 줄수 있게 만듬
 			DataOutputStream sendData = new DataOutputStream(sendPay); // 데이터를 주는 애 
