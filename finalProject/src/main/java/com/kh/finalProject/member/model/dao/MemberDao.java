@@ -2,6 +2,7 @@ package com.kh.finalProject.member.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -110,13 +111,32 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMemImg", mi);
 	}
 	//마이페이지 이미지 수정
-		public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
-			return sqlSession.update("memberMapper.updateMemImg", mi);
-		}
+	public int updateMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+		return sqlSession.update("memberMapper.updateMemImg", mi);
+	}
 	
 	//마이페이지 이미지 조회
 	public MemberImg selectMemberImg(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
 	}
 	
+
+	// 운영진인 사람들만 조회
+	public ArrayList<Member> levelMember(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.levelMember");
+	}
+	// 카카오페이로 결제
+	public int updatePay(SqlSessionTemplate sqlSession, int point, int userNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("point", point);
+		params.put("userNo", userNo);
+		
+		return sqlSession.update("memberMapper.updatePay", params);
+	}
+
+	public ArrayList<Member> chattingSelectFriend(SqlSessionTemplate sqlSession, HashMap info) {
+		return (ArrayList)sqlSession.selectList("memberMapper.chattingSelectFriend", info);
+	}
+	
+
 }

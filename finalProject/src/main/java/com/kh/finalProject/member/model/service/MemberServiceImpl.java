@@ -162,5 +162,21 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMemberImg(sqlSession, userNo);
 	}
 
+	@Override
+
+	public ArrayList<Member> levelMember() {
+		return memberDao.levelMember(sqlSession);
+	}
+
+	@Override
+	public int updatePay(int point, int userNo) {
+		return memberDao.updatePay(sqlSession, point, userNo);
+	}
+
+	public ArrayList<Member> chattingSelectFriend(HashMap info) {
+		return memberDao.chattingSelectFriend(sqlSession, info);
+
+	}
+
 	
 }
