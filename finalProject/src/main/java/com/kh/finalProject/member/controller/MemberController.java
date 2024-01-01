@@ -212,7 +212,7 @@ public class MemberController {
 	      }
 	      return changeName;
 	   }
-	
+	//회원가
 	@ResponseBody
 	@RequestMapping(value= "/join.me",produces="application/json; charset=UTF-8" )
 	public String joinMember(Member m,ModelAndView mv, HttpSession session) {
@@ -347,21 +347,30 @@ public class MemberController {
 		return new Gson().toJson(memberService.getUserSportInfo(info));
 	}
 	
-	
+	//친구요청 
 	@ResponseBody
 	@RequestMapping("/sendPostFriend.me")
 	public String sendPostFriend(Friend f,HttpSession session) {
 		Member m =  (Member) session.getAttribute("loginUser");
 		f.setFriendResUser(m.getUserNo());
-		int result = memberService.checkFriendStatus(f);
+		int result = memberService.checkFriendStatus(f); // 이미 친구요청 상태를 검
+		int result3 =  memberService.checkFriendStatus2(f); // 이미 친구인 상태를 검사 
 		if(result > 0) {
 			return "PostFriendFail";
 		}
+		if(result3> 0) {
+			return "PostFriendFail12";
+		 }
+		
 		f.setFriendResUser(f.getFriendReqUser());
 		f.setFriendReqUser(m.getUserNo());
 		int result2 = memberService.checkFriendStatus(f);
+		int result4 =  memberService.checkFriendStatus2(f);
 		if(result2> 0) {
-			return "PostFriendFail";
+			return "PostFriendFail1";
+		 }
+		if(result4> 0) {
+			return "PostFriendFail12";
 		 }
 		return   memberService.sendPostFriend(f) > 0 ? "PostFriendOk" : "PostFriendFail";
 	}

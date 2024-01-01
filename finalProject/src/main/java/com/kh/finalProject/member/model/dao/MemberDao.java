@@ -69,7 +69,7 @@ public class MemberDao {
 
 	}
 	public ArrayList<Team> selectMyTeam(SqlSessionTemplate sqlSession, HashMap teamMap) {
-		return (ArrayList)sqlSession.selectList("teamMapper.selectMyTeam", teamMap);
+		return (ArrayList)sqlSession.selectList("teamMapper.selectMyteamCategory", teamMap);
 	}
 	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, String searchMain) {
 		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", searchMain);
@@ -85,6 +85,9 @@ public class MemberDao {
 	
 	public int checkFriendStatus(SqlSessionTemplate sqlSession, Friend f) {
 		return sqlSession.selectOne("memberMapper.checkFriendStatus",f);
+	}
+	public int checkFriendStatus2(SqlSessionTemplate sqlSession, Friend f) {
+		return sqlSession.selectOne("memberMapper.checkFriendStatus2",f);
 	}
 	public Member userInfo(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.userInfo",userNo);

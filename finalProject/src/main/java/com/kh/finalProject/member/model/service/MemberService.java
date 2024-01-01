@@ -54,6 +54,7 @@ public interface MemberService {
 	int updatePay(int point, int userNo);
 
 	ArrayList<Member> chattingSelectFriend(HashMap info);
+	int checkFriendStatus2(Friend f);
 
 }
 

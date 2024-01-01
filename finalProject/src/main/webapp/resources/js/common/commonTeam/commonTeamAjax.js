@@ -18,7 +18,13 @@ const commonAjaxController ={
             type: "post",
             data,
             success: (result) => {
-              result === "PostFriendOk" ? alert("친구요청 성공") : alert("이미 친구요청을한 친구입니다.")
+                if(result === "PostFriendOk"){
+                    alert("친구요청 성공")
+                }else if(result === "PostFriendFail1"){
+                    alert("이미 친구요청을한 친구입니다.")
+                }else{
+                    alert("이미 친구상태입니다.")
+                }
             },
             error: (err) => {
                 console.log(err)

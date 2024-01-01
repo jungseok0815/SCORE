@@ -121,6 +121,11 @@ public class MemberServiceImpl implements MemberService {
 	public int checkFriendStatus(Friend f) {
 		return memberDao.checkFriendStatus(sqlSession,f);
 	}
+	
+	@Override
+	public int checkFriendStatus2(Friend f) {
+		return memberDao.checkFriendStatus2(sqlSession, f);
+	}
 
 	@Override
 	public Member userInfo(int userNo) {
@@ -180,6 +185,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.chattingSelectFriend(sqlSession, info);
 
 	}
+
+
 
 	
 }
