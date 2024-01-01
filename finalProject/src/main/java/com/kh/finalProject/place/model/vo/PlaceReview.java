@@ -16,14 +16,14 @@ public class PlaceReview {
 	private String fieldReviewStatus;
 	private String userName;
 	private String fieldName;
-	
+	private String reviewOriginName;
+	private String reviewChangeName;
 	
 	public PlaceReview () {}
 
-
 	public PlaceReview(int reviewNo, String categoryNum, int fieldNo, String userNo, int resNo, String fieldArea,
 			int reviewCount, String reviewContent, Date reviewEnrollDate, int starRating, String fieldReviewStatus,
-			String userName, String fieldName) {
+			String userName, String fieldName, String reviewOriginName, String reviewChangeName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.categoryNum = categoryNum;
@@ -38,138 +38,129 @@ public class PlaceReview {
 		this.fieldReviewStatus = fieldReviewStatus;
 		this.userName = userName;
 		this.fieldName = fieldName;
+		this.reviewOriginName = reviewOriginName;
+		this.reviewChangeName = reviewChangeName;
 	}
-
 
 	public int getReviewNo() {
 		return reviewNo;
 	}
 
-
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-
 
 	public String getCategoryNum() {
 		return categoryNum;
 	}
 
-
 	public void setCategoryNum(String categoryNum) {
 		this.categoryNum = categoryNum;
 	}
-
 
 	public int getFieldNo() {
 		return fieldNo;
 	}
 
-
 	public void setFieldNo(int fieldNo) {
 		this.fieldNo = fieldNo;
 	}
-
 
 	public String getUserNo() {
 		return userNo;
 	}
 
-
 	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
-
 
 	public int getResNo() {
 		return resNo;
 	}
 
-
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
 	}
-
 
 	public String getFieldArea() {
 		return fieldArea;
 	}
 
-
 	public void setFieldArea(String fieldArea) {
 		this.fieldArea = fieldArea;
 	}
-
 
 	public int getReviewCount() {
 		return reviewCount;
 	}
 
-
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
 	}
-
 
 	public String getReviewContent() {
 		return reviewContent;
 	}
 
-
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
-
 
 	public Date getReviewEnrollDate() {
 		return reviewEnrollDate;
 	}
 
-
 	public void setReviewEnrollDate(Date reviewEnrollDate) {
 		this.reviewEnrollDate = reviewEnrollDate;
 	}
-
 
 	public int getStarRating() {
 		return starRating;
 	}
 
-
 	public void setStarRating(int starRating) {
 		this.starRating = starRating;
 	}
-
 
 	public String getFieldReviewStatus() {
 		return fieldReviewStatus;
 	}
 
-
 	public void setFieldReviewStatus(String fieldReviewStatus) {
 		this.fieldReviewStatus = fieldReviewStatus;
 	}
-
 
 	public String getUserName() {
 		return userName;
 	}
 
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 
 	public String getFieldName() {
 		return fieldName;
 	}
 
-
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
 
+	public String getReviewOriginName() {
+		return reviewOriginName;
+	}
+
+	public void setReviewOriginName(String reviewOriginName) {
+		this.reviewOriginName = reviewOriginName;
+	}
+
+	public String getReviewChangeName() {
+		return reviewChangeName;
+	}
+
+	public void setReviewChangeName(String reviewChangeName) {
+		this.reviewChangeName = reviewChangeName;
+	}
 
 	@Override
 	public String toString() {
@@ -177,9 +168,11 @@ public class PlaceReview {
 				+ ", userNo=" + userNo + ", resNo=" + resNo + ", fieldArea=" + fieldArea + ", reviewCount="
 				+ reviewCount + ", reviewContent=" + reviewContent + ", reviewEnrollDate=" + reviewEnrollDate
 				+ ", starRating=" + starRating + ", fieldReviewStatus=" + fieldReviewStatus + ", userName=" + userName
-				+ ", fieldName=" + fieldName + "]";
+				+ ", fieldName=" + fieldName + ", reviewOriginName=" + reviewOriginName + ", reviewChangeName="
+				+ reviewChangeName + "]";
 	}
 
-
 	
+
+
 }

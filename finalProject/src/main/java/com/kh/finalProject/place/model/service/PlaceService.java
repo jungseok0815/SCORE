@@ -3,15 +3,16 @@ package com.kh.finalProject.place.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.kh.finalProject.common.vo.PageInfo;
 import com.kh.finalProject.member.model.vo.Member;
 import com.kh.finalProject.member.model.vo.SportInfo;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.ReplyReply;
-import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
 
@@ -55,7 +56,7 @@ public interface PlaceService {
 
 	//댓글 리스트
 	ArrayList<Reply> selectReplyList(int fno);
-	PlaceReview selectReplyField(int fno);
+	PlaceReview selectReplyField(HashMap<String, Integer> map);
 	//리뷰 이미지 조회
 	ArrayList<ReviewImg> placeReviewImgList(int rno);
 	
@@ -91,6 +92,21 @@ public interface PlaceService {
 	//댓글 삭제할때 답글 삭제
 	int deleteReplyRe(Reply rr);
 
+	
+	//리뷰게시글 조회수증가(update)
+	int reviewIncreaseCount(int rno);
+	
+	//자기가 리뷰 쓴 경기장 못 쓰게 막음
+	int checkReview(PlaceReview pr);
+	
+	//리뷰 삭제
+	int deleteReview(int rno);
+	
+	//리뷰 게시글 업데이트
+	int updateReview(PlaceReview pr);
+	
+	//리뷰 사진 업데이트
+	int updateReviewImg(ReviewImg ri);
 	
 	// 평가 끝난 후 매니저 이름 바꾸기
 	int fieldManagerUpdate(int fieldNo);

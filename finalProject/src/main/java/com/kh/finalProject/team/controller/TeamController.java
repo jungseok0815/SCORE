@@ -288,9 +288,6 @@ public class TeamController {
 //		System.out.println(t);
 		int resultImg = 0;
 		
-	
-//		System.out.println(t);
-//	    System.out.println(reupfile);
 	    //새로운 첨부파일 존재유무 확인
 	    if(!reupfile.getOriginalFilename().equals("")) {
 	       String changeName = saveFile(reupfile, session, "resources/img/team/teamProfile/");

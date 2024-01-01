@@ -161,8 +161,8 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public PlaceReview selectReplyField(int fno) {
-		return pDao.selectReplyField(sqlSession, fno);
+	public PlaceReview selectReplyField(HashMap<String, Integer> map) {
+		return pDao.selectReplyField(sqlSession, map);
 	}	
 		
 	public ArrayList<PlaceReview> placeReviewList(PageInfo pi) {
@@ -219,6 +219,31 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	@Override
+	public int reviewIncreaseCount(int rno) {
+		return pDao.reviewIncreaseCount(sqlSession, rno);
+	}
+
+	@Override
+	public int checkReview(PlaceReview pr) {
+		return pDao.checkReview(sqlSession, pr);
+	}
+
+	@Override
+	public int deleteReview(int rno) {
+		return pDao.deleteReview(sqlSession, rno);
+	}
+
+	@Override
+	public int updateReviewImg(ReviewImg ri) {
+		return pDao.updateReviewImg(sqlSession, ri);
+	}
+
+	@Override
+	public int updateReview(PlaceReview pr) {
+		return pDao.updateReview(sqlSession, pr);
+	}
+	
 	@Override
 	public int fieldManagerUpdate(int fieldNo) {
 		return pDao.fieldManagerUpdate(sqlSession, fieldNo);

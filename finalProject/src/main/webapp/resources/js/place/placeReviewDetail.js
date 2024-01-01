@@ -350,3 +350,24 @@ function drawMapClick(fieldArea){
     }
 }
 
+//리뷰 게시글 삭제
+deleteReview = (rno) =>{
+    if(window.confirm("정말 삭제하시겠습니까?")){
+        location.href='reviewDelete.pl?rno=' + rno;
+    }
+}
+
+//사진 미리보기
+loadImg = (inputFile) => {
+
+    if(inputFile.files.length == 1){ 
+        const reader = new FileReader();
+        reader.readAsDataURL(inputFile.files[0]);
+        reader.onload = function(ev){
+            document.getElementById('file-img').src = ev.target.result;
+        }
+    } else {
+        document.getElementById('file-img').src = null;   
+    }
+}
+

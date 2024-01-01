@@ -26,6 +26,7 @@ import org.json.simple.parser.JSONParser;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -48,9 +50,9 @@ import com.kh.finalProject.place.model.service.PlaceServiceImpl;
 import com.kh.finalProject.place.model.vo.Field;
 import com.kh.finalProject.place.model.vo.Place;
 import com.kh.finalProject.place.model.vo.PlaceImg;
+import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.ReplyReply;
-import com.kh.finalProject.place.model.vo.PlaceReview;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
 
@@ -82,9 +84,9 @@ public class PlaceController {
 			//전달된 파일이 있을 경우 => 파일명 수정 후 서버 업로드 => 원본명, 서버업로드된 경로로 DB에 담기(파일이 있을때만)
 			if(!mf.getOriginalFilename().equals("")) {
 				PlaceImg pi = new PlaceImg();
-				String changeName = saveFile(mf, session);
+				String changeName = saveFile(mf, session, "resources/img/place/placeInsert/");
 				
-				pi.setFieldUrl("resources/img/place/");
+				pi.setFieldUrl("resources/img/place/placeInsert/");
 				pi.setFieldOriginName(mf.getOriginalFilename());
 				pi.setFieldChangeName("resources/img/place/placeInsert/" + changeName);
 				
@@ -100,7 +102,7 @@ public class PlaceController {
 		return "redirect:/";
 	}
 	
-	public String saveFile(MultipartFile upfile, HttpSession session) {
+	public String saveFile(MultipartFile upfile, HttpSession session, String filepath) {
 	  
 	      String originName = upfile.getOriginalFilename();
 	      
@@ -112,7 +114,7 @@ public class PlaceController {
 	      
 	      String changeName = currentTime + ranNum + ext;
 	      
-	      String savePath = session.getServletContext().getRealPath("/resources/img/place/placeInsert/");
+	      String savePath = session.getServletContext().getRealPath(filepath);
 	      
 	      try {
 	         upfile.transferTo(new File(savePath + changeName));
@@ -774,15 +776,37 @@ public class PlaceController {
 	//경기장 리뷰 상세페이지 
 	@RequestMapping("/placeReviewDetail.pl")
 	public String placeReviewDetail(int fno, Model m, int rno) {
+		
+		int result = pService.reviewIncreaseCount(rno);
+		
+		//System.out.println(fno);
+		//System.out.println(rno);
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("fno", fno);
+		map.put("rno", rno);
+		//System.out.println(result);
+		
+		if(result > 0) {
+			PlaceReview pr = pService.selectReplyField(map);
+			ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
+			m.addAttribute("pr", pr);
+			System.out.println(pr);
+			m.addAttribute("reImgList", ri);
+			System.out.println(ri);
+			
+		}
+
 		System.out.println(fno);
 		System.out.println(rno);
-		PlaceReview pr = pService.selectReplyField(fno);
+		PlaceReview pr = pService.selectReplyField(map);
 		ArrayList<ReviewImg> ri = pService.placeReviewImgList(rno);
 		System.out.println(pr);
 		System.out.println(rno);
 		m.addAttribute("pr", pr);
 		m.addAttribute("reImgList", ri);
 		System.out.println(m);
+
 		return "place/placeReviewDetail";
 	}
 	
@@ -824,7 +848,7 @@ public class PlaceController {
 	public HashMap addReplyReply(ReplyReply p, HttpSession session) {
 		p.setUserNo(((Member)session.getAttribute("loginUser")).getUserNo());
 		
-		System.out.println(p);
+		//System.out.println(p);
 		int result  = pService.addReplyReply(p);
 		HashMap m1 = new HashMap();
 		if(result> 0) {
@@ -865,14 +889,15 @@ public class PlaceController {
 		pr.setFieldNo(fieldNo);
 		pr.setUserNo(userNo);
 		
+		
 		int resultReview = pService.insertPlaceReview(pr);
 		
 		int resultImg = 0;
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
-			String changeName = saveFile(upfile, session);
-			ri.setReviewUrl("resources/img/place//placeReviewList/");
+			String changeName = saveFile(upfile, session, "resources/img/place/placeReviewList/");
+			ri.setReviewUrl("resources/img/place/placeReviewList/");
 			ri.setReviewOriginName(upfile.getOriginalFilename());
 			ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName);
 			
@@ -897,13 +922,14 @@ public class PlaceController {
 			@RequestParam(value="categoryNum", defaultValue="4") String categoryNum) {
 		
 		int cno = Integer.parseInt(categoryNum);
-		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 10);
-		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectReviewListCount(), currentPage, 5, 5);
+		//System.out.println(pService.selectReviewListCount());
 		
 		if(cno == 4) {
 			ArrayList<PlaceReview> pList =  pService.placeReviewList(pi);
 			
 			m.addAttribute("pi",pi);
+			//System.out.println(pi);
 			m.addAttribute("pList",pList);
 		}else {
 			ArrayList<PlaceReview> pList =  pService.placeChoiceReviewList(pi, categoryNum);
@@ -921,20 +947,22 @@ public class PlaceController {
 										 @RequestParam("keyword") String keyword,
 										 @RequestParam(value="cpage", defaultValue="1") int currentPage,
 										 HttpSession session) {
-		System.out.println(keyword);
+		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
-		String userNo = Integer.toString(((Member)session.getAttribute("loginUser")).getUserNo());
-		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 10);
-		System.out.println(pi);
+		Member user = (Member)session.getAttribute("loginUser");
+		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 5);
+		
 		ArrayList<PlaceReview> pList =  pService.selectSearchList(map, pi);
-		System.out.println(pList);
+		
 		HashMap result = new HashMap();
 		result.put("pList", pList);
 		result.put("pi", pi);
 		
-		if(userNo != null && !userNo.equals("")) {
+		if(user != null && !user.equals("")) {
+			String userNo = Integer.toString(user.getUserNo());
 			ArrayList<Reservation> rList = pService.selectResList(userNo);	
 			result.put("rList", rList);
 		}
@@ -942,6 +970,56 @@ public class PlaceController {
 		return result ;
 	}
 	
+	@RequestMapping("reviewDelete.pl")
+	public String deleteReview(int rno, String filePath, HttpSession session, Model model) {
+		System.out.println(rno);
+		int result = pService.deleteReview(rno);
+		
+		if (result > 0) { //삭제성공
+			
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			return "place/placeReviewList";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorMsg";
+		}
+	}
+	
+	@RequestMapping("updateReview.pl")
+	public ModelAndView reviewUpdate(String reviewNo, PlaceReview pr, ReviewImg ri, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
+		
+		
+		pr.setReviewNo(Integer.parseInt(reviewNo));
+		System.out.println(pr);
+		ri.setReviewNo(Integer.parseInt(reviewNo));
+		System.out.println(ri);
+		int resultImg = 0;
+		
+	    System.out.println(reupfile);
+	    //새로운 첨부파일 존재유무 확인
+	    if(!reupfile.getOriginalFilename().equals("")) {
+	       String changeName = saveFile(reupfile, session, "resources/img/place/placeReviewList/");
+	       if(ri.getReviewOriginName() != null) {
+	          new File(session.getServletContext().getRealPath(ri.getReviewChangeName())).delete();
+	       }      
+	       
+	       ri.setReviewOriginName(reupfile.getOriginalFilename());
+	       ri.setReviewChangeName("resources/img/place/placeReviewList/" + changeName); 
+	      
+	    }
+	    
+	    resultImg = pService.updateReviewImg(ri);
+	    int resultContent = pService.updateReview(pr);
+	    
+	    if(resultContent > 0) {
+	        session.setAttribute("alertMsg", "리뷰 수정 완료");
+	        mv.setViewName("place/placeReviewList");
+	    }else {
+	    	session.setAttribute("alertMsg", "다시 수정해주세요");
+	    }
+	      
+	      return mv;
+	}	
 
 	@ResponseBody
 	@RequestMapping(value="fieldUpdate.pl", produces="application/json; charset=UTF-8")
