@@ -1,0 +1,50 @@
+.resListView{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
+}
+#calendar{
+    max-width: 550px;
+    margin: auto;
+    height: 500px;
+    margin-bottom: 50px;
+}
+.fc-daygrid-day-number, .fc-col-header-cell-cushion{
+    text-decoration:none;
+    color:black;
+}
+.calendar-body{
+    display: block;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.calendar-body-left{
+    width: 400px;
+}
+.calendar-body-right{
+    width: 500px; 
+    height: 500px; 
+    padding: 10px;
+    margin: auto;
+}
+@media screen and (min-width: 1000px) {
+    .calendar-body{
+        display: flex;
+    }
+    #calendar{
+        margin: 0px;
+    }
+    .calendar-body-right{
+        margin: 0px;
+    }
+}
+.fc-daygrid-event-harness{
+    width: 20px;
+}
+.fc-daygrid-event-harness a{
+    height: 15px;
+    border-radius: 15px;
+    left: 19px;
+    bottom: -9px;
+}

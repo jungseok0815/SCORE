@@ -189,6 +189,7 @@
           AND MATCH_GENDER = #{matchGender}
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
+          AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
  	
  	<select id="selectPlaceList" resultMap="placeResultSet">
@@ -207,6 +208,7 @@
           AND MATCH_GENDER = #{matchGender}
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
+          AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
  	
  	<select id="placeDetailview" resultMap="placeResultSet">
@@ -296,6 +298,7 @@
 		  FROM RESERVATION
 		  JOIN FIELD USING (FIELD_NO)
 		 WHERE RES_USER_NO = #{resUserNo}
+		 AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
  	
@@ -303,6 +306,46 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
+ 	<select id="selectMatchPay" resultType="_int">
+ 		SELECT MATCH_PAY
+		  FROM FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</select>
+ 	<select id="selectResDay" resultMap="placeResultSet">
+ 		SELECT FIELD_DATE
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{userNo}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+	  GROUP BY FIELD_DATE
+ 	</select>
+ 	<select id="dateChoiceResList" resultMap="reservationResultSet">
+ 		SELECT FIELD_NO,
+		       FIELD_NAME,
+		       CATEGORY_NUM,
+		       FIELD_DATE,
+		       START_TIME,
+		       RES_NO
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{resUserNo}
+		   AND FIELD_DATE = #{fieldDate}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+	  ORDER BY FIELD_DATE
+ 	</select>
+ 	<select id="dateAllResList" resultMap="reservationResultSet">
+ 		SELECT FIELD_NO,
+		       FIELD_NAME,
+		       CATEGORY_NUM,
+		       FIELD_DATE,
+		       START_TIME,
+		       RES_NO
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{resUserNo}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+		 ORDER BY FIELD_DATE
+ 	</select>
  	
  	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
 	<select id="selectManager" resultMap="fieldResultSet">

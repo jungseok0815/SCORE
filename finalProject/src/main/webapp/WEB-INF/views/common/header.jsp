@@ -71,14 +71,15 @@
                     </div>
                 </div>
                 <div class ="search-bar-icon">
-                    <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" alt="" class="header-img">
                     <c:choose>
-	            		<c:when test="${empty loginUser}">
-                    		<a href="${pageContext.request.contextPath}/loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                        <c:when test="${empty loginUser}">
+                            <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" class="header-img" onclick="location.href='${pageContext.request.contextPath}/calendar.pl?userNo=0'">
+                            <a href="${pageContext.request.contextPath}/loginView.me"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
                 		</c:when>
                 	<c:otherwise>
 		                <!-- 로그인 후 -->
-			              	<a  href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
+                        <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_mymatch.svg" class="header-img" onclick="location.href='${pageContext.request.contextPath}/calendar.pl?userNo=${loginUser.userNo}'">
+			            <a href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
 
 	                </c:otherwise>
 	            </c:choose>     

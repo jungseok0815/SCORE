@@ -25,7 +25,32 @@ function selectTeamMember(teamNo,callback){
     })
     
 }
-
+function fastWeatherAjax(data,callback1,callback2){
+    $.ajax({
+        type:"get",
+        url:"fastWeatherAjax.pl",
+        data,  
+        success: function(res){
+            callback1(res)
+        },
+        error:function(){
+            callback2();
+        }
+    })
+}
+slowWeatherAjax = (data,callback1,callback2) =>{
+    $.ajax({
+        type:"get",
+        url:"slowWeatherAjax.pl",
+        data,  
+        success: function(res){
+            callback1(res)
+        },
+        error:function(){
+            callback2()
+        }
+    })
+}
 const replyReviewDetailController={
     // 댓글 리스트
     selectReplyListAjax: (data, callback) => {

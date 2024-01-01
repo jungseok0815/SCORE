@@ -28,12 +28,15 @@ public interface PlaceService {
 	int placeResCount(int fno);
 	ArrayList<Place> searchPlace(String selectValue);
 	int insertResMatch(Reservation res);
-	int payPoint(Member loginUser);
+	int changePoint(Member loginUser);
 	int checkResMatch(Reservation res);
 	ArrayList<PlaceImg> placeImgList(int fno);
 	ArrayList<Reservation> selectResList(String userNo);
 	int deleteReservation(int resNo);
-	
+	int selectMatchPay(int fieldNo);
+	ArrayList<Place> selectResDay(int userNo);
+	ArrayList<Reservation> dateChoiceResList(Reservation res);
+	ArrayList<Reservation> dateAllResList(int resUserNo);
 
 	// 매니저 게임 다 가져오기
 	ArrayList<Field> selectManager(String userName);

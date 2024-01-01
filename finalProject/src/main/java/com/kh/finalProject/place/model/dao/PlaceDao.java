@@ -60,8 +60,8 @@ public class PlaceDao {
 	public int insertResMatch(SqlSessionTemplate sqlSession, Reservation res) {
 		return sqlSession.insert("placeMapper.insertResMatch", res);
 	}
-	public int payPoint(SqlSessionTemplate sqlSession, Member loginUser) {
-		return sqlSession.update("memberMapper.payPoint", loginUser);
+	public int changePoint(SqlSessionTemplate sqlSession, Member loginUser) {
+		return sqlSession.update("memberMapper.changePoint", loginUser);
 	}
 	public int checkResMatch(SqlSessionTemplate sqlSession, Reservation res) {
 		return sqlSession.selectOne("placeMapper.checkResMatch", res);
@@ -74,6 +74,18 @@ public class PlaceDao {
 	}
 	public int deleteReservation(SqlSessionTemplate sqlSession, int resNo) {
 		return sqlSession.delete("placeMapper.deleteReservation", resNo);
+	}
+	public int selectMatchPay(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.selectOne("placeMapper.selectMatchPay", fieldNo);
+	}
+	public ArrayList<Place> selectResDay(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.selectResDay", userNo);
+	}
+	public ArrayList<Reservation> dateChoiceResList(SqlSessionTemplate sqlSession, Reservation res){
+		return (ArrayList)sqlSession.selectList("placeMapper.dateChoiceResList", res);
+	}
+	public ArrayList<Reservation> dateAllResList(SqlSessionTemplate sqlSession, int resUserNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.dateAllResList", resUserNo);
 	}
 	public ArrayList<Field> selectManager(SqlSessionTemplate sqlSession, String userName) {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectManager", userName);
