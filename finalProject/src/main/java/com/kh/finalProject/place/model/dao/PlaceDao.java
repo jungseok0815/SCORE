@@ -155,7 +155,6 @@ public class PlaceDao {
 	}
 	
 	public int fieldManagerUpdate(SqlSessionTemplate sqlSession, int fieldNo) {
-		System.out.println("다오" + fieldNo);
 		return sqlSession.update("placeMapper.fieldManagerUpdate", fieldNo);
 	}
 	

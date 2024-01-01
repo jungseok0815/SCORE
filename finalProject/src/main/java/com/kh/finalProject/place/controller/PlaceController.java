@@ -256,7 +256,8 @@ public class PlaceController {
 		
 		mv.addObject("list", list)
 		  .addObject("list2", list2)
-		  .setViewName("place/evaluation");
+		  .addObject("fieldNo", fieldNo)
+		  .setViewName("place/evaluation");	
 		
 		return mv;
 	}
@@ -308,8 +309,6 @@ public class PlaceController {
 	@ResponseBody
 	@RequestMapping(value="fieldDel.pl", produces="application/json; charset=UTF-8")
 	public Map<String, Object> fieldDelImg(int fieldNo, HttpSession session) {
-	
-		System.out.println(fieldNo);
 		
 		int fieldImgDel = pService.fieldNoDel(fieldNo);
 		int fieldReq = pService.fieldReqDel(fieldNo);
@@ -318,7 +317,7 @@ public class PlaceController {
 		Member m = (Member)session.getAttribute("loginUser");
 		
 		Map<String, Object> resultMap = new HashMap<>();
-		if(fieldImgDel * fieldDel * fieldReq > 0) {
+		if(fieldImgDel * fieldDel > 0) {
 			resultMap.put("result", "success");
 			resultMap.put("userNo", m.getUserNo());
 		}else {
@@ -505,11 +504,9 @@ public class PlaceController {
 	@ResponseBody
 	@RequestMapping(value="fieldUpdate.pl", produces="application/json; charset=UTF-8")
 	public String fieldManagerUpdate(int fieldNo, Model model, HttpSession session) {
-	
-		System.out.println("안녕 : " + fieldNo);
+
 		
 		int result = pService.fieldManagerUpdate(fieldNo);
-		System.out.println("받음" + result);
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		
