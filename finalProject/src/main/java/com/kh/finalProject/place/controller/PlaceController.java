@@ -187,7 +187,7 @@ public class PlaceController {
 		res.setResUserNo(loginUser.getUserNo());
 		if(pService.checkResMatch(res) > 0) {
 			session.setAttribute("alertMsg", "이미 예약된 경기입니다.");
-			return "main";
+			return "redirect:/";
 		}
 		int result = pService.insertResMatch(res);
 		if(result>0) {
@@ -201,7 +201,7 @@ public class PlaceController {
 		}else {
 			session.setAttribute("errorMsg", "예약 실패!");
 		}
-		return "main";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="insertResMatch.pl")
@@ -222,7 +222,7 @@ public class PlaceController {
 			
 			if(pService.checkResMatch(res) > 0) {
 				session.setAttribute("alertMsg", "이미 예약한 인원이 존재합니다.");
-				return "main";
+				return "redirect:/";
 			}
 		}
 		for(int i = 0; i < teamMember.size(); i++) {
@@ -236,7 +236,7 @@ public class PlaceController {
 		if(resultPay>0) {
 			session.setAttribute("alertMsg", "성공적으로 예약되었습니다.");
 		}
-		return "main";
+		return "redirect:/";
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectResList.pl",produces="application/json; charset=UTF-8")
@@ -673,7 +673,8 @@ public class PlaceController {
 		
 		mv.addObject("list", list)
 		  .addObject("list2", list2)
-		  .setViewName("place/evaluation");
+		  .addObject("fieldNo", fieldNo)
+		  .setViewName("place/evaluation");	
 		
 		return mv;
 	}
@@ -725,8 +726,6 @@ public class PlaceController {
 	@ResponseBody
 	@RequestMapping(value="fieldDel.pl", produces="application/json; charset=UTF-8")
 	public Map<String, Object> fieldDelImg(int fieldNo, HttpSession session) {
-	
-		System.out.println(fieldNo);
 		
 		int fieldImgDel = pService.fieldNoDel(fieldNo);
 		int fieldReq = pService.fieldReqDel(fieldNo);
@@ -735,7 +734,7 @@ public class PlaceController {
 		Member m = (Member)session.getAttribute("loginUser");
 		
 		Map<String, Object> resultMap = new HashMap<>();
-		if(fieldImgDel * fieldDel * fieldReq > 0) {
+		if(fieldImgDel * fieldDel > 0) {
 			resultMap.put("result", "success");
 			resultMap.put("userNo", m.getUserNo());
 		}else {
@@ -943,6 +942,28 @@ public class PlaceController {
 		return result ;
 	}
 	
+
+	@ResponseBody
+	@RequestMapping(value="fieldUpdate.pl", produces="application/json; charset=UTF-8")
+	public String fieldManagerUpdate(int fieldNo, Model model, HttpSession session) {
+
+		
+		int result = pService.fieldManagerUpdate(fieldNo);
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		if(result > 0) {
+			model.addAttribute("userNo", m.getUserNo());
+			model.addAttribute("result", "success");
+		} else {
+			session.setAttribute("alertMsg", "실패");
+			model.addAttribute("result","fail");
+		}
+
+		return new Gson().toJson(model);
+	}
+	
+
 	//댓글 수정
 		@ResponseBody
 		@RequestMapping(value= "/upadateReply.pl")
@@ -976,6 +997,7 @@ public class PlaceController {
 		public String updateReplyReply(ReplyReply rr, HttpSession session) {
 			return 	pService.updateReplyReply(rr) > 0 ? "Ok": "fail";
 		}
+
 }
 
 

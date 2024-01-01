@@ -220,6 +220,10 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
+	public int fieldManagerUpdate(int fieldNo) {
+		return pDao.fieldManagerUpdate(sqlSession, fieldNo);
+	}
+	@Override
 	public int addReply(Reply r) {
 		return pDao.addReply(sqlSession, r);
 	}

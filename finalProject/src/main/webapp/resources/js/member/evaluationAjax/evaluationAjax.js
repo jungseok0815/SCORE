@@ -34,6 +34,7 @@ const evaluationAjaxController = {
             type: "post",
             data,
             success: (result) => {
+                console.log(result)
                 callback(result)
             },
             error: (err) => {
@@ -41,5 +42,21 @@ const evaluationAjaxController = {
             }
         })
     },
+
+    fieldUpdate : (data, callback) => {
+        console.log(data)
+        $.ajax({
+            url: "fieldUpdate.pl",
+            type: "post",
+            data,
+            success: (result) => {
+                console.log(result);
+                callback(result);
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    }
  
 }

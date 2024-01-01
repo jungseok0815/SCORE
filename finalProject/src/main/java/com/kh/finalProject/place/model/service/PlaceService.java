@@ -92,4 +92,9 @@ public interface PlaceService {
 	int deleteReplyRe(Reply rr);
 
 	
+	// 평가 끝난 후 매니저 이름 바꾸기
+	int fieldManagerUpdate(int fieldNo);
+
+
+
 }

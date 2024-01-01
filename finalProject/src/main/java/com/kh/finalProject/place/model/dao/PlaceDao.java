@@ -166,6 +166,10 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
 	}
 	
+
+	public int fieldManagerUpdate(SqlSessionTemplate sqlSession, int fieldNo) {
+		return sqlSession.update("placeMapper.fieldManagerUpdate", fieldNo);
+	}
 	public int addReply(SqlSessionTemplate sqlSession, Reply r) {
 		return sqlSession.insert("placeMapper.addReply", r);
 	}

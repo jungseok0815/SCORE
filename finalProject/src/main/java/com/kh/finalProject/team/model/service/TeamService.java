@@ -270,5 +270,10 @@ public class TeamService implements TeamServiceImp{
 
 	}
 
+	@Override
+	public int selectReqListCheck(int userNo, int tno) {
+		return teamDao.selectReqListCheck(sqlSession, userNo, tno);
+	}
+
 
 }

@@ -39,15 +39,15 @@ test2 = (result) =>{
             fieldNo :  fieldNo,
         }
 
-        evaluationAjaxController.fieldDel(data,(result) => {
+        evaluationAjaxController.fieldUpdate(data,(result) => {
             console.log("성공: " + result)
-            const userNo = result.userNo
-
+            console.log("성공: " + userNo)
+            
             if (result.result === "success") {
-                alert("경기장 삭제 완료");
-                window.location.href = "/final/myPage.me?userNo=" + userNo; 
+                alert("슈우웃");
+                location.href = "/final/myPage.me?userNo=" + userNo; 
             }else{
-                alert("경기장 삭제 실패");
+                alert("실패");
             }
             
         })
@@ -59,11 +59,15 @@ test2 = (result) =>{
 
 
 delField =() => {
-    const fieldNo = document.querySelector("#enalFieldNo").value
-    console.log(fieldNo)
+    const fieldNo = document.querySelector("#RealFieldNo").value
+    // const userNo = document.querySelector("#RealUserNo").value
+    
+    console.log("FieldNo:", fieldNo);
+    // console.log("userNo:", userNo);
 
     data = {
         fieldNo :  fieldNo,
+        // userNo : userNo,
     }
 
     evaluationAjaxController.fieldDel(data, deleteField);

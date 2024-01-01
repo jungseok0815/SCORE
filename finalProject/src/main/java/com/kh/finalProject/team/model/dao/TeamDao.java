@@ -282,5 +282,17 @@ public class TeamDao {
 	public ArrayList<Team> chattingSelectTeam(SqlSessionTemplate sqlSession, HashMap info) {
 		return (ArrayList)sqlSession.selectList("teamMapper.chattingSelectTeam", info);
 	}
+	
+	public int selectReqListCheck(SqlSessionTemplate sqlSession, int userNo, int tno) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userNo", userNo);
+		params.put("tno", tno);
+		
+//		return sqlSession.selectOne("teamMapper.selectReqListCheck", params);
+		Integer result = sqlSession.selectOne("teamMapper.selectReqListCheck", params);
+
+	    // 만약 result가 null이면 -1을 반환, 아니면 result 값을 반환
+	    return (result != null) ? result : -1;
+	}
 
 }

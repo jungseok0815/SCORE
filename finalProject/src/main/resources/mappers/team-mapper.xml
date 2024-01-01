@@ -687,6 +687,13 @@
 		    AND REQ_STATUS = 'N'   
  	</select>
  	
+ 	<!-- 팀 프로필 가져오기 -->
+   <select id="reqList" resultType="_int">
+      SELECT REQ_USER_NO
+        FROM TEAM_REQ
+       WHERE REQ_NO = #{reqNo}
+   </select>
+ 	
  	<!-- 개인 프로필 가져오기 -->
 	<select id="selectMemberProImg" resultType="string">
 		SELECT 
@@ -750,6 +757,15 @@
 			 )  
 		WHERE TEAM_NAME LIKE '%'||#{selectValue}||'%'	
 		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
+ 	</select>
+ 	
+ 	<!-- 이미 팀 신청한 사람 리스트 -->
+ 	<select id="selectReqListCheck" resultType="_int" parameterType="map">
+ 		SELECT 
+ 				REQ_USER_NO
+	       FROM TEAM_REQ
+          WHERE OFFER_NO = #{tno} 
+            AND REQ_USER_NO = #{userNo} 
  	</select>
 
  </mapper>

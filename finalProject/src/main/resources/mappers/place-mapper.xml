@@ -648,6 +648,16 @@
  			WHERE REPLY_NO = #{replyNo}
  	</select>
  	
+
+ 	<!-- 평가 한후 매니저 이름 바꿈 -->
+	<update id="fieldManagerUpdate">
+		UPDATE FIELD
+		SET MANAGER = '평가완료'
+		WHERE FIELD_NO = #{fieldNo}
+ 	</update>
+ 	
+ 	
+
  	<insert id="addReply">
  		INSERT INTO REPLY
 				 (
@@ -698,4 +708,5 @@
  		AND
  			REPLYREPLY_NO = #{replyReplyNo}
  	</update>
+
 </mapper>
