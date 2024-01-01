@@ -247,17 +247,42 @@ public class PlaceController {
 		System.out.println(rno);
 		m.addAttribute("pr", pr);
 		m.addAttribute("reImgList", ri);
+		System.out.println(m);
 		return "place/placeReviewDetail";
 	}
 	
 	//댓글 리스트
 	@ResponseBody
 	@RequestMapping(value= "/rlist.pl", produces = "appalication/json; charset = UTF-8")
-	public String placeReplyList(Model m, @RequestParam("fno") int fno) {
+	public String placeReplyList(Model m , HttpSession session, @RequestParam("fno") int fno) {
 		ArrayList<Reply> rlist = pService.selectReplyList(fno);
+		m.addAttribute("loginUser", session.getAttribute("loginUser"));
 		m.addAttribute("rlist", rlist);
-		return new Gson().toJson(rlist);
+		return new Gson().toJson(m);
 	}
+	
+	//댓글 등록insertReply
+	@ResponseBody
+	@RequestMapping(value= "/insertReply.pl", produces = "appalication/json; charset = UTF-8")
+	public String addReply(int fieldNo, String replyContent, HttpSession session, Model model) {
+		System.out.println(fieldNo +" " +replyContent );
+		Member m = (Member)session.getAttribute("loginUser");
+		Reply r = new Reply();
+		r.setFieldNo(fieldNo);
+		r.setReplyContent(replyContent);
+		r.setUserNo(m.getUserNo());
+		r.setReplyWriter(m.getUserName());
+		System.out.println(r);
+		int result = pService.addReply(r);
+		if(result >0) {
+			ArrayList<Reply> rlist = pService.selectReplyList(fieldNo);
+			model.addAttribute("rlist", rlist);
+			model.addAttribute("loginUser", m);
+			System.out.println(rlist);
+		}
+		return new Gson().toJson(model);
+	}
+	
 	//답글 등록
 	@ResponseBody
 	@RequestMapping(value= "/addReplyReply.pl")
@@ -381,6 +406,38 @@ public class PlaceController {
 		
 		return result ;
 	}
-		
 	
+	//댓글 수정
+		@ResponseBody
+		@RequestMapping(value= "/upadateReply.pl")
+		public String upadateReply(Reply reply, HttpSession session) {
+			return 	pService.upadateReply(reply) > 0 ? "Ok" : "fail";
+		}
+		
+	//댓글 삭제
+		@ResponseBody
+		@RequestMapping(value= "/deleteReply.pl")
+		public String deleteReply(Reply reply, HttpSession session) {
+			System.out.println(reply);
+			int result = pService .deleteReplyRe(reply);
+			int result2=  0;
+			if(result > 0) {
+				return  	pService.deleteReply(reply)  >  0 ? "Ok": "fail";
+			}
+			return   "fail";
+		}
+		
+		//답글 삭제
+		@ResponseBody
+		@RequestMapping(value= "/deleteReplyReply.pl")
+		public String deleteReplyReply(ReplyReply rr, HttpSession session) {
+			return 	pService.deleteReplyReply(rr) > 0 ? "Ok" : "fail";
+		}
+		
+		//답글 수정
+		@ResponseBody
+		@RequestMapping(value= "/updateReplyReply.pl")
+		public String updateReplyReply(ReplyReply rr, HttpSession session) {
+			return 	pService.updateReplyReply(rr) > 0 ? "Ok": "fail";
+		}
 }

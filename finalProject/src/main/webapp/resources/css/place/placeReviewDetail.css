@@ -80,6 +80,32 @@
     color: #939396;
     float: right;
     margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+
+#replyDelImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#replyUpImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#replyreImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .replyName{
@@ -119,7 +145,8 @@ table{
     width: 100%;
 }
 
-.btnReply{
+
+.btnUpdate{
     font-size: 15px;
     float: right;
     border: none;
@@ -128,7 +155,20 @@ table{
     height: 40px;
 }
 
-.btnReply:hover{
+.btnUpdate:hover{
+    background-color: rgb(204, 204, 204);
+}
+
+.btnDelete{
+    font-size: 15px;
+    float: right;
+    border: none;
+    border-radius: 10px;
+    width: 60px;
+    height: 40px;
+}
+
+.btnDelete:hover{
     background-color: rgb(204, 204, 204);
 }
 
@@ -168,4 +208,50 @@ input::placeholder{
     height:448px;
     display: none;
     margin: auto;
+}
+
+.inputReplyInput{
+    width: 700px;
+    height: 80px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.replyReplyBody{
+    font-size: 15px;
+    width: 500px;
+}
+.reply-content-list-te{
+    display: table-row;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.replyReplyTextArea{
+    width: 90%;
+    height: 100%;
+}
+
+.updateReplyBtn{
+    width: 10%;
+}
+
+.replyReplyBtn{
+    width: 10%;
+}
+
+.repluTextArea{
+    width: 700px;
+    height: 80px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.replyReplyTextArea{
+    width: 700px;
+    height: 80px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

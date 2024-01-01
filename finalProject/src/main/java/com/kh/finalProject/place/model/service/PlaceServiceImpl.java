@@ -163,5 +163,35 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	@Override
+	public int addReply(Reply r) {
+		return pDao.addReply(sqlSession, r);
+	}
+
+	@Override
+	public int upadateReply(Reply r) {
+		return pDao.upadateReply(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		return pDao.deleteReply(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReplyReply(ReplyReply rr) {
+		return pDao.deleteReplyReply(sqlSession, rr);
+	}
+
+	@Override
+	public int updateReplyReply(ReplyReply rr) {
+		return pDao.updateReplyReply(sqlSession, rr);
+	}
+
+	@Override
+	public int deleteReplyRe(Reply rr) {
+		return pDao.deleteReplyRe(sqlSession, rr);
+	}
+
 
 }
