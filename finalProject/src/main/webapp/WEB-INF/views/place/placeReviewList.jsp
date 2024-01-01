@@ -96,7 +96,7 @@
                     </div>
                     <div class="select-myPlace" style="margin-bottom: 5px;">
                         <div style="width: 100%;">
-                            <select name="fieldNo" id="" style="width: 100%;">
+                            <select name="fieldNo" id="" style="width: 100%;" required>
                                 <c:forEach var="item" items="${rList}">
                                     <option value="${item.fieldNo}">${item.fieldName}</option>
                                 </c:forEach>
@@ -112,7 +112,7 @@
                         <td colspan="2">
                             <div class="filebox">
                                 <label class="btn-upload" for="file">
-                                    <img src="" id="file-img" onclick="">
+                                    <img id="file-img" onclick="">
                                 </label>
                                 <input type="file" name="upfile" id="file" onchange="imgChangeUpdate(this)" required>
                             </div>
