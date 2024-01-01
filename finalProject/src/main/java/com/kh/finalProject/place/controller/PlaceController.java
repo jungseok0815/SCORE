@@ -751,11 +751,11 @@ public class PlaceController {
 	
 	
 
-	//placeInfoList로 보내주는 메소드
-	@RequestMapping("/placeReviewList.pl")
-	public String placeInfoListView() {
-		return "place/placeReviewList";
-	}
+//	//placeInfoList로 보내주는 메소드
+//	@RequestMapping("/placeReviewList.pl")
+//	public String placeInfoListView() {
+//		return "place/placeReviewList";
+//	}
 
 
 	//리뷰 작성할 때 로그인유저가 예약했었던 경기장만 리뷰 쓸 수 있게 하려고

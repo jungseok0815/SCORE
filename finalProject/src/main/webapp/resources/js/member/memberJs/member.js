@@ -423,7 +423,7 @@ sendPhoneAuth = () =>{
         }
         memberAjaxController.sendPhoneAuthAjax(data,drawAuthInput)
     }else{
-        alert("올바르게 전화번로를 입력해주세요")
+        alert("올바르게 전화번호를 입력해주세요")
     }
     console.log("hihi")
 }

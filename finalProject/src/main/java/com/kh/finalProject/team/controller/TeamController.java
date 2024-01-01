@@ -251,7 +251,7 @@ public class TeamController {
 		int tno = Integer.parseInt(teamNo);
 		int tmc = teamService.teamMemberCount(tno);
 		int taa = teamService.teamAvgAge(tno);
-		
+		System.out.println(teamNo + " " + tmc + " " +taa );
 		Team t = teamService.teamProfile(tno);
 
 		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
