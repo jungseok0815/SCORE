@@ -154,5 +154,28 @@ public class PlaceDao {
 		return (ArrayList)sqlSession.selectList("placeMapper.selectReplyReply", reply);
 	}
 	
+	public int addReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("placeMapper.addReply", r);
+	}
+	
+	public int upadateReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.update("placeMapper.upadateReply", r);
+	}
+	
+	public int deleteReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.delete("placeMapper.deleteReply", r);
+	}
+	
+	public int deleteReplyReply(SqlSessionTemplate sqlSession, ReplyReply rr) {
+		return sqlSession.delete("placeMapper.deleteReplyReply", rr);
+	}
+	
+	public int updateReplyReply(SqlSessionTemplate sqlSession, ReplyReply rr) {
+		return sqlSession.update("placeMapper.updateReplyReply", rr);
+	}
+	
+	public int deleteReplyRe(SqlSessionTemplate sqlSession, Reply rr) {
+		return sqlSession.delete("placeMapper.deleteReplyRe", rr);
+	}
 	
 }

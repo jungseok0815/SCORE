@@ -70,9 +70,23 @@ public interface PlaceService {
 	int selectSearchCount(HashMap<String, String> map);
 	ArrayList<PlaceReview> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
+	//대댓글 등록
 	int addReplyReply(ReplyReply p);
+	//대댓글 셀렉트
 	ArrayList<ReplyReply> selectReplyReply(int replyNo);
+
+	//댓글 등록
+	int addReply(Reply r);
+	//댓글 수정
+	int upadateReply(Reply r);
+	//댓글 삭제
+	int deleteReply(Reply r);
+	//답글 삭제
+	int deleteReplyReply(ReplyReply rr);
+	//답글 수정
+	int updateReplyReply(ReplyReply rr);
+	//댓글 삭제할때 답글 삭제
+	int deleteReplyRe(Reply rr);
+
 	
-
-
 }

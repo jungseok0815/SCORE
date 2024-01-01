@@ -37,57 +37,6 @@
                     </tr>
                 </thead>
 
-
-                <tbody>
-                    <tr onclick="location.href = 'placeReviewDetail.pl?fno=2&rno=6';">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>부산</td>
-                        <td class="review-name">구덕운동장</td>
-                        <td>금남식</td>
-                        <td>40</a></td>
-                        <td>2023-12-19</td>
-                        <td class="star-rating">★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>경남</td>
-                        <td class="review-name">엔씨파크</td>
-                        <td>윤구진</td>
-                        <td>70</a></td>
-                        <td>2023-12-18</td>
-                        <td class="star-rating">★★★★★</td>
-                    </tr>
-                    <tr onclick="">
-                        <td>서울</td>
-                        <td class="review-name">성남고등학교 대운동장</td>
-                        <td>임두현</td>
-                        <td>111</a></td>
-                        <td>2023-12-17</td>
-                        <td class="star-rating">★</td>
-                    </tr>
-                    
                 <!-- 리뷰 리스트 ajax불러오는 곳 -->
                 <tbody class="review-list">
                 </tbody>
