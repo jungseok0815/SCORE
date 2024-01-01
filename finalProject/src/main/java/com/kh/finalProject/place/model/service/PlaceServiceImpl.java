@@ -82,8 +82,8 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public int payPoint(Member loginUser) {
-		return pDao.payPoint(sqlSession, loginUser);
+	public int changePoint(Member loginUser) {
+		return pDao.changePoint(sqlSession, loginUser);
 	}
 
 	@Override
@@ -106,6 +106,25 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.deleteReservation(sqlSession, resNo);
 	}
 
+	@Override
+	public int selectMatchPay(int fieldNo) {
+		return pDao.selectMatchPay(sqlSession, fieldNo);
+	}
+
+	@Override
+	public ArrayList<Place> selectResDay(int userNo) {
+		return pDao.selectResDay(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<Reservation> dateChoiceResList(Reservation res) {
+		return pDao.dateChoiceResList(sqlSession, res);
+	}
+
+	@Override
+	public ArrayList<Reservation> dateAllResList(int resUserNo) {
+		return pDao.dateAllResList(sqlSession, resUserNo);
+	}
 	@Override
 	public ArrayList<Field> selectManager(String userName) {
 		return pDao.selectManager(sqlSession, userName);
@@ -203,6 +222,35 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public int fieldManagerUpdate(int fieldNo) {
 		return pDao.fieldManagerUpdate(sqlSession, fieldNo);
+	}
+	@Override
+	public int addReply(Reply r) {
+		return pDao.addReply(sqlSession, r);
+	}
+
+	@Override
+	public int upadateReply(Reply r) {
+		return pDao.upadateReply(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		return pDao.deleteReply(sqlSession, r);
+	}
+
+	@Override
+	public int deleteReplyReply(ReplyReply rr) {
+		return pDao.deleteReplyReply(sqlSession, rr);
+	}
+
+	@Override
+	public int updateReplyReply(ReplyReply rr) {
+		return pDao.updateReplyReply(sqlSession, rr);
+	}
+
+	@Override
+	public int deleteReplyRe(Reply rr) {
+		return pDao.deleteReplyRe(sqlSession, rr);
 	}
 
 

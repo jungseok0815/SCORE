@@ -125,7 +125,7 @@
         width: 60px;
         text-align: center;
         position: absolute;
-        top: 40%;
+        top: 47%;
         left: 50%;
     }
     .img2{
@@ -334,6 +334,9 @@
 }
 .accordion-button{
     text-align: center;
+}    
+.accordion-item div div{
+    padding: 20px 10px 15px 10px;
 }
 .accordion-body a {
     display: flex;

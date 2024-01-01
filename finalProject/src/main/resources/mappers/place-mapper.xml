@@ -189,6 +189,7 @@
           AND MATCH_GENDER = #{matchGender}
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
+          AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
  	
  	<select id="selectPlaceList" resultMap="placeResultSet">
@@ -207,6 +208,7 @@
           AND MATCH_GENDER = #{matchGender}
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
+          AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
  	</select>
  	
  	<select id="placeDetailview" resultMap="placeResultSet">
@@ -296,6 +298,7 @@
 		  FROM RESERVATION
 		  JOIN FIELD USING (FIELD_NO)
 		 WHERE RES_USER_NO = #{resUserNo}
+		 AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
  	
@@ -303,6 +306,46 @@
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
  	</delete>
+ 	<select id="selectMatchPay" resultType="_int">
+ 		SELECT MATCH_PAY
+		  FROM FIELD
+		 WHERE FIELD_NO = #{fieldNo}
+ 	</select>
+ 	<select id="selectResDay" resultMap="placeResultSet">
+ 		SELECT FIELD_DATE
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{userNo}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+	  GROUP BY FIELD_DATE
+ 	</select>
+ 	<select id="dateChoiceResList" resultMap="reservationResultSet">
+ 		SELECT FIELD_NO,
+		       FIELD_NAME,
+		       CATEGORY_NUM,
+		       FIELD_DATE,
+		       START_TIME,
+		       RES_NO
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{resUserNo}
+		   AND FIELD_DATE = #{fieldDate}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+	  ORDER BY FIELD_DATE
+ 	</select>
+ 	<select id="dateAllResList" resultMap="reservationResultSet">
+ 		SELECT FIELD_NO,
+		       FIELD_NAME,
+		       CATEGORY_NUM,
+		       FIELD_DATE,
+		       START_TIME,
+		       RES_NO
+		  FROM RESERVATION
+		  JOIN FIELD USING (FIELD_NO)
+		 WHERE RES_USER_NO = #{resUserNo}
+		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+		 ORDER BY FIELD_DATE
+ 	</select>
  	
  	<!-- 매니저 이름으로 참여했던 경기 가져오기 -->
 	<select id="selectManager" resultMap="fieldResultSet">
@@ -423,7 +466,8 @@
 	
 	<!-- 리뷰 게시글 정보 불러옴 -->
 	<select id="selectReplyField" resultMap="PlaceReviewResultSet">
-		SELECT FIELD_NO,
+		SELECT REVIEW_NO,
+					 FIELD_NO,
 		             FIELD_NAME,
 		             FIELD_AREA
 			FROM FIELD_REVIEW
@@ -596,12 +640,15 @@
  			SELECT USER_NAME, 
  						 REPLYREPLY_DATE, 
  						 REPLYREPLY_CONTENT,
- 						 USER_NO
+ 						 USER_NO,
+ 						 REPLYREPLY_NO,
+ 						 REPLY_NO
  			FROM REPLYREPLY
  			JOIN MEMBER USING(USER_NO)
  			WHERE REPLY_NO = #{replyNo}
  	</select>
  	
+
  	<!-- 평가 한후 매니저 이름 바꿈 -->
 	<update id="fieldManagerUpdate">
 		UPDATE FIELD
@@ -610,4 +657,56 @@
  	</update>
  	
  	
+
+ 	<insert id="addReply">
+ 		INSERT INTO REPLY
+				 (
+					REPLY_NO,
+					REPLY_WRITER,
+					REPLY_CONTENT,
+	                USER_NO,
+	                FIELD_NO
+				 )
+		 VALUES
+				 (
+					SEQ_REPLY.NEXTVAL,
+					#{replyWriter},
+					#{replyContent},
+					#{userNo},
+					#{fieldNo}
+				 )
+ 	</insert>
+ 	<update id ="upadateReply">
+ 		UPDATE REPLY 
+ 			SET
+ 				REPLY_CONTENT = #{replyContent}
+ 		WHERE 
+ 			REPLY_NO = #{replyNo}
+ 	</update>
+ 	 <delete id ="deleteReply">
+ 		DELETE FROM REPLY
+ 		WHERE REPLY_NO = #{replyNo}
+ 	</delete>
+ 	
+ 	 <delete id ="deleteReplyReply">
+ 		DELETE FROM REPLYREPLY
+ 		WHERE REPLY_NO = #{replyNo}
+ 			AND REPLYREPLY_NO = #{replyReplyNo}
+ 	</delete>
+ 	
+ 	<delete id ="deleteReplyRe">
+ 		DELETE FROM REPLYREPLY
+ 		WHERE REPLY_NO = #{replyNo}
+ 	</delete>
+ 	
+ 	<update id ="updateReplyReply">
+ 		UPDATE REPLYREPLY 
+ 			SET
+ 				REPLYREPLY_CONTENT = #{replyReplyContent}
+ 		WHERE 
+ 			REPLY_NO = #{replyNo}
+ 		AND
+ 			REPLYREPLY_NO = #{replyReplyNo}
+ 	</update>
+
 </mapper>

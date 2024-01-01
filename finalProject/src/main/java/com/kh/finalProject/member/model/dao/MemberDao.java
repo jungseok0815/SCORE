@@ -119,6 +119,9 @@ public class MemberDao {
 	public MemberImg selectMemberImg(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.selectOne("memberMapper.selectMemberImg", userNo);
 	}
+	public ArrayList<Member> selectManegerList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectManegerList");
+	}
 	
 
 	// 운영진인 사람들만 조회

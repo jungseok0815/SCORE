@@ -38,10 +38,10 @@
                     <td colspan="2">
                         <div class="filebox">
                                 <div class="btn-upload">
-                                    <img src="" id="file-img1" onclick="clickImg(1)">
-                                    <img src="" id="file-img2" onclick="clickImg(2)">
-                                    <img src="" id="file-img3" onclick="clickImg(3)">
-                                    <img src="" id="file-img4" onclick="clickImg(4)">
+                                    <img id="file-img1" onclick="clickImg(1)">
+                                    <img id="file-img2" onclick="clickImg(2)">
+                                    <img id="file-img3" onclick="clickImg(3)">
+                                    <img id="file-img4" onclick="clickImg(4)">
                                 </div>
                             
                             <input type="file" name="upfile" id="fileImgFile1" onchange="loadImg(this,1)" required>
@@ -70,8 +70,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="text" style="padding: 10px;" class="address-input" id="sample6_address" name="fieldArea" placeholder="주소">
-                        <input type="button" style="width: 65px; height: 35px;" onclick="sample6_execDaumPostcode()" value="주소 찾기">
+                        <input type="text" style="padding: 10px;" class="address-input" id="sample4_jibunAddress" name="fieldArea" placeholder="주소">
+                        <input type="button" style="width: 65px; height: 35px;" onclick="sample4_execDaumPostcode()" value="주소 찾기">
                     </td>
                 </tr>
                 <tr align="center">

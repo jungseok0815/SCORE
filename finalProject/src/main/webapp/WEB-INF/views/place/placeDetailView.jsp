@@ -7,12 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/final/resources/css/place/placeDetailView.css">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('955fd1b6a15de821bfc4496937d1d8d2'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=955fd1b6a15de821bfc4496937d1d8d2&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="resources/js/place/placeDetailView.js"></script>
 <script src="resources/js/place/placeAjax/placeAjax.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=955fd1b6a15de821bfc4496937d1d8d2&libraries=services"></script>
 </head>
-<body onload="init()">
+<body onload="init(`${fieldDate}`,`${pl.fieldArea}`,`${pl.startTime}`)">
 	<jsp:include page="../common/header.jsp" />
 	<div class="outer">
         <div class="slider">
@@ -107,8 +112,12 @@
                 <div class="body_right section_div">
                     <p>${pl.fieldDate} ${pl.startTime}</p>
                     <h1 onclick="location.href='${pageContext.request.contextPath}/placeInfo.pl'" style="cursor: pointer;">${pl.fieldName}</h1>
-                    <span><p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a></h6></span>
-                    <br>
+                    <p id="copy_text">${pl.fieldArea}</p><h6><a onclick="copyText()">주소복사</a><a onclick="drawMapBtn(`${pl.fieldArea}`)">지도보기</a>
+                        <a id="kakaotalk-sharing-btn" href="javascript:;">
+                          <img src="${pageContext.request.contextPath}/resources/img/place/share.svg"
+                            alt="카카오톡 공유 보내기 버튼" style="width: 20px;" />
+                      </h6>
+                    </a>
                     <hr>
                     <h1 class="body_right_pay">${matchPay}</h1><h6 class="body_right_pay">/2시간</h6>
                     <hr>
@@ -129,6 +138,9 @@
                           onclick="resMatchBtn('${loginUser.userNo}','${pl.categoryNum}','${pageContext.request.contextPath}')">신청하기</button>
                           </c:otherwise> 
                       </c:choose>
+                    </div>
+                    <div id="weatherBody">
+                      <div class="spinner-border"></div>
                     </div>
                 </div>
 
@@ -187,6 +199,8 @@
           </div>
         </div>
       </div>
+      <i class="bi bi-share"></i>
+     
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

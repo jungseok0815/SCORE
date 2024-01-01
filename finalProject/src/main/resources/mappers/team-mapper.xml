@@ -76,12 +76,14 @@
 
 	<select id="selectMyTeam" resultMap="teamResult">
 			SELECT TEAM_NO
-					,TEAM_NAME
-					,CATEGORY_NUM
-				FROM TEAM_MEMBER
-				JOIN TEAM USING(TEAM_NO)
-				WHERE USER_NO = #{userNo}
-				AND CATEGORY_NUM = #{categoryNum}
+				   ,TEAM_NAME
+				   ,CATEGORY_NUM
+				   ,TEAM_CHANGE_NAME
+			  FROM TEAM_MEMBER
+			  JOIN TEAM USING(TEAM_NO)
+			  JOIN TEAM_IMG USING(TEAM_NO)
+			 WHERE USER_NO = #{userNo}
+		  	   AND CATEGORY_NUM = #{categoryNum}
 	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
@@ -533,9 +535,11 @@
  	<select id="selectMyTeamList" resultMap="teamResult">
 	 	SELECT TEAM_NO,
 			   TEAM_NAME,
-			   CATEGORY_NUM
+			   CATEGORY_NUM,
+			   TEAM_CHANGE_NAME
 		  FROM TEAM_MEMBER
 		  JOIN TEAM USING (TEAM_NO)
+          JOIN TEAM_IMG USING (TEAM_NO)
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
  	</select>
