@@ -76,6 +76,10 @@ public class ChattingController extends TextWebSocketHandler{
 	
 	private void sendMessageToUser(ChattingMessage vo,int roomNo) {
 	Map<Integer, WebSocketSession> chattingUser = roomUserSession.get(roomNo);
+		System.out.println("--------------");
+		System.out.println(vo);
+		System.out.println("--------------");
+		
 		chattingService.saveChattingNoReadMessage(vo);
 	   for (Map.Entry<Integer, WebSocketSession> entry : chattingUser.entrySet()) {
 		   if(entry.getKey() != vo.getUserNo()) {

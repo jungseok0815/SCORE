@@ -73,15 +73,18 @@
     </resultMap>
   
 
-
-	<select id="selectMyTeam" resultMap="teamResult">
+    
+	<select id="selectMyteamCategory" resultMap="teamResult">
 			SELECT TEAM_NO
 					,TEAM_NAME
 					,CATEGORY_NUM
+					,TEAM_CHANGE_NAME
 				FROM TEAM_MEMBER
 				JOIN TEAM USING(TEAM_NO)
+				JOIN TEAM_IMG USING(TEAM_NO)
 				WHERE USER_NO = #{userNo}
 				AND CATEGORY_NUM = #{categoryNum}
+				 AND OFFER_NO IS NULL
 	</select>
 
 	<select id="selectCategoryNum" resultMap="teamResult">
@@ -539,6 +542,9 @@
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
  	</select>
+ 	
+ 	
+ 	
  
  	<delete id="deleteTeam">
  		DELETE FROM TEAM
@@ -723,7 +729,6 @@
 		    JOIN TEAM_MEMBER USING(TEAM_NO)
 		   WHERE USER_NO = #{userNo} 
 		   AND OFFER_NO IS  NULL
-		   <!-- 조건문에 팀 번호도 넣어서 구인글 작성 누르면 팀 번호 던져 줘야 함  -->
  	</select>
  	
  	 <select id="chattingSelectTeam" resultMap="teamResult"> 

@@ -122,6 +122,9 @@ public class ChattingController {
 			messageArr.add(chattingService.selectChattingMessage(chMem.getRoomNo())); 
 			for(ChattingMember i : chattingRoomMem) {
 				System.out.println(i);
+				if(i.getMemberChangeName() == null) {
+					i.setMemberChangeName("null");
+				}
 			}
 		
 			outerList.add(chattingRoomMem);

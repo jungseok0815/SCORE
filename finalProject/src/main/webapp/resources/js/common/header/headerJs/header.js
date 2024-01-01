@@ -59,7 +59,12 @@ drawCahttingFriendList = (friendList) =>{
        chattingFriendList.className = "chatting-friend-list"
        const chattingFriendProfile =  document.createElement("div")
        chattingFriendProfile.className = "chatting-friend-profile"
-       chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =.`+friendList[i].memberChangeName +`/>`
+       if(friendList[i].memberChangeName === "null"){
+        chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =./resources/img/team/teamOfferBoardList/profile.jpg/>`
+       }else{
+        chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =.`+friendList[i].memberChangeName +`/>`
+       }
+       
        chattingFriendList.appendChild(chattingFriendProfile)
        
 
@@ -238,7 +243,11 @@ drawChattingRoomList = (result) =>{
                 chattingFriendList.className = "chatting-chatting-list"
                 const chattingFriendProfile =  document.createElement("div")
                 chattingFriendProfile.className = "chatting-friend-profile"
-                chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =.`+list[i][j].memberChangeName +`/>`
+                if(list[i][j].memberChangeName === "null"){
+                    chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =./resources/img/team/teamOfferBoardList/profile.jpg/>`
+                }else{
+                    chattingFriendProfile.innerHTML =`<img class ='chatting-profile-img' src =.`+list[i][j].memberChangeName +`/>`
+                }
                 chattingFriendList.appendChild(chattingFriendProfile)
                 
 
@@ -248,11 +257,16 @@ drawChattingRoomList = (result) =>{
                 chattingFriendInfo.ondblclick = () =>{
                     addChattingRoom([list[i][j].userNo],0)                  
                 }
-                chattingFriendInfo.innerHTML = `<div>`+list[i][j].userName+`(`+list[i][j].userId+`)</div>`
-                                                +`<div class ="chattinglist-area2">`
-                                                + `<div>`+message[i].messageText+`</div>`+
-                                                `<div class="message-date">`+message[i].semdDate+`</div>`+
-                                                `</div>`
+                if(message[i] === null){
+                    chattingFriendInfo.innerHTML = `<div>`+list[i][j].userName+`(`+list[i][j].userId+`)</div>`
+                }else{
+                    chattingFriendInfo.innerHTML = `<div>`+list[i][j].userName+`(`+list[i][j].userId+`)</div>`
+                    +`<div class ="chattinglist-area2">`
+                    + `<div>`+message[i].messageText+`</div>`+
+                    `<div class="message-date">`+message[i].semdDate+`</div>`+
+                    `</div>`
+                }
+        
                 chattingFriendList.appendChild(chattingFriendInfo)
                 userPart.appendChild(chattingFriendList)
                 }
@@ -277,11 +291,15 @@ drawChattingRoomList = (result) =>{
                     chattingFriendInfo.ondblclick = () =>{
                         addChattingRoom(team,list[i][j].teamNo)                  
                     }
-                    chattingFriendInfo.innerHTML = `<div>`+list[i][j].teamName+`(`+list[i].length+`)</div>`
-                                                  +`<div class ="chattinglist-area2">`
-                                                    + `<div>`+message[i].messageText+`</div>`+
-                                                      `<div class="message-date">`+message[i].semdDate+`</div>`
-                                                    +`</div>`
+                    if(message[i] === null){
+                        chattingFriendInfo.innerHTML = `<div>`+list[i][j].teamName+`(`+list[i].length+`)</div>`
+                    }else{
+                        chattingFriendInfo.innerHTML = `<div>`+list[i][j].teamName+`(`+list[i].length+`)</div>`
+                        +`<div class ="chattinglist-area2">`
+                          + `<div>`+message[i].messageText +`</div>`+
+                            `<div class="message-date">`+message[i].semdDate+`</div>`
+                          +`</div>`
+                    }
                     chattingFriendList.appendChild(chattingFriendInfo)
                     userPart.appendChild(chattingFriendList)
                    
