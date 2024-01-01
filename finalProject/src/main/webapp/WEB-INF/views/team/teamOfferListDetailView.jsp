@@ -9,13 +9,12 @@
 	
 	<!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-   
     <link rel="stylesheet" href="/final/resources/css/team/teamOfferListDetailView.css">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="resources/js/team/teamJs/teamOfferListDetailView.js"></script>
     
 </head>
 <body>
@@ -59,21 +58,29 @@
 	                        </div>
 	                    </div>
 	                    <div class="btn-wrap">
-							<!-- Button to Open the Modal -->
 							<c:if test="${empty loginUser and isMyteam == 1}"> 
 							    <!-- 로그인이 안 되어 있을 때 버튼을 보이지 않게 함 그리고 이미 팀원인 사람은 안보이게 -->
 							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
-								
 							</c:if>
+							
 							<c:if test="${not empty loginUser and isMyteam == 0}"> 
 							    <!-- 로그인이 되어 있을 때 버튼을 보이게 함 그리고 팀 번호가 다르면 보이게 함-->
-							    <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
-								
+							    <c:choose>
+							    	<c:when test="${reqList eq loginUser.userNo}">
+							    		 <!-- 이미 신청중인 사람만 보이는 버튼-->
+							    		 <button onclick="init()" class="btnJoin btnFloat btnLightBlue">너 뭐야</button>
+							    	</c:when>
+							    	<c:otherwise>
+							    		 <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">가입 신청</button>
+							    	</c:otherwise>
+							    </c:choose>
 							</c:if>
 						</div>
+						
 						<c:if test="${teamOffer.userNo eq loginUser.userNo}">
 							<button onclick="location.href='offerDelete.tm?tno=${teamOffer.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
 	                	</c:if>
+	                	
 	                </div>
 	            </div>
 	            

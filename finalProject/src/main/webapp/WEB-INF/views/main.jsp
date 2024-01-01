@@ -89,7 +89,7 @@
                             </a>
                         </c:otherwise>
                     </c:choose>
-                    <a href="${pageContext.request.contextPath}/placeReviewList.pl?userNo=${loginUser.userNo}&currentPage=1">
+                    <a href="${pageContext.request.contextPath}/placeReviewList.pl?userNo=${loginUser.userNo}&cpage=1">
                         <img src="./resources/img/main/stadiumInfo.png" alt="">
                         <p>경기장 리뷰</p>
                     </a>

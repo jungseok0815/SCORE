@@ -65,16 +65,14 @@ img {
 #copy_text{
     margin-bottom: 0px;
 }
-.body_right span{
-    display: inline-flex;
-    align-items: center;
+.body_right h6{
+    margin-top: 12px;
+    margin-bottom: 0px;
 }
-.body_right span h6 a{
-    display: inline-flex;
+.body_right h6 a{
     align-items: center;
     opacity: 0.5;
     margin-left: 5px;
-    margin-top: 9px;
     cursor: pointer;
 }
 .body_right h5 a{

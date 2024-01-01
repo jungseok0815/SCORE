@@ -39,6 +39,7 @@
     font-size: 22px;
     line-height: 120%;
     margin-bottom: 3px;
+    font-weight: 600;
 }
 
 .contentWrap-info{
@@ -80,10 +81,37 @@
     color: #939396;
     float: right;
     margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+
+#replyDelImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#replyUpImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#replyreImg{
+    width: 12px;
+    height: 12px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .replyName{
     font-size: 18px;
+    width: 100px;
 }
 
 .replyReplyDate{
@@ -119,7 +147,8 @@ table{
     width: 100%;
 }
 
-.btnReply{
+
+.btnUpdate{
     font-size: 15px;
     float: right;
     border: none;
@@ -128,7 +157,20 @@ table{
     height: 40px;
 }
 
-.btnReply:hover{
+.btnUpdate:hover{
+    background-color: rgb(204, 204, 204);
+}
+
+.btnDelete{
+    font-size: 15px;
+    float: right;
+    border: none;
+    border-radius: 10px;
+    width: 60px;
+    height: 40px;
+}
+
+.btnDelete:hover{
     background-color: rgb(204, 204, 204);
 }
 
@@ -168,4 +210,136 @@ input::placeholder{
     height:448px;
     display: none;
     margin: auto;
+}
+
+.star-rating{
+    color: #f73c32;
+}
+
+.review-count{
+    font-size: 14px;
+    line-height: 120%;
+    color: #727F88;
+    margin: 10px 10px 20px 0px;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.btn-area{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.star-area p {
+    margin-bottom: 0px;
+    color: #f73c32;
+}
+.star-rating{
+    color: #f73c32;
+}
+.file-area{
+    margin-bottom: 5px;
+}
+
+
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+       .rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input {display: none;}
+.rate > label {float: right;color: #ddd}
+.rate > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.rate .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.rate input:checked ~ label, 
+.rate label:hover,.rate label:hover ~ label { color: #f73c32 !important;  } 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  } 
+
+.btn-upload {
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.btn-upload img{
+    width: 400px;
+    height: 200px;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#file {
+display: none;
+}
+.inputReplyInput{
+    width: 650px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.replyReplyBody{
+    font-size: 15px;
+    width: 500px;
+}
+.reply-content-list-te{
+    display: table-row;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.replyReplyTextArea{
+    width: 90%;
+    height: 100%;
+}
+
+.updateReplyBtn{
+    float: right;
+    border: none;
+    width: 40px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.replyReplyBtn{
+    float: right;
+    border: none;
+    width: 40px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.repluTextArea{
+    width: 650px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.replyReplyTextArea{
+    width: 650px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

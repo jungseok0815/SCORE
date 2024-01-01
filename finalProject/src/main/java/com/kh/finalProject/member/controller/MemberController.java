@@ -397,6 +397,7 @@ public class MemberController {
 	
 		return "authFail";
 	}
+	
 
 	
 	@ResponseBody

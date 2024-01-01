@@ -25,7 +25,32 @@ function selectTeamMember(teamNo,callback){
     })
     
 }
-
+function fastWeatherAjax(data,callback1,callback2){
+    $.ajax({
+        type:"get",
+        url:"fastWeatherAjax.pl",
+        data,  
+        success: function(res){
+            callback1(res)
+        },
+        error:function(){
+            callback2();
+        }
+    })
+}
+slowWeatherAjax = (data,callback1,callback2) =>{
+    $.ajax({
+        type:"get",
+        url:"slowWeatherAjax.pl",
+        data,  
+        success: function(res){
+            callback1(res)
+        },
+        error:function(){
+            callback2()
+        }
+    })
+}
 const replyReviewDetailController={
     // 댓글 리스트
     selectReplyListAjax: (data, callback) => {
@@ -44,6 +69,49 @@ const replyReviewDetailController={
         })
     },
 
+    //댓글 등록
+    insertReply : (data,callback) =>{
+        $.ajax({
+            url:"insertReply.pl",
+            data,
+            success: function(result){
+                console.log(result)
+                callback(result)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+
+     //댓글 수정
+     upadateReplyAjax : (data,callback)  => {
+        $.ajax({
+            url:"upadateReply.pl",
+            data,
+            success: function(result){
+                callback(result)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+
+    //댓글 삭제
+    deleteReplyAjax : (data,callback)  => {
+        $.ajax({
+            url:"deleteReply.pl",
+            data,
+            success: function(result){
+                callback(result)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+    
     //답글 등록
     insertReplyReplyAjax : (data,i,callback)  => {
         $.ajax({
@@ -69,5 +137,33 @@ const replyReviewDetailController={
                 console.log("Asdasdas")
             }
         })
-    }
+    },
+
+    //답글 삭제
+    deleteReplyReplyAjax : (data,callback) => {
+        $.ajax({
+            url:"deleteReplyReply.pl",
+            data,
+            success: function(result){
+               callback(result);
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+      //댓글 수정
+      updateReplyReplyAjax : (data,callback) => {
+        $.ajax({
+            url:"updateReplyReply.pl",
+            data,
+            success: function(result){
+                callback(result)
+            },
+            error : (error) => {
+                console.log("Asdasdas")
+            }
+        })
+    },
+    
 }

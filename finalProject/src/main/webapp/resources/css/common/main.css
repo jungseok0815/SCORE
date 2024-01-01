@@ -702,7 +702,7 @@ input::placeholder {
     margin-bottom: 16px;
 }
 .choice-sports div:hover{
-    background : #1BB8F7;
+    background : rgb(192, 192, 192);
     cursor: pointer;
 }
 .choice-box{
@@ -722,8 +722,6 @@ input::placeholder {
     justify-content: space-evenly;
 }
 .date-container div {
-    width: 50px;
-    margin: 13px 0px 0px 0px;
     border: 1px solid gray;
     border-radius: 15px;
     text-align: center;

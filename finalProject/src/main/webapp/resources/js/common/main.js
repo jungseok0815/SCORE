@@ -23,22 +23,63 @@ function mainInit(path){
         today.setDate(today.getDate()+1);
         dayStr = changeDay(today.getDay())
         let nextFullDay = changeFullDay(today);
-        str += `<div onclick="changeDate('`+nextFullDay+`')"><p>`+today.getDate()+`</p><span>`+dayStr+`</span></div>`;
+        str += `<div onclick="changeDate('`+nextFullDay+`')"><p>`+today.getDate()+`</p><span value="`+dayStr+`">`+dayStr+`</span></div>`;
     }
     document.querySelector('.date-container').innerHTML = str;
+
+    let divElements = document.querySelectorAll('.date-container div');
+    
+        for (let i = 0; i < divElements.length; i++) {
+            let dayElement = divElements[i].querySelector('span[value="토"]');
+            let pElement = divElements[i].querySelector('p');
+            if (dayElement) {
+                divElements[i].style.border = '1px solid #4e71f5';
+                dayElement.style.color = '#4e71f5'; 
+                pElement.style.color = '#4e71f5';
+                divElements[i].addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgb(197 209 255)';
+                  });
+                  divElements[i].addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'white';
+                  });
+            }
+        }
+        for (let i = 0; i < divElements.length; i++) {
+            let dayElement = divElements[i].querySelector('span[value="일"]');
+            let pElement = divElements[i].querySelector('p');
+            if (dayElement) {
+                divElements[i].style.border = '1px solid red';
+                dayElement.style.color = 'red'; 
+                pElement.style.color = 'red';
+                divElements[i].addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#ffc8c8';
+                  });
+                  divElements[i].addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'white';
+                  });
+            }
+        }
+
 
     mainValue.path = path
     handleClickPage();
 }
 
+
 function changeFullDay(today){
     let dayInt;
+    let monthInt;
     if(today.getDate()<10){
         dayInt = "0"+today.getDate();
     }else{
         dayInt = today.getDate();
     }
-    let fullDayStr = (today.getFullYear()+"-"+(today.getMonth() + 1)+"-"+dayInt)
+    if(today.getMonth() + 1<10){
+        monthInt = "0"+(today.getMonth()+1);
+    }else{
+        monthInt = today.getMonth()+1;
+    }
+    let fullDayStr = (today.getFullYear()+"-"+monthInt+"-"+dayInt)
     return fullDayStr;
 }
 
@@ -96,15 +137,15 @@ function drawPage(data){
                                     '</div>';
                 for(let j of data.model.resList){
                     if(j.fieldNo == tmp.fieldNo){
-                        if((tmp.fieldCount)-(j.fieldCount)<=5){
-                            btnControll = '<div class="match-status isHurry">'+
-                                                '<p>마감임박</p>'+
-                                            '</div>';
-                        }else if((tmp.fieldCount)-(j.fieldCount) <=0){
+                        if((tmp.fieldCount)-(j.fieldCount) <=0){
                             btnControll = '<div class="match-status isFull">'+
                                                 '<p>마감</p>'+
                                             '</div>';
-                        } 
+                        }else if((tmp.fieldCount)-(j.fieldCount)<=5){
+                            btnControll = '<div class="match-status isHurry">'+
+                                                '<p>마감임박</p>'+
+                                            '</div>';
+                        }
                     }
                 }
                 switch(tmp.matchGender){

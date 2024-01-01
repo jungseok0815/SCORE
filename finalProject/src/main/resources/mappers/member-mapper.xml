@@ -279,7 +279,8 @@
 			 FRIEND_REQ_USER = #{friendReqUser}
 	</select>
 	
- 	<update id="payPoint">
+
+ 	<update id="changePoint">
  		UPDATE MEMBER
 		   SET USER_POINT = #{point}
 		 WHERE USER_NO = #{userNo}
@@ -391,6 +392,13 @@
  			 WHERE USER_NO = #{userNo}
  			 
  	</select>
+ 	<select id="selectManegerList" resultMap="memberResult">
+	 	SELECT USER_NO,
+		       USER_NAME
+		  FROM MEMBER
+		 WHERE USER_LEVEL = 1
+	</select>
+ 	
 
  	 <select id="chattingSelectFriend" resultMap="memberResult">
  		SELECT 
