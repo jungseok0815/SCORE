@@ -87,6 +87,9 @@ drawReviewList = (result) =>{
                 break;
             case 5 :
                 star = `★★★★★`
+                break;
+            default :
+                star = ''
         }
         str += `<tr onclick="location.href = 'placeReviewDetail.pl?fno=${p.fieldNo}&rno=${p.reviewNo}';">`+
                     `<td>`+p.userName+`</td>`+

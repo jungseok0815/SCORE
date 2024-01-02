@@ -55,6 +55,7 @@ import com.kh.finalProject.place.model.vo.Reply;
 import com.kh.finalProject.place.model.vo.ReplyReply;
 import com.kh.finalProject.place.model.vo.Reservation;
 import com.kh.finalProject.place.model.vo.ReviewImg;
+import com.sun.org.apache.xpath.internal.operations.Equals;
 
 @Controller
 public class PlaceController {
@@ -760,7 +761,7 @@ public class PlaceController {
 
 	//리뷰 작성할 때 로그인유저가 예약했었던 경기장만 리뷰 쓸 수 있게 하려고
 	@ResponseBody
-	@RequestMapping(value="/placeReviewList.pl", produces="application/json; charset=UTF-8")
+	@RequestMapping(value="/placeReviewList.pl")
 	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
 		
 		if(!userNo.equals("")) {
@@ -971,24 +972,28 @@ public class PlaceController {
 	}
 	
 	@RequestMapping("reviewDelete.pl")
-	public String deleteReview(int rno, String filePath, HttpSession session, Model model) {
+	public ModelAndView deleteReview(String uno, int rno, String filePath, HttpSession session, ModelAndView mv) {
+		ArrayList<Reservation> rList = pService.selectResList(uno);
 		System.out.println(rno);
 		int result = pService.deleteReview(rno);
 		
 		if (result > 0) { //삭제성공
-			
 			session.setAttribute("alertMsg", "게시글 삭제 성공");
-			return "place/placeReviewList";
+			mv.addObject("rList", rList);
+			mv.setViewName("place/placeReviewList");
+
 		} else {
-			model.addAttribute("errorMsg", "게시글 삭제 실패");
-			return "common/errorMsg";
+			mv.addObject("errorMsg", "게시글 삭제 실패");
+			mv.setViewName("common/errorMsg");
+			
 		}
+		return mv;
 	}
 	
 	@RequestMapping("updateReview.pl")
 	public ModelAndView reviewUpdate(String reviewNo, PlaceReview pr, ReviewImg ri, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
-		
-		
+		ArrayList<Reservation> rList = pService.selectResList(pr.getUserNo());
+		System.out.println(pr.getUserNo());
 		pr.setReviewNo(Integer.parseInt(reviewNo));
 		System.out.println(pr);
 		ri.setReviewNo(Integer.parseInt(reviewNo));
@@ -1008,11 +1013,13 @@ public class PlaceController {
 	      
 	    }
 	    
+	    System.out.println(rList);
 	    resultImg = pService.updateReviewImg(ri);
 	    int resultContent = pService.updateReview(pr);
 	    
 	    if(resultContent > 0) {
 	        session.setAttribute("alertMsg", "리뷰 수정 완료");
+	        mv.addObject("rList", rList);
 	        mv.setViewName("place/placeReviewList");
 	    }else {
 	    	session.setAttribute("alertMsg", "다시 수정해주세요");

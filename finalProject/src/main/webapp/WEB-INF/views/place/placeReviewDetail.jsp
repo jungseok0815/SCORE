@@ -62,7 +62,7 @@
                     <c:if test="${pr.userNo eq loginUser.userNo}">
                         <!-- 로그인이 안 되어 있을 때와 자기가 쓴 글이 아니면 안보이게 -->
                         <button id="modify-btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">수정</button>
-                        <button id="delete-btn" onclick="deleteReview(`${pr.reviewNo}`)" type="button" class="btn btn-danger">삭제</button>
+                        <button id="delete-btn" onclick="deleteReview(`${pr.reviewNo}`, ${loginUser.userNo})" type="button" class="btn btn-danger">삭제</button>
                     </c:if>
                 </div>
             </div>
