@@ -2,6 +2,7 @@ let contextPath = "";
 mypageInit=(path)=>{
     contextPath = path;
 }
+
 function imgChangeUpdate(file){
     if(file.files.length == 1){
         const reader = new FileReader();
@@ -15,6 +16,18 @@ function imgChangeUpdate(file){
         document.getElementById('img-upload-my').src = null;
     }
 }
+
+//버튼누르면 기본이미지로 변경
+function changeImgOrigin(){
+    const imageChange = document.getElementById("img-upload-my");
+    imageChange.src="./resources/img/team/teamOfferBoardList/profile.jpg";
+
+}
+
+function updatebtn(){
+    document.getElementsByName("isDefault").value="true";
+}
+
 
 
 updateMypage =(categoryNum) =>{
@@ -207,3 +220,4 @@ drawResList = (data) =>{
     }
     document.querySelector('.resListBody').innerHTML = str;
 }
+

@@ -134,7 +134,7 @@ public class MemberController {
 		Member login =  (Member) session.getAttribute("loginUser");
 		sport.setUserNo(m.getUserNo());
 		int resultMemImg =0;
-
+		System.out.println(reupfile.getOriginalFilename()+"sssssss");
 		if(!reupfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
 			mi.setMemberUrl("/resources/img/member/memberInsert/");
@@ -146,7 +146,12 @@ public class MemberController {
 			}else {
 				resultMemImg = memberService.updateMemImg(mi);
 			}
-		}	
+		}else{
+			if(memberService.selectMemImg(m.getUserNo()) > 0) {
+				resultMemImg = memberService.deleteMemImg(mi);
+			}
+		}
+		
 		
 //		MemberImg existingImg = memberService.selectMemberImg(m.getUserNo());
 //		

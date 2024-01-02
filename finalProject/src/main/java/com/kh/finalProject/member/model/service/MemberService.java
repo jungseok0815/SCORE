@@ -55,6 +55,10 @@ public interface MemberService {
 
 	ArrayList<Member> chattingSelectFriend(HashMap info);
 	int checkFriendStatus2(Friend f);
-
+	
+	//이미지 셀렉트 -- 기본이미지
+	int selectMemImg(int userNo);
+	//이미지 삭제 --기본이미지
+	int deleteMemImg(MemberImg mi);
 }
 

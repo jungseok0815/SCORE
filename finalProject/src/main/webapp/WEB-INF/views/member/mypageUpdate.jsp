@@ -19,14 +19,10 @@
             <input type="hidden" name="userNo" value="${loginUser.userNo}" />
             <div class="title2">
                 
-             <!--     <div class="imgUpload">
-                    <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
-                </div>  -->
-                
               <c:choose>
                     <c:when test="${empty memberImg.memberOriginName}">
                         <div class="imgUpload">
-                            <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my"/>
+                            <img src="./resources/img/team/teamOfferBoardList/profile.jpg" class="img3" id="img-upload-my" onclick="updatebtn()"/>
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -37,14 +33,19 @@
                 </c:choose>
 
                 <div class="a-btn">
-                    <label for="file">
-                        <div class="btn-upload">파일 업로드하기</div>
-                        <div>사진을 수정해주세요</div>
-                    </label>
-                    <input type="file" name="reupfile" id="file"  onchange="imgChangeUpdate(this)" />
+                    <input type="hidden" name="isDefault" value="false" />
+                    <div>
+                        <label for="file">
+                            <div class="btn-upload">파일 업로드하기</div>
+                        </label>
+                        <input type="file" name="reupfile" id="file"  onchange="imgChangeUpdate(this)" />
+                    </div>
+                    <div class="btnOrigin">
+                        <div class="btn-origin-img" id="btnOriginImg" onclick="changeImgOrigin()">기본 이미지로 변경</div>
+                    </div>
+                    <div>사진을 수정해주세요</div>      
                 </div>
-                
-            
+
                 <div class="title3">이름</div>
                 <input type="text" value="${loginUser.userName}" class="input-1" name="userName">
                 <button class="b-btn" onclick="">수정</button>
@@ -206,6 +207,7 @@
                 }
             }
         }
+
     </script>
    
    <jsp:include page="../common/footer.jsp" />

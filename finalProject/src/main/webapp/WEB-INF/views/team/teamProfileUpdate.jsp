@@ -160,7 +160,7 @@
 
 				<div class="team-btn">
 					<button class="btn btn-primary" type="submit">수정</button>
-					<button type="button" class="btn btn-outline-danger delete-btn">삭제</button>
+					<button type="button" class="btn btn-outline-secondary delete-btn" onclick="goBack()">돌아가기</button>
 				</div>
 			</div>
 		</form>
@@ -181,6 +181,10 @@
 					break;
 				}
 			}
+		}
+
+		function goBack(){
+			window.history.back();
 		}
 	</script>
 </body>

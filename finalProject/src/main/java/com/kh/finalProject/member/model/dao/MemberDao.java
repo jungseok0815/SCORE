@@ -144,5 +144,12 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.chattingSelectFriend", info);
 	}
 	
-
+	public int selectMemImg(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMemImg", userNo);
+	}
+	
+	//이미지 삭제
+	public int deleteMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+		return sqlSession.delete("memberMapper.deleteMemImg", mi);
+	}
 }
