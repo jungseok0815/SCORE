@@ -1,44 +1,36 @@
-# Would, U?
-> 친구와 함께 일기를 작성하고 서로의 감정을 돌아볼 수 있는 서비스
+# SCORE
+> 축구, 농구, 야구를 하는 사람들이 보다 편하게 경기에 참여하고 즐기위한 서비스
 
 ## 프로젝트 개요
-
-![로고](./front/public/mainlogo.png)
-
-- 개발 기간: 2023-00-00 ~ 2023-00-00
-- 서비스 링크: [https://www.naver.com](https://www.naver.com)
+- 개발 기간: 2023-12-01 ~ 2024-01-04
 - 본 프로젝트의 구조를 더 자세히 알고 싶다면?
   - [백엔드 README](./BACK.md)
   - [프론트엔드 README](./FRONT.md)
 
 ## 기술 스택
-`Front-End` 
+`Front-End` :  <img src="https://img.shields.io/badge/javascript-3178C6?style=flat-square&logo=javascript&logoColor=#F7DF1E"/>
+<img src="https://img.shields.io/badge/css3-3178C6?style=flat-square&logo=css3&logoColor=#1572B6"/>
+<img src="https://img.shields.io/badge/html5-3178C6?style=flat-square&logo=html5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/jquery-FF4154?style=flat-square&logo=jquery&logoColor=##0769AD"/>
 
-<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=Next.js&logoColor=white"/>
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
-<img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&logo=ReactQuery&logoColor=white"/>
-<img src="https://img.shields.io/badge/Recoil-black?style=flat-square&logo=Recoil&logoColor=white"/>
-<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/>
-<img src="https://img.shields.io/badge/ReactHookForm-EC5990?style=flat-square&logo=ReactHookForm&logoColor=white"/>
-
-
-`Back-end`
-
-<img src="https://img.shields.io/badge/Nest.js-E0234E?style=flat-square&logo=Nestjs&logoColor=white">
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
-<img src="https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white">
+`Back-end`<img src="https://img.shields.io/badge/spring-E0234E?style=flat-square&logo=spring&logoColor=#6DB33F">
+<img src="https://img.shields.io/badge/springsecurity-3178C6?style=flat-square&logo=springsecurity&logoColor=#6DB33F"/>
+<img src="https://img.shields.io/badge/oracle-4479A1?style=flat-square&logo=oracle&logoColor=#F80000">
+<img src="https://img.shields.io/badge/apachetomcat-FF4154?style=flat-square&logo=apachetomcat&logoColor=#F8DC75">
 
 `Communication`
 <img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=flat-square&logo=github&logoColor=white">
 
+## 프로젝트 구조
+
 ## 사용 라이브러리및 API
--
--
--
--
--
+- 카카오페이 API
+- 카카오지도 API
+- COOLSMS 문자인증 API
+- 다음 주소 API
+- 카카오톡 공유 API
+- 기상청 날씨 정보 API
 
 ## 실행 방법
 
