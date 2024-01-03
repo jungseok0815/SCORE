@@ -354,9 +354,9 @@ function drawMapClick(fieldArea){
 }
 
 //리뷰 게시글 삭제
-deleteReview = (rno) =>{
+deleteReview = (rno, uno) =>{
     if(window.confirm("정말 삭제하시겠습니까?")){
-        location.href='reviewDelete.pl?rno=' + rno;
+        location.href='reviewDelete.pl?rno=' + rno + '&uno=' +uno;
     }
 }
 

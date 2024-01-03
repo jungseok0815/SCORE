@@ -69,8 +69,8 @@ public class PlaceDao {
 	public ArrayList<PlaceImg> placeImgList(SqlSessionTemplate sqlSession, int fieldNo){
 		return (ArrayList)sqlSession.selectList("placeMapper.placeImgList", fieldNo);
 	}
-	public ArrayList<Reservation> selectResList(SqlSessionTemplate sqlSession, String resUserNo){
-		return (ArrayList)sqlSession.selectList("placeMapper.selectResList", resUserNo);
+	public ArrayList<Reservation> selectResList(SqlSessionTemplate sqlSession, String userNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.selectResList", userNo);
 	}
 	public int deleteReservation(SqlSessionTemplate sqlSession, int resNo) {
 		return sqlSession.delete("placeMapper.deleteReservation", resNo);

@@ -56,7 +56,6 @@
             <select name="condition" class="pl" id="condition">
                 <option value="writer">작성자</option>
                 <option value="title">구장이름</option>
-                <option value="content">내용</option>
             </select>
             <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
             <button type="button" onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" ></button>  
@@ -91,7 +90,6 @@
                             <input type="radio" id="rating6" name="starRating" value="3"><label for="rating6" title="3점"></label>
                             <input type="radio" id="rating4" name="starRating" value="2"><label for="rating4" title="2점"></label>
                             <input type="radio" id="rating2" name="starRating" value="1"><label for="rating2" title="1점"></label>
-                           
                         </fieldset>
                     </div>
                     <div class="select-myPlace" style="margin-bottom: 5px;">
