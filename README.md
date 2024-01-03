@@ -58,7 +58,7 @@ https://maven.apache.org/docs/3.9.5/release-notes.html
 
 ## 데이터베이스
 # 오라클 DB
- - [데이터베이스 README](./BACK.md)
+ - [데이터베이스 README](./wiki/SCORE데이터베이스-최종)
 ## 주요 기능
 
 
