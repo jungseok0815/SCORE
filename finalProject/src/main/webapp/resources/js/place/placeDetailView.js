@@ -118,6 +118,9 @@ function drawMyTeam(res){
 function drawTeamMemberList(res){
     let myTeamMemberListStr = "";
     for(let i = 0; i < res.length; i++){
+        if(res[i].memberChangeName == null){
+            res[i].memberChangeName = "/resources/img/member/basicImg.jpg"
+        }
         myTeamMemberListStr += `<div class="team-member">`+
                                     `<img src=".`+res[i].memberChangeName+`" alt="">`+
                                     `<div>`+

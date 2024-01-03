@@ -140,10 +140,11 @@ public class PlaceController {
 		String dayDate = (Integer.parseInt(pl.getFieldDate().substring(8,10))) + "일";
 		pl.setFieldDate(monthDate+dayDate);
 		
-		
 		m.addAttribute("pl", pl);
 		m.addAttribute("fieldDate", fieldDate);
 		m.addAttribute("matchPay", formatter.format(pl.getMatchPay()));
+		// 여성 플레이어 명수 구하는 함수
+		m.addAttribute("gender", pService.countFemalePlayer(fno));
 		m.addAttribute("resCount", pService.placeResCount(fno));
 		m.addAttribute("plImgList", pService.placeImgList(fno));
 		return "place/placeDetailView";

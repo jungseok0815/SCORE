@@ -211,6 +211,7 @@
           AND MATCH_LEVEL = #{matchLevel}
           AND FIELD_DATE = #{fieldDate}
           AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
+		ORDER BY START_TIME
  	</select>
  	
  	<select id="placeDetailview" resultMap="placeResultSet">
@@ -758,5 +759,12 @@
  		AND
  			REPLYREPLY_NO = #{replyReplyNo}
  	</update>
+ 	<select id="countFemalePlayer" resultType="_int">
+ 		SELECT COUNT(*)
+		  FROM RESERVATION R
+		  JOIN MEMBER M ON R.RES_USER_NO = M.USER_NO
+		 WHERE FIELD_NO = #{fno}
+		   AND GENDER = '여자'
+ 	</select>
 
 </mapper>

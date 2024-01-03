@@ -278,5 +278,10 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.deleteReplyRe(sqlSession, rr);
 	}
 
+	@Override
+	public int countFemalePlayer(int fno) {
+		return pDao.countFemalePlayer(sqlSession, fno);
+	}
+
 
 }
