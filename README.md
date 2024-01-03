@@ -59,8 +59,8 @@ $ yarn dev
 
 ## 주요 기능
 
-### ✏ 소중한 사람과 **공용 일기장**을 만들어 서로의 일상을 공유할 수 있어요.  
-  <img src="" height="300">
+### ✏ 축구, 농구, 야구를 하는 사람들이 보다 편하게 경기에 참여하고 즐길수 있어요. 
+  <img src="http://localhost:8088/final" height="300">
   <img src="" height="300">
   <img src="" height="300">
   <img src="" height="300">
