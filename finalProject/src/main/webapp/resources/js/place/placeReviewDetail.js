@@ -58,7 +58,7 @@ drewReplyRe = (result,i) =>{
         rereplyTr.className = "reply-content-list-te reply-item" + j;
 
         rereplyTr.innerHTML =  `<td></td><td class="replyName">`+ list[j].userName +`</td>`+
-                               `<td class="replyContent" colspan="2">` + list[j].replyReplyContent + `</td>`+
+                               `<td class="replyContent">` + list[j].replyReplyContent + `</td>`+
                                `<td class="replyDate">` + list[j].replyReplyDate + `</td>`+
                                `<td colspan="1"></td>`
                                if(list[j].userNo === loginNo ){ 
@@ -81,6 +81,7 @@ drawUpdateReplyReply = (replyReplyNo,replyNo,j) =>{
     textAreaDiv.value = replyReplyContent;
     const replyReplyBtn = document.createElement("button");
     replyReplyBtn.className = "replyReplyBtn"
+    replyReplyBtn.textContent = "수정하기"
     replyReplyBtn.onclick  = () =>{
         data = {
             replyNo,
@@ -110,6 +111,7 @@ drawUpdateReply = (replyNo,j) =>{
     textareaDiv.value = text
     const updateReplyBtn = document.createElement("button")
     updateReplyBtn.className = "updateReplyBtn"
+    updateReplyBtn.textContent = "수정하기"
     updateReplyBtn.onclick = () =>{
         upadateReply(replyNo,document.querySelector(".input"+j).value)
     }
@@ -220,10 +222,11 @@ selectReplyList = (result) => {
         str+=`<tr class="replyReply-content" id="replyReply`+ i +`">`+
                 `<td></td><td class="replyContent" colspan="2"><input type="text"
                 style="width: 650px;
-                        height: 70px;
+                        height: 50px;
                         border-radius: 10px;
-                        margin-top: 20px;
-                        margin-bottom: 20px;"
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        padding: 10px;"
                     class="inputReply`+ i +`" placeholder="댓글을 입력해주세요."></td>`+
                 `<td></td><td colspan="3"><button class="btnInsert" onclick="addReplyRE(`+tmp.replyNo+`,`+i+`)">등록하기</button></td>`+
             `</tr>`

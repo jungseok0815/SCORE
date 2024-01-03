@@ -3,6 +3,18 @@ init = () => {
     
 }
 
+initing = () => {
+    console.log("aaa")
+
+    alert("이미 신청중입니다.")
+}
+
+inging = () => {
+    console.log("aaa")
+
+    alert("지금은 팀원 모집을 받고있지 않습니다.")
+}
+
 memberView = () => {
     document.querySelector('.overview-tab').classList.remove('overview-tab-focused');
     document.querySelector('.member-tab').className += ' member-tab-focused';
@@ -63,14 +75,7 @@ reloaddeleteTeamMember= (result) =>{
     }
 }
 copyToClipboard = (phone) =>{
-    const textarea = document.createElement('textarea');
-    textarea.textContent = phone;
-
-    document.body.appendChild(textarea);
-    textarea.select();
-    textarea.setSelectionRange(0, 9999);
-    document.execCommand('copy');
-    document.body.removeChild(textarea)
+    navigator.clipboard.writeText(phone)
 
     // 복사 완료 메시지 (예를 들어, 알림 등으로 표시 가능)
     alert("텍스트가 클립보드에 복사되었습니다.");

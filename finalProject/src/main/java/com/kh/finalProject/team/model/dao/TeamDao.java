@@ -76,7 +76,11 @@ public class TeamDao {
 	}
 	
 	public int deleteOffer(SqlSessionTemplate sqlSession, int offerNo) {
-		return sqlSession.update("teamMapper.deleteOffer", offerNo);
+		return sqlSession.delete("teamMapper.deleteOffer", offerNo);
+	}
+	
+	public int deleteOfferImg(SqlSessionTemplate sqlSession, int offerNo) {
+		return sqlSession.delete("teamMapper.deleteOfferImg", offerNo);
 	}
 	
 	public int teamReq(SqlSessionTemplate sqlSession, int userNo, String reqContent, int offerNo) {
@@ -234,7 +238,8 @@ public class TeamDao {
 	
 	// 팀요청 수락
 	public int teamReqAccept(SqlSessionTemplate sqlSession, int reqNo) {
-		return sqlSession.update("teamMapper.teamReqAccept", reqNo);
+//		return sqlSession.update("teamMapper.teamReqAccept", reqNo);
+		return sqlSession.delete("teamMapper.teamReqAccept", reqNo);
 	}
 	
 	// 팀요청 거절
@@ -287,12 +292,65 @@ public class TeamDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userNo", userNo);
 		params.put("tno", tno);
-		
+		System.out.println(params);
 //		return sqlSession.selectOne("teamMapper.selectReqListCheck", params);
 		Integer result = sqlSession.selectOne("teamMapper.selectReqListCheck", params);
 
 	    // 만약 result가 null이면 -1을 반환, 아니면 result 값을 반환
 	    return (result != null) ? result : -1;
 	}
+	
+	public int selectReqListCheck22(SqlSessionTemplate sqlSession, int userNo, int tno, int teamNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userNo", userNo);
+		params.put("tno", tno);
+		params.put("teamNo", teamNo);
+		
+		Integer result = sqlSession.selectOne("teamMapper.selectReqListCheck22", params);
 
+	    // 만약 result가 null이면 -1을 반환, 아니면 result 값을 반환
+	    return (result != null) ? result : -1;
+	}
+	
+	public int selectReqListCheck33(SqlSessionTemplate sqlSession, int userNo, int tno, int offerNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userNo", userNo);
+		params.put("tno", tno);
+		params.put("offerNo", offerNo);
+		
+		Integer result = sqlSession.selectOne("teamMapper.selectReqListCheck33", params);
+
+	    // 만약 result가 null이면 -1을 반환, 아니면 result 값을 반환
+	    return (result != null) ? result : -1;
+	}
+	
+	public int deleteOfferAll(SqlSessionTemplate sqlSession, int tNo) {
+		return sqlSession.delete("teamMapper.deleteOfferAll", tNo);
+	}
+	
+	public ArrayList<TeamOffer> teamOfferListNo(SqlSessionTemplate sqlSession, int tNo) {
+		return (ArrayList)sqlSession.selectList("teamMapper.teamOfferListNo", tNo);
+	}
+
+	public int deleteTeamReqAll(SqlSessionTemplate sqlSession, int offerNo) {
+		return sqlSession.delete("teamMapper.deleteTeamReqAll", offerNo);
+	}
+	
+	public int teamReqSolo(SqlSessionTemplate sqlSession, int userNo, String reqContent, int offerNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userNo", userNo);
+		params.put("reqContent", reqContent);
+		params.put("offerNo", offerNo);
+		
+		return sqlSession.insert("teamMapper.teamReqSolo", params);
+	}
+	
+	public ArrayList<TeamOffer> listCountNo(SqlSessionTemplate sqlSession, int tno) {
+		return (ArrayList)sqlSession.selectList("teamMapper.listCountNo", tno);
+	}
+	
+	public ArrayList<TeamReq> selectListReqCount(SqlSessionTemplate sqlSession, int tno) {
+		return (ArrayList)sqlSession.selectList("teamMapper.selectListReqCount", tno);
+	}
+	
 }

@@ -134,7 +134,7 @@ public class MemberController {
 		Member login =  (Member) session.getAttribute("loginUser");
 		sport.setUserNo(m.getUserNo());
 		int resultMemImg =0;
-
+		System.out.println(reupfile.getOriginalFilename()+"sssssss");
 		if(!reupfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
 			mi.setMemberUrl("/resources/img/member/memberInsert/");
@@ -146,7 +146,12 @@ public class MemberController {
 			}else {
 				resultMemImg = memberService.updateMemImg(mi);
 			}
-		}	
+		}else{
+			if(memberService.selectMemImg(m.getUserNo()) > 0) {
+				resultMemImg = memberService.deleteMemImg(mi);
+			}
+		}
+		
 		
 //		MemberImg existingImg = memberService.selectMemberImg(m.getUserNo());
 //		
@@ -382,21 +387,63 @@ public class MemberController {
 		return new Gson().toJson(memberService.selectReqResFriendList(m.getUserNo()));
 	}
 	
-
+	//회원가입시 핸드폰 인증번호 검
 	@ResponseBody
-	@RequestMapping(value= "/checkPhoneAuth.me")
+	@RequestMapping(value= "/checkPhoneAuthJoin.me")
 	public String checkPhoneAuth(HttpSession session,MessageAuth auth) {
-	
-	
 		int reusult = memberService.checkPhoneAuth(auth);
-		System.out.println();
-		System.out.println(reusult);
 		if(reusult > 0) {
 			return "authOk";
 		}
-	
 		return "authFail";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/checkPhoneAuthfind.me",produces="application/json; charset=UTF-8")
+	public String checkPhoneAuthFind(HttpSession session,MessageAuth auth) {	
+		int reusult = memberService.checkPhoneAuth(auth);
+		if(reusult > 0) {
+			return new Gson().toJson(memberService.authPassFindUserInfo(auth));
+		}
+		return  new Gson().toJson("authFail");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/checkUserNamePhone.me")
+	public String checkUserNamePhone(HttpSession session,MessageAuth auth) {
+		System.out.println(auth);
+		Member m1 =memberService.authPassFindUserInfo(auth);	
+		System.out.println(m1);
+		if(m1 == null) {
+			return "authFail";
+		}
+		return m1.getUserId();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/checkUserIdPhone.me")
+	public String checkUserIdPhone(HttpSession session,Member m1) {	
+		int result = memberService.checkUserIdPhone(m1);
+		if(result > 0) {
+			return "authOk";
+		}
+		return "authFail";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/updatePassword.me")
+	public String updatePassword(HttpSession session,Member m1) {	
+		System.out.println(m1);
+		String encPwd = bcryptPasswordEncoder.encode(m1.getUserPwd());
+		m1.setUserPwd(encPwd);
+		
+		int result = memberService.updatePassword(m1);
+		if(result > 0) {
+			return "changeOk";
+		}
+		return "changeFail";
+	}
+	
 	
 
 	

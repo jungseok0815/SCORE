@@ -212,5 +212,8 @@ public class PlaceDao {
 	public int deleteReplyRe(SqlSessionTemplate sqlSession, Reply rr) {
 		return sqlSession.delete("placeMapper.deleteReplyRe", rr);
 	}
+	public int countFemalePlayer(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.selectOne("placeMapper.countFemalePlayer", fno);
+	}
 	
 }

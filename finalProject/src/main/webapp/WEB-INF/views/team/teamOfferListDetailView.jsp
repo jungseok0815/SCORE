@@ -78,8 +78,15 @@
 						</div>
 						
 						<c:if test="${teamOffer.userNo eq loginUser.userNo}">
-							<button onclick="location.href='offerDelete.tm?tno=${teamOffer.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
-	                	</c:if>
+						    <c:if test="${not empty listReq}">
+						        <!-- listReq가 비어있지 않은 경우 -->
+						        <button onclick="poing()" class="custom-btn btn-3"><span>삭제하기</span></button>
+						    </c:if>
+						    
+						    <c:if test="${empty listReq}">
+						        <button onclick="location.href='offerDelete.tm?tno=${teamOffer.offerNo}'" class="custom-btn btn-3"><span>삭제하기</span></button>
+						    </c:if>
+						</c:if>
 	                	
 	                </div>
 	            </div>

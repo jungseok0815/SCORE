@@ -158,4 +158,25 @@ public interface TeamServiceImp {
 	// 신청한 팀원 리스트
 	int selectReqListCheck(int userNo, int tno);
 	
+	// 오퍼로만 신청한 팀원 리스트
+	int selectReqListCheck22(int userNo, int tno, int teamNo);
+	
+	// 오퍼로만 신청한 팀원 리스트
+		int selectReqListCheck33(int userNo, int tno, int offerNo);
+	
+	// 팀 해체시 게시물 삭제
+	int deleteOfferAll(int tNo);
+	// 팀 번호로 구인 번호 다 받아오기
+	ArrayList<TeamOffer> teamOfferListNo(int tNo);
+	// 구인번호로 TeamReq삭제
+	int deleteTeamReqAll(int offerNo);
+	// 팀 프로필로 가서 팀 신청하기
+	int teamReqSolo(int userNo, String reqContent, int offerNo);
+	// 구인글 이미지 삭제
+	int deleteOfferImg(int offerNo);
+	// 구인글 있나 없나 여부조사
+	ArrayList<TeamOffer> listCountNo(int tno);
+	// 예약자 있나 없나 여부조사
+	ArrayList<TeamReq> selectListReqCount(int tno);
+	
 }

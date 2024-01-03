@@ -204,11 +204,20 @@
  	</select>
  	
  	<!-- 게시글 삭제 -->
- 	<update id="deleteOffer">
- 		UPDATE TEAM_OFFER
+ 	<delete id="deleteOffer">
+ 		<!--  UPDATE TEAM_OFFER
  		   SET OFFER_STATUS = 'N'
- 	 	 WHERE OFFER_NO = #{offerNo}
- 	</update>
+ 	 	 WHERE OFFER_NO = #{offerNo}-->
+ 	 	 DELETE FROM TEAM_OFFER
+		  WHERE OFFER_NO = #{offerNo}
+ 	 	 
+ 	</delete>
+ 	
+ 	<!-- 구인글 사진 삭제  -->
+ 	<delete id="deleteOfferImg">
+ 		DELETE FROM TEAM_IMG
+		WHERE OFFER_NO = #{offerNo}
+ 	</delete>
  	
  	<!-- 팀 신청 -->
  	<insert id="teamReq" parameterType="map">
@@ -543,6 +552,7 @@
           JOIN TEAM_IMG USING (TEAM_NO)
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
+		   AND OFFER_NO IS NULL
  	</select>
  	
  	
@@ -559,9 +569,12 @@
  	</delete>
  	
  	 <delete id="deleteTeamImg">
+      	<!-- DELETE FROM TEAM_IMG
+      	WHERE TEAM_NO = #{tNo}
+      	AND OFFER_NO IS NULL -->
       	DELETE FROM TEAM_IMG
       	WHERE TEAM_NO = #{tNo}
-      	AND OFFER_NO IS NULL
+      	
  	</delete>
  	<update id="changeTeamGradeUp">
  		UPDATE TEAM_MEMBER 
@@ -645,11 +658,11 @@
  	</select>
  	
  	<!-- 팀 수락 -->
- 	<update id="teamReqAccept">
-		UPDATE TEAM_REQ
-		    SET REQ_STATUS = 'Y'
-		    WHERE REQ_NO = #{REQ_NO}
-	</update>
+ 	<delete id="teamReqAccept">
+		DELETE FROM TEAM_REQ
+			WHERE
+			REQ_NO = #{REQ_NO}
+	</delete>
 	
 	<!-- 팀 거절 -->
 	<delete id="teamReqReqRefuse">
@@ -770,5 +783,102 @@
           WHERE OFFER_NO = #{tno} 
             AND REQ_USER_NO = #{userNo} 
  	</select>
+ 	
+ 	<!-- 오퍼로만 이미 팀 신청한 사람 리스트 -->
+ 	<select id="selectReqListCheck22" resultType="_int" parameterType="map">
+ 	<!-- SELECT 
+ 				REQ_USER_NO
+	       FROM TEAM_REQ
+	       JOIN TEAM_OFFER USING(OFFER_NO)
+          WHERE OFFER_NO = #{tno} 
+          	AND TEAM_NO = #{teamNo}
+            AND REQ_USER_NO = #{userNo} -->
+ 		SELECT 
+ 				REQ_USER_NO
+	       FROM TEAM_REQ
+	       JOIN TEAM_OFFER USING(OFFER_NO)
+          WHERE OFFER_NO = #{tno} 
+          	OR TEAM_NO = #{teamNo}
+            AND REQ_USER_NO = #{userNo} 
+ 	</select>
+ 	
+ 	<!-- 오퍼로만 이미 팀 신청한 사람 리스트 -->
+ 	<select id="selectReqListCheck33" resultType="_int" parameterType="map">
+ 	<!-- SELECT 
+ 				REQ_USER_NO
+	       FROM TEAM_REQ
+	       JOIN TEAM_OFFER USING(OFFER_NO)
+          WHERE OFFER_NO = #{offerNo} 
+          	AND TEAM_NO = #{tno}
+            AND REQ_USER_NO = #{userNo}  -->
+ 		SELECT 
+ 				REQ_USER_NO
+	       FROM TEAM_REQ
+	       JOIN TEAM_OFFER USING(OFFER_NO)
+          WHERE OFFER_NO = #{offerNo} 
+          	OR TEAM_NO = #{tno}
+            AND REQ_USER_NO = #{userNo} 
+ 	</select>
+ 	
+ 	<!-- 팀해체시 게시글 삭제 -->
+ 	<delete id="deleteOfferAll">
+ 		DELETE FROM TEAM_OFFER
+		WHERE TEAM_NO = #{tNo}
+ 	</delete>
+ 	
+ 	<!-- 팀 번호로 구인 번호 다 받아오기 -->
+ 	<select id="teamOfferListNo" resultMap="teamOfferResult">
+         SELECT OFFER_NO,
+				OFFER_TITLE,
+				OFFER_CONTENT,
+				OFFER_GENDER,
+				OFFER_LEVEL,
+				OFFER_AGE,
+				OFFER_COUNT,
+				USER_NO,
+				TEAM_NO,
+				OFFER_STATUS
+           FROM TEAM_OFFER
+		  WHERE TEAM_NO = #{tNo}
+ 	</select>
+ 	
+ 	<!-- 구인번호로 TeamReq삭제 -->
+ 	<delete id="deleteTeamReqAll">
+ 		DELETE FROM TEAM_REQ
+		WHERE OFFER_NO = #{offerNo}
+ 	</delete>
 
+	<!-- 팀 프로필로 팀 신청 -->
+ 	<insert id="teamReqSolo" parameterType="map">
+ 		INSERT INTO 
+		    TEAM_REQ(
+		             REQ_NO,
+		             REQ_STATUS,
+		             REQ_USER_NO,
+		             OFFER_NO,
+		             REQ_CONTENT
+		             )
+             VALUES (
+ 			  		   SEQ_TEAD_REQ.NEXTVAL,
+ 			  		   'N',
+ 			  		   #{userNo},
+ 			  		   #{offerNo},
+ 			  		   #{reqContent}
+                     )
+ 	</insert>
+ 	
+ 	<!-- 팀 구인글 여부조사 -->
+ 	<select id="listCountNo" resultType="_int">
+         SELECT OFFER_NO
+           FROM TEAM_OFFER
+      	  WHERE TEAM_NO = #{tNo}
+ 	</select>
+ 	
+ 	<!-- 예약자 여부조사 -->
+ 	<select id="selectListReqCount" resultType="_int">
+         SELECT OFFER_NO
+         	FROM TEAM_REQ
+      		WHERE OFFER_NO = #{tno}
+ 	</select>
+ 	
  </mapper>

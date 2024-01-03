@@ -99,7 +99,7 @@ integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/
                         <ul>
                             <li>
                                 <img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_info_fire.svg" class="icon">
-                                <p>아직 여자플레이어가 0명이에요</p>
+                                <p>아직 여자플레이어가 ${gender}명이에요</p>
                             </li>
                             <br>
                             <li>

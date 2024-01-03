@@ -181,12 +181,33 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePay(sqlSession, point, userNo);
 	}
 
+	@Override
 	public ArrayList<Member> chattingSelectFriend(HashMap info) {
 		return memberDao.chattingSelectFriend(sqlSession, info);
-
+	}
+	
+	public Member authPassFindUserInfo(MessageAuth auth) {
+		return memberDao.authPassFindUserInfo(sqlSession, auth);
 	}
 
+	@Override
+	public int checkUserIdPhone(Member m1) {
+		return memberDao.checkUserIdPhone(sqlSession, m1);
+	}
 
+	@Override
+	public int updatePassword(Member m1) {
+		return memberDao.updatePassword(sqlSession, m1);
+	}
 
+	@Override
+	public int selectMemImg(int userNo) {
+		return memberDao.selectMemImg(sqlSession, userNo);
+	}
+
+	@Override
+	public int deleteMemImg(MemberImg mi) {
+		return memberDao.deleteMemImg(sqlSession, mi);
+	}
 	
 }

@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="resources/js/team/teamJs/teamProfile.js?ver=3"></script>
 <script src="resources/js/team/teamAjax/teamProfileAjax.js?ver=2"></script>
-
+<link rel="stylesheet" href="/final/resources/css/team/teamOfferListDetailView.css">
 
 </head>
 <body onload="init()">	
@@ -70,9 +70,20 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
-                                    <button class="btn btn-outline-primary" onclick="">
-                                        가입신청
-                                    </button>
+                                   <c:choose>
+							    	<c:when test="${reqList eq loginUser.userNo}">
+							    		 <!-- 이미 신청중인 사람만 보이는 버튼-->
+							    		 <c:if test="${empty listCount}">
+							    			 <button onclick="inging()" class="btnJoin btnFloat btnLightBlue">가입 신청</button>
+							    		 </c:if>
+							    		 <button onclick="initing()" class="btnJoin btnFloat btnLightBlue">너 뭐야</button>
+							    	</c:when>
+							    	<c:otherwise>
+							    		 <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">
+							    		 가입 신청
+							    		 </button>
+							    	</c:otherwise>
+							    </c:choose>
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -241,6 +252,43 @@
             </div>
         </div>
     </div>
+    
+    <!-- The Modal -->
+	    <div class="modal" id="myModal">
+	        <div class="modal-dialog modal-dialog-centered modal-lg">
+	            <div class="modal-content">
+	
+	            <!-- Modal Header -->
+	            <div class="modal-header">
+	                <h4 class="modal-title" >팀 가입 신청</h4>
+	                <button type="button" class="btn-close" id="btnCloseModal" data-bs-dismiss="modal"></button>
+	            </div>
+	            
+	            
+	            <!-- Modal body -->
+	            <form action="teamReqSolo.tm" method="POST">
+		            <input type="hidden" name="userNo" value="${loginUser.userNo}">
+		            <input type="hidden" name="teamNo" value="${team.teamNo}">
+		            <div class="modal-body">
+		                <div class="join-name">
+		                    <label for="join-name">이름</label><br>
+		                    <input id="modal-input-name" name="" placeholder="${loginUser.userId}" disabled/>
+		                </div>
+		                <div class="join-content">
+		                    <label for="join-content">각오 한마디</label><br>
+		                    <textarea id="modal-input-content" name="reqContent"  placeholder="내용을 입력하세요."></textarea>
+		                </div>
+		            </div>
+		
+		            <!-- Modal bottom -->
+		            <div class="modal-bottom">
+		                <div class="modal-button-join">
+		                    <button type="submit" class="btnModelJoin btnFloat2 btnLightBlue2"></button>
+		                </div>
+		            </div>
+				</form>
+	        </div>
+	    </div> 
 
     
 	<jsp:include page="../common/footer.jsp" />

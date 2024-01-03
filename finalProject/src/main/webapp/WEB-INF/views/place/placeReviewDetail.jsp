@@ -10,7 +10,7 @@
     <script src="resources/js/place/placeReviewDetail.js"></script>
     <script src="resources/js/place/placeAjax/placeAjax.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9c9e0c47ddbb3c0c58f465de9e58e1a&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=955fd1b6a15de821bfc4496937d1d8d2&libraries=services"></script>
     <title>Document</title>
 </head>
 <body onload="selectReply('${pr.reviewNo}', '${pr.fieldNo}')">

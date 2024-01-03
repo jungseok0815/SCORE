@@ -143,6 +143,25 @@ public class MemberDao {
 	public ArrayList<Member> chattingSelectFriend(SqlSessionTemplate sqlSession, HashMap info) {
 		return (ArrayList)sqlSession.selectList("memberMapper.chattingSelectFriend", info);
 	}
-	
 
+	public Member authPassFindUserInfo(SqlSessionTemplate sqlSession, MessageAuth auth) {
+		return sqlSession.selectOne("memberMapper.authPassFindUserInfo", auth);
+	}
+
+	public int checkUserIdPhone(SqlSessionTemplate sqlSession, Member m1) {
+		return sqlSession.selectOne("memberMapper.checkUserIdPhone", m1);
+	}
+
+	public int updatePassword(SqlSessionTemplate sqlSession, Member m1) {
+		return sqlSession.update("memberMapper.updatePassword", m1);
+	}
+	
+	public int selectMemImg(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("memberMapper.selectMemImg", userNo);
+	}
+	
+	//이미지 삭제
+	public int deleteMemImg(SqlSessionTemplate sqlSession, MemberImg mi) {
+		return sqlSession.delete("memberMapper.deleteMemImg", mi);
+	}
 }
