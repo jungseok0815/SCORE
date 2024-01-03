@@ -38,7 +38,7 @@ public interface PlaceService {
 	ArrayList<Place> selectResDay(int userNo);
 	ArrayList<Reservation> dateChoiceResList(Reservation res);
 	ArrayList<Reservation> dateAllResList(int resUserNo);
-
+	ArrayList<Reservation> selectReListAll(String userNo);
 	// 매니저 게임 다 가져오기
 	ArrayList<Field> selectManager(String userName);
 	// 게임에 참가했던 애들 조회

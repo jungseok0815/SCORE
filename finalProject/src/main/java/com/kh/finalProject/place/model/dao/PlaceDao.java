@@ -72,6 +72,9 @@ public class PlaceDao {
 	public ArrayList<Reservation> selectResList(SqlSessionTemplate sqlSession, String userNo){
 		return (ArrayList)sqlSession.selectList("placeMapper.selectResList", userNo);
 	}
+	public ArrayList<Reservation> selectReListAll(SqlSessionTemplate sqlSession, String userNo){
+		return (ArrayList)sqlSession.selectList("placeMapper.selectReListAll", userNo);
+	}
 	public int deleteReservation(SqlSessionTemplate sqlSession, int resNo) {
 		return sqlSession.delete("placeMapper.deleteReservation", resNo);
 	}

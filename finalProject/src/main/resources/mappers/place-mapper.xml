@@ -104,7 +104,7 @@
   	
   	<resultMap type="Reply" id="replyResultSet">
   	  	<result column="REPLY_NO" property="replyNo" />
-  		<result column="REPLY_WRITER" property="replyWriter" />
+  		<result column="USER_NAME" property="userName" />
   		<result column="REPLY_CONTENT" property="replyContent" />
   		<result column="REPLY_DATE" property="replyDate" />
   		<result column="USER_NO" property="userNo" />
@@ -305,6 +305,27 @@
 		 ORDER BY FIELD_DATE, START_TIME
  	</select>
  	
+ 	
+ 	<select id ="selectReListAll" resultMap="reservationResultSet">
+		SELECT 
+		    RES_NO,
+		    RES_USER_NO,
+		    FIELD_NO,
+		    FIELD_NAME,
+		    FIELD_DATE,
+		    START_TIME,
+		    CATEGORY_NUM
+		FROM 
+		    RESERVATION
+		JOIN 
+		    FIELD USING (FIELD_NO)
+		WHERE 
+		    RES_USER_NO = #{userNo}
+		ORDER BY 
+		    FIELD_DATE, 
+		    START_TIME
+ 	</select>
+ 	
  	<delete id="deleteReservation">
 	 	DELETE FROM RESERVATION
 		 WHERE RES_NO = #{resNo}	
@@ -460,11 +481,12 @@
  	<!-- 리뷰 댓글 조회 -->
  	<select id="selectReplyList" resultMap="replyResultSet">
  		SELECT REPLY_NO,
- 					 REPLY_WRITER,
  					 REPLY_CONTENT,
  					 REPLY_DATE,
- 					 USER_NO
+ 					 USER_NO,
+ 					 USER_NAME
  		  FROM REPLY
+ 		  JOIN MEMBER USING(USER_NO)
  		WHERE FIELD_NO = #{fno}
  	</select>
 	
@@ -714,7 +736,6 @@
  		INSERT INTO REPLY
 				 (
 					REPLY_NO,
-					REPLY_WRITER,
 					REPLY_CONTENT,
 	                USER_NO,
 	                FIELD_NO
@@ -722,7 +743,6 @@
 		 VALUES
 				 (
 					SEQ_REPLY.NEXTVAL,
-					#{replyWriter},
 					#{replyContent},
 					#{userNo},
 					#{fieldNo}

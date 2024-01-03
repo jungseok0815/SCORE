@@ -283,5 +283,9 @@ public class PlaceServiceImpl implements PlaceService{
 		return pDao.countFemalePlayer(sqlSession, fno);
 	}
 
+	public ArrayList<Reservation> selectReListAll(String userNo) {
+		return pDao.selectReListAll(sqlSession, userNo);
+	}
+
 
 }
