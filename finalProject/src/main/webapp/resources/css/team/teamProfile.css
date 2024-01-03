@@ -205,6 +205,10 @@ section {
     cursor: pointer;
 }
 
+.modal-dialog-scrollable .modal-content {
+    margin: 0px;
+    position: static;
+}
 
 
 @media (min-width: 720px) {

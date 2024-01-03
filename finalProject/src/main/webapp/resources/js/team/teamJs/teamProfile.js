@@ -1,6 +1,6 @@
 init = () => {
     document.querySelector('.overview-tab').className += ' overview-tab-focused';
-    
+
 }
 
 initing = () => {
