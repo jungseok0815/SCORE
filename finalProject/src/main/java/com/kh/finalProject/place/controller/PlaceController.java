@@ -764,11 +764,16 @@ public class PlaceController {
 	@ResponseBody
 	@RequestMapping(value="/placeReviewList.pl")
 	public ModelAndView placeReviewListView(ModelAndView mv, String userNo, @RequestParam(value="cpage", defaultValue = "1") int currentPage) {
-		
 		if(!userNo.equals("")) {
-			ArrayList<Reservation> rList = pService.selectResList(userNo);
+			ArrayList<Reservation> rList = pService.selectReListAll(userNo);
+			System.out.println(rList);
+			for(Reservation r1 : rList) {
+				System.out.println(r1);
+			}
 			mv.addObject("rList", rList);
 		}
+		
+		
 		mv.setViewName("place/placeReviewList");
 		
 		return mv;
@@ -816,6 +821,7 @@ public class PlaceController {
 	@ResponseBody
 	@RequestMapping(value= "/rlist.pl", produces = "appalication/json; charset = UTF-8")
 	public String placeReplyList(Model m , HttpSession session, @RequestParam("fno") int fno) {
+		System.out.println(fno);
 		ArrayList<Reply> rlist = pService.selectReplyList(fno);
 		m.addAttribute("loginUser", session.getAttribute("loginUser"));
 		m.addAttribute("rlist", rlist);
@@ -832,7 +838,7 @@ public class PlaceController {
 		r.setFieldNo(fieldNo);
 		r.setReplyContent(replyContent);
 		r.setUserNo(m.getUserNo());
-		r.setReplyWriter(m.getUserName());
+		r.setUserName(m.getUserName());
 		System.out.println(r);
 		int result = pService.addReply(r);
 		if(result >0) {
@@ -974,7 +980,7 @@ public class PlaceController {
 	
 	@RequestMapping("reviewDelete.pl")
 	public ModelAndView deleteReview(String uno, int rno, String filePath, HttpSession session, ModelAndView mv) {
-		ArrayList<Reservation> rList = pService.selectResList(uno);
+		ArrayList<Reservation> rList = pService.selectReListAll(uno);
 		System.out.println(rno);
 		int result = pService.deleteReview(rno);
 		
@@ -993,7 +999,7 @@ public class PlaceController {
 	
 	@RequestMapping("updateReview.pl")
 	public ModelAndView reviewUpdate(String reviewNo, PlaceReview pr, ReviewImg ri, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
-		ArrayList<Reservation> rList = pService.selectResList(pr.getUserNo());
+		ArrayList<Reservation> rList = pService.selectReListAll(pr.getUserNo());
 		System.out.println(pr.getUserNo());
 		pr.setReviewNo(Integer.parseInt(reviewNo));
 		System.out.println(pr);

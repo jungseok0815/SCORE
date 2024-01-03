@@ -208,7 +208,7 @@ selectReplyList = (result) => {
         let tmp = result.rlist[i];
 
         str+=`<tr class="reply-content-list">`+
-                    `<td class="replyName">`+ tmp.replyWriter +`</td>`+
+                    `<td class="replyName">`+ tmp.userName +`</td>`+
                     `<td class="replyContent" colspan="2">` + tmp.replyContent + `</td>`+
                     `<td class="replyDate">` + tmp.replyDate + `</td>`+
                     `<td class="replyButton" colspan="1"><img src="./resources/img/place/reply.png" id="replyreImg" onclick="replyFunc(`+tmp.replyNo+`,`+i+`)"></td>`
