@@ -335,6 +335,7 @@
 		   AND SYSDATE &lt; TO_DATE(FIELD_DATE || ' ' || START_TIME,'YYYY-MM-DD HH24:MI')
 	  ORDER BY FIELD_DATE
  	</select>
+ 	
  	<select id="dateAllResList" resultMap="reservationResultSet">
  		SELECT FIELD_NO,
 		       FIELD_NAME,
