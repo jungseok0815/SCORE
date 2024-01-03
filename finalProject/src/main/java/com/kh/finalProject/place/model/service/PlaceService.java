@@ -110,7 +110,8 @@ public interface PlaceService {
 	
 	// 평가 끝난 후 매니저 이름 바꾸기
 	int fieldManagerUpdate(int fieldNo);
-
+	// 여성플레이어 구하는 메소드
+	int countFemalePlayer(int fno);
 
 
 }

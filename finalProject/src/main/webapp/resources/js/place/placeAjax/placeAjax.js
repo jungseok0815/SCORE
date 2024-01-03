@@ -1,4 +1,5 @@
 function loadTeam(data,callback){
+    console.log(data)
     $.ajax({
         type:"get",
         url:"resMatch.tm",

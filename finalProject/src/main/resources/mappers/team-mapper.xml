@@ -543,6 +543,7 @@
           JOIN TEAM_IMG USING (TEAM_NO)
 		 WHERE USER_NO = #{userNo}
 		   AND CATEGORY_NUM = #{categoryNum}
+		   AND OFFER_NO IS NULL
  	</select>
  	
  	
