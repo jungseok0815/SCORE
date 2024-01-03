@@ -25,7 +25,10 @@
 	                 	 <c:when test="${empty list}">
 	                 	 	<div style="display: flex; justify-content: center; display: grid;">
 						        <img src="./resources/img/team/teamJoinList/cat.png" style="width: 436px; height: 397px;">
-						        <h1 style="display: flex; justify-content: center;">신청 내역이 없습니다...</h1><br><br>
+						        <h1 style="display: flex; justify-content: center;">신청 내역이 없습니다...</h1><br>
+						        
+						        <button onclick="location.href='teamProfile.tm?teamNo=${tno}'">뒤로</button>
+						        <br>
 						    </div>
 	                 	 </c:when>
 	                 	 <c:otherwise>

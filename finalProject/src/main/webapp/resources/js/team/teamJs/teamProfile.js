@@ -3,6 +3,18 @@ init = () => {
     
 }
 
+initing = () => {
+    console.log("aaa")
+
+    alert("이미 신청중입니다.")
+}
+
+inging = () => {
+    console.log("aaa")
+
+    alert("지금은 팀원 모집을 받고있지 않습니다.")
+}
+
 memberView = () => {
     document.querySelector('.overview-tab').classList.remove('overview-tab-focused');
     document.querySelector('.member-tab').className += ' member-tab-focused';
