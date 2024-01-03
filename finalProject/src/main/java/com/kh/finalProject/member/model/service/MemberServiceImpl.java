@@ -180,6 +180,7 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePay(int point, int userNo) {
 		return memberDao.updatePay(sqlSession, point, userNo);
 	}
+
 	@Override
 	public ArrayList<Member> chattingSelectFriend(HashMap info) {
 		return memberDao.chattingSelectFriend(sqlSession, info);
@@ -199,7 +200,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePassword(sqlSession, m1);
 	}
 
+	@Override
+	public int selectMemImg(int userNo) {
+		return memberDao.selectMemImg(sqlSession, userNo);
+	}
 
-
+	@Override
+	public int deleteMemImg(MemberImg mi) {
+		return memberDao.deleteMemImg(sqlSession, mi);
+	}
 	
 }

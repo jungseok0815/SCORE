@@ -760,6 +760,7 @@
  		AND
  			REPLYREPLY_NO = #{replyReplyNo}
  	</update>
+	
  	<select id="countFemalePlayer" resultType="_int">
  		SELECT COUNT(*)
 		  FROM RESERVATION R

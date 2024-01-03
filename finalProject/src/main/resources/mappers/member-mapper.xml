@@ -444,6 +444,20 @@
 			WHERE USER_NO = #{userNo}
 	</update>
 	
+
+	<!-- 멤버이미지 셀렉트 -->
+	<select id="selectMemImg" resultType="_int">
+		SELECT COUNT(*)
+			FROM MEMBER_IMG
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	<!-- 멤버이미지 삭제 -->
+	<delete id="deleteMemImg">
+		DELETE FROM MEMBER_IMG
+		WHERE USER_NO = #{userNo}
+	</delete>
+
 	
 	<select id="authPassFindUserInfo" resultMap="memberResult">
 		SELECT USER_NO, USER_ID,USER_NAME
