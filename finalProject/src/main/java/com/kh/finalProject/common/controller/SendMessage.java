@@ -57,6 +57,4 @@ public class SendMessage {
         }
         return "sendAuthErr";
     }
-
-
 }

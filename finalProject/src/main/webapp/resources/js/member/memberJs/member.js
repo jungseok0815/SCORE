@@ -170,7 +170,6 @@ handleMemberSportInfo=(userNo,categoryNum)=>{
     const fvStyleData = newfvStyleArr.join(",");
     console.log(newfvStyleArr)
   
-
     const data = {
         skill:  abilityData,
         style : fvStyleData,
@@ -270,7 +269,6 @@ selectPostFriend = () =>{
 } 
 
 drawSelectPostFriend = (result) =>{
-    console.log(result)
      document.querySelector("#aaaaaa").innerText = "친구요청 " + result.length+"명 |"
      
     const PostList  = document.querySelector("#postFriendList");
@@ -304,7 +302,6 @@ drawSelectPostFriend = (result) =>{
 
 
 addFriend = (userNo) =>{
-    console.log(userNo)
     data = {
         friendReqUser  : userNo
     }
@@ -314,7 +311,6 @@ addFriend = (userNo) =>{
 
 selectFriendList = () =>{
     memberAjaxController.selectFriendList(drawSelectfriendList)
-    
 }
 
 
@@ -350,7 +346,6 @@ drawSelectfriendList= (friendList) =>{
 
 
 deleteFriend= (userNo) =>{
-    console.log(userNo);
     data = {
         friendReqUser : userNo
     }
@@ -365,7 +360,6 @@ selectTeamList =() =>{
 
 
 selectMyTeam = (categoryNum) => {
-    console.log(categoryNum);
     data = {
         categoryNum : categoryNum
     }
@@ -412,7 +406,6 @@ drawUserSportInfo = (userSportInfo) =>{
     document.querySelector(".red-card > div").innerText = userSportInfo.sportRed;
 }
 
-
 sendPhoneAuth = () =>{
     const regex = /^\d{11}$/;
     const phoneNum =  document.querySelector(".join-phone > input").value
@@ -432,6 +425,7 @@ drawAuthInput = () =>{
     document.querySelector("#authBtn").click()
     checkAuthTime()
 }
+
 
 checkAuthTime = () =>{
     let time = 180;
@@ -480,6 +474,352 @@ drawCheckPhoneAuth = (result) =>{
 logOut = () =>{
     location.href ="/final/logOut.me"
 }
+
+
+//아이디 찾기를 그려주는 함수
+drawFindId = () =>{
+     deleteCheckTime()
+    const findArea = document.querySelector(".find-area")
+    findArea.innerHTML = ""
+
+
+    const findAreaAuthDiv1 = document.createElement("div");
+    findAreaAuthDiv1.className = "form-floating mb-3 inupt-user-phone"
+    findAreaAuthDiv1.innerHTML = `<input type="email" class="form-control find-id-name"  id="floatingInput" placeholder="name@example.com">` +
+                                    `<label for="floatingInput">이름을 입력해주세요</label>`
+
+
+    const findAreaDiv = document.createElement("div")
+    findAreaDiv.className = "input-userInfo"
+    findAreaDiv.innerHTML = `<p class=""modal-font>휴대폰 인증</p>`
+    
+    const findAreaAuthDiv = document.createElement("div");
+    findAreaAuthDiv.className = "form-floating mb-3 inupt-user-phone"
+    findAreaAuthDiv.innerHTML = ` <input type="email" class="form-control find-id-phone" id="floatingInput" placeholder="name@example.com">` +
+                                `  <label for="floatingInput">휴대폰 번호를 입력하세요</label>`
+
+    const authBtn = document.createElement("button")
+    authBtn.className = "btn btn-primary find-modal-btn"
+    authBtn.innerText = "인증요청"
+    authBtn.onclick = () =>{ 
+        const regex = /^\d{11}$/;
+        const phoneNum =  document.querySelector(".find-id-phone").value
+        const userName =  document.querySelector(".find-id-name").value
+        if(phoneNum === "" && userName ===""){
+            alert("이름과 휴대폰번호를 입력해주세요")
+            return
+        }else{
+            if(regex.test(phoneNum)){
+                data = {
+                    phone : phoneNum,
+                    userName
+                }
+             memberAjaxController.checkUserNamePhone(data,sendPhoneAuthFind)
+            }else{
+                alert("올바르게 전화번호를 입력해주세요")
+            }
+        }
+    }
+    findAreaAuthDiv.appendChild(authBtn)
+    findArea.appendChild(findAreaAuthDiv1)
+    findArea.appendChild(findAreaAuthDiv)
+}
+
+
+sendPhoneAuthFind = (result) =>{
+    console.log(result)
+    if(result === "authFail"){
+        alert("존재하지 않는 아이디 입니다.")
+    }else{
+        memberAjaxController.sendPhoneAuthAjax(data,drawFindIdAuthInput)
+    }
+}
+
+//아이디 찾기에서 인증 시에 나오는 인증번호 입력창
+drawFindIdAuthInput=() =>{
+    const findArea = document.querySelector(".find-area")
+    const findAreaDiv2 = document.createElement("div")
+    
+    findAreaDiv2.className = "input-userInfo"
+    findAreaDiv2.innerHTML = `<p class=""modal-font>인증번호</p>`
+
+    const findAreaAuthDiv2 = document.createElement("div");
+    findAreaAuthDiv2.className = "form-floating mb-3 inupt-user-phone"
+    findAreaAuthDiv2.innerHTML = `<input type="email" class="form-control find-id-authNum"  id="floatingInput" placeholder="name@example.com">` +
+                                    `<label for="floatingInput">인증 번호를  입력하세요</label>`
+    const authBtn2 = document.createElement("button")
+    authBtn2.className = "btn btn-primary find-modal-btn"
+    authBtn2.innerText = "인증확인"
+    authBtn2.onclick = () =>{
+        data = {
+            phone : document.querySelector(".find-id-phone").value,
+            authNum: document.querySelector(".find-id-authNum").value,
+            userName : document.querySelector(".find-id-name").value
+        }
+        memberAjaxController.checkPhoneAuthFindAjax(data,drawShowUserIdAuthPass)
+    }
+   
+    findAreaAuthDiv2.appendChild(authBtn2)
+  
+    findArea.appendChild(findAreaAuthDiv2)
+    checkAuthTime()
+}
+
+//휴대폰 인증후에 성공시에 아이디를 보여주는 함수 
+drawShowUserIdAuthPass = (result) =>{
+    if(result === "authFail"){
+        alert("인증번호가 잘못되었습니다.")
+    }else{
+        console.log(result)
+        alert("인증이 확인되었습니다.")
+
+        document.querySelector(".find-area").innerHTML = 
+                                `<div class="showUserIdAuthOk">`+
+                                    `<div>`+result.userName+`님의 아이디는</div>`+
+                                    `<div><span class="showAuthOKId">`+result.userId+`</span>입니다.</div>`+
+                                `</div>`
+
+        deleteCheckTime()
+    }  
+}
+
+checkAuthTime = () =>{
+    let time = 180;
+    let min = ""
+    let sec = "";
+    const checkTime = document.createElement("div")
+    document.querySelector(".find-area").appendChild(checkTime)
+    checkTime.style.color="black"
+    checkTime.id = "checkTime2"
+    const x = setInterval(()=>{
+        min = parseInt(time/60);
+        sec = time%60;
+        time --;
+        checkTime.innerHTML = "유효시간 : "+ min+"분" + sec +"초";
+        if(time < 0){
+            clearInterval(x)
+            checkTime.style.color="red"
+            checkTime.innerHTML = "시간초과"
+        }
+    },1000)
+}
+
+deleteCheckTime = () =>{
+    if(document.querySelector("#checkTime2")!= null)
+        document.querySelector("#checkTime2").remove()
+}
+//비밀번호 찾기를 그려주는 함수
+drawFindPassword = () =>{
+    deleteCheckTime()
+    const findArea = document.querySelector(".find-area")
+    findArea.innerHTML = ""
+
+    const findAreaDiv3 = document.createElement("div")
+    findAreaDiv3.className = "input-userInfo"
+    findAreaDiv3.innerHTML = `<p class=""modal-font>아이디 인증</p>`
+    
+    const findAreaAuthDiv3 = document.createElement("div");
+    findAreaAuthDiv3.className = "form-floating mb-3 inupt-user-phone"
+    findAreaAuthDiv3.innerHTML = ` <input type="email" class="form-control find-password-input-id" id="floatingInput" placeholder="name@example.com">` +
+                                `  <label for="floatingInput">유저의 아이디를 입력해주세요</label>`
+
+    findArea.appendChild(findAreaAuthDiv3)
+
+
+    const findAreaDiv = document.createElement("div")
+    findAreaDiv.className = "input-userInfo"
+    findAreaDiv.innerHTML = `<p class=""modal-font>휴대폰 인증</p>`
+    
+    const findAreaAuthDiv = document.createElement("div");
+    findAreaAuthDiv.className = "form-floating mb-3 inupt-user-phone"
+    findAreaAuthDiv.innerHTML = ` <input type="email" class="form-control find-password-input-phone" id="floatingInput" placeholder="name@example.com">` +
+                                `  <label for="floatingInput">휴대폰 번호를 입력하세요</label>`
+
+    const authBtn = document.createElement("button")
+    authBtn.className = "btn btn-primary find-modal-btn"
+    authBtn.innerText = "인증요청"
+    authBtn.onclick = () =>{
+    
+        data = {
+            userId : document.querySelector(".find-password-input-id").value,
+            phone : document.querySelector(".find-password-input-phone").value
+        }
+        memberAjaxController.checkUserIdPhone(data,sendPhoneAuthFindPassword)
+    }
+    findAreaAuthDiv.appendChild(authBtn)
+    findArea.appendChild(findAreaAuthDiv)
+}
+
+let findPasswordUserId = null;
+
+sendPhoneAuthFindPassword = (result) =>{
+    console.log(result)
+    console.log(data)
+    findPasswordUserId = data.userId
+    if(result === "authFail"){
+        alert("아이디와 핸드폰번호를 확인해주세요")
+       
+    }else{ 
+         memberAjaxController.sendPhoneAuthAjax(data,drawFindPawsswordAuthInput)
+    }
+}
+
+
+drawFindPawsswordAuthInput = () =>{
+        const findArea = document.querySelector(".find-area")
+        const findAreaDiv2 = document.createElement("div")
+        findAreaDiv2.className = "input-userInfo"
+        findAreaDiv2.innerHTML = `<p class=""modal-font>인증번호</p>`
+    
+        const findAreaAuthDiv2 = document.createElement("div");
+        findAreaAuthDiv2.className = "form-floating mb-3 inupt-user-phone"
+        findAreaAuthDiv2.innerHTML = `<input type="email" class="form-control find-password-authNum" id="floatingInput" placeholder="name@example.com">` +
+                                        `<label for="floatingInput">인증 번호를  입력하세요</label>`
+        const authBtn2 = document.createElement("button")
+        authBtn2.className = "btn btn-primary find-modal-btn"
+        authBtn2.innerText = "인증확인"
+        authBtn2.onclick = () =>{
+            data = {
+                phone : document.querySelector(".find-password-input-phone").value,
+                authNum : document.querySelector(".find-password-authNum").value
+            }
+            memberAjaxController.checkPhoneAuthAjax(data,drawNewPasswordInup)
+        }
+        findAreaAuthDiv2.appendChild(authBtn2)
+        findArea.appendChild(findAreaAuthDiv2)
+        checkAuthTime()
+}
+
+drawNewPasswordInup = (result) =>{
+    if(result === "authFail"){
+        alert("인증번호를 확인해주세요")
+    }else{
+        alert("인증번호 확인 성공!!")
+        deleteCheckTime()
+        const findArea = document.querySelector(".find-area");
+        findArea.innerHTML = ""
+        const findAreaDiv3 = document.createElement("div")
+        findAreaDiv3.className = "input-userInfo"
+        findAreaDiv3.innerHTML = `<p class=""modal-font>새로운 비밀번호</p>`
+        
+        const findAreaAuthDiv3 = document.createElement("div");
+        findAreaAuthDiv3.className = "form-floating mb-3 inupt-user-phone"
+        const newPasswordInput = document.createElement("input");
+   
+    
+        newPasswordInput.type = "password"
+        newPasswordInput.className ="form-control new-password"
+        newPasswordInput.id = "floatingInput"
+        newPasswordInput.placeholder = "name@example.com"
+    
+        findAreaAuthDiv3.appendChild(newPasswordInput)
+     
+        findAreaAuthDiv3.innerHTML += `<label for="floatingInput">새로운 비밀번로를 입력해주세요</label>`
+        findArea.appendChild(findAreaAuthDiv3)
+        
+      
+    
+        const findAreaDiv = document.createElement("div")
+        findAreaDiv.className = "input-userInfo"
+        findAreaDiv.innerHTML = `<p class=""modal-font>비밀번호 확인</p>`
+        
+        const findAreaAuthDiv = document.createElement("div");
+        findAreaAuthDiv.className = "form-floating mb-3 inupt-user-phone"
+        const newPasswordCheck = document.createElement("input");
+   
+        newPasswordCheck.type = "password"
+        newPasswordCheck.className = "form-control new-password-check"
+        newPasswordCheck.id = "floatingInput"
+        newPasswordCheck.placeholder = "name@example.com"
+
+        findAreaAuthDiv.appendChild(newPasswordCheck)
+        findAreaAuthDiv.innerHTML +=  `<label for="floatingInput">비밀번호 확인</label>`
+    
+        const authBtn = document.createElement("button")
+        authBtn.className = "btn btn-primary find-modal-btn change-fwd-btn"
+        authBtn.innerText = "비밀번호 수정"
+     
+    
+        findArea.appendChild(findAreaAuthDiv)
+        findArea.innerHTML +=  `<div>`+
+                                    `<p class ="new-check-password-vail">*비밀번호는 영문 숫자 특수기호 조합 8자리 이상</p>`+
+                                    `<p class ="new-check-password-same">*비민번호 확인</p>`+
+                                `</div>`    
+    
+        findArea.appendChild(authBtn)
+    
+        let checkSamePWd = false;
+        document.querySelector(".new-password-check").onkeyup = () =>{
+            console.log("sdfklsdkfa")
+            const checkSame =  document.querySelector(".new-check-password-same")
+           if(checkPasswordSame(document.querySelector(".new-password").value,document.querySelector(".new-password-check").value)){
+            checkSame.innerText = "*비민번호 확인v"
+            checkSame.style.color="green"
+            checkSamePWd = true
+           }else{
+            checkSame.innerText = "*비민번호 확인"
+            checkSame.style.color="red"
+            checkSamePWd = false;
+           }
+        }
+
+        let checkAvil = false;
+        document.querySelector(".new-password").onkeyup = () =>{
+            console.log(newPasswordInput.value)
+            const checkvail =  document.querySelector(".new-check-password-vail")
+           if(checkPasswordVail(document.querySelector(".new-password").value)){
+            checkvail.innerText ="*비밀번호는 영문 숫자 특수기호 조합 8자리 이상v"
+            checkvail.style.color = "green"
+            checkAvil = true
+           }else{
+            checkvail.innerText ="*비밀번호는 영문 숫자 특수기호 조합 8자리 이상"
+            checkvail.style.color = "red"
+            checkAvil =  false
+           }
+        }
+
+        authBtn.onclick = () =>{
+            console.log("sdfjklasjdk")
+            if(checkSamePWd && checkAvil){
+                data = {
+                    userId : findPasswordUserId,
+                    userPwd : document.querySelector(".new-password").value
+                }
+                memberAjaxController.updatePasswordAjax(data,suscessChageFwd)
+            }else{
+                alert("비밀번호 양식을 확인해주세요")
+            }
+            
+        }
+
+    }
+}
+suscessChageFwd = (result) =>{
+    if(result === "changeOk"){
+        alert("비밀번호 수정 완료")
+        location.href = "loginView.me"
+    }else{
+        alert("비밀번호 수정 실패")
+    }
+}
+checkPasswordVail = (password) =>{
+    //영문 숫자 특수기호 조합 8자리 이상
+    let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+    if(reg.test(password)){
+        return true
+    }else{
+        return false
+    }
+}
+
+checkPasswordSame =(password, checkPassword) =>{
+    if(password ===checkPassword){
+       return true
+    }else{
+        return false
+    }
+}
+
 
 
 

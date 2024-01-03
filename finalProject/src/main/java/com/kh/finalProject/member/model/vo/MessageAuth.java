@@ -6,6 +6,7 @@ public class MessageAuth {
 	private int authNum;
 	private String phone;
 	private String sendDate;
+	private String userName;
 	
 	public MessageAuth(int authNum, String phone, String sendDate) {
 		super();
@@ -13,6 +14,29 @@ public class MessageAuth {
 		this.phone = phone;
 		this.sendDate = sendDate;
 	}
+
+
+	
+	public MessageAuth(int authNum, String phone, String sendDate, String userName) {
+		super();
+		this.authNum = authNum;
+		this.phone = phone;
+		this.sendDate = sendDate;
+		this.userName = userName;
+	}
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 
 
 	public MessageAuth() {
