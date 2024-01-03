@@ -56,7 +56,6 @@
             <select name="condition" class="pl" id="condition">
                 <option value="writer">작성자</option>
                 <option value="title">구장이름</option>
-                <option value="content">내용</option>
             </select>
             <input id="search-input" type="text" placeholder="검색" name="keyword" value="${ keyword }">
             <button type="button" onclick="searchKeyword(event)"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" ></button>  
