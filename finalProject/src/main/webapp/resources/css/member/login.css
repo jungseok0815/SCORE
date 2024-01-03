@@ -64,6 +64,9 @@ a{
 .login-join{
     margin-left: 40px;
 }
+.login-join:hover{
+    cursor: pointer;
+}
 
 .checkbox-wrapper-1 *,
 .checkbox-wrapper-1 ::after,
@@ -145,7 +148,39 @@ a{
 .login-find-User{
     cursor: pointer;
 }
+.find-id-div {
+    width: 50%;
+    text-align: center;
+}
+.find-password-div{
+    width: 50%;
+    text-align: center;
+}
+.find-modal-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10%;
+}
+.showUserIdAuthOk{
+    text-align: center;
+    font-size: 25px;
+}
+.showAuthOKId{
+    color: blue;
+}
 
+.find-id-btn{
+    width: 99%;
+}
+.find-password-btn{
+    width: 99%;
+}
+.change-fwd-btn{
+    width: 100%;
+    margin-bottom: 20px
+}
 @media screen and (min-width: 720px) {
     .login-header{
         margin-top: 10%;

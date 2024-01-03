@@ -6,8 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/final/resources/css/member/login.css">
+	<script src="resources/js/member/memberJs/member.js"></script>
+    <link rel="stylesheet" href="/final/resources/css/member/login.css">
     <link rel="stylesheet" href="/final/resources/css/member/findUserInfo.css">
 </head>
 <body>
@@ -56,26 +58,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
             <div class="modal-body">
-
-                <div class="input-userInfo">
-                    <p class="modal-font">휴대폰 번호</p>
-                    <div class="form-floating mb-3 inupt-user-phone">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">휴대폰 번호를 입력하세요</label>
-                        <button class="btn btn-primary find-modal-btn" type="submit">인증요청</button>
-                    </div>
+                <div class="find-modal-body">
+                    <div class="find-id-div"><button class="btn btn-primary find-id-btn" onclick="drawFindId()">아이디 찾기</button></div>
+                    <div class="find-password-div"><button class="btn btn-primary find-password-btn" onclick="drawFindPassword()">비밀번호 찾기</button></div>
                 </div>
-          
-                <div class="input-userInfo">
-                    <p class="modal-font">인증 번호</p>
-                    <div class="form-floating mb-3 inupt-user-phone">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">인증 번호를  입력하세요</label>
-                        <button class="btn btn-primary find-modal-btn" type="submit">인증확인</button>
-                    </div>
+                <div class="find-area">
                 </div>
-           
-            </div>
+        
             <div class="find-modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>

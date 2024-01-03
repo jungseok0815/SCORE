@@ -55,6 +55,9 @@ public interface MemberService {
 
 	ArrayList<Member> chattingSelectFriend(HashMap info);
 	int checkFriendStatus2(Friend f);
+	Member authPassFindUserInfo(MessageAuth auth);
+	int checkUserIdPhone(Member m1);
+	int updatePassword(Member m1);
 
 }
 

@@ -82,8 +82,15 @@
 			            <a href="${pageContext.request.contextPath}/myPage.me?userNo=${loginUser.userNo}"><img src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_my.svg" alt="" class="header-img"></a>
 
 	                </c:otherwise>
-	            </c:choose>     
-                <a onclick="showChatting()"><i class="fa-regular fa-message fa-lg"></i></i></a>
+	            </c:choose>    
+                <c:choose>
+                    <c:when test="${empty loginUser}"> 
+                       
+                    </c:when>
+                    <c:otherwise>
+                        <a onclick="showChatting()"><i class="fa-regular fa-message fa-lg"></i></i></a>
+                    </c:otherwise>
+                </c:choose>
                 </div>
                 <div class="messageDiv">
                         <div class="chattin-header">
