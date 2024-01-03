@@ -141,14 +141,13 @@ const memberAjaxController = {
             }
         })
     },
-    //사용자가 입력한 인증번호 확인
+    //사용자가 입력한 인증번호 확인(회원가입)
     checkPhoneAuthAjax: (data,callback) =>{
         $.ajax({
-            url: "checkPhoneAuth.me",
+            url: "checkPhoneAuthJoin.me",
             type: "post",
             data,
             success: (result) => {
-                console.log(result)
                 callback(result)
                
             },
@@ -157,6 +156,22 @@ const memberAjaxController = {
             }
         })
     },
+    //사용자가 입력한 인증번호 확인(아이디 찾기)
+    checkPhoneAuthFindAjax: (data,callback) =>{
+        $.ajax({
+            url: "checkPhoneAuthfind.me",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result)
+                
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    
     getResDrawAjax: (data,callback) =>{
         $.ajax({
             url: "dateChoiceRes.pl",
@@ -176,6 +191,47 @@ const memberAjaxController = {
             type: "post",
             success: (result) => {
                 callback(result)
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    checkUserNamePhone:(data,callback) =>{
+        $.ajax({
+            url: "checkUserNamePhone.me",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result) 
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+    //아이디랑 휴대폰번호로 유저가 있는지 검사
+    checkUserIdPhone:(data,callback) =>{
+        $.ajax({
+            url: "checkUserIdPhone.me",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result) 
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    },
+      //아이디랑 휴대폰번호로 유저가 있는지 검사
+    updatePasswordAjax:(data,callback) =>{
+        $.ajax({
+            url: "updatePassword.me",
+            type: "post",
+            data,
+            success: (result) => {
+                callback(result) 
             },
             error: (err) => {
                 console.log(err)

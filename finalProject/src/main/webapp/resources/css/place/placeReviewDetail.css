@@ -290,10 +290,11 @@ display: none;
 }
 .inputReplyInput{
     width: 650px;
-    height: 70px;
+    height: 60px;
     border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .replyReplyBody{
@@ -305,41 +306,42 @@ display: none;
     border-bottom: 1px solid #c7c7c7;
 }
 
-.replyReplyTextArea{
-    width: 90%;
-    height: 100%;
-}
-
 .updateReplyBtn{
-    float: right;
     border: none;
-    width: 40px;
+    width: 65px;
     border-radius: 10px;
     height: 40px;
     font-size: 15px;
+    margin-left: 10px;
 }
 
 .replyReplyBtn{
-    float: right;
     border: none;
-    width: 40px;
+    width: 65px;
     border-radius: 10px;
     height: 40px;
     font-size: 15px;
+    margin-left: 10px;
 }
 
 .repluTextArea{
-    width: 650px;
-    height: 70px;
+    width: 575px;
+    height: 60px;
     border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 .replyReplyTextArea{
-    width: 650px;
-    height: 70px;
+    width: 465px;
+    height: 50px;
     border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.btn-area button{
+    margin-right: 15px;
+    margin-bottom: 10px;
 }

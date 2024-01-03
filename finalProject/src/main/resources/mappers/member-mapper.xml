@@ -444,6 +444,7 @@
 			WHERE USER_NO = #{userNo}
 	</update>
 	
+
 	<!-- 멤버이미지 셀렉트 -->
 	<select id="selectMemImg" resultType="_int">
 		SELECT COUNT(*)
@@ -456,5 +457,30 @@
 		DELETE FROM MEMBER_IMG
 		WHERE USER_NO = #{userNo}
 	</delete>
+
+	
+	<select id="authPassFindUserInfo" resultMap="memberResult">
+		SELECT USER_NO, USER_ID,USER_NAME
+		  FROM MEMBER
+		 WHERE 
+		 	USER_NAME = #{userName} AND
+		 	USER_PHONE = #{phone}
+	</select> 
+	
+	
+	<select id="checkUserIdPhone" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE 
+		 	USER_ID = #{userId} AND
+		 	USER_PHONE = #{phone}
+	</select> 
+	
+	<update id="updatePassword">
+		UPDATE MEMBER
+				SET USER_PWD = #{userPwd}
+			WHERE USER_ID = #{userId}
+	</update>
+	
 	
 </mapper>

@@ -60,5 +60,9 @@ public interface MemberService {
 	int selectMemImg(int userNo);
 	//이미지 삭제 --기본이미지
 	int deleteMemImg(MemberImg mi);
+	Member authPassFindUserInfo(MessageAuth auth);
+	int checkUserIdPhone(Member m1);
+	int updatePassword(Member m1);
+
 }
 

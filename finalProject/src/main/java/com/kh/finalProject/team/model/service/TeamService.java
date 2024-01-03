@@ -274,6 +274,57 @@ public class TeamService implements TeamServiceImp{
 	public int selectReqListCheck(int userNo, int tno) {
 		return teamDao.selectReqListCheck(sqlSession, userNo, tno);
 	}
+	
+	@Override
+	public int selectReqListCheck22(int userNo, int tno, int teamNo) {
+		return teamDao.selectReqListCheck22(sqlSession, userNo, tno, teamNo);
+	}
+	
+	@Override
+	public int selectReqListCheck33(int userNo, int tno, int offerNo) {
+		return teamDao.selectReqListCheck33(sqlSession, userNo, tno, offerNo);
+	}
+
+	@Override
+	public int deleteOfferAll(int tNo) {
+		return teamDao.deleteOfferAll(sqlSession, tNo);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> teamOfferListNo(int tNo) {
+		return teamDao.teamOfferListNo(sqlSession, tNo);
+	}
+
+	@Override
+	public int deleteTeamReqAll(int offerNo) {
+		return teamDao.deleteTeamReqAll(sqlSession, offerNo);
+	}
+
+	@Override
+	public int teamReqSolo(int userNo, String reqContent, int offerNo) {
+		return teamDao.teamReqSolo(sqlSession, userNo, reqContent, offerNo);
+	}
+
+	@Override
+	public int deleteOfferImg(int offerNo) {
+		return teamDao.deleteOfferImg(sqlSession, offerNo);
+	}
+
+	@Override
+	public ArrayList<TeamOffer> listCountNo(int tno) {
+		return teamDao.listCountNo(sqlSession, tno);
+	}
+
+	@Override
+	public ArrayList<TeamReq> selectListReqCount(int tno) {
+		return teamDao.selectListReqCount(sqlSession, tno);
+	}
+
+	
+
+
+
+	
 
 
 }
