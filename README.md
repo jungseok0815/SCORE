@@ -5,7 +5,7 @@
 - 개발 기간: 2023-12-01 ~ 2024-01-04
 - 본 프로젝트의 구조를 더 자세히 알고 싶다면?
   - [백엔드 README](./backend.md)
-  - [프론트엔드 README](./FRONT.md)
+  - [프론트엔드 README](./frontend.md)
 
 ## 기술 스택
 `Front-End` :  <img src="https://img.shields.io/badge/javascript-3178C6?style=flat-square&logo=javascript&logoColor=#F7DF1E"/>
