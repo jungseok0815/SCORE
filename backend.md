@@ -285,6 +285,7 @@
 ## 게임 평가 
 #### 게임에 참여했던 선수들에게 스마일카드, 레드카드, 레벨 등등을 책정한 value값을 배열로 만들어 준다
 
+```
 updateEnal = (sportSmile) =>{
     console.log(sportSmile)
     const sprotInfo = document.querySelectorAll(".check")
@@ -314,11 +315,12 @@ updateEnal = (sportSmile) =>{
         
         console.log(typeof(realData) )
     }
-
+```
 
 ## 게임 평가 
 #### 받은 데이터들을 오브젝트로 형변환 시킨 후 첫번째 인덱스부터 마지막 인덱스까지 차례대로 서비스로 보내서 업데이트를 시킨다.
 
+```
 @RequestMapping(value="evaluationUpdate.pl", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> evaluationUpdate(String realdata, Model model, HttpSession session) {
@@ -352,6 +354,8 @@ updateEnal = (sportSmile) =>{
             resultMap.put("message", "게임 평가 완료");
             resultMap.put("userNo", m.getUserNo());
         } else {
+```
+
         	 resultMap.put("result", "failure");
              resultMap.put("message", "게임 평가 실패");
         }
