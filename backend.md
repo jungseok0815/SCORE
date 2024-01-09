@@ -282,3 +282,79 @@
 ```
 
  
+## 게임 평가 
+#### 게임에 참여했던 선수들에게 스마일카드, 레드카드, 레벨 등등을 책정한 value값을 배열로 만들어 준다
+
+updateEnal = (sportSmile) =>{
+    console.log(sportSmile)
+    const sprotInfo = document.querySelectorAll(".check")
+    let data = []
+    for(let i =0; i<sprotInfo.length; i++){
+        let sprotInfoi =  document.querySelectorAll("#sportInfo" + i + ">td > select")
+        let sprotInfoj =  document.querySelector("#sportInfo" + i + ">td > input")
+        const userNo = document.querySelector("#enalUserNo" + i).value
+        const categoryNum = document.querySelector("#enalCategoryNum").value
+        const fieldNo = document.querySelector("#enalFieldNo").value
+        console.log(fieldNo)
+            info ={
+                fieldNo : fieldNo,
+                categoryNum : categoryNum,
+                userNo : userNo,
+                sportSmile : sprotInfoi[0].value,
+                sportYellow : sprotInfoi[1].value,
+                sportRed : sprotInfoi[2].value,
+                sportLever : sprotInfoi[3].value,
+                sportScore : sprotInfoj.value
+        }
+        data.push(info)
+    }
+
+        const realData=  JSON.stringify(data)
+        evaluationAjaxController.test(realData,test2)
+        
+        console.log(typeof(realData) )
+    }
+
+
+## 게임 평가 
+#### 받은 데이터들을 오브젝트로 형변환 시킨 후 첫번째 인덱스부터 마지막 인덱스까지 차례대로 서비스로 보내서 업데이트를 시킨다.
+
+@RequestMapping(value="evaluationUpdate.pl", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> evaluationUpdate(String realdata, Model model, HttpSession session) {
+		
+		Gson gson = new Gson();
+		int updateSpo = 0;
+		ArrayList<SportInfo> list = new ArrayList<>();
+		
+		JsonArray  jsonArray  = new JsonParser().parseString(realdata).getAsJsonArray();
+
+		JsonElement firstElement = jsonArray.get(0); // 1번째 인덱스의 요소 가져오기
+		JsonObject firstObject = firstElement.getAsJsonObject(); // JsonObject로 변환
+
+		int fieldNo = firstObject.get("fieldNo").getAsInt(); // "fieldNo" 키의 값을 가져와서 int로 변환
+	
+        for (JsonElement element : jsonArray) {
+        	SportInfo spoInfo = gson.fromJson(element, SportInfo.class);
+
+            list.add(spoInfo);
+        }
+        
+        for (SportInfo spoInfo : list) {
+            updateSpo = pService.updateEval(spoInfo);
+        }
+        Member m = (Member)session.getAttribute("loginUser");
+        
+        Map<String, Object> resultMap = new HashMap<>();
+        if(updateSpo > 0) {
+        	resultMap.put("fieldNo", fieldNo);
+        	resultMap.put("result", "success");
+            resultMap.put("message", "게임 평가 완료");
+            resultMap.put("userNo", m.getUserNo());
+        } else {
+        	 resultMap.put("result", "failure");
+             resultMap.put("message", "게임 평가 실패");
+        }
+        return resultMap;
+	}
+ 
