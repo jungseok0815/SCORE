@@ -354,11 +354,61 @@ updateEnal = (sportSmile) =>{
             resultMap.put("message", "게임 평가 완료");
             resultMap.put("userNo", m.getUserNo());
         } else {
-```
-
         	 resultMap.put("result", "failure");
              resultMap.put("message", "게임 평가 실패");
         }
         return resultMap;
 	}
- 
+ ```
+
+## 카카오페이 
+#### 카카오페이 토큰을 받아오는 과정이다 parameter는 통해 성공시 실패시 가는 맵핑값을 적어주는게 포인트이다
+
+```
+@ResponseBody
+	@RequestMapping(value="payPoint.me", produces="application/json; charset=UTF-8")
+	public String kakaoPay(int point, HttpSession session) {
+		
+		try {
+			URL address = new URL("https://kapi.kakao.com/v1/payment/ready"); 	// 주소 
+			HttpURLConnection join =  (HttpURLConnection) address.openConnection(); // 서버 연결
+			join.setRequestMethod("POST"); 
+			join.setRequestProperty("Authorization", "KakaoAK 5ec0b38b846924ddb31e67e0cc96795c"); 
+			join.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			join.setDoOutput(true);
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=Score&quantity=1&total_amount=" + point + "&tax_free_amount=0&approval_url=http://localhost:8088/final/kakaoPoint.me&cancel_url=http://localhost:8088/final/kakaoPoint.me&fail_url=http://localhost:8088/final/pointView.me";
+			// parameter = 파라미터 
+			OutputStream sendPay = join.getOutputStream(); // 데이터를 줄수 있게 만듬
+			DataOutputStream sendData = new DataOutputStream(sendPay); // 데이터를 주는 애 
+			sendData.writeBytes(parameter); // 문자열을 형변환 시켜줌
+			sendData.close(); // 자기가 가지고있는 바이트를 서버로 전송함 
+			
+			int result = join.getResponseCode(); // 결과 
+			
+			InputStream getResult; // 받는 애
+			if(result == 200) { // 200이면 성공 나머지는 다 실패
+				getResult = join.getInputStream();
+			} else {
+				getResult = join.getErrorStream();
+			}
+			InputStreamReader captain = new InputStreamReader(getResult); // 받은 거에서 읽어주는 역할
+			BufferedReader charginWrite = new BufferedReader(captain); // 읽어주는거 받아서 형변환 시켜주기
+			
+//			session.setAttribute("loginUser", point);
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			loginUser.setPoint(point);
+			
+			session.setAttribute("loginUser", loginUser);
+			
+			return charginWrite.readLine();
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "";
+	}
+
