@@ -139,4 +139,100 @@
   }
 ```
 
+## 팀 프로필
+#### 로그인한 유저의 팀 정보와 멤버별 등급에 따라 다른 권한을 가지고 있다는걸 보여주는 코드
+
+
+ ```
+	@RequestMapping("teamProfile.tm")
+	public ModelAndView teamProfile(String teamNo, HttpSession session, ModelAndView mv) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		int tno = Integer.parseInt(teamNo);
+		int tmc = teamService.teamMemberCount(tno);
+		int taa = teamService.teamAvgAge(tno);
+		
+		//팀 프로필
+		Team t = teamService.teamProfile(tno);
+		
+		int reqList = 0;
+		int offerNo = 0;
+		
+		//구인글 리스트
+		ArrayList<TeamOffer> list = teamService.teamOfferListNo(tno);
+		
+		if(loginUser != null) {
+			
+			for(int i = 0; i < list.size(); i++) {
+				TeamOffer teamOffer = list.get(i); 
+			    offerNo = teamOffer.getOfferNo(); 
+			}
+			
+			reqList = teamService.selectReqListCheck33(loginUser.getUserNo(), tno, offerNo); 
+		}
+		
+		// 구인리스트 카운트
+		ArrayList<TeamOffer> listCount = teamService.listCountNo(tno);
+		
+		// 팀 멤버
+		ArrayList<TeamMember> tm = teamService.teamMemberList(tno);
+		
+		int myGrade = 0;
+		for (TeamMember m : tm) {
+			if(m.getUserNo() == loginUser.getUserNo())
+				myGrade = m.getGrade();
+			
+		}
+		mv.addObject("teamMemberCount", tmc)
+		.addObject("teamAvgAge", taa)
+		.addObject("team", t)
+		.addObject("teamMemberList", tm)
+		.addObject("myGrade", myGrade)
+		.addObject("reqList", reqList)
+		.addObject("listCount", listCount)
+		.setViewName("team/teamProfile");
+		
+		return mv;
+	}
+
+```
+
+## 경기장 리뷰
+#### 조건에따라 경기장 리뷰 글을 검색할 수 있는 코드(맵 형태로 리턴하여 키, 값 형태로 꺼내서 쓸 수 있음)
+
+
+ ```
+	@ResponseBody
+	@RequestMapping(value="/search.pl", produces="application/json; charset=UTF-8")
+	public HashMap selectSearchList(ModelAndView mv,
+					 @RequestParam("condition") String condition,
+					 @RequestParam("keyword") String keyword,
+					 @RequestParam(value="cpage", defaultValue="1") int currentPage,
+					 HttpSession session) {
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		Member user = (Member)session.getAttribute("loginUser");
+		
+		PageInfo pi = Pagenation.getPageInfo(pService.selectSearchCount(map), currentPage, 5, 5);
+		
+		ArrayList<PlaceReview> pList =  pService.selectSearchList(map, pi);
+		
+		HashMap result = new HashMap();
+		result.put("pList", pList);
+		result.put("pi", pi);
+		
+		if(user != null && !user.equals("")) {
+			String userNo = Integer.toString(user.getUserNo());
+			ArrayList<Reservation> rList = pService.selectResList(userNo);	
+			result.put("rList", rList);
+		}
+		
+		return result ;
+	}
+```
+
+
+
  
