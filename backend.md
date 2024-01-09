@@ -234,5 +234,51 @@
 ```
 
 
+## 마이페이지
+#### 마이페이지를 수정할때 기본 이미지, 수정된 이미지로 변경할 수 있고 필요한 값들을 넘겨주는 코드
+
+
+ ```
+	@ResponseBody
+	@RequestMapping(value= "/reMyPageUpdate.me",produces="application/json; charset=UTF-8")
+	public ModelAndView updateMyPageMember(Member m, HttpSession session,ModelAndView mv, MultipartFile reupfile,  String[] skill, String[] style, SportInfo sport, MemberImg mi) {
+		Member login = (Member) session.getAttribute("loginUser");
+		sport.setUserNo(m.getUserNo());
+		int resultMemImg = 0;
+		if(!reupfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(reupfile, session, "/resources/img/member/memberInsert/");
+			mi.setMemberUrl("/resources/img/member/memberInsert/");
+			mi.setMemberOriginName(reupfile.getOriginalFilename());
+			mi.setMemberChangeName("/resources/img/member/memberInsert/" + changeName);
+			if(memberService.selectMemberImg(m.getUserNo()) == null) {
+				resultMemImg = memberService.insertMemImg(mi);
+			}else {
+				resultMemImg = memberService.updateMemImg(mi);
+			}
+		}else{
+			if(memberService.selectMemImg(m.getUserNo()) > 0) {
+				resultMemImg = memberService.deleteMemImg(mi);
+			}
+		}
+
+		int result = memberService.updateMyPageMember(m);
+		int result2 = memberService.updateMyPageSport(sport);
+				
+	    	if(result * result2  > 0) {
+	            Member loginInfo = memberService.loginMember(login.getUserId());
+		    SportInfo sportInfo = memberService.getUserSportInfo(sport);
+		    session.setAttribute("loginUser", loginInfo);
+		    session.setAttribute("alertMsg", "수정 성공");
+		    mv.addObject("sportInfo", sportInfo)
+		    .addObject("userInfo", loginInfo)
+		    .addObject("memberImg", mi)
+		    .setViewName("redirect:myPage.me?userNo=" + login.getUserNo());
+	    	} else {
+			mv.addObject("errorMsg", "수정  실패");
+	    	}
+		return mv;
+	}
+
+```
 
  
