@@ -412,8 +412,13 @@ updateEnal = (sportSmile) =>{
 		
 		return "";
 	}
+
+ ```
+
 ## 기상청 공공데이터
  #### 오늘날짜로부터 3일동안의 날씨정보를 가져오는 코드
+
+```
  @ResponseBody
 	@RequestMapping(value="fastWeatherAjax.pl", produces="application/json; charset=UTF-8")
 	public String weatherAjax(@RequestParam("fieldArea") String fieldArea,@RequestParam("startTime") String startTime,
@@ -460,7 +465,11 @@ updateEnal = (sportSmile) =>{
         return new Gson().toJson(m);
         
 	}
+ ```
+
  #### 현재 주소를 가지고 기상청날씨를 불러오기위한 좌표값을 구해오는 코드
+
+```
  public HashMap loadCoordinate(String fieldArea) throws org.json.simple.parser.ParseException, IOException {
 		String[] strArr = fieldArea.split(" ");
 		String result;
@@ -596,7 +605,11 @@ updateEnal = (sportSmile) =>{
 		teamMap.put("y",y);
 		return teamMap;
 	}
+ ```
+
  #### 오늘날짜로부터 3일~7일의 날씨정보를 가져오는 코드
+
+```
  @ResponseBody
 	@RequestMapping(value="slowWeatherAjax.pl", produces="application/json; charset=UTF-8")
 	public String slowWeatherAjax(@RequestParam("fieldArea") String fieldArea, @RequestParam("fieldDate") String fieldDate,
@@ -678,7 +691,11 @@ public String afterWeather(String fieldArea, String fieldDate, String convertedD
         conn.disconnect();
         return responseText;
 	}
+ ```
+
  #### 오늘날짜로부터 3일~7일의 기온을 가져오는 코드
+
+```
 	public String afterTemperature(String fieldArea, String fieldDate, String convertedDate) throws IOException{
 		
 		String areaCode = "";
