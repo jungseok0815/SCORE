@@ -696,83 +696,83 @@ public String afterWeather(String fieldArea, String fieldDate, String convertedD
  #### 오늘날짜로부터 3일~7일의 기온을 가져오는 코드
 
 ```
-	public String afterTemperature(String fieldArea, String fieldDate, String convertedDate) throws IOException{
-		
-		String areaCode = "";
-		switch(fieldArea){
-		case "서울" : 
-			areaCode = "11B10101";
-			break;
-		case "인천" :
-			areaCode = "11B20201";
-			break;
-		case "경기" :
-			areaCode = "11B20601";
-			break;
-		case "강원" : 
-			areaCode = "11D10301";
-			break;
-		case "대전" : 
-			areaCode = "11C20401";
-			break;
-		case "충남" :
-			areaCode = "11C20101";
-			break;
-		case "충북" : 
-			areaCode = "11C10301";
-			break;
-		case "광주" : 
-			areaCode = "11F20501";
-			break;
-		case "전남" :
-			areaCode = "21F20801";
-			break;
-		case "전북" :
-			areaCode = "21F10501";
-			break;
-		case "대구" : 
-			areaCode = "11H10701";
-			break;
-		case "경북" :
-			areaCode = "11H10501";
-			break;
-		case "부산" : 
-			areaCode = "11H20201";
-			break;
-		case "울산" :
-			areaCode = "11H20101";
-			break;
-		case "경남" :
-			areaCode = "11H20301";
-			break;
-		case "제주" :
-			areaCode = "11G00201";
-			break;
-		}
-		
-		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=YNI9%2FTqzyomsIOP52v7CqWRtntwjz5qAaMRawm%2FRFKkqq4T6jVH%2BiCbZCcJvtSBgQA%2FfDNJH1aJJrMrtBjJ2FQ%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-        urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
-        urlBuilder.append("&" + URLEncoder.encode("regId","UTF-8") + "=" + URLEncoder.encode(areaCode, "UTF-8")); /*11B10101 서울, 11B20201 인천 등 ( 별첨엑셀자료 참고)*/
-        urlBuilder.append("&" + URLEncoder.encode("tmFc","UTF-8") + "=" + URLEncoder.encode(convertedDate+"0600", "UTF-8")); /*-일 2회(06:00,18:00)회 생성 되며 발표시각을 입력- YYYYMMDD0600(1800) 최근 24시간 자료만 제공*/
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        String responseText = "";
-        String line;
-        while ((line = rd.readLine()) != null) {
-        	responseText += line;
-        }
-        rd.close();
-        conn.disconnect();
-        return responseText;
+public String afterTemperature(String fieldArea, String fieldDate, String convertedDate) throws IOException{
+	
+	String areaCode = "";
+	switch(fieldArea){
+	case "서울" : 
+		areaCode = "11B10101";
+		break;
+	case "인천" :
+		areaCode = "11B20201";
+		break;
+	case "경기" :
+		areaCode = "11B20601";
+		break;
+	case "강원" : 
+		areaCode = "11D10301";
+		break;
+	case "대전" : 
+		areaCode = "11C20401";
+		break;
+	case "충남" :
+		areaCode = "11C20101";
+		break;
+	case "충북" : 
+		areaCode = "11C10301";
+		break;
+	case "광주" : 
+		areaCode = "11F20501";
+		break;
+	case "전남" :
+		areaCode = "21F20801";
+		break;
+	case "전북" :
+		areaCode = "21F10501";
+		break;
+	case "대구" : 
+		areaCode = "11H10701";
+		break;
+	case "경북" :
+		areaCode = "11H10501";
+		break;
+	case "부산" : 
+		areaCode = "11H20201";
+		break;
+	case "울산" :
+		areaCode = "11H20101";
+		break;
+	case "경남" :
+		areaCode = "11H20301";
+		break;
+	case "제주" :
+		areaCode = "11G00201";
+		break;
 	}
+	
+	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa"); /*URL*/
+urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=YNI9%2FTqzyomsIOP52v7CqWRtntwjz5qAaMRawm%2FRFKkqq4T6jVH%2BiCbZCcJvtSBgQA%2FfDNJH1aJJrMrtBjJ2FQ%3D%3D"); /*Service Key*/
+urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
+urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
+urlBuilder.append("&" + URLEncoder.encode("regId","UTF-8") + "=" + URLEncoder.encode(areaCode, "UTF-8")); /*11B10101 서울, 11B20201 인천 등 ( 별첨엑셀자료 참고)*/
+urlBuilder.append("&" + URLEncoder.encode("tmFc","UTF-8") + "=" + URLEncoder.encode(convertedDate+"0600", "UTF-8")); /*-일 2회(06:00,18:00)회 생성 되며 발표시각을 입력- YYYYMMDD0600(1800) 최근 24시간 자료만 제공*/
+URL url = new URL(urlBuilder.toString());
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+conn.setRequestMethod("GET");
+conn.setRequestProperty("Content-type", "application/json");
+BufferedReader rd;
+if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+    rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+} else {
+    rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+}
+String responseText = "";
+String line;
+while ((line = rd.readLine()) != null) {
+	responseText += line;
+}
+rd.close();
+conn.disconnect();
+return responseText;
+}
