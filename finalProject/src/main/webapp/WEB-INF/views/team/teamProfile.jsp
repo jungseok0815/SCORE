@@ -71,19 +71,29 @@
                             <c:otherwise>
                                 <div class="profile-btn d-grid gap-2">
                                    <c:choose>
-							    	<c:when test="${reqList eq loginUser.userNo}">
-							    		 <!-- 이미 신청중인 사람만 보이는 버튼-->
-							    		 <c:if test="${empty listCount}">
-							    			 <button onclick="inging()" class="btnJoin btnFloat btnLightBlue">가입 신청</button>
-							    		 </c:if>
-							    		 <button onclick="initing()" class="btnJoin btnFloat btnLightBlue">너 뭐야</button>
+                                   
+							    	<c:when test="${empty listCount}">
+							    		 <button onclick="inging()" class="btnJoin btnFloat btnLightBlue">가입 신청</button>
 							    	</c:when>
+							    	
 							    	<c:otherwise>
-							    		 <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">
-							    		 가입 신청
-							    		 </button>
+							    		 <c:choose>
+										    <c:when test="${reqList eq loginUser.userNo}">
+										        <button onclick="initing()" class="btnJoin btnFloat btnLightBlue">너 뭐야</button>
+										       
+										    </c:when>
+										    <c:otherwise>
+										       
+										        <button type="button" class="btnJoin btnFloat btnLightBlue" data-bs-toggle="modal" data-bs-target="#myModal">
+										            가입 신청
+										        </button>
+										    </c:otherwise>
+										</c:choose>
+							    		 
 							    	</c:otherwise>
 							    </c:choose>
+							    
+							    
                                 </div>
                             </c:otherwise>
                         </c:choose>

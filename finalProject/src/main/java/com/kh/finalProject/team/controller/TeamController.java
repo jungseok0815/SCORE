@@ -274,7 +274,7 @@ public class TeamController {
 			}
 			
 			reqList = teamService.selectReqListCheck33(loginUser.getUserNo(), tno, offerNo); 
-			System.out.println("신청자들 먼데 : " + reqList);
+			System.out.println("신청자들 없으면 -1 : " + reqList);
 		}
 
 		ArrayList<TeamOffer> listCount = teamService.listCountNo(tno);
